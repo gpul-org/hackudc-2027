@@ -1,11 +1,19 @@
 ---
-import Welcome from "../components/Welcome.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import HomePage from "../components/HomePage.tsx";
 import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const localeUrls = {
+  es: getRelativeLocaleUrl("es", ""),
+  en: getRelativeLocaleUrl("en", ""),
+  gl: getRelativeLocaleUrl("gl", ""),
+};
 ---
 
-<Layout>
-  <Welcome />
+<Layout
+  lang="es"
+  title="HackUDC27 · Hackea el futuro desde Galicia"
+  description="Únete a la quinta edición de HackUDC, una hackathon de 36 horas en A Coruña."
+>
+  <HomePage client:load locale="es" localeUrls={localeUrls} />
 </Layout>

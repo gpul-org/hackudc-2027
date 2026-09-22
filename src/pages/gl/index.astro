@@ -1,0 +1,19 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import HomePage from "../../components/HomePage.tsx";
+import Layout from "../../layouts/Layout.astro";
+
+const localeUrls = {
+  es: getRelativeLocaleUrl("es", ""),
+  en: getRelativeLocaleUrl("en", ""),
+  gl: getRelativeLocaleUrl("gl", ""),
+};
+---
+
+<Layout
+  lang="gl"
+  title="HackUDC27 · Hackea o futuro desde Galicia"
+  description="Únete á quinta edición de HackUDC, unha hackathon de 36 horas na Coruña."
+>
+  <HomePage client:load locale="gl" localeUrls={localeUrls} />
+</Layout>
