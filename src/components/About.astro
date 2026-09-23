@@ -56,17 +56,18 @@ const cardCaption =
         <h2
           class="mt-4 max-w-[12ch] display-heading reveal"
           data-reveal
+          data-leading-punctuation={t.aboutTitle.startsWith("¿") ? "true" : undefined}
           id="about-title"
         >
           {t.aboutTitle}
         </h2>
       </div>
-      <div class="max-w-sm pb-1.5 text-base leading-normal sm:max-w-md lg:text-xl">
+      <div class="max-w-sm pb-1.5 text-base leading-[1.6] sm:max-w-md lg:text-xl">
         <p class="reveal" data-reveal>
           {t.aboutBody}
         </p>
         <p
-          class="mt-5 max-w-sm text-[0.95rem] leading-normal text-ink/70 reveal"
+          class="mt-5 max-w-sm text-[0.95rem] leading-[1.6] text-ink/70 reveal"
           data-reveal
         >
           {t.aboutDetail}
@@ -101,7 +102,7 @@ const cardCaption =
         {t.experienceTitle}
       </h2>
       <p
-        class="reveal mt-8 max-w-md text-base leading-snug lg:text-xl"
+        class="reveal mt-8 max-w-md text-base leading-[1.55] lg:text-xl"
         data-reveal
       >
         {t.experienceBody}

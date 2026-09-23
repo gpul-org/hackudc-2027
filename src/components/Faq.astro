@@ -26,7 +26,7 @@ const t = copy[Astro.props.locale];
     <div class="border-t border-ink/15">
       {t.faq.map(([question, answer]) => (
         <details class="group border-b border-ink/15 py-5 reveal" data-reveal>
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-serif text-xl font-medium tracking-tight lg:text-3xl [&::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-serif text-xl leading-[1.15] font-normal tracking-[-0.01em] lg:text-3xl [&::-webkit-details-marker]:hidden">
             <span>{question}</span>
             <span
               class="inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-current font-sans text-xl leading-none transition duration-200 ease-out group-open:rotate-45 group-open:bg-ink group-open:text-cream"
@@ -35,7 +35,7 @@ const t = copy[Astro.props.locale];
               <Plus class="size-4" aria-hidden="true" />
             </span>
           </summary>
-          <p class="mt-4 mr-11 max-w-xl text-[0.95rem] leading-normal">
+          <p class="mt-4 mr-11 max-w-xl text-[0.95rem] leading-[1.6]">
             {answer}
           </p>
         </details>
