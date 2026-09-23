@@ -64,10 +64,13 @@ const plaque =
     class="relative z-1 -mx-5 mt-10 min-h-40 flex-1 self-stretch"
     aria-hidden="true"
   >
-    <div class="absolute top-[26%] left-[-4%] z-1 w-[108%] -rotate-5 overflow-hidden bg-cream py-3 text-sm font-black whitespace-nowrap text-neutral-950 sm:top-[38%] lg:text-lg">
-      <span class="inline-block animate-ticker motion-reduce:animate-none">
-        {t.marquee.repeat(3)}
-      </span>
+    <div class="absolute top-[26%] left-[-4%] z-4 w-[108%] -rotate-5 overflow-hidden bg-cream py-3 text-sm font-black whitespace-nowrap text-neutral-950 sm:top-[38%] lg:text-lg">
+      <div class="flex w-max animate-ticker motion-reduce:animate-none">
+        <span class="shrink-0 whitespace-nowrap">{t.marquee.repeat(12)}</span>
+        <span class="shrink-0 whitespace-nowrap" aria-hidden="true">
+          {t.marquee.repeat(12)}
+        </span>
+      </div>
     </div>
     <img
       class="absolute bottom-0 left-1/2 z-2 aspect-1123/501 h-full max-h-(--building) w-auto max-w-(--building) -translate-x-1/2 object-cover object-top"

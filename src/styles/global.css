@@ -16,7 +16,7 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 
   --animate-hero-logo: hero-logo-in 800ms var(--ease-out) both;
-  --animate-ticker: ticker 28s linear infinite;
+  --animate-ticker: ticker 168s linear infinite;
 
   @keyframes hero-logo-in {
     from {
@@ -27,7 +27,7 @@
 
   @keyframes ticker {
     to {
-      transform: translateX(-33.333%);
+      transform: translateX(-50%);
     }
   }
 }
