@@ -8,9 +8,10 @@ interface Props {
 
 const { locale, localeUrls } = Astro.props;
 const current = languages.find(({ code }) => code === locale)!;
-const others = languages.filter(({ code }) => code !== locale);
 const languageLink =
   "rounded-full px-3.5 py-2 text-sm font-extrabold tracking-wide transition-colors";
+const languageOption =
+  "grid min-w-0 grid-cols-[0fr] transition-[grid-template-columns] duration-300 ease-out group-focus-within:ms-0.5 group-focus-within:grid-cols-[1fr] group-hover:ms-0.5 group-hover:grid-cols-[1fr] group-data-open:ms-0.5 group-data-open:grid-cols-[1fr] motion-reduce:transition-none";
 ---
 
 <!-- Desktop only. Shown once the hero has scrolled out of view. -->
@@ -34,39 +35,93 @@ const languageLink =
     class="group flex items-center rounded-full border border-transparent p-1 transition-colors duration-300 focus-within:border-ink/30 hover:border-ink/30 data-open:border-ink/30 motion-reduce:transition-none"
     data-language-menu
   >
-    <button
-      class={`${languageLink} bg-ink text-cream`}
-      type="button"
-      aria-label={`Language: ${current.label}`}
-      aria-expanded="false"
-      aria-controls="floating-nav-languages"
-    >
-      {current.label}
-    </button>
-    <div
-      class="grid grid-cols-[0fr] transition-[grid-template-columns] duration-300 ease-out group-focus-within:grid-cols-[1fr] group-hover:grid-cols-[1fr] group-data-open:grid-cols-[1fr] motion-reduce:transition-none"
-      id="floating-nav-languages"
-    >
-      <div class="flex min-w-0 gap-0.5 overflow-hidden pl-0.5">
-        {others.map((language) => (
-          <a
-            class={`${languageLink} hover:bg-ink hover:text-cream`}
-            href={localeUrls[language.code]}
-            hreflang={language.code}
+    <div class="flex items-center">
+      {languages.map((language) =>
+        language.code === locale ? (
+          <button
+            class={`${languageLink} shrink-0 bg-ink text-cream`}
+            type="button"
+            aria-label={`Language: ${current.label}`}
+            aria-expanded="false"
           >
             {language.label}
-          </a>
-        ))}
-      </div>
+          </button>
+        ) : (
+          <div class={languageOption}>
+            <div class="min-w-0 overflow-hidden">
+              <a
+                class={`${languageLink} block shrink-0 whitespace-nowrap hover:bg-ink hover:text-cream`}
+                href={localeUrls[language.code]}
+                hreflang={language.code}
+                data-floating-language
+              >
+                {language.label}
+              </a>
+            </div>
+          </div>
+        ),
+      )}
     </div>
   </div>
 </nav>
 
 <script>
+  const scrollPositionKey = "hackudc:floating-language-scroll";
   let observer: IntersectionObserver | undefined;
   let controller: AbortController | undefined;
 
+  const currentRoute = () =>
+    `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+  const rememberScrollPosition = (link: HTMLAnchorElement) => {
+    const destination = new URL(link.href, window.location.href);
+
+    try {
+      sessionStorage.setItem(
+        scrollPositionKey,
+        JSON.stringify({
+          route: `${destination.pathname}${destination.search}${destination.hash}`,
+          left: window.scrollX,
+          top: window.scrollY,
+        }),
+      );
+    } catch {
+      // Ignore storage restrictions; navigation should still work normally.
+    }
+  };
+
+  const restoreScrollPosition = () => {
+    try {
+      const stored = sessionStorage.getItem(scrollPositionKey);
+      if (!stored) return;
+
+      sessionStorage.removeItem(scrollPositionKey);
+      const position = JSON.parse(stored) as {
+        route?: unknown;
+        left?: unknown;
+        top?: unknown;
+      };
+
+      if (
+        position.route !== currentRoute() ||
+        typeof position.left !== "number" ||
+        typeof position.top !== "number"
+      ) {
+        return;
+      }
+
+      window.scrollTo({
+        left: position.left,
+        top: position.top,
+        behavior: "instant",
+      });
+    } catch {
+      // Ignore malformed or unavailable session storage.
+    }
+  };
+
   document.addEventListener("astro:page-load", () => {
+    restoreScrollPosition();
     observer?.disconnect();
     controller?.abort();
 
@@ -84,10 +139,37 @@ const languageLink =
     // Touch screens have no hover, so a tap on the current language opens the rest.
     controller = new AbortController();
     const { signal } = controller;
+    const languageLinks = menu.querySelectorAll<HTMLAnchorElement>(
+      "[data-floating-language]",
+    );
     const setOpen = (open: boolean) => {
       menu.toggleAttribute("data-open", open);
       toggle.setAttribute("aria-expanded", String(open));
     };
+
+    languageLinks.forEach((link) => {
+      link.addEventListener(
+        "click",
+        (event) => {
+          if (
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          ) {
+            return;
+          }
+
+          rememberScrollPosition(link);
+        },
+        { signal },
+      );
+    });
+
+    document.addEventListener("astro:after-swap", restoreScrollPosition, {
+      signal,
+    });
 
     toggle.addEventListener(
       "click",
