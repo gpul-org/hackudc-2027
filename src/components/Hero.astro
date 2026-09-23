@@ -6,6 +6,10 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
+const sponsorPageUrl =
+  Astro.props.locale === "es"
+    ? "/sponsors/"
+    : `/${Astro.props.locale}/sponsors/`;
 
 // CTAs drawn as ornamented plaques; the artwork is the background.
 const plaque =
@@ -54,9 +58,7 @@ const plaque =
       </a>
       <a
         class={`${plaque} bg-[url(/assets/scene/button-secondary.svg)] text-[#63bdee]`}
-        href="https://nocodb.gpul.org/dashboard/#/nc/form/b7ced3f1-c936-4c84-916f-f4c0261e91b3"
-        target="_blank"
-        rel="noopener noreferrer"
+        href={sponsorPageUrl}
       >
         {t.sponsor}
       </a>

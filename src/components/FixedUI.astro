@@ -9,6 +9,10 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
+const sponsorPageUrl =
+  Astro.props.locale === "es"
+    ? "/sponsors/"
+    : `/${Astro.props.locale}/sponsors/`;
 // The footer lists every network; the floating bar keeps only the main ones.
 const socials = [
   { label: "X", href: "https://x.com/gpul_", icon: X },
@@ -63,9 +67,7 @@ const pill =
     </a>
     <a
       class={`${pill} bg-cream text-ink hover:bg-yellow`}
-      href="https://nocodb.gpul.org/dashboard/#/nc/form/b7ced3f1-c936-4c84-916f-f4c0261e91b3"
-      target="_blank"
-      rel="noopener noreferrer"
+      href={sponsorPageUrl}
     >
       {t.sponsor}
     </a>

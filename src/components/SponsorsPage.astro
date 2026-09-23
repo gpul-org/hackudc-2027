@@ -1,0 +1,320 @@
+---
+import ArrowLeft from "@lucide/astro/icons/arrow-left";
+import Download from "@lucide/astro/icons/download";
+import type { Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const homeUrl = locale === "es" ? "/" : `/${locale}/`;
+const content = {
+  es: {
+    back: "Volver a HackUDC",
+    kicker: "Patrocinio · HackUDC 2027",
+    title: "Construyamos el futuro tecnológico de Galicia.",
+    intro:
+      "En nuestra quinta edición reuniremos a 500 hackers durante 36 horas en la Facultad de Informática de A Coruña.",
+    download: "Descargar dossier completo",
+    downloadNote: "PDF · Paquetes de patrocinio 2027",
+    why: "¿Por qué patrocinar HackUDC?",
+    benefits: [
+      ["437", "hackers en la última edición"],
+      ["+30", "ciudades españolas"],
+      ["91%", "entre 19 y 24 años"],
+      ["21", "edad mediana"],
+    ],
+    reasons: [
+      [
+        "Marca y comunidad",
+        "Sitúa a tu empresa en el centro de la comunidad tecnológica gallega mediante stands, charlas, talleres e interacción directa.",
+      ],
+      [
+        "Selección de talento",
+        "Conoce a estudiantes antes de que entren al mercado laboral. Participantes de ediciones anteriores encontraron prácticas y empleo a través de HackUDC.",
+      ],
+      [
+        "Construye con nosotros",
+        "Propón un reto real, acompaña a los equipos y descubre lo que cientos de hackers pueden crear en 36 horas.",
+      ],
+    ],
+    packages: "Paquetes de patrocinio",
+    tickets: "Entradas con comidas incluidas",
+    challenge: "Proponer un reto",
+    stand: "Stand en el evento",
+    cv: "Acceso a CV de hackers",
+    website: "Logo en la web",
+    signage: "Logo en la señalética",
+    social: "Mención en redes",
+    talks: "Charlas y talleres",
+    swag: "Merchandising en las bolsas",
+    taxes: "Impuestos y premios de los retos no incluidos en el precio.",
+    contact: "¿Listos para colaborar?",
+    contactBody:
+      "Cuéntanos qué te gustaría construir con la comunidad de HackUDC.",
+    email: "Escribir a hackudc@gpul.org",
+  },
+  en: {
+    back: "Back to HackUDC",
+    kicker: "Sponsorship · HackUDC 2027",
+    title: "Let’s build Galicia’s tech future.",
+    intro:
+      "For our fifth edition, we will bring 500 hackers together for 36 hours at the Faculty of Computer Science in A Coruña.",
+    download: "Download the full deck",
+    downloadNote: "PDF · 2027 sponsorship packages",
+    why: "Why sponsor HackUDC?",
+    benefits: [
+      ["437", "hackers last edition"],
+      ["+30", "Spanish cities"],
+      ["91%", "aged 19-24"],
+      ["21", "median age"],
+    ],
+    reasons: [
+      [
+        "Brand and community",
+        "Put your company at the heart of Galicia’s tech community through stands, talks, workshops and direct interaction.",
+      ],
+      [
+        "Recruiting",
+        "Meet talented students before they enter the job market. Past participants have found internships and jobs through HackUDC.",
+      ],
+      [
+        "Build with us",
+        "Bring a real challenge, mentor teams and see what hundreds of hackers can build in 36 hours.",
+      ],
+    ],
+    packages: "Sponsorship packages",
+    tickets: "Event tickets with meals",
+    challenge: "Propose a challenge",
+    stand: "Stand at the event",
+    cv: "Access to hacker CVs",
+    website: "Logo on the website",
+    signage: "Logo on event signage",
+    social: "Social media shoutout",
+    talks: "Talks and workshops",
+    swag: "Company swag in bags",
+    taxes: "Taxes and challenge prizes are not included in the price.",
+    contact: "Ready to partner?",
+    contactBody:
+      "Tell us what you would like to build with the HackUDC community.",
+    email: "Email hackudc@gpul.org",
+  },
+  gl: {
+    back: "Volver a HackUDC",
+    kicker: "Patrocinio · HackUDC 2027",
+    title: "Construamos o futuro tecnolóxico de Galicia.",
+    intro:
+      "Na nosa quinta edición reuniremos 500 hackers durante 36 horas na Facultade de Informática da Coruña.",
+    download: "Descargar o dossier completo",
+    downloadNote: "PDF · Paquetes de patrocinio 2027",
+    why: "Por que patrocinar HackUDC?",
+    benefits: [
+      ["437", "hackers na última edición"],
+      ["+30", "cidades españolas"],
+      ["91%", "entre 19 e 24 anos"],
+      ["21", "idade mediana"],
+    ],
+    reasons: [
+      [
+        "Marca e comunidade",
+        "Sitúa a túa empresa no centro da comunidade tecnolóxica galega mediante stands, charlas, obradoiros e interacción directa.",
+      ],
+      [
+        "Selección de talento",
+        "Coñece estudantes antes de que entren no mercado laboral. Participantes de edicións anteriores atoparon prácticas e emprego a través de HackUDC.",
+      ],
+      [
+        "Constrúe con nós",
+        "Propón un reto real, acompaña os equipos e descubre o que centos de hackers poden crear en 36 horas.",
+      ],
+    ],
+    packages: "Paquetes de patrocinio",
+    tickets: "Entradas con comidas incluídas",
+    challenge: "Propoñer un reto",
+    stand: "Stand no evento",
+    cv: "Acceso a CV de hackers",
+    website: "Logo na web",
+    signage: "Logo na sinalética",
+    social: "Mención en redes",
+    talks: "Charlas e obradoiros",
+    swag: "Merchandising nas bolsas",
+    taxes: "Os impostos e os premios dos retos non están incluídos no prezo.",
+    contact: "Listos para colaborar?",
+    contactBody:
+      "Cóntanos que che gustaría construír coa comunidade de HackUDC.",
+    email: "Escribir a hackudc@gpul.org",
+  },
+} as const;
+const t = content[locale];
+
+const packages = [
+  {
+    name: "</root>",
+    price: "7.000€",
+    details: [
+      "~6",
+      "+1",
+      "Grande",
+      "Sí",
+      "Más grande",
+      "Sí",
+      "Sí",
+      "2 × 1 h",
+      "Sí",
+    ],
+  },
+  {
+    name: "</admin>",
+    price: "3.500€",
+    details: ["~4", "1", "Regular", "Sí", "Grande", "Sí", "Sí", "1 h", "Sí"],
+  },
+  {
+    name: "</user>",
+    price: "1.000€",
+    details: ["~2", "—", "—", "—", "Regular", "—", "Sí", "30 min", "Sí"],
+  },
+  {
+    name: "</collab>",
+    price: "In-kind",
+    details: ["—", "—", "—", "—", "Pequeño", "—", "Sí", "—", "—"],
+  },
+];
+const features = [
+  t.tickets,
+  t.challenge,
+  t.stand,
+  t.cv,
+  t.website,
+  t.signage,
+  t.social,
+  t.talks,
+  t.swag,
+];
+---
+
+<main class="min-h-dvh bg-red text-cream">
+  <header class="page-wrap flex items-center justify-between py-5 sm:py-7">
+    <a
+      class="inline-flex min-h-11 items-center gap-2 text-xs font-black tracking-wide uppercase hover:text-yellow"
+      href={homeUrl}
+    >
+      <ArrowLeft class="size-4" aria-hidden="true" />
+      {t.back}
+    </a>
+    <img
+      class="h-7 w-auto sm:h-9"
+      src="/assets/brand/logo-cream.svg"
+      alt="HackUDC27"
+      width="1003"
+      height="153"
+    />
+  </header>
+
+  <section
+    class="page-wrap pt-16 pb-24 sm:pt-24 lg:pt-32"
+    aria-labelledby="sponsors-title"
+  >
+    <p class="eyebrow text-yellow">{t.kicker}</p>
+    <div class="mt-6 grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+      <div>
+        <h1 id="sponsors-title" class="display-heading max-w-[11ch] text-cream">
+          {t.title}
+        </h1>
+        <p class="mt-8 max-w-xl text-pretty text-lg leading-snug sm:text-xl">
+          {t.intro}
+        </p>
+      </div>
+      <a
+        class="group flex min-h-14 items-center justify-between gap-5 rounded-full bg-cream px-6 py-3 text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-yellow"
+        href="/assets/documents/HackUDC2027-Dosier.pdf"
+        download
+      >
+        <span>
+          <span class="block text-sm font-black">{t.download}</span>
+          <span class="mt-0.5 block text-xs">{t.downloadNote}</span>
+        </span>
+        <Download
+          class="size-5 shrink-0 transition group-hover:translate-y-0.5"
+          aria-hidden="true"
+        />
+      </a>
+    </div>
+  </section>
+
+  <section
+    class="border-y border-cream/30 bg-cream text-ink"
+    aria-labelledby="why-title"
+  >
+    <div class="page-wrap py-20 lg:py-28">
+      <p class="eyebrow text-red">HackUDC en cifras</p>
+      <h2 id="why-title" class="display-heading mt-5 max-w-[12ch]">
+        {t.why}
+      </h2>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {t.benefits.map(([number, label]) => (
+          <div class="border-t-4 border-red pt-4">
+            <strong class="block font-serif text-5xl leading-none text-red tabular-nums">
+              {number}
+            </strong>
+            <span class="mt-3 block max-w-[15ch] text-sm font-bold leading-snug">
+              {label}
+            </span>
+          </div>
+        ))}
+      </div>
+      <div class="mt-20 grid gap-10 lg:grid-cols-3">
+        {t.reasons.map(([title, body]) => (
+          <article>
+            <h3 class="font-serif text-2xl text-red">{title}</h3>
+            <p class="mt-4 max-w-sm text-pretty leading-snug">{body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-wrap py-20 lg:py-28" aria-labelledby="packages-title">
+    <p class="eyebrow text-yellow">HackUDC 2027</p>
+    <h2 id="packages-title" class="display-heading mt-5">
+      {t.packages}
+    </h2>
+    <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      {packages.map((pkg) => (
+        <article class="flex flex-col border-2 border-cream p-6">
+          <h3 class="font-serif text-3xl">{pkg.name}</h3>
+          <p class="mt-4 text-4xl font-black tabular-nums text-yellow">
+            {pkg.price}
+          </p>
+          <dl class="mt-8 space-y-3 border-t border-cream/30 pt-5 text-sm">
+            {features.map((feature, index) => (
+              <div class="grid grid-cols-[1fr_auto] gap-3">
+                <dt>{feature}</dt>
+                <dd class="font-bold text-yellow">{pkg.details[index]}</dd>
+              </div>
+            ))}
+          </dl>
+        </article>
+      ))}
+    </div>
+    <p class="mt-6 text-sm text-cream/80">{t.taxes}</p>
+  </section>
+
+  <section class="border-t border-cream/30 bg-ink">
+    <div class="page-wrap grid gap-8 py-16 sm:grid-cols-[1fr_auto] sm:items-center">
+      <div>
+        <p class="eyebrow text-yellow">HackUDC · GPUL</p>
+        <h2 class="mt-4 font-serif text-4xl text-balance sm:text-5xl">
+          {t.contact}
+        </h2>
+        <p class="mt-4 max-w-xl text-pretty leading-snug">{t.contactBody}</p>
+      </div>
+      <a
+        class="inline-flex min-h-12 items-center justify-center rounded-full bg-cream px-6 py-3 text-sm font-black text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-yellow"
+        href="mailto:hackudc@gpul.org"
+      >
+        {t.email}
+      </a>
+    </div>
+  </section>
+</main>
