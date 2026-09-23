@@ -8,6 +8,8 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://hackudc.gpul.org",
+
   i18n: {
     locales: ["es", "en", "gl"],
     defaultLocale: "es",
