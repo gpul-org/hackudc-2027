@@ -34,6 +34,10 @@ export type Copy = {
   developedBy: string;
   manifestoCta: string;
   backToTop: string;
+  terms: string;
+  privacy: string;
+  conduct: string;
+  backHome: string;
 };
 
 export const copy: Record<Locale, Copy> = {
@@ -109,6 +113,10 @@ export const copy: Record<Locale, Copy> = {
     developedBy: "Web desarrollada por",
     manifestoCta: "Descargar el manifiesto",
     backToTop: "Volver arriba",
+    terms: "Términos y condiciones",
+    privacy: "Política de privacidad",
+    conduct: "Código de conducta",
+    backHome: "Volver al inicio",
   },
   en: {
     nav: ["What is it", "The experience", "Sponsorship", "FAQ"],
@@ -178,6 +186,10 @@ export const copy: Record<Locale, Copy> = {
     developedBy: "Website developed by",
     manifestoCta: "Download the manifesto",
     backToTop: "Back to top",
+    terms: "Terms and conditions",
+    privacy: "Privacy policy",
+    conduct: "Code of conduct",
+    backHome: "Back to home",
   },
   gl: {
     nav: ["Que é", "A experiencia", "Patrocinio", "FAQ"],
@@ -251,6 +263,10 @@ export const copy: Record<Locale, Copy> = {
     developedBy: "Web desenvolvida por",
     manifestoCta: "Descargar o manifesto",
     backToTop: "Volver arriba",
+    terms: "Termos e condicións",
+    privacy: "Política de privacidade",
+    conduct: "Código de conduta",
+    backHome: "Volver ao inicio",
   },
 };
 

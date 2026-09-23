@@ -1,0 +1,132 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import ArrowLeft from "@lucide/astro/icons/arrow-left";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { copy, languages, type Locale } from "@/i18n/copy";
+import Layout from "@/layouts/Layout.astro";
+
+type Policy = "terms" | "privacy" | "conduct";
+
+const { frontmatter } = Astro.props;
+const locale = frontmatter.locale as Locale;
+const policy = frontmatter.policy as Policy;
+const t = copy[locale];
+const homeUrl = getRelativeLocaleUrl(locale, "");
+const localeUrls: Record<Locale, string> = {
+  es: getRelativeLocaleUrl("es", policy),
+  en: getRelativeLocaleUrl("en", policy),
+  gl: getRelativeLocaleUrl("gl", policy),
+};
+---
+
+<Layout
+  lang={locale}
+  title={frontmatter.title}
+  description={frontmatter.description}
+>
+  <div class="min-h-dvh bg-cream text-ink">
+    <header class="page-wrap flex items-center justify-between gap-4 py-5 sm:py-7">
+      <a
+        class="inline-flex min-h-11 items-center gap-2 text-xs font-black tracking-wide uppercase hover:text-red"
+        href={homeUrl}
+      >
+        <ArrowLeft class="size-4" aria-hidden="true" />
+        {t.backHome}
+      </a>
+      <div class="flex items-center gap-3 sm:gap-5">
+        <nav
+          class="flex gap-0.5 rounded-full border border-ink/30 p-1"
+          aria-label="Language selector"
+        >
+          {languages.map((language) => (
+            <a
+              class="rounded-full px-2 py-1 text-xs font-extrabold tracking-wide transition-colors hover:bg-ink hover:text-cream aria-[current=page]:bg-ink aria-[current=page]:text-cream"
+              href={localeUrls[language.code]}
+              hreflang={language.code}
+              aria-current={language.code === locale ? "page" : undefined}
+            >
+              {language.label}
+            </a>
+          ))}
+        </nav>
+        <a href={homeUrl} aria-label="HackUDC27, home">
+          <img
+            class="h-7 w-auto sm:h-9"
+            src="/assets/brand/logo-navy.svg"
+            alt="HackUDC27"
+            width="1003"
+            height="153"
+          />
+        </a>
+      </div>
+    </header>
+
+    <main class="page-wrap pb-16 sm:pb-24">
+      <article class="legal-copy mx-auto max-w-3xl">
+        <p class="eyebrow text-red">HackUDC 2027</p>
+        <slot />
+      </article>
+    </main>
+
+    <SiteFooter locale={locale} />
+  </div>
+</Layout>
+
+<style>
+  .legal-copy :global(h1) {
+    margin-top: 1rem;
+    font-family: var(--font-serif);
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    line-height: 1;
+    text-wrap: balance;
+  }
+  .legal-copy :global(h2) {
+    margin-top: 2.75rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  .legal-copy :global(h3) {
+    margin-top: 1.75rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+  .legal-copy :global(p),
+  .legal-copy :global(li) {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+  .legal-copy :global(ul),
+  .legal-copy :global(ol) {
+    margin-top: 1rem;
+    padding-inline-start: 1.5rem;
+  }
+  .legal-copy :global(ul) {
+    list-style: disc;
+  }
+  .legal-copy :global(ol) {
+    list-style: decimal;
+  }
+  .legal-copy :global(li + li),
+  .legal-copy :global(li > ul) {
+    margin-top: 0.4rem;
+  }
+  .legal-copy :global(a) {
+    color: var(--color-red);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+  .legal-copy :global(blockquote) {
+    margin-top: 2rem;
+    border-inline-start: 4px solid var(--color-red);
+    padding-inline-start: 1.25rem;
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    line-height: 1.2;
+  }
+</style>

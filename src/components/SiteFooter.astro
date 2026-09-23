@@ -6,6 +6,7 @@ import Linkedin from "@/assets/icons/linkedin.svg";
 import Telegram from "@/assets/icons/telegram.svg";
 import Twitch from "@/assets/icons/twitch.svg";
 import X from "@/assets/icons/x.svg";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { copy, type Locale } from "@/i18n/copy";
 
 interface Props {
@@ -13,6 +14,12 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
+const locale = Astro.props.locale;
+const legalLinks = [
+  { label: t.terms, href: getRelativeLocaleUrl(locale, "terms") },
+  { label: t.privacy, href: getRelativeLocaleUrl(locale, "privacy") },
+  { label: t.conduct, href: getRelativeLocaleUrl(locale, "conduct") },
+];
 const socials = [
   {
     label: "Instagram",
@@ -77,4 +84,14 @@ const socials = [
       {t.backToTop}
     </a>
   </div>
+  <nav
+    class="mt-5 flex flex-wrap gap-x-4 gap-y-2 border-t border-cream/20 pt-4 text-xs"
+    aria-label="Legal"
+  >
+    {legalLinks.map(({ label, href }) => (
+      <a class="small-link text-cream/80" href={href}>
+        {label}
+      </a>
+    ))}
+  </nav>
 </footer>
