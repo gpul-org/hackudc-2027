@@ -8,9 +8,10 @@ export type Copy = {
   waitlistShort: string;
   sponsor: string;
   marquee: string;
-  kicker: string;
+  aboutLabel: string;
   aboutTitle: string;
   aboutBody: string;
+  aboutDetail: string;
   stats: [string, string][];
   experienceKicker: string;
   experienceTitle: string;
@@ -31,6 +32,7 @@ export type Copy = {
   faq: [string, string][];
   footer: string;
   developedBy: string;
+  manifestoCta: string;
   backToTop: string;
 };
 
@@ -43,10 +45,12 @@ export const copy: Record<Locale, Copy> = {
     waitlistShort: "Lista de espera",
     sponsor: "Patrocinar",
     marquee: "LISTA DE ESPERA ABIERTA · ÚNETE AHORA · HACKUDC27 · ",
-    kicker: "HACKUDC27 / UNA HISTORIA QUE CONTINÚA",
-    aboutTitle: "Tecnología, creatividad y comunidad.",
+    aboutLabel: "HACK + MARATÓN",
+    aboutTitle: "¿Qué es HackUDC?",
     aboutBody:
-      "HackUDC es una hackathon universitaria abierta a cualquier persona con ganas de aprender, crear y compartir. Durante 36 horas, equipos multidisciplinares convierten una idea en algo real.",
+      "HackUDC es una hackathon de código abierto organizada por GPUL. Construye un proyecto en 36 horas a partir de un reto patrocinado o crea algo original con un equipo de hasta cuatro hackers.",
+    aboutDetail:
+      "No hace falta sentirse preparado: ven a aprender, probar, conocer gente y compartir algo que pueda seguir creciendo después del evento.",
     stats: [
       ["500+", "participantes"],
       ["36h", "de hacking"],
@@ -103,6 +107,7 @@ export const copy: Record<Locale, Copy> = {
     ],
     footer: "Hecho en A Coruña para cambiar lo que viene.",
     developedBy: "Web desarrollada por",
+    manifestoCta: "Descargar el manifiesto",
     backToTop: "Volver arriba",
   },
   en: {
@@ -113,10 +118,12 @@ export const copy: Record<Locale, Copy> = {
     waitlistShort: "Waitlist",
     sponsor: "Sponsor",
     marquee: "WAITLIST NOW OPEN · JOIN US · HACKUDC27 · ",
-    kicker: "HACKUDC27 / A STORY IN THE MAKING",
-    aboutTitle: "Technology, creativity and community.",
+    aboutLabel: "HACK + MARATHON",
+    aboutTitle: "What is HackUDC?",
     aboutBody:
-      "HackUDC is a university hackathon open to anyone who wants to learn, create and share. For 36 hours, multidisciplinary teams turn an idea into something real.",
+      "HackUDC is an open-source hackathon organized by GPUL. Build a project in 36 hours from a sponsored challenge, or create something original with a team of up to four hackers.",
+    aboutDetail:
+      "You do not need to feel ready. Come to learn, try, meet people and share something that can keep growing after the event.",
     stats: [
       ["500+", "participants"],
       ["36h", "of hacking"],
@@ -169,6 +176,7 @@ export const copy: Record<Locale, Copy> = {
     ],
     footer: "Made in A Coruña for what comes next.",
     developedBy: "Website developed by",
+    manifestoCta: "Download the manifesto",
     backToTop: "Back to top",
   },
   gl: {
@@ -179,10 +187,12 @@ export const copy: Record<Locale, Copy> = {
     waitlistShort: "Lista de espera",
     sponsor: "Patrocinar",
     marquee: "LISTA DE ESPERA ABERTA · ÚNETE AGORA · HACKUDC27 · ",
-    kicker: "HACKUDC27 / UNHA HISTORIA QUE CONTINÚA",
-    aboutTitle: "Tecnoloxía, creatividade e comunidade.",
+    aboutLabel: "HACK + MARATÓN",
+    aboutTitle: "Que é HackUDC?",
     aboutBody:
-      "HackUDC é unha hackathon universitaria aberta a calquera persoa con ganas de aprender, crear e compartir. Durante 36 horas, equipos multidisciplinares converten unha idea en algo real.",
+      "HackUDC é unha hackathon de código aberto organizada por GPUL. Constrúe un proxecto en 36 horas a partir dun reto patrocinado ou crea algo orixinal cun equipo de ata catro hackers.",
+    aboutDetail:
+      "Non tes que sentirte preparado. Ven aprender, probar, coñecer xente e compartir algo que poida seguir medrando despois do evento.",
     stats: [
       ["500+", "participantes"],
       ["36h", "de hacking"],
@@ -239,6 +249,7 @@ export const copy: Record<Locale, Copy> = {
     ],
     footer: "Feito na Coruña para cambiar o que vén.",
     developedBy: "Web desenvolvida por",
+    manifestoCta: "Descargar o manifesto",
     backToTop: "Volver arriba",
   },
 };

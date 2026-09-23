@@ -9,24 +9,24 @@ const t = copy[Astro.props.locale];
 
 // CTAs drawn as ornamented plaques; the artwork is the background.
 const plaque =
-  "grid aspect-[334/78] w-64 place-items-center bg-contain bg-center bg-no-repeat text-lg font-black tracking-wide uppercase transition duration-200 ease-out hover:-translate-y-0.5 lg:w-72 lg:text-xl";
+  "grid aspect-[334/78] min-w-0 flex-1 place-items-center bg-contain bg-center bg-no-repeat text-xs font-black tracking-wide uppercase transition duration-200 ease-out hover:-translate-y-0.5 sm:w-64 sm:flex-none sm:text-lg lg:w-72 lg:text-xl";
 ---
 
 <section
-  class="relative isolate flex min-h-svh flex-col items-center overflow-hidden bg-linear-to-b from-[#5ba3e0] to-[#95d0f1] px-5 pt-[clamp(6rem,16svh,10rem)] text-center [--building:118vw] sm:[--building:72vw] lg:[--building:min(62vw,62rem)]"
+  class="relative isolate flex min-h-svh flex-col items-center overflow-hidden bg-linear-to-b from-[#5ba3e0] to-[#95d0f1] px-5 pt-[clamp(6rem,16svh,10rem)] text-center [--building:90vw] [--mobile-logo-width:min(78vw,24rem)] sm:[--building:72vw] lg:[--building:min(62vw,62rem)]"
   id="top"
   aria-labelledby="hero-title"
 >
   <div class="relative z-2 flex flex-col items-center">
     <div class="relative flex flex-col items-center">
-      <span class="mb-3 bg-red py-1.5 pr-5 pl-6 text-sm font-black tracking-wide text-cream [clip-path:polygon(0_0,calc(100%-0.75rem)_0,100%_50%,calc(100%-0.75rem)_100%,0_100%,0.75rem_50%)] sm:absolute sm:right-0 sm:bottom-full sm:mb-3 sm:text-base lg:text-xl">
+      <span class="absolute right-0 bottom-full mb-3 bg-red py-1.5 pr-5 pl-6 text-sm font-black tracking-wide text-cream [clip-path:polygon(0_0,calc(100%-0.75rem)_0,100%_50%,calc(100%-0.75rem)_100%,0_100%,0.75rem_50%)] sm:text-base lg:text-xl">
         {t.edition}
       </span>
       <h1 id="hero-title">
-        <picture class="block w-[min(55vw,14rem)] sm:w-[min(60vw,56rem,80svh)]">
+        <picture class="block w-(--mobile-logo-width) sm:w-[min(60vw,56rem,80svh)]">
           <source
             media="(width < 40rem)"
-            srcset="/assets/brand/logo-vertical-navy.svg"
+            srcset="/assets/brand/logo-mobile-navy.svg"
           />
           <img
             class="w-full animate-hero-logo motion-reduce:animate-none"
@@ -41,7 +41,7 @@ const plaque =
     </div>
 
     <div
-      class="mt-10 flex flex-col items-center gap-4 sm:mt-14 sm:flex-row sm:gap-10"
+      class="mt-10 flex w-(--mobile-logo-width) flex-row items-center gap-2 sm:mt-14 sm:w-auto sm:gap-10"
       id="waitlist"
     >
       <a
@@ -79,6 +79,6 @@ const plaque =
       width="1123"
       height="1121"
     />
-    <div class="absolute inset-x-0 bottom-0 z-3 h-16 bg-linear-to-b from-transparent to-cream"></div>
+    <div class="absolute inset-x-0 bottom-0 z-3 h-48 bg-linear-to-b from-transparent to-cream sm:h-16"></div>
   </div>
 </section>
