@@ -1,0 +1,108 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import type { Locale } from "@/i18n/copy";
+
+// Site chrome
+import FixedUI from "@/components/FixedUI.astro";
+import FloatingNav from "@/components/FloatingNav.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
+
+// Page sections, in display order
+import Hero from "@/components/Hero.astro";
+import EventStats from "@/components/EventStats.astro";
+import About from "@/components/About.astro";
+import HowTo from "@/components/HowTo.astro";
+import Sponsors from "@/components/Sponsors.astro";
+import Faq from "@/components/Faq.astro";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const localeUrls: Record<Locale, string> = {
+  es: getRelativeLocaleUrl("es", ""),
+  en: getRelativeLocaleUrl("en", ""),
+  gl: getRelativeLocaleUrl("gl", ""),
+};
+---
+
+<div class="overflow-clip bg-cream">
+  <SiteHeader locale={locale} localeUrls={localeUrls} />
+
+  <main>
+    <Hero locale={locale} />
+    <EventStats locale={locale} />
+    <About locale={locale} />
+    <HowTo locale={locale} />
+    <Sponsors locale={locale} />
+    <Faq locale={locale} />
+  </main>
+
+  <SiteFooter locale={locale} />
+</div>
+
+<!-- Floating UI, shown depending on scroll position. -->
+<FloatingNav locale={locale} localeUrls={localeUrls} />
+<FixedUI locale={locale} />
+
+<script>
+  const show = (element: Element) => element.setAttribute("data-visible", "");
+  const reduceMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Fades sections in the first time they scroll into view.
+  let revealObserver: IntersectionObserver | undefined;
+
+  function initReveal() {
+    revealObserver?.disconnect();
+    const reveals = document.querySelectorAll("[data-reveal]");
+
+    if (reduceMotion() || !("IntersectionObserver" in window)) {
+      reveals.forEach(show);
+      return;
+    }
+
+    revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          show(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.14, rootMargin: "0px 0px -8% 0px" },
+    );
+    reveals.forEach((element) => revealObserver?.observe(element));
+  }
+
+  // Parallax for decorative images. Uses the standalone `translate` property
+  // so it composes with Tailwind's `rotate-*` utilities.
+  let frame = 0;
+
+  function updateDrift() {
+    const viewport = window.innerHeight || 1;
+    document
+      .querySelectorAll<HTMLElement>("[data-scroll-drift]")
+      .forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        const progress = (viewport - rect.top) / (viewport + rect.height);
+        const offset = Math.max(-1, Math.min(1, progress - 0.5)) * -28;
+        element.style.translate = `0 ${offset}px`;
+      });
+    frame = 0;
+  }
+
+  function requestDrift() {
+    if (!frame && !reduceMotion()) {
+      frame = window.requestAnimationFrame(updateDrift);
+    }
+  }
+
+  window.addEventListener("scroll", requestDrift, { passive: true });
+  document.addEventListener("astro:page-load", () => {
+    initReveal();
+    requestDrift();
+  });
+</script>

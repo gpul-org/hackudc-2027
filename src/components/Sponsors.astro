@@ -1,0 +1,80 @@
+---
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const t = copy[Astro.props.locale];
+
+const tiers = [
+  { name: "root", logos: 4, tier: "min-h-32", logo: "h-10 w-14" },
+  {
+    name: "admin",
+    logos: 3,
+    tier: "ml-[8%] w-[84%] min-h-24",
+    logo: "h-7 w-10",
+  },
+  {
+    name: "user",
+    logos: 1,
+    tier: "ml-[16%] w-[68%] min-h-16",
+    logo: "h-7 w-10",
+  },
+];
+---
+
+<section
+  class="bg-red py-24 text-cream lg:py-40"
+  id="sponsors"
+  aria-labelledby="sponsors-title"
+>
+  <div class="page-wrap grid items-center gap-12 sm:grid-cols-[1fr_0.8fr] sm:gap-16">
+    <div class="max-w-4xl">
+      <p class="eyebrow text-yellow reveal" data-reveal>
+        {t.sponsorsKicker}
+      </p>
+      <h2
+        class="mt-5 max-w-[10ch] display-heading reveal"
+        data-reveal
+        id="sponsors-title"
+      >
+        {t.sponsorsTitle}
+      </h2>
+      <p
+        class="reveal mt-8 max-w-md text-base leading-snug lg:text-xl"
+        data-reveal
+      >
+        {t.sponsorsBody}
+      </p>
+      <a
+        class="group reveal mt-8 inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-transparent bg-cream px-5 py-3 text-xs font-black tracking-wide text-red transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-yellow"
+        data-reveal
+        href="mailto:sponsors@hackudc.gpul.org?subject=HackUDC27%20sponsorship"
+      >
+        {t.sponsorCta}
+        <ArrowUpRight
+          class="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          aria-hidden="true"
+        />
+      </a>
+    </div>
+    <div
+      class="flex max-w-sm flex-col gap-2.5 sm:p-6 reveal"
+      data-reveal
+      aria-label="Sponsorship tiers"
+    >
+      {tiers.map(({ name, logos, tier, logo }) => (
+        <div
+          class={`flex items-center gap-2.5 border-2 border-cream bg-cream/10 p-3 ${tier}`}
+        >
+          <span class="mr-auto font-serif">{name}</span>
+          {Array.from({ length: logos }, () => (
+            <b class={`bg-cream/90 ${logo}`} />
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,80 @@
+---
+import ArrowUp from "@lucide/astro/icons/arrow-up";
+import Github from "@/assets/icons/github.svg";
+import Instagram from "@/assets/icons/instagram.svg";
+import Linkedin from "@/assets/icons/linkedin.svg";
+import Telegram from "@/assets/icons/telegram.svg";
+import Twitch from "@/assets/icons/twitch.svg";
+import X from "@/assets/icons/x.svg";
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const t = copy[Astro.props.locale];
+const socials = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/gpul_",
+    icon: Instagram,
+  },
+  { label: "X", href: "https://x.com/gpul_", icon: X },
+  { label: "Twitch", href: "https://www.twitch.tv/gpul_/", icon: Twitch },
+  { label: "Telegram", href: "https://t.me/+PrK44xhqJ9eP9ZUf", icon: Telegram },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/gpul/",
+    icon: Linkedin,
+  },
+  { label: "GitHub", href: "https://github.com/gpul-org", icon: Github },
+];
+---
+
+<footer
+  class="bg-ink px-[clamp(1.25rem,6vw,7rem)] pt-8 pb-5 text-cream"
+  data-site-footer
+>
+  <div class="flex flex-col items-start gap-8 border-b border-cream/30 pb-8 sm:flex-row sm:items-center sm:justify-between">
+    <img
+      class="w-full max-w-[80vw] sm:max-w-[min(50vw,26rem)]"
+      src="/assets/brand/logo-cream.svg"
+      alt="HackUDC27"
+      width="1003"
+      height="153"
+    />
+    <p class="max-w-60 font-serif text-base leading-tight sm:text-right lg:text-2xl">
+      {t.footer}
+    </p>
+  </div>
+  <!-- Equal side columns keep the icons centred on the footer, whatever the text widths. -->
+  <div class="flex flex-col items-start gap-6 pt-5 text-[0.7rem] text-cream/70 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-4">
+    <span>
+      © 2027 HackUDC · {t.developedBy}{" "}
+      <a class="small-link text-cream" href="https://gpul.org">
+        GPUL
+      </a>
+    </span>
+    <ul class="flex gap-5">
+      {socials.map(({ label, href, icon: Icon }) => (
+        <li>
+          <a
+            class="block text-cream transition-colors hover:text-yellow"
+            href={href}
+            aria-label={label}
+            title={label}
+          >
+            <Icon class="size-5" aria-hidden="true" />
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a
+      class="small-link inline-flex items-center gap-1 text-cream sm:justify-self-end"
+      href="#top"
+    >
+      <ArrowUp class="size-3.5" aria-hidden="true" />
+      {t.backToTop}
+    </a>
+  </div>
+</footer>

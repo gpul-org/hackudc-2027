@@ -1,0 +1,33 @@
+---
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const t = copy[Astro.props.locale];
+---
+
+<section
+  class="relative my-16 min-h-60 sm:my-24"
+  aria-label="HackUDC27 statistics"
+>
+  <div
+    class="absolute inset-0 bg-yellow/80 [clip-path:polygon(0_12%,100%_0,100%_88%,32%_100%)] sm:[clip-path:polygon(22%_0,100%_0,100%_100%,36%_100%,0_43%)]"
+    aria-hidden="true"
+  ></div>
+  <div class="relative mx-auto grid max-w-7xl grid-cols-2 gap-x-3 gap-y-8 px-5 py-16 sm:grid-cols-4 sm:gap-5 sm:px-[8vw] sm:py-18">
+    {t.stats.map(([value, label], index) => (
+      <div
+        class="flex flex-col gap-1.5 text-center reveal"
+        style={`transition-delay: ${index * 70}ms`}
+        data-reveal
+      >
+        <strong class="font-serif text-3xl leading-none tracking-tighter sm:text-5xl lg:text-6xl">
+          {value}
+        </strong>
+        <span class="text-xs font-black tracking-wider uppercase">{label}</span>
+      </div>
+    ))}
+  </div>
+</section>

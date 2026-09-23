@@ -1,0 +1,67 @@
+---
+import { copy, languages, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+  localeUrls: Record<Locale, string>;
+}
+
+const { locale, localeUrls } = Astro.props;
+const t = copy[locale];
+const navTargets = ["#about", "#experience", "#sponsors", "#faq"];
+---
+
+<header
+  class="absolute inset-x-0 top-0 z-10 flex items-center justify-between gap-8 px-5 py-4 sm:px-[4vw]"
+  data-site-header
+>
+  <a
+    class="inline-flex items-center gap-2"
+    href={localeUrls[locale]}
+    aria-label="HackUDC27, home"
+  >
+    <span class="inline-flex size-7 items-center justify-center rounded-full border-[1.5px] border-current text-xs font-extrabold">
+      H
+    </span>
+    <span class="text-xs leading-[0.8] font-black tracking-tighter sm:text-[0.8rem]">
+      HACKUDC
+      <sup class="ml-0.5 inline-block align-top text-[0.43rem] leading-[0.85] tracking-normal">
+        20
+        <br />
+        27
+      </sup>
+    </span>
+  </a>
+
+  <nav class="hidden gap-[2.5vw] lg:flex" aria-label="Primary navigation">
+    {t.nav.map((label, index) => (
+      <a class="small-link" href={navTargets[index]}>
+        {label}
+      </a>
+    ))}
+  </nav>
+
+  <div class="ml-auto flex items-center gap-3">
+    <div
+      class="flex gap-0.5 rounded-full border border-ink/30 p-1"
+      aria-label="Language selector"
+    >
+      {languages.map((language) => (
+        <a
+          class="rounded-full px-2 py-1 text-xs font-extrabold tracking-wide transition-colors hover:bg-ink hover:text-cream aria-[current=page]:bg-ink aria-[current=page]:text-cream"
+          href={localeUrls[language.code]}
+          hreflang={language.code}
+          aria-current={language.code === locale ? "page" : undefined}
+        >
+          {language.label}
+        </a>
+      ))}
+    </div>
+    <a
+      class="hidden rounded-full bg-ink px-4 py-3 text-xs font-extrabold tracking-wide text-cream transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-red sm:block"
+      href="#waitlist"
+    >
+      {t.waitlist}
+    </a>
+  </div>
+</header>

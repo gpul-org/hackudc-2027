@@ -1,0 +1,55 @@
+---
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const t = copy[Astro.props.locale];
+---
+
+<section class="py-28 lg:py-52" aria-labelledby="steps-title">
+  <div class="page-wrap sm:grid sm:grid-cols-[minmax(10rem,0.62fr)_minmax(0,1.38fr)] sm:gap-x-20 sm:gap-y-8">
+    <div
+      class="mx-auto mb-16 max-w-52 rounded-full outline outline-offset-12 outline-ink/25 sm:row-span-2 sm:mb-0 sm:max-w-80 sm:self-center reveal"
+      data-reveal
+      aria-hidden="true"
+    >
+      <img
+        class="w-full mix-blend-multiply"
+        src="/assets/scene/compass.svg"
+        alt=""
+        width="990"
+        height="987"
+      />
+    </div>
+    <div class="max-w-4xl">
+      <p class="eyebrow reveal" data-reveal>
+        {t.stepsKicker}
+      </p>
+      <h2
+        class="mt-5 max-w-[12ch] display-heading reveal"
+        data-reveal
+        id="steps-title"
+      >
+        {t.stepsTitle}
+      </h2>
+    </div>
+    <div class="mt-14 border-t border-ink/15 sm:mt-12">
+      {t.steps.map(([number, title, body]) => (
+        <article
+          class="grid grid-cols-[3rem_1fr] items-start gap-6 border-b border-ink/15 py-6 reveal"
+          data-reveal
+        >
+          <span class="font-serif text-xl font-bold text-red">{number}</span>
+          <div>
+            <h3 class="font-serif text-2xl leading-none font-medium tracking-tighter lg:text-4xl">
+              {title}
+            </h3>
+            <p class="mt-2.5 max-w-md text-sm leading-snug">{body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

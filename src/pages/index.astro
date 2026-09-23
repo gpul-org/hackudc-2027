@@ -1,18 +1,11 @@
 ---
-import { getRelativeLocaleUrl } from "astro:i18n";
-import HomePage from "@/components/HomePage.tsx";
+import HomePage from "@/components/HomePage.astro";
 import Layout from "@/layouts/Layout.astro";
-
-const localeUrls = {
-  es: getRelativeLocaleUrl("es", ""),
-  en: getRelativeLocaleUrl("en", ""),
-  gl: getRelativeLocaleUrl("gl", ""),
-};
 ---
 
 <Layout
   lang="es"
   description="Hackathon estudiantil de código abierto de 36 horas en A Coruña, organizada por GPUL."
 >
-  <HomePage client:load locale="es" localeUrls={localeUrls} />
+  <HomePage locale="es" />
 </Layout>

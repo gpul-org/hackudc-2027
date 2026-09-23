@@ -1,0 +1,134 @@
+---
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import Play from "@lucide/astro/icons/play";
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const t = copy[Astro.props.locale];
+const cardTopline =
+  "flex justify-between px-1.5 pt-1 pb-3 text-[0.68rem] font-black tracking-wider uppercase";
+const cardCaption =
+  "absolute bottom-3 left-3 inline-flex items-center gap-1 text-xs font-black tracking-wide uppercase";
+---
+
+<section
+  class="relative pt-16 pb-40 sm:pb-72 lg:pt-28"
+  id="about"
+  aria-labelledby="about-title"
+>
+  <img
+    class="absolute right-4 bottom-10 w-16 opacity-95 sm:right-8 sm:w-24 lg:right-[max(1rem,calc(50%-35rem))]"
+    src="/assets/scene/mascot.svg"
+    alt=""
+    width="93"
+    height="94"
+    data-scroll-drift
+  />
+  <img
+    class="absolute bottom-0 -left-16 w-36 origin-bottom -rotate-4 opacity-30 sm:-left-20 sm:w-56 sm:opacity-90 lg:left-[max(-8rem,calc(50%-44rem))]"
+    src="/assets/scene/farola.svg"
+    alt=""
+    width="706"
+    height="742"
+    data-scroll-drift
+  />
+  <div class="page-wrap">
+    <p class="eyebrow reveal" data-reveal>
+      {t.kicker}
+    </p>
+    <div class="mt-9 grid items-end gap-8 sm:grid-cols-[1.2fr_0.8fr] sm:gap-12">
+      <h2
+        class="display-heading max-w-[12ch] reveal"
+        data-reveal
+        id="about-title"
+      >
+        {t.aboutTitle}
+      </h2>
+      <div
+        class="max-w-sm pb-1.5 text-base leading-normal sm:max-w-md lg:text-xl reveal"
+        data-reveal
+      >
+        <p>{t.aboutBody}</p>
+        <a
+          class="mt-8 inline-flex gap-3 border-b border-current pb-1.5 text-xs font-black tracking-widest uppercase"
+          href="#experience"
+        >
+          {t.nav[1]} <span aria-hidden="true">↘</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section
+  class="bg-blue py-24 lg:py-40"
+  id="experience"
+  aria-labelledby="experience-title"
+>
+  <div class="page-wrap">
+    <div class="max-w-4xl">
+      <p class="eyebrow text-blue-deep reveal" data-reveal>
+        {t.experienceKicker}
+      </p>
+      <h2
+        class="mt-5 max-w-[12ch] display-heading reveal"
+        data-reveal
+        id="experience-title"
+      >
+        {t.experienceTitle}
+      </h2>
+      <p
+        class="reveal mt-8 max-w-md text-base leading-snug lg:text-xl"
+        data-reveal
+      >
+        {t.experienceBody}
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-4 sm:mt-24 sm:grid-cols-[1.05fr_0.95fr] sm:gap-[3vw] lg:mt-30">
+      <article class="border-2 border-ink bg-cream p-3 reveal" data-reveal>
+        <div class={cardTopline}>
+          <span>{t.gallery}</span>
+          <span>01</span>
+        </div>
+        <div class="relative aspect-[1.55] overflow-hidden bg-linear-145 from-[#75b5e4] to-[#d9eefb]">
+          <img
+            class="absolute bottom-0 left-[5%] w-[90%]"
+            src="/assets/scene/building-wide.svg"
+            alt=""
+            width="990"
+            height="459"
+          />
+          <span class={cardCaption}>
+            {t.galleryCta}
+            <ArrowUpRight class="size-3.5" aria-hidden="true" />
+          </span>
+        </div>
+      </article>
+      <article
+        class="ml-[8%] self-end border-2 border-ink bg-blue-deep p-3 text-cream sm:-mb-20 sm:ml-0 reveal"
+        data-reveal
+      >
+        <div class={cardTopline}>
+          <span>{t.aftermovie}</span>
+          <span>02</span>
+        </div>
+        <div class="relative flex aspect-[1.55] items-center justify-center bg-linear-145 from-blue-deep to-[#1e286b]">
+          <span
+            class="flex size-14 items-center justify-center rounded-full border-2 border-cream pl-0.5"
+            aria-hidden="true"
+          >
+            <Play class="size-5 fill-current" aria-hidden="true" />
+          </span>
+          <span class={cardCaption}>
+            {t.videoCta}
+            <ArrowUpRight class="size-3.5" aria-hidden="true" />
+          </span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
