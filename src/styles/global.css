@@ -2,11 +2,12 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-ink: #141244;
-  --color-red: #b52024;
-  --color-blue: #a8d3f1;
-  --color-blue-deep: #2f3c8d;
-  --color-cream: #fafbfb;
+  --color-ink: #030846;
+  --color-red: #bf2100;
+  --color-blue: #a3d5ff;
+  --color-cream: #fafafa;
+  --color-black: #000000;
+  /* Intentional semantic exception: the stats shape is a ray of light. */
   --color-yellow: #f5dc8f;
 
   --font-sans:

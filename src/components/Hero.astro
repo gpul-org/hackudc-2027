@@ -17,7 +17,7 @@ const plaque =
 ---
 
 <section
-  class="relative isolate flex min-h-svh flex-col items-center overflow-hidden bg-linear-to-b from-[#5ba3e0] to-[#95d0f1] px-5 pt-[clamp(6rem,16svh,10rem)] text-center [--building:90vw] [--mobile-logo-width:min(78vw,24rem)] sm:[--building:72vw] lg:[--building:min(62vw,62rem)]"
+  class="relative isolate flex min-h-svh flex-col items-center overflow-hidden bg-linear-to-b from-blue via-blue to-cream px-5 pt-[clamp(6rem,16svh,10rem)] text-center [--building:90vw] [--mobile-logo-width:min(78vw,24rem)] sm:[--building:72vw] lg:[--building:min(62vw,62rem)]"
   id="top"
   aria-labelledby="hero-title"
 >
@@ -57,7 +57,7 @@ const plaque =
         {t.waitlistShort}
       </a>
       <a
-        class={`${plaque} bg-[url(/assets/scene/button-secondary.svg)] text-[#63bdee]`}
+        class={`${plaque} bg-[url(/assets/scene/button-secondary.svg)] text-ink`}
         href={sponsorPageUrl}
       >
         {t.sponsor}
@@ -70,7 +70,7 @@ const plaque =
     class="relative z-1 -mx-5 mt-10 min-h-40 flex-1 self-stretch"
     aria-hidden="true"
   >
-    <div class="absolute top-[26%] left-[-4%] z-4 w-[108%] -rotate-5 overflow-hidden bg-cream py-3 text-sm font-black whitespace-nowrap text-neutral-950 sm:top-[38%] lg:text-lg">
+    <div class="absolute top-[26%] left-[-4%] z-4 w-[108%] -rotate-5 overflow-hidden bg-cream py-3 text-sm font-black whitespace-nowrap text-ink sm:top-[38%] lg:text-lg">
       <div class="flex w-max animate-ticker motion-reduce:animate-none">
         <span class="shrink-0 whitespace-nowrap">{t.marquee.repeat(12)}</span>
         <span class="shrink-0 whitespace-nowrap" aria-hidden="true">
@@ -85,6 +85,6 @@ const plaque =
       width="1123"
       height="1121"
     />
-    <div class="absolute inset-x-0 bottom-0 z-3 h-48 bg-linear-to-b from-transparent to-cream sm:h-16"></div>
+    <div class="absolute inset-x-0 bottom-0 z-3 h-[clamp(14rem,34svh,26rem)] bg-linear-to-b from-transparent to-cream"></div>
   </div>
 </section>

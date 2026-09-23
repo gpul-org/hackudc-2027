@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1180" fill="none">
+  <style>
+    .line{fill:#FAFAFA}.pane{fill:#A3D5FF;stroke:#FAFAFA;stroke-width:12}.label{fill:#A3D5FF;font:700 28px Rockwell,Georgia,serif;text-anchor:middle}.small{fill:#A3D5FF;stroke:#FAFAFA;stroke-width:10}
+  </style>
+  <!-- Root facade -->
+  <rect class="line" x="70" y="40" width="860" height="18" rx="9"/>
+  <rect class="pane" x="80" y="62" width="155" height="260" rx="8"/>
+  <rect class="pane" x="245" y="62" width="155" height="260" rx="8"/>
+  <rect class="pane" x="400" y="62" width="200" height="260" rx="8"/>
+  <rect class="pane" x="600" y="62" width="155" height="260" rx="8"/>
+  <rect class="pane" x="765" y="62" width="155" height="260" rx="8"/>
+  <path class="line" d="M400 150c48-62 152-62 200 0v14c-51-44-149-44-200 0z"/>
+  <text class="label" x="500" y="106">ROOT</text>
+  <!-- Admin band and six windows -->
+  <rect class="line" x="60" y="342" width="880" height="38" rx="15"/>
+  <text class="label" x="500" y="371">ADMIN</text>
+  <g>
+    <rect class="pane" x="175" y="400" width="205" height="118" rx="8"/>
+    <rect class="pane" x="398" y="400" width="205" height="118" rx="8"/>
+    <rect class="pane" x="621" y="400" width="205" height="118" rx="8"/>
+    <rect class="pane" x="175" y="532" width="205" height="118" rx="8"/>
+    <rect class="pane" x="398" y="532" width="205" height="118" rx="8"/>
+    <rect class="pane" x="621" y="532" width="205" height="118" rx="8"/>
+  </g>
+  <!-- User panel -->
+  <rect class="line" x="60" y="672" width="880" height="38" rx="15"/>
+  <text class="label" x="500" y="701">USER</text>
+  <rect class="pane" x="135" y="728" width="730" height="150" rx="10"/>
+  <!-- Collaborator arcade -->
+  <rect class="line" x="60" y="900" width="880" height="38" rx="15"/>
+  <text class="label" x="500" y="929">COLLAB</text>
+  <path class="line" d="M80 1140V970h840v170h-35v-104c0-58-65-84-105-42-14 15-20 31-20 50v96H620v-96c0-58-65-84-105-42-14 15-20 31-20 50v96H355v-96c0-58-65-84-105-42-14 15-20 31-20 50v96z"/>
+  <path d="M115 1140v-104c0-28 19-48 43-48s42 20 42 48v104m155 0v-104c0-28 19-48 43-48s42 20 42 48v104m155 0v-104c0-28 19-48 43-48s42 20 42 48v104" stroke="#A3D5FF" stroke-width="12"/>
+</svg>
