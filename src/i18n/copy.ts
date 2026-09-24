@@ -4,6 +4,8 @@ export type Copy = {
   nav: string[];
   edition: string;
   title: string;
+  datePlaceholder: string;
+  dateComingSoon: string;
   waitlist: string;
   waitlistShort: string;
   sponsor: string;
@@ -45,6 +47,8 @@ export const copy: Record<Locale, Copy> = {
     nav: ["Qué es", "La experiencia", "Patrocinio", "FAQ"],
     edition: "5ª EDICIÓN",
     title: "Hackea el futuro desde Galicia.",
+    datePlaceholder: "XX FEB — XX MAR",
+    dateComingSoon: "Fechas próximamente",
     waitlist: "Apúntate a la lista de espera",
     waitlistShort: "Lista de espera",
     sponsor: "Patrocinar",
@@ -179,6 +183,8 @@ export const copy: Record<Locale, Copy> = {
     nav: ["What is it", "The experience", "Sponsorship", "FAQ"],
     edition: "5TH EDITION",
     title: "Hack the future from Galicia.",
+    datePlaceholder: "XX FEB — XX MAR",
+    dateComingSoon: "Dates coming soon",
     waitlist: "Join the waitlist",
     waitlistShort: "Waitlist",
     sponsor: "Sponsor",
@@ -306,6 +312,8 @@ export const copy: Record<Locale, Copy> = {
     nav: ["Que é", "A experiencia", "Patrocinio", "FAQ"],
     edition: "5ª EDICIÓN",
     title: "Hackea o futuro desde Galicia.",
+    datePlaceholder: "XX FEB — XX MAR",
+    dateComingSoon: "Datas proximamente",
     waitlist: "Apúntate á lista de espera",
     waitlistShort: "Lista de espera",
     sponsor: "Patrocinar",

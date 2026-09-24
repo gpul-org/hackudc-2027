@@ -38,6 +38,22 @@ const sponsorPageUrl =
         </picture>
         <span class="sr-only">{t.title}</span>
       </h1>
+
+      <div class="group mt-5 inline-grid -rotate-1 place-items-center border-2 border-ink bg-cream text-xs font-black tracking-[0.14em] whitespace-nowrap uppercase sm:mt-7 sm:text-sm">
+        <span
+          class="col-start-1 row-start-1 select-none px-5 py-2 text-ink blur-[6px]"
+          aria-hidden="true"
+        >
+          {t.datePlaceholder}
+        </span>
+        <button
+          class="z-1 col-start-1 row-start-1 -m-0.5 grid min-h-11 cursor-pointer place-items-center self-stretch border-2 border-ink bg-blue px-5 py-2 text-ink shadow-[0_3px_0_var(--color-ink)] transition-[transform,opacity] duration-200 ease-out group-hover:-translate-y-2 group-hover:-rotate-2 data-peeling:-translate-y-[130%] data-peeling:opacity-0 motion-reduce:transform-none motion-reduce:transition-none"
+          type="button"
+          data-date-cover
+        >
+          {t.dateComingSoon}
+        </button>
+      </div>
     </div>
 
     <div
@@ -84,3 +100,35 @@ const sponsorPageUrl =
     <div class="absolute inset-x-0 bottom-0 z-3 h-[clamp(14rem,34svh,26rem)] bg-linear-to-b from-transparent to-cream"></div>
   </div>
 </section>
+
+<script>
+  let dateController: AbortController | undefined;
+  let peelTimer: number | undefined;
+
+  document.addEventListener("astro:page-load", () => {
+    dateController?.abort();
+    window.clearTimeout(peelTimer);
+    dateController = new AbortController();
+    const { signal } = dateController;
+    const dateCover = document.querySelector<HTMLElement>("[data-date-cover]");
+
+    dateCover?.addEventListener(
+      "click",
+      () => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          return;
+        }
+
+        window.clearTimeout(peelTimer);
+        dateCover.removeAttribute("data-peeling");
+        void dateCover.offsetWidth;
+        dateCover.setAttribute("data-peeling", "");
+
+        peelTimer = window.setTimeout(() => {
+          dateCover.removeAttribute("data-peeling");
+        }, 240);
+      },
+      { signal },
+    );
+  });
+</script>
