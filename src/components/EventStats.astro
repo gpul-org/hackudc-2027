@@ -8,26 +8,64 @@ interface Props {
 const t = copy[Astro.props.locale];
 ---
 
+{/*
+  Four knobs drive the layout, all set on the section:
+  `--faro-w` is the width of the lighthouse box, pinned `left-4`,
+  `--beam-origin` is the x of the tip, parked on the lighthouse lamp
+  (`left-4` + its width, minus an overlap so the beam is born inside the drawing),
+  `--beam-flat` is where the wedge opens into its full height, and
+  `--stats-inset` is how far the stats are pushed off the left edge.
+*/}
 <section
-  class="relative my-16 min-h-60 sm:my-24"
+  class="relative my-16 min-h-60 [--beam-flat:12%] [--beam-origin:0%] [--faro-w:13.5rem] [--stats-inset:12%] sm:my-24 sm:[--beam-flat:46%] sm:[--beam-origin:calc(var(--faro-w)_-_0.5rem)] sm:[--stats-inset:32%]"
   aria-label="HackUDC27 statistics"
 >
+  {/*
+    Ray of light. The wedge is symmetric about the vertical middle: it opens from
+    the tip at `--beam-origin` and reaches full height at `--beam-flat` on both
+    edges. The wrapper's blur softens the silhouette (filter runs on the
+    already-clipped child) and the mask dissipates the beam towards its far end.
+  */}
+  <div class="absolute inset-0 blur-[4px] sm:blur-[8px]" aria-hidden="true">
+    <div class="size-full bg-yellow/80 mask-r-from-70% mask-r-to-100% [clip-path:polygon(var(--beam-flat)_0,100%_0,100%_100%,var(--beam-flat)_100%,var(--beam-origin)_50%)]"></div>
+  </div>
+  {/*
+    Placeholder for the lighthouse artwork: swap this box for the <img>, keeping
+    the width and the aspect ratio so the beam keeps meeting it at the lamp.
+    It is meant to stand roughly twice as tall as the beam, overflowing it.
+  */}
   <div
-    class="absolute inset-0 bg-yellow/80 [clip-path:polygon(0_12%,100%_0,100%_88%,32%_100%)] sm:[clip-path:polygon(22%_0,100%_0,100%_100%,36%_100%,0_43%)]"
+    class="absolute top-1/2 left-4 hidden aspect-10/21 w-(--faro-w) -translate-y-1/2 place-items-center border-2 border-dashed border-ink/35 text-[0.6rem] font-black tracking-widest text-ink/45 uppercase sm:grid"
     aria-hidden="true"
-  ></div>
-  <div class="relative mx-auto grid max-w-7xl grid-cols-2 gap-x-3 gap-y-8 px-5 py-16 sm:grid-cols-4 sm:gap-5 sm:px-[8vw] sm:py-18">
-    {t.stats.map(([value, label], index) => (
-      <div
-        class="flex flex-col gap-2 text-center reveal"
-        style={`transition-delay: ${index * 70}ms`}
-        data-reveal
-      >
-        <strong class="font-serif text-3xl leading-[0.98] tracking-[-0.02em] sm:text-5xl lg:text-6xl">
-          {value}
-        </strong>
-        <span class="text-xs font-black tracking-wider uppercase">{label}</span>
-      </div>
-    ))}
+  >
+    faro
+  </div>
+  <div class="relative ml-(--stats-inset) px-5 py-16 sm:px-[3vw] sm:py-18">
+    {/* Columns follow the number of stats, so commenting one out never leaves a gap. */}
+    <div
+      class="mx-auto grid max-w-5xl grid-cols-2 gap-x-3 gap-y-8 sm:gap-5 lg:grid-cols-(--stats-cols)"
+      style={`--stats-cols: repeat(${t.stats.length}, minmax(0, 1fr))`}
+    >
+      {t.stats.map(([value, label], index) => (
+        <div
+          class:list={[
+            "flex flex-col gap-2 text-center reveal",
+            // An odd count leaves an orphan in the two-column phone grid.
+            index === t.stats.length - 1 &&
+              t.stats.length % 2 === 1 &&
+              "max-lg:col-span-2",
+          ]}
+          style={`transition-delay: ${index * 70}ms`}
+          data-reveal
+        >
+          <strong class="font-serif text-3xl leading-[0.98] tracking-[-0.02em] sm:text-5xl xl:text-6xl">
+            {value}
+          </strong>
+          <span class="text-xs font-black tracking-wider uppercase">
+            {label}
+          </span>
+        </div>
+      ))}
+    </div>
   </div>
 </section>

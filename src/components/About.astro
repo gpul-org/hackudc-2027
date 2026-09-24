@@ -15,7 +15,7 @@ const cardCaption =
 ---
 
 <section
-  class="relative pt-16 pb-40 sm:pb-72 lg:pt-28"
+  class="relative overflow-hidden pt-16 pb-40 sm:pb-72 lg:pt-28"
   id="about"
   aria-labelledby="about-title"
 >
@@ -39,24 +39,28 @@ const cardCaption =
       height="94"
     />
   </div>
-  <img
-    class="absolute bottom-0 -left-16 hidden w-36 origin-bottom -rotate-4 opacity-30 sm:block sm:-left-20 sm:w-56 sm:opacity-90 lg:left-[max(-8rem,calc(50%-44rem))]"
-    src="/assets/scene/farola.svg"
-    alt=""
-    width="706"
-    height="742"
-    data-scroll-drift
-  />
   <div class="page-wrap">
     <div class="mt-9 grid gap-10 sm:grid-cols-[1.1fr_0.9fr] sm:gap-16 lg:gap-24">
-      <div class="max-w-4xl">
+      <div class="relative max-w-4xl self-start">
+        <!-- The canopy's right arm is aligned to sit just under the title, so it
+             reads as a swash underline; the mast runs off the section's bottom edge. -->
+        <img
+          class="pointer-events-none absolute top-full left-0 hidden max-w-none origin-top -rotate-4 opacity-90 sm:block sm:w-[21.5rem] lg:w-[28.5rem]"
+          src="/assets/scene/farola.svg"
+          alt=""
+          width="706"
+          height="742"
+          data-scroll-drift
+        />
         <p class="eyebrow text-red reveal" data-reveal>
           {t.aboutLabel}
         </p>
         <h2
           class="mt-4 max-w-[12ch] display-heading reveal"
           data-reveal
-          data-leading-punctuation={t.aboutTitle.startsWith("¿") ? "true" : undefined}
+          data-leading-punctuation={
+            t.aboutTitle.startsWith("¿") ? "true" : undefined
+          }
           id="about-title"
         >
           {t.aboutTitle}
