@@ -10,10 +10,6 @@ const sponsorPageUrl =
   Astro.props.locale === "es"
     ? "/sponsors/"
     : `/${Astro.props.locale}/sponsors/`;
-
-// CTAs drawn as ornamented plaques; the artwork is the background.
-const plaque =
-  "grid aspect-[334/78] min-w-0 flex-1 place-items-center bg-contain bg-center bg-no-repeat text-xs font-black tracking-wide uppercase transition duration-200 ease-out hover:-translate-y-0.5 sm:w-64 sm:flex-none sm:text-lg lg:w-72 lg:text-xl";
 ---
 
 <section
@@ -45,11 +41,11 @@ const plaque =
     </div>
 
     <div
-      class="mt-10 flex w-(--mobile-logo-width) flex-row items-center gap-2 sm:mt-14 sm:w-auto sm:gap-10"
+      class="mt-10 flex w-[min(68vw,20rem)] flex-col items-stretch gap-2 sm:mt-14 sm:w-auto sm:flex-row sm:items-center sm:gap-10"
       id="waitlist"
     >
       <a
-        class={`${plaque} bg-[url(/assets/scene/button-primary.svg)] text-cream`}
+        class="cta-plaque bg-[url(/assets/scene/button-primary.svg)] text-base text-cream sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
         href="https://nocodb.gpul.org/dashboard/#/nc/form/f1137831-84ad-4682-93de-a416cc592ff1"
         target="_blank"
         rel="noopener noreferrer"
@@ -57,7 +53,7 @@ const plaque =
         {t.waitlistShort}
       </a>
       <a
-        class={`${plaque} bg-[url(/assets/scene/button-secondary.svg)] text-ink`}
+        class="cta-plaque bg-[url(/assets/scene/button-secondary.svg)] text-base text-ink sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
         href={sponsorPageUrl}
       >
         {t.sponsor}

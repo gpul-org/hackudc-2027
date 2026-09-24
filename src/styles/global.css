@@ -81,3 +81,16 @@
 @utility small-link {
   @apply text-xs font-extrabold tracking-wide transition-colors hover:text-red;
 }
+
+@utility cta-plaque {
+  @apply grid aspect-[334/78] min-w-0 flex-1 place-items-center bg-contain bg-center bg-no-repeat text-xs font-black tracking-wide uppercase transition duration-200 ease-out hover:-translate-y-0.5 active:scale-[0.96] motion-reduce:transition-none;
+}
+
+@utility plaque-frame-primary {
+  @apply rounded-[1.5rem] border-4 border-cream bg-blue;
+  box-shadow: inset 0 0 0 2px var(--color-cream);
+}
+
+@utility plaque-frame-secondary {
+  @apply rounded-[1.5rem] border-4 border-cream bg-cream;
+}
