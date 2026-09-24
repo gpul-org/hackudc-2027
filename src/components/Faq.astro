@@ -9,16 +9,8 @@ interface Props {
 const t = copy[Astro.props.locale];
 ---
 
-<section
-  class="relative isolate py-16 lg:py-28"
-  id="faq"
-  aria-labelledby="faq-title"
->
-  <div
-    class="pointer-events-none absolute inset-x-0 top-0 h-24 bg-linear-to-b from-blue to-cream"
-    aria-hidden="true"
-  ></div>
-  <div class="page-wrap relative z-1">
+<section class="py-16 lg:py-28" id="faq" aria-labelledby="faq-title">
+  <div class="page-wrap">
     <div class="mx-auto max-w-4xl text-center">
       <p class="eyebrow reveal" data-reveal>
         {t.faqKicker}

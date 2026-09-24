@@ -212,10 +212,10 @@ const features = [
 ];
 ---
 
-<main class="min-h-dvh bg-blue text-ink">
+<main class="min-h-dvh bg-red text-cream">
   <header class="page-wrap flex items-center justify-between py-5 sm:py-7">
     <a
-      class="inline-flex min-h-11 items-center gap-2 text-xs font-black tracking-wide uppercase hover:text-red"
+      class="inline-flex min-h-11 items-center gap-2 text-xs font-black tracking-wide uppercase hover:text-blue"
       href={homeUrl}
     >
       <ArrowLeft class="size-4" aria-hidden="true" />
@@ -223,7 +223,7 @@ const features = [
     </a>
     <img
       class="h-7 w-auto sm:h-9"
-      src="/assets/brand/logo-navy.svg"
+      src="/assets/brand/logo-cream.svg"
       alt="HackUDC27"
       width="1003"
       height="153"
@@ -234,10 +234,10 @@ const features = [
     class="page-wrap pt-16 pb-24 sm:pt-24 lg:pt-32"
     aria-labelledby="sponsors-title"
   >
-    <p class="eyebrow text-sm">{t.kicker}</p>
+    <p class="eyebrow text-sm text-blue">{t.kicker}</p>
     <div class="mt-6 grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
       <div>
-        <h1 id="sponsors-title" class="display-heading max-w-[11ch]">
+        <h1 id="sponsors-title" class="display-heading max-w-[11ch] text-cream">
           {t.title}
         </h1>
         <p class="mt-8 max-w-xl text-pretty text-lg leading-snug sm:text-xl">
@@ -245,7 +245,7 @@ const features = [
         </p>
       </div>
       <a
-        class="group flex min-h-14 items-center justify-between gap-5 rounded-full bg-cream px-6 py-3 text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-ink hover:text-cream"
+        class="group flex min-h-14 items-center justify-between gap-5 rounded-full bg-cream px-6 py-3 text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-blue"
         href="/assets/documents/HackUDC2027-Dossier.pdf"
         download
       >
@@ -294,32 +294,32 @@ const features = [
   </section>
 
   <section class="page-wrap py-20 lg:py-28" aria-labelledby="packages-title">
-    <p class="eyebrow text-sm">HackUDC 2027</p>
+    <p class="eyebrow text-sm text-blue">HackUDC 2027</p>
     <h2 id="packages-title" class="display-heading mt-5">
       {t.packages}
     </h2>
     <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
       {packages.map((pkg) => (
-        <article class="flex flex-col border-2 border-ink/25 p-6">
+        <article class="flex flex-col border-2 border-cream p-6">
           <h3 class="font-serif text-3xl">{pkg.name}</h3>
-          <p class="mt-4 text-4xl font-black tabular-nums text-red">
+          <p class="mt-4 text-4xl font-black tabular-nums text-blue">
             {pkg.price}
           </p>
-          <dl class="mt-8 space-y-3 border-t border-ink/20 pt-5 text-sm">
+          <dl class="mt-8 space-y-3 border-t border-cream/30 pt-5 text-sm">
             {features.map((feature, index) => (
               <div class="grid grid-cols-[1fr_auto] gap-3">
                 <dt>{feature}</dt>
-                <dd class="font-bold text-red">{pkg.details[index]}</dd>
+                <dd class="font-bold text-blue">{pkg.details[index]}</dd>
               </div>
             ))}
           </dl>
         </article>
       ))}
     </div>
-    <p class="mt-6 text-sm text-ink/70">{t.taxes}</p>
+    <p class="mt-6 text-sm text-cream/80">{t.taxes}</p>
   </section>
 
-  <section class="border-t border-cream/30 bg-ink text-cream">
+  <section class="border-t border-cream/30 bg-ink">
     <div class="page-wrap grid gap-8 py-16 sm:grid-cols-[1fr_auto] sm:items-center">
       <div>
         <p class="eyebrow text-sm text-blue">HackUDC · GPUL</p>

@@ -23,7 +23,8 @@ const socials = [
     icon: Linkedin,
   },
 ];
-const compactCta = "cta-plaque sm:h-[60px] sm:w-64 sm:flex-none sm:text-sm";
+const pill =
+  "rounded-full px-4 py-3 text-xs font-extrabold tracking-wide shadow-sm transition duration-200 ease-out hover:-translate-y-0.5";
 ---
 
 <!-- Shown while neither the site header nor the footer is in view. -->
@@ -32,7 +33,7 @@ const compactCta = "cta-plaque sm:h-[60px] sm:w-64 sm:flex-none sm:text-sm";
   data-fixed-ui
 >
   <nav
-    class="plaque-frame-primary hidden p-1.5 backdrop-blur sm:block"
+    class="hidden rounded-full bg-cream/90 p-1.5 shadow-sm backdrop-blur sm:block"
     aria-label="Social media"
   >
     <ul class="flex items-end gap-1.5">
@@ -45,7 +46,7 @@ const compactCta = "cta-plaque sm:h-[60px] sm:w-64 sm:flex-none sm:text-sm";
             {label}
           </span>
           <a
-            class="grid size-10 origin-bottom place-items-center rounded-full bg-cream text-ink transition duration-200 ease-out group-hover:scale-125 group-hover:bg-ink group-hover:text-cream focus-visible:scale-125 motion-reduce:transition-none"
+            class="grid size-10 origin-bottom place-items-center rounded-full bg-ink/5 text-ink transition duration-200 ease-out group-hover:scale-125 group-hover:bg-ink group-hover:text-cream focus-visible:scale-125 motion-reduce:transition-none"
             href={href}
             aria-label={label}
           >
@@ -55,19 +56,16 @@ const compactCta = "cta-plaque sm:h-[60px] sm:w-64 sm:flex-none sm:text-sm";
       ))}
     </ul>
   </nav>
-  <div class="flex w-full gap-2 sm:ml-auto sm:w-auto">
+  <div class="ml-auto flex gap-2">
     <a
-      class={`${compactCta} bg-[url(/assets/scene/button-primary.svg)] text-cream`}
+      class={`${pill} bg-ink text-cream hover:bg-red`}
       href="https://nocodb.gpul.org/dashboard/#/nc/form/f1137831-84ad-4682-93de-a416cc592ff1"
       target="_blank"
       rel="noopener noreferrer"
     >
       {t.waitlistShort}
     </a>
-    <a
-      class={`${compactCta} bg-[url(/assets/scene/button-secondary.svg)] text-ink`}
-      href={sponsorPageUrl}
-    >
+    <a class={`${pill} bg-cream text-ink hover:bg-blue`} href={sponsorPageUrl}>
       {t.sponsor}
     </a>
   </div>

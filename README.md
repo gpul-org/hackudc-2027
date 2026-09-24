@@ -2,6 +2,11 @@
 
 Website for HackUDC 2027, built with [Astro](https://docs.astro.build).
 
+## Brand guidelines
+
+Follow the [HackUDC 2027 brand guidelines](./BRAND_GUIDELINES.md) for logo,
+colour, typography, voice, and accessibility decisions.
+
 ## Commands
 
 | Command        | Action                                       |
