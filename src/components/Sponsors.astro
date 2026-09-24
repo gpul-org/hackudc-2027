@@ -1,5 +1,5 @@
 ---
-import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import Download from "@lucide/astro/icons/download";
 import { copy, type Locale } from "@/i18n/copy";
 
 interface Props {
@@ -51,11 +51,12 @@ const tiers = [
       <a
         class="group reveal mt-8 inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-transparent bg-cream px-5 py-3 text-xs font-black tracking-wide text-red transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-blue hover:text-ink"
         data-reveal
-        href="mailto:sponsors@hackudc.gpul.org?subject=HackUDC27%20sponsorship"
+        href="/assets/documents/HackUDC2027-Dossier.pdf"
+        download
       >
         {t.sponsorCta}
-        <ArrowUpRight
-          class="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        <Download
+          class="size-4 transition group-hover:translate-y-0.5"
           aria-hidden="true"
         />
       </a>
