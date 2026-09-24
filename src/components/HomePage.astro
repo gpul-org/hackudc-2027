@@ -77,12 +77,14 @@ const localeUrls: Record<Locale, string> = {
     reveals.forEach((element) => revealObserver?.observe(element));
   }
 
-  // Parallax for decorative images. Uses the standalone `translate` property
-  // so it composes with Tailwind's `rotate-*` utilities.
+  // Scroll effects use one frame for all decorative motion to keep scrolling cheap.
   let frame = 0;
 
-  function updateDrift() {
+  function updateScrollEffects() {
     const viewport = window.innerHeight || 1;
+
+    // Parallax for decorative images. Uses the standalone `translate` property
+    // so it composes with Tailwind's `rotate-*` utilities.
     document
       .querySelectorAll<HTMLElement>("[data-scroll-drift]")
       .forEach((element) => {
@@ -91,18 +93,29 @@ const localeUrls: Record<Locale, string> = {
         const offset = Math.max(-1, Math.min(1, progress - 0.5)) * -28;
         element.style.translate = `0 ${offset}px`;
       });
+
     frame = 0;
   }
 
-  function requestDrift() {
+  function requestScrollEffects() {
     if (!frame && !reduceMotion()) {
-      frame = window.requestAnimationFrame(updateDrift);
+      frame = window.requestAnimationFrame(updateScrollEffects);
     }
   }
 
-  window.addEventListener("scroll", requestDrift, { passive: true });
+  let pageController: AbortController | undefined;
+
   document.addEventListener("astro:page-load", () => {
+    pageController?.abort();
+    pageController = new AbortController();
+    const { signal } = pageController;
+
     initReveal();
-    requestDrift();
+    window.addEventListener("scroll", requestScrollEffects, {
+      passive: true,
+      signal,
+    });
+    window.addEventListener("resize", requestScrollEffects, { signal });
+    requestScrollEffects();
   });
 </script>

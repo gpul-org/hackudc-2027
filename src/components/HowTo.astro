@@ -1,55 +1,231 @@
 ---
 import { copy, type Locale } from "@/i18n/copy";
-
 interface Props {
   locale: Locale;
 }
-
 const t = copy[Astro.props.locale];
 ---
 
-<section class="py-28 lg:py-52" aria-labelledby="steps-title">
-  <div class="page-wrap sm:grid sm:grid-cols-[minmax(10rem,0.62fr)_minmax(0,1.38fr)] sm:gap-x-20 sm:gap-y-8">
-    <div
-      class="mx-auto mb-16 max-w-52 rounded-full outline outline-offset-12 outline-ink/25 sm:row-span-2 sm:mb-0 sm:max-w-80 sm:self-center reveal"
-      data-reveal
-      aria-hidden="true"
-    >
-      <img
-        class="w-full mix-blend-multiply"
-        src="/assets/scene/compass.svg"
-        alt=""
-        width="990"
-        height="987"
-      />
-    </div>
-    <div class="max-w-4xl">
-      <p class="eyebrow reveal" data-reveal>
-        {t.stepsKicker}
-      </p>
-      <h2
-        class="mt-5 max-w-[12ch] display-heading reveal"
-        data-reveal
-        id="steps-title"
-      >
+<section
+  id="steps"
+  class="compass-section bg-blue"
+  aria-labelledby="steps-title"
+  data-compass-section
+>
+  <div class="compass-sticky" data-compass-sticky>
+    <header class="page-wrap pt-12 sm:pt-16">
+      <p class="eyebrow">{t.stepsKicker}</p>
+      <h2 id="steps-title" class="mt-4 max-w-[18ch] display-heading">
         {t.stepsTitle}
       </h2>
-    </div>
-    <div class="mt-14 border-t border-ink/15 sm:mt-12">
-      {t.steps.map(([number, title, body]) => (
-        <article
-          class="grid grid-cols-[3rem_1fr] items-start gap-6 border-b border-ink/15 py-6 reveal"
-          data-reveal
-        >
-          <span class="font-serif text-xl font-bold text-red">{number}</span>
-          <div>
-            <h3 class="font-serif text-2xl leading-[1.05] font-normal tracking-[-0.02em] lg:text-4xl">
-              {title}
-            </h3>
-            <p class="mt-3 max-w-md text-sm leading-[1.55]">{body}</p>
-          </div>
-        </article>
-      ))}
+    </header>
+    <div class="compass-stage">
+      <div class="compass-position" aria-hidden="true">
+        <img
+          class="compass-art motion-reduce:animate-none"
+          data-compass-art
+          src="/assets/scene/rosa-ventos.svg"
+          alt=""
+          width="1024"
+          height="1032"
+        />
+      </div>
+      <div class="compass-copy bg-ink text-cream">
+        <div class="compass-panels">
+          {t.steps.map(([number, title, body]) => (
+            <article data-compass-step>
+              <span class="eyebrow text-yellow">{number}</span>
+              <h3 class="mt-4 font-serif text-3xl leading-tight sm:text-4xl">
+                {title}
+              </h3>
+              <p class="mt-5 max-w-sm text-base leading-relaxed sm:text-lg">
+                {body}
+              </p>
+            </article>
+          ))}
+        </div>
+        <div class="mt-8 flex gap-2" aria-hidden="true">
+          {t.steps.map(() => (
+            <span class="compass-marker" data-compass-marker />
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .compass-section {
+    position: relative;
+  }
+  .compass-sticky {
+    padding-bottom: 3rem;
+  }
+  .compass-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 30rem;
+    margin-top: 2rem;
+    overflow: clip;
+  }
+  .compass-position {
+    --compass-size: clamp(20rem, 90vw, 38rem);
+    position: absolute;
+    width: var(--compass-size);
+    left: calc(27vw - var(--compass-size));
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .compass-art {
+    display: block;
+    width: 100%;
+    height: auto;
+    transform-origin: 50% 50%;
+  }
+  .compass-copy {
+    position: relative;
+    margin-left: 18%;
+    width: 82%;
+    padding: 2rem 1.25rem 2rem calc(12vw + 0.5rem);
+  }
+  .compass-panels {
+    display: grid;
+    gap: 2rem;
+  }
+  .compass-marker {
+    width: 2rem;
+    height: 3px;
+    background: var(--color-cream);
+    opacity: 0.25;
+  }
+  .compass-marker[data-active] {
+    opacity: 1;
+    background: var(--color-yellow);
+  }
+  [data-enhanced] {
+    height: 300svh;
+  }
+  [data-enhanced] .compass-sticky {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 4.5rem;
+  }
+  [data-enhanced] .compass-stage {
+    flex: 1;
+    min-height: 0;
+  }
+  [data-enhanced] .compass-panels > article {
+    grid-area: 1 / 1;
+  }
+  @media (min-width: 64rem) {
+    .compass-position {
+      --compass-size: min(49vw, 42rem, calc(100svh - 22rem));
+      left: calc(49% - var(--compass-size));
+    }
+    .compass-copy {
+      margin-left: 30%;
+      width: 64%;
+      padding: 3rem 3rem 3rem 24%;
+    }
+    .compass-stage {
+      min-height: 42rem;
+    }
+    [data-enhanced] .compass-stage {
+      min-height: 0;
+    }
+    .compass-sticky header h2 {
+      font-size: clamp(3rem, 4vw, 3.75rem);
+      max-width: 22ch;
+    }
+  }
+  @media (max-width: 30rem) {
+    .compass-copy h3 {
+      font-size: clamp(1.5rem, 7vw, 2rem);
+      overflow-wrap: anywhere;
+    }
+    .compass-copy p {
+      margin-top: 1rem;
+    }
+  }
+  @media (max-height: 36rem) {
+    .compass-sticky header {
+      padding-top: 1.5rem;
+    }
+    .compass-sticky header h2 {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const section = document.querySelector<HTMLElement>(
+      "[data-compass-section]",
+    );
+    const art = section?.querySelector<HTMLElement>("[data-compass-art]");
+    const stage = section?.querySelector<HTMLElement>("[data-compass-sticky]");
+    if (!section || !art || !stage) return;
+    const steps = [
+      ...section.querySelectorAll<HTMLElement>("[data-compass-step]"),
+    ];
+    const markers = [
+      ...section.querySelectorAll<HTMLElement>("[data-compass-marker]"),
+    ];
+    const controller = new AbortController();
+    const { signal } = controller;
+    const motion = matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+
+    function update() {
+      frame = 0;
+      if (!section || !art || !stage) return;
+      // Short viewports and reduced motion retain all steps in normal document flow.
+      const enhanced = !motion.matches && innerHeight >= 560;
+      section.toggleAttribute("data-enhanced", enhanced);
+      const progress = enhanced
+        ? Math.max(
+            0,
+            Math.min(
+              1,
+              -section.getBoundingClientRect().top /
+                Math.max(1, section.offsetHeight - stage.offsetHeight),
+            ),
+          )
+        : 0;
+      const position = progress * (steps.length - 1);
+      art.style.transform = `rotate(${position * 90}deg)`;
+      steps.forEach((step, index) => {
+        const distance = Math.abs(position - index);
+        const active = !enhanced || index === Math.round(position);
+        step.style.opacity = enhanced
+          ? String(Math.max(0, Math.min(1, (0.55 - distance) / 0.2)))
+          : "1";
+        step.style.visibility = active ? "visible" : "hidden";
+        step.toggleAttribute("inert", !active);
+        step.setAttribute("aria-hidden", String(!active));
+        markers[index]?.toggleAttribute("data-active", active);
+      });
+    }
+    function requestUpdate() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    window.addEventListener("scroll", requestUpdate, { passive: true, signal });
+    window.addEventListener("resize", requestUpdate, { signal });
+    motion.addEventListener("change", requestUpdate, { signal });
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        controller.abort();
+        cancelAnimationFrame(frame);
+      },
+      { once: true, signal },
+    );
+    update();
+  });
+</script>

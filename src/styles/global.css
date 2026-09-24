@@ -67,7 +67,7 @@
 }
 
 @utility display-heading {
-  @apply font-serif text-4xl leading-[0.98] font-normal tracking-[-0.025em] sm:text-7xl lg:text-8xl;
+  @apply font-serif text-3xl leading-[1.04] font-normal tracking-[-0.025em] sm:text-5xl sm:leading-none lg:text-6xl;
   /* Optical margin alignment: compensate for wide/diagonal capitals at the edge. */
   text-indent: -0.02em;
   hanging-punctuation: last;
