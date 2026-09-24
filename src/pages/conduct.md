@@ -32,9 +32,9 @@ Envía un correo a [hackudc@gpul.org](mailto:hackudc@gpul.org); la denuncia lleg
 
 También puedes contactar directamente con alguno de los siguientes puntos de contacto para incidencias de conducta:
 
-- 
-- 
-- 
+-
+-
+-
 
 ## Cambios y contacto
 

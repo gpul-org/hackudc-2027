@@ -32,9 +32,9 @@ Email [hackudc@gpul.org](mailto:hackudc@gpul.org), and your report will reach th
 
 You may also contact one of the following conduct offense contact points directly:
 
-- 
-- 
-- 
+-
+-
+-
 
 ## Changes and contact
 
