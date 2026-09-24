@@ -58,7 +58,8 @@ export const copy: Record<Locale, Copy> = {
     stats: [
       ["500+", "participantes"],
       ["36h", "de hacking"],
-      ["X€", "en premios"],
+      // Restore once the prize pool is confirmed.
+      // ["X€", "en premios"],
       ["100%", "open source"],
     ],
     experienceKicker: "La experiencia",
@@ -135,7 +136,8 @@ export const copy: Record<Locale, Copy> = {
     stats: [
       ["500+", "participants"],
       ["36h", "of hacking"],
-      ["X€", "in prizes"],
+      // Restore once the prize pool is confirmed.
+      // ["X€", "in prizes"],
       ["100%", "open source"],
     ],
     experienceKicker: "The experience",
@@ -208,7 +210,8 @@ export const copy: Record<Locale, Copy> = {
     stats: [
       ["500+", "participantes"],
       ["36h", "de hacking"],
-      ["X€", "en premios"],
+      // Restore once the prize pool is confirmed.
+      // ["X€", "en premios"],
       ["100%", "open source"],
     ],
     experienceKicker: "A experiencia",

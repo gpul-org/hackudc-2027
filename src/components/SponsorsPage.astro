@@ -18,6 +18,7 @@ const content = {
       "En nuestra quinta edición reuniremos a 500 hackers durante 36 horas en la Facultad de Informática de A Coruña.",
     download: "Descargar dossier completo",
     downloadNote: "PDF · Paquetes de patrocinio 2027",
+    stats: "HackUDC en cifras",
     why: "¿Por qué patrocinar HackUDC?",
     benefits: [
       ["437", "hackers en la última edición"],
@@ -49,6 +50,11 @@ const content = {
     social: "Mención en redes",
     talks: "Charlas y talleres",
     swag: "Merchandising en las bolsas",
+    yes: "Sí",
+    sizeS: "Pequeño",
+    sizeM: "Regular",
+    sizeL: "Grande",
+    sizeXL: "Más grande",
     taxes: "Impuestos y premios de los retos no incluidos en el precio.",
     contact: "¿Listos para colaborar?",
     contactBody:
@@ -63,6 +69,7 @@ const content = {
       "For our fifth edition, we will bring 500 hackers together for 36 hours at the Faculty of Computer Science in A Coruña.",
     download: "Download the full deck",
     downloadNote: "PDF · 2027 sponsorship packages",
+    stats: "HackUDC by the numbers",
     why: "Why sponsor HackUDC?",
     benefits: [
       ["437", "hackers last edition"],
@@ -94,6 +101,11 @@ const content = {
     social: "Social media shoutout",
     talks: "Talks and workshops",
     swag: "Company swag in bags",
+    yes: "Yes",
+    sizeS: "Small",
+    sizeM: "Standard",
+    sizeL: "Large",
+    sizeXL: "Extra large",
     taxes: "Taxes and challenge prizes are not included in the price.",
     contact: "Ready to partner?",
     contactBody:
@@ -108,6 +120,7 @@ const content = {
       "Na nosa quinta edición reuniremos 500 hackers durante 36 horas na Facultade de Informática da Coruña.",
     download: "Descargar o dossier completo",
     downloadNote: "PDF · Paquetes de patrocinio 2027",
+    stats: "HackUDC en cifras",
     why: "Por que patrocinar HackUDC?",
     benefits: [
       ["437", "hackers na última edición"],
@@ -139,6 +152,11 @@ const content = {
     social: "Mención en redes",
     talks: "Charlas e obradoiros",
     swag: "Merchandising nas bolsas",
+    yes: "Si",
+    sizeS: "Pequeno",
+    sizeM: "Normal",
+    sizeL: "Grande",
+    sizeXL: "Máis grande",
     taxes: "Os impostos e os premios dos retos non están incluídos no prezo.",
     contact: "Listos para colaborar?",
     contactBody:
@@ -148,6 +166,7 @@ const content = {
 } as const;
 const t = content[locale];
 
+const no = "—";
 const packages = [
   {
     name: "</root>",
@@ -155,29 +174,29 @@ const packages = [
     details: [
       "~6",
       "+1",
-      "Grande",
-      "Sí",
-      "Más grande",
-      "Sí",
-      "Sí",
+      t.sizeL,
+      t.yes,
+      t.sizeXL,
+      t.yes,
+      t.yes,
       "2 × 1 h",
-      "Sí",
+      t.yes,
     ],
   },
   {
     name: "</admin>",
     price: "3.500€",
-    details: ["~4", "1", "Regular", "Sí", "Grande", "Sí", "Sí", "1 h", "Sí"],
+    details: ["~4", "1", t.sizeM, t.yes, t.sizeL, t.yes, t.yes, "1 h", t.yes],
   },
   {
     name: "</user>",
     price: "1.000€",
-    details: ["~2", "—", "—", "—", "Regular", "—", "Sí", "30 min", "Sí"],
+    details: ["~2", no, no, no, t.sizeM, no, t.yes, "30 min", t.yes],
   },
   {
     name: "</collab>",
     price: "In-kind",
-    details: ["—", "—", "—", "—", "Pequeño", "—", "Sí", "—", "—"],
+    details: [no, no, no, no, t.sizeS, no, t.yes, no, no],
   },
 ];
 const features = [
@@ -247,7 +266,7 @@ const features = [
     aria-labelledby="why-title"
   >
     <div class="page-wrap py-20 lg:py-28">
-      <p class="eyebrow text-red">HackUDC en cifras</p>
+      <p class="eyebrow text-red">{t.stats}</p>
       <h2 id="why-title" class="display-heading mt-5 max-w-[12ch]">
         {t.why}
       </h2>
