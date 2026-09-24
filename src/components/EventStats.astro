@@ -17,7 +17,7 @@ const t = copy[Astro.props.locale];
   `--stats-inset` is how far the stats are pushed off the left edge.
 */}
 <section
-  class="relative my-16 min-h-60 [--beam-flat:12%] [--beam-origin:0%] [--faro-w:13.5rem] [--stats-inset:12%] sm:my-24 sm:[--beam-flat:46%] sm:[--beam-origin:calc(var(--faro-w)_-_0.5rem)] sm:[--stats-inset:32%]"
+  class="relative my-10 min-h-60 [--beam-flat:12%] [--beam-origin:0%] [--faro-w:13.5rem] [--stats-inset:12%] sm:my-16 sm:[--beam-flat:46%] sm:[--beam-origin:calc(var(--faro-w)_-_0.5rem)] sm:[--stats-inset:32%]"
   aria-label="HackUDC27 statistics"
 >
   {/*
@@ -40,7 +40,7 @@ const t = copy[Astro.props.locale];
   >
     faro
   </div>
-  <div class="relative ml-(--stats-inset) px-5 py-16 sm:px-[3vw] sm:py-18">
+  <div class="relative ml-(--stats-inset) px-5 py-10 sm:px-[3vw] sm:py-14">
     {/* Columns follow the number of stats, so commenting one out never leaves a gap. */}
     <div
       class="mx-auto grid max-w-5xl grid-cols-2 gap-x-3 gap-y-8 sm:gap-5 lg:grid-cols-(--stats-cols)"

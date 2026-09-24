@@ -22,6 +22,7 @@ export type Copy = {
   aftermovie: string;
   galleryCta: string;
   videoCta: string;
+  comingSoon: string;
   stepsKicker: string;
   stepsTitle: string;
   steps: [string, string, string][];
@@ -74,6 +75,7 @@ export const copy: Record<Locale, Copy> = {
     aftermovie: "Aftermovie 2026",
     galleryCta: "Ver fotos",
     videoCta: "Ver vídeo",
+    comingSoon: "Próximamente",
     stepsKicker: "Cómo funciona",
     stepsTitle: "Tu próximo proyecto empieza aquí.",
     steps: [
@@ -210,6 +212,7 @@ export const copy: Record<Locale, Copy> = {
     aftermovie: "2026 aftermovie",
     galleryCta: "View photos",
     videoCta: "Watch video",
+    comingSoon: "Coming soon",
     stepsKicker: "How it works",
     stepsTitle: "Your next project starts here.",
     steps: [
@@ -339,6 +342,7 @@ export const copy: Record<Locale, Copy> = {
     aftermovie: "Aftermovie 2026",
     galleryCta: "Ver fotos",
     videoCta: "Ver vídeo",
+    comingSoon: "Proximamente",
     stepsKicker: "Como funciona",
     stepsTitle: "O teu próximo proxecto comeza aquí.",
     steps: [
