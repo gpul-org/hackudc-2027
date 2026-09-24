@@ -9,6 +9,11 @@ interface Props {
 const { locale, localeUrls } = Astro.props;
 const t = copy[locale];
 const navTargets = ["#about", "#experience", "#sponsors", "#faq"];
+const current = languages.find(({ code }) => code === locale)!;
+const languageLink =
+  "rounded-full px-3.5 py-2 text-sm font-extrabold tracking-wide transition-colors";
+const languageOption =
+  "grid min-w-0 grid-cols-[0fr] transition-[grid-template-columns] duration-300 ease-out group-focus-within:ms-0.5 group-focus-within:grid-cols-[1fr] group-hover:ms-0.5 group-hover:grid-cols-[1fr] group-data-open:ms-0.5 group-data-open:grid-cols-[1fr] motion-reduce:transition-none";
 ---
 
 <header
@@ -38,21 +43,38 @@ const navTargets = ["#about", "#experience", "#sponsors", "#faq"];
   </nav>
 
   <div class="ml-auto flex items-center gap-3">
-    <div
-      class="flex gap-0.5 rounded-full border border-ink/30 p-1"
+    <nav
+      class="group flex items-center rounded-full border border-transparent p-1 transition-colors duration-300 focus-within:border-ink/30 hover:border-ink/30 data-open:border-ink/30 motion-reduce:transition-none"
       aria-label="Language selector"
+      data-header-language-menu
     >
-      {languages.map((language) => (
-        <a
-          class="rounded-full px-2 py-1 text-xs font-extrabold tracking-wide transition-colors hover:bg-ink hover:text-cream aria-[current=page]:bg-ink aria-[current=page]:text-cream"
-          href={localeUrls[language.code]}
-          hreflang={language.code}
-          aria-current={language.code === locale ? "page" : undefined}
-        >
-          {language.label}
-        </a>
-      ))}
-    </div>
+      <div class="flex items-center">
+        {languages.map((language) =>
+          language.code === locale ? (
+            <button
+              class={`${languageLink} shrink-0 bg-ink text-cream`}
+              type="button"
+              aria-label={`Language: ${current.label}`}
+              aria-expanded="false"
+            >
+              {language.label}
+            </button>
+          ) : (
+            <div class={languageOption}>
+              <div class="min-w-0 overflow-hidden">
+                <a
+                  class={`${languageLink} block shrink-0 whitespace-nowrap hover:bg-ink hover:text-cream`}
+                  href={localeUrls[language.code]}
+                  hreflang={language.code}
+                >
+                  {language.label}
+                </a>
+              </div>
+            </div>
+          ),
+        )}
+      </div>
+    </nav>
     <a
       class="hidden rounded-full bg-ink px-4 py-3 text-xs font-extrabold tracking-wide text-cream transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-red sm:block"
       href="https://nocodb.gpul.org/dashboard/#/nc/form/f1137831-84ad-4682-93de-a416cc592ff1"
@@ -63,3 +85,44 @@ const navTargets = ["#about", "#experience", "#sponsors", "#faq"];
     </a>
   </div>
 </header>
+
+<script>
+  let controller: AbortController | undefined;
+
+  document.addEventListener("astro:page-load", () => {
+    controller?.abort();
+
+    const menu = document.querySelector<HTMLElement>(
+      "[data-header-language-menu]",
+    );
+    const toggle = menu?.querySelector("button");
+    if (!menu || !toggle) return;
+
+    controller = new AbortController();
+    const { signal } = controller;
+    const setOpen = (open: boolean) => {
+      menu.toggleAttribute("data-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    };
+
+    toggle.addEventListener(
+      "click",
+      () => setOpen(!menu.hasAttribute("data-open")),
+      { signal },
+    );
+    document.addEventListener(
+      "click",
+      (event) => {
+        if (!menu.contains(event.target as Node)) setOpen(false);
+      },
+      { signal },
+    );
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape") setOpen(false);
+      },
+      { signal },
+    );
+  });
+</script>
