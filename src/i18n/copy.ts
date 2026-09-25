@@ -14,6 +14,7 @@ export type Copy = {
   aboutTitle: string;
   aboutBody: string;
   aboutDetail: string;
+  statsTitle: string;
   stats: [string, string][];
   experienceKicker: string;
   experienceTitle: string;
@@ -62,6 +63,7 @@ export const copy: Record<Locale, Copy> = {
       "HackUDC es una hackathon de código abierto organizada por GPUL. Construye un proyecto en 36 horas a partir de un reto patrocinado o crea algo original con un equipo de hasta cuatro hackers.",
     aboutDetail:
       "No hace falta sentirse preparado: ven a aprender, probar, conocer gente y compartir algo que pueda seguir creciendo después del evento.",
+    statsTitle: "HackUDC en cifras",
     stats: [
       ["500+", "participantes"],
       ["36h", "de hacking"],
@@ -205,6 +207,7 @@ export const copy: Record<Locale, Copy> = {
       "HackUDC is an open-source hackathon organized by GPUL. Build a project in 36 hours from a sponsored challenge, or create something original with a team of up to four hackers.",
     aboutDetail:
       "You do not need to feel ready. Come to learn, try, meet people and share something that can keep growing after the event.",
+    statsTitle: "HackUDC by the numbers",
     stats: [
       ["500+", "participants"],
       ["36h", "of hacking"],
@@ -341,6 +344,7 @@ export const copy: Record<Locale, Copy> = {
       "HackUDC é unha hackathon de código aberto organizada por GPUL. Constrúe un proxecto en 36 horas a partir dun reto patrocinado ou crea algo orixinal cun equipo de ata catro hackers.",
     aboutDetail:
       "Non tes que sentirte preparado. Ven aprender, probar, coñecer xente e compartir algo que poida seguir medrando despois do evento.",
+    statsTitle: "HackUDC en cifras",
     stats: [
       ["500+", "participantes"],
       ["36h", "de hacking"],

@@ -6,62 +6,72 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
+const digits = Array.from({ length: 30 }, (_, index) => index % 10);
 ---
 
-{/*
-  Four knobs drive the layout, all set on the section:
-  `--faro-w` is the width of the lighthouse box, pinned `left-4`,
-  `--beam-origin` is the x of the tip, parked on the lighthouse lamp
-  (`left-4` + its width, minus an overlap so the beam is born inside the drawing),
-  `--beam-flat` is where the wedge opens into its full height, and
-  `--stats-inset` is how far the stats are pushed off the left edge.
-*/}
 <section
-  class="relative my-10 min-h-60 [--beam-flat:12%] [--beam-origin:0%] [--faro-w:13.5rem] [--stats-inset:12%] sm:my-16 sm:[--beam-flat:46%] sm:[--beam-origin:calc(var(--faro-w)_-_0.5rem)] sm:[--stats-inset:32%]"
-  aria-label="HackUDC27 statistics"
+  class="stats-scene relative isolate"
+  id="stats"
+  aria-labelledby="stats-title"
 >
-  {/*
-    Ray of light. The wedge is symmetric about the vertical middle: it opens from
-    the tip at `--beam-origin` and reaches full height at `--beam-flat` on both
-    edges. The wrapper's blur softens the silhouette (filter runs on the
-    already-clipped child) and the mask dissipates the beam towards its far end.
-  */}
-  <div class="absolute inset-0 blur-[4px] sm:blur-[8px]" aria-hidden="true">
-    <div class="size-full bg-yellow/80 mask-r-from-70% mask-r-to-100% [clip-path:polygon(var(--beam-flat)_0,100%_0,100%_100%,var(--beam-flat)_100%,var(--beam-origin)_50%)]"></div>
-  </div>
-  {/*
-    Placeholder for the lighthouse artwork: swap this box for the <img>, keeping
-    the width and the aspect ratio so the beam keeps meeting it at the lamp.
-    It is meant to stand roughly twice as tall as the beam, overflowing it.
-  */}
+  <h2 class="sr-only" id="stats-title">
+    {t.statsTitle}
+  </h2>
+
   <div
-    class="absolute top-1/2 left-4 hidden aspect-10/21 w-(--faro-w) -translate-y-1/2 place-items-center border-2 border-dashed border-ink/35 text-[0.6rem] font-black tracking-widest text-ink/45 uppercase sm:grid"
+    class="stats-beam pointer-events-none absolute inset-0 -z-1"
     aria-hidden="true"
-  >
-    faro
-  </div>
-  <div class="relative ml-(--stats-inset) px-5 py-10 sm:px-[3vw] sm:py-14">
-    {/* Columns follow the number of stats, so commenting one out never leaves a gap. */}
+  ></div>
+  <img
+    class="stats-lighthouse pointer-events-none absolute bottom-0 left-0 z-1 max-w-none select-none"
+    src="/assets/scene/faro.svg"
+    alt=""
+    width="253"
+    height="383"
+    aria-hidden="true"
+  />
+
+  <div class="stats-content relative z-2 mx-auto flex h-full w-full max-w-7xl items-center">
     <div
-      class="mx-auto grid max-w-5xl grid-cols-2 gap-x-3 gap-y-8 sm:gap-5 lg:grid-cols-(--stats-cols)"
+      class="grid w-full grid-cols-2 gap-x-3 gap-y-9 sm:gap-x-6 lg:grid-cols-(--stats-cols)"
       style={`--stats-cols: repeat(${t.stats.length}, minmax(0, 1fr))`}
     >
       {t.stats.map(([value, label], index) => (
         <div
           class:list={[
-            "flex flex-col gap-2 text-center reveal",
-            // An odd count leaves an orphan in the two-column phone grid.
+            "reveal flex flex-col items-center gap-2 text-center",
             index === t.stats.length - 1 &&
               t.stats.length % 2 === 1 &&
-              "max-lg:col-span-2",
+              "col-span-2 lg:col-span-1",
           ]}
           style={`transition-delay: ${index * 70}ms`}
           data-reveal
         >
-          <strong class="font-serif text-3xl leading-[0.98] tracking-[-0.02em] sm:text-5xl xl:text-6xl">
-            {value}
+          <strong
+            class="stat-value inline-flex items-baseline font-serif text-[clamp(2.35rem,10.5vw,3rem)] leading-none tracking-[-0.035em] whitespace-nowrap tabular-nums lg:text-[clamp(3.75rem,6vw,5.75rem)]"
+            data-stat-value
+          >
+            <span class="sr-only">{value}</span>
+            <span class="inline-flex items-baseline" aria-hidden="true">
+              {[...value].map((character, digitIndex) =>
+                /\d/.test(character) ? (
+                  <span
+                    class="stat-digit"
+                    style={`--end: ${20 + Number(character)}; --order: ${digitIndex}`}
+                  >
+                    <span class="stat-digit-track">
+                      {digits.map((digit) => (
+                        <span>{digit}</span>
+                      ))}
+                    </span>
+                  </span>
+                ) : (
+                  <span>{character}</span>
+                ),
+              )}
+            </span>
           </strong>
-          <span class="text-xs font-black tracking-wider uppercase">
+          <span class="text-[clamp(0.7rem,1.1vw,0.95rem)] leading-tight font-black tracking-wider uppercase">
             {label}
           </span>
         </div>
@@ -69,3 +79,146 @@ const t = copy[Astro.props.locale];
     </div>
   </div>
 </section>
+
+<style>
+  .stat-digit {
+    display: inline-block;
+    height: 1.3em;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+
+  .stat-digit-track {
+    display: flex;
+    flex-direction: column;
+    transform: translateY(calc(var(--end) * -1.3em));
+  }
+
+  .stat-digit-track > span {
+    display: block;
+    height: 1.3em;
+    flex: none;
+    line-height: 1.3em;
+  }
+
+  .stat-value[data-ready] .stat-digit-track {
+    transform: translateY(0);
+  }
+
+  .stat-value[data-rolled] .stat-digit-track {
+    transform: translateY(calc(var(--end) * -1.3em));
+    transition: transform 1400ms var(--ease-out);
+    transition-delay: calc(var(--order) * 70ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stat-value[data-rolled] .stat-digit-track {
+      transition: none;
+    }
+  }
+
+  .stats-scene {
+    --faro-width: clamp(17rem, 23vw, 21rem);
+    height: clamp(23rem, 31vw, 30rem);
+    margin-block: 2.5rem 1.5rem;
+  }
+
+  .stats-lighthouse {
+    width: var(--faro-width);
+  }
+
+  .stats-beam {
+    background: var(--color-yellow);
+    opacity: 0.78;
+    /* The tip follows the third blue pane as the lighthouse scales. */
+    clip-path: polygon(
+      7% calc(100% - var(--faro-width) - 1.75rem),
+      31% 9%,
+      100% 9%,
+      100% 91%,
+      31% 91%
+    );
+    filter: blur(13px);
+    mask-image: linear-gradient(
+      to right,
+      var(--color-ink) 0%,
+      var(--color-ink) 68%,
+      transparent 100%
+    );
+  }
+
+  .stats-content {
+    padding: 1rem clamp(2rem, 5vw, 5rem) 1rem clamp(17rem, 26vw, 24rem);
+  }
+
+  @media (max-width: 639px) {
+    .stats-scene {
+      --faro-width: 16rem;
+      height: 23rem;
+      margin-block: 1rem 0;
+    }
+
+    .stats-lighthouse {
+      left: -4rem;
+    }
+
+    .stats-beam {
+      clip-path: polygon(
+        2% calc(100% - var(--faro-width) - 1.75rem),
+        28% 6%,
+        100% 6%,
+        100% 96%,
+        28% 96%
+      );
+      filter: blur(8px);
+      mask-image: linear-gradient(
+        to right,
+        var(--color-ink) 0%,
+        var(--color-ink) 78%,
+        transparent 100%
+      );
+    }
+
+    .stats-content {
+      padding: 2.5rem 1.1rem 2rem 5.7rem;
+    }
+  }
+</style>
+
+<script>
+  let statsObserver: IntersectionObserver | undefined;
+  let statsController: AbortController | undefined;
+
+  document.addEventListener("astro:page-load", () => {
+    statsObserver?.disconnect();
+    statsController?.abort();
+    statsController = new AbortController();
+    document.addEventListener(
+      "astro:before-swap",
+      () => statsObserver?.disconnect(),
+      { signal: statsController.signal },
+    );
+
+    const section = document.querySelector<HTMLElement>("#stats");
+    if (!section) return;
+
+    const values = section.querySelectorAll<HTMLElement>("[data-stat-value]");
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !("IntersectionObserver" in window)
+    ) {
+      return;
+    }
+
+    values.forEach((value) => value.setAttribute("data-ready", ""));
+    statsObserver = new IntersectionObserver(
+      (entries, observer) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        values.forEach((value) => value.setAttribute("data-rolled", ""));
+        observer.disconnect();
+      },
+      { threshold: 0.25 },
+    );
+    statsObserver.observe(section);
+  });
+</script>
