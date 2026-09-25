@@ -98,6 +98,10 @@
   @apply text-xs font-extrabold tracking-wide transition-colors hover:text-red;
 }
 
+@utility cta-outline {
+  @apply border-2 border-cream text-cream transition-[border-color,color,transform] duration-200 ease-out hover:-translate-y-0.5 hover:border-blue hover:text-blue active:scale-[0.96] motion-reduce:translate-y-0 motion-reduce:transition-none;
+}
+
 @utility cta-plaque {
   @apply grid aspect-[334/78] min-w-0 flex-1 place-items-center bg-contain bg-center bg-no-repeat text-xs font-black tracking-wide uppercase transition duration-200 ease-out hover:-translate-y-0.5 active:scale-[0.96] motion-reduce:transition-none;
 }
