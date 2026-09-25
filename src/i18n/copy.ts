@@ -30,6 +30,8 @@ export type Copy = {
   sponsorsTitle: string;
   sponsorsBody: string;
   sponsorCta: string;
+  sponsorWindow: string;
+  sponsorTiers: [string, string][];
   faqKicker: string;
   faqTitle: string;
   faq: [string, string][];
@@ -100,6 +102,12 @@ export const copy: Record<Locale, Copy> = {
     sponsorsBody:
       "Conecta tu marca con la próxima generación de personas que construyen el futuro.",
     sponsorCta: "Descargar dossier de patrocinio",
+    sponsorWindow: "Jugar con la ventana",
+    sponsorTiers: [
+      ["root", "</root>"],
+      ["admin", "</admin>"],
+      ["user", "</user>"],
+    ],
     faqKicker: "Preguntas frecuentes",
     faqTitle: "Lo importante, antes de hacer las maletas.",
     faq: [
@@ -233,6 +241,12 @@ export const copy: Record<Locale, Copy> = {
     sponsorsBody:
       "Connect your brand with the next generation of people building the future.",
     sponsorCta: "Download sponsorship deck",
+    sponsorWindow: "Play with window",
+    sponsorTiers: [
+      ["root", "</root>"],
+      ["admin", "</admin>"],
+      ["user", "</user>"],
+    ],
     faqKicker: "Frequently asked",
     faqTitle: "The useful stuff, before you pack your bags.",
     faq: [
@@ -367,6 +381,12 @@ export const copy: Record<Locale, Copy> = {
     sponsorsBody:
       "Conecta a túa marca coa próxima xeración de persoas que constrúen o futuro.",
     sponsorCta: "Descargar dossier de patrocinio",
+    sponsorWindow: "Xogar coa xanela",
+    sponsorTiers: [
+      ["root", "</root>"],
+      ["admin", "</admin>"],
+      ["user", "</user>"],
+    ],
     faqKicker: "Preguntas frecuentes",
     faqTitle: "O importante, antes de facer as maletas.",
     faq: [

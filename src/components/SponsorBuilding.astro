@@ -1,0 +1,344 @@
+---
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const t = copy[Astro.props.locale];
+// Coordinates share the facade's cropped viewBox, including when it stretches.
+const windows = [
+  {
+    src: "/assets/scene/sponsors-window-1.svg",
+    left: 14.733490566037737,
+    top: 46.93546176762661,
+    width: 22.60571002979146,
+    height: 14.118008937437935,
+  },
+  {
+    src: "/assets/scene/sponsors-window-2.svg",
+    left: 38.68008440913604,
+    top: 47.133490566037736,
+    width: 22.61819761668322,
+    height: 14.099935451837139,
+  },
+  {
+    src: "/assets/scene/sponsors-window-3.svg",
+    left: 62.6103227408143,
+    top: 46.92461767626614,
+    width: 22.59966732869911,
+    height: 14.098227408143,
+  },
+  {
+    src: "/assets/scene/sponsors-window-4.svg",
+    left: 14.72649950347567,
+    top: 62.235228401191655,
+    width: 22.593331678252234,
+    height: 14.095278053624627,
+  },
+  {
+    src: "/assets/scene/sponsors-window-5.svg",
+    left: 38.654731876861966,
+    top: 62.40275074478648,
+    width: 22.632512413108245,
+    height: 14.146434955312811,
+  },
+  {
+    src: "/assets/scene/sponsors-window-6.svg",
+    left: 62.59723435948361,
+    top: 62.199577954319764,
+    width: 22.630014895729893,
+    height: 14.135690168818272,
+  },
+];
+const tiers = t.sponsorTiers.map(([id, label], index) => ({
+  id,
+  label,
+  top: [5.1, 44.4, 79][index],
+}));
+---
+
+<div
+  class="absolute inset-0 [container-type:inline-size]"
+  data-sponsor-building
+>
+  <img
+    class="absolute inset-0 h-full w-full"
+    src="/assets/scene/sponsors-facade.svg"
+    width="2014"
+    height="2014"
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+  {tiers.map(({ id, label, top }) => (
+    <span
+      data-tier={id}
+      class="pointer-events-none absolute left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[clamp(0.75rem,3.5cqw,1.65rem)] leading-none text-ink"
+      style={{ top: `${top}%` }}
+    >
+      {label}
+    </span>
+  ))}
+  {windows.map((window, index) => (
+    <button
+      type="button"
+      data-sponsor-window
+      aria-label={`${t.sponsorWindow} ${index + 1}`}
+      class="absolute cursor-pointer rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+      style={{
+        left: `${window.left}%`,
+        top: `${window.top}%`,
+        width: `${window.width}%`,
+        height: `${window.height}%`,
+      }}
+    >
+      <span
+        class="block h-full w-full motion-reduce:animate-none"
+        data-window-shake
+      >
+        <img
+          class="block h-full w-full select-none"
+          data-window-press
+          src={window.src}
+          alt=""
+          draggable="false"
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
+    </button>
+  ))}
+</div>
+
+<style>
+  [data-window-press] {
+    transition:
+      transform 160ms var(--ease-out),
+      opacity 160ms var(--ease-out);
+  }
+
+  [data-sponsor-window]:active [data-window-press],
+  [data-sponsor-window][data-pressed] [data-window-press] {
+    transform: scale(0.96);
+    opacity: 0.8;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-window-press] {
+      transition: none;
+    }
+    [data-sponsor-window]:active [data-window-press],
+    [data-sponsor-window][data-pressed] [data-window-press] {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  let controller: AbortController | undefined;
+  let observer: IntersectionObserver | undefined;
+
+  document.addEventListener("astro:page-load", () => {
+    controller?.abort();
+    observer?.disconnect();
+    controller = new AbortController();
+    const { signal } = controller;
+    const building = document.querySelector<HTMLElement>(
+      "[data-sponsor-building]",
+    );
+    if (!building) return;
+
+    const windows = [
+      ...building.querySelectorAll<HTMLButtonElement>("[data-sponsor-window]"),
+    ];
+    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    const hover = matchMedia("(any-hover: hover) and (any-pointer: fine)");
+    const desktop = matchMedia("(min-width: 1024px)");
+    const arrow = document.querySelector<SVGSVGElement>("[data-dossier-arrow]");
+    let arrowTimer: number | undefined;
+    let arrowAnimations: Animation[] = [];
+    const animations = new Map<HTMLButtonElement, Animation>();
+    const pressTimers = new Map<HTMLButtonElement, number>();
+    let timer: number | undefined;
+    let visible = false;
+    let lastWindow = -1;
+    const easing = getComputedStyle(building)
+      .getPropertyValue("--ease-out")
+      .trim();
+
+    function shake(button: HTMLButtonElement, repeat = false) {
+      if (
+        reduceMotion.matches ||
+        button.matches(":active") ||
+        button.hasAttribute("data-pressed")
+      )
+        return;
+      const target = button.querySelector<HTMLElement>("[data-window-shake]")!;
+      animations.get(button)?.cancel();
+      const animation = target.animate(
+        [
+          { transform: "translateX(0) rotate(0deg)" },
+          { transform: "translateX(-2px) rotate(-3deg)", offset: 0.12 },
+          { transform: "translateX(2px) rotate(3deg)", offset: 0.26 },
+          { transform: "translateX(-2px) rotate(-2.5deg)", offset: 0.4 },
+          { transform: "translateX(1px) rotate(2deg)", offset: 0.54 },
+          { transform: "translateX(-1px) rotate(-1deg)", offset: 0.68 },
+          { transform: "translateX(0) rotate(0deg)", offset: 0.8 },
+          { transform: "translateX(0) rotate(0deg)" },
+        ],
+        // Linear timing preserves every shake; a strong ease-out compressed them.
+        { duration: 600, easing: "linear", iterations: repeat ? Infinity : 1 },
+      );
+      animations.set(button, animation);
+      animation.onfinish = () => animations.delete(button);
+    }
+
+    function hideArrow() {
+      clearTimeout(arrowTimer);
+      arrow?.removeAttribute("data-visible");
+      arrowAnimations.forEach((animation) => animation.cancel());
+      arrowAnimations = [];
+    }
+
+    function showArrow() {
+      if (!arrow || !desktop.matches) return;
+      hideArrow();
+      arrow.setAttribute("data-visible", "");
+      if (!reduceMotion.matches) {
+        arrow
+          .querySelectorAll<SVGPathElement>("path")
+          .forEach((path, index) => {
+            const length = path.getTotalLength();
+            arrowAnimations.push(
+              path.animate(
+                [
+                  { strokeDasharray: `${length}`, strokeDashoffset: length },
+                  { strokeDasharray: `${length}`, strokeDashoffset: 0 },
+                ],
+                {
+                  duration: index === 0 ? 650 : 180,
+                  delay: index === 0 ? 0 : 570,
+                  fill: "both",
+                  easing,
+                },
+              ),
+            );
+          });
+      }
+      arrowTimer = window.setTimeout(hideArrow, 4500);
+    }
+
+    function stopMotion() {
+      clearTimeout(timer);
+      animations.forEach((animation) => animation.cancel());
+      animations.clear();
+    }
+
+    function schedule() {
+      clearTimeout(timer);
+      if (!visible || document.hidden || reduceMotion.matches) return;
+      timer = window.setTimeout(
+        () => {
+          const candidates = windows.filter(
+            (button, index) =>
+              index !== lastWindow &&
+              !button.matches(":hover, :focus, :active"),
+          );
+          const button =
+            candidates[Math.floor(Math.random() * candidates.length)];
+          if (button) {
+            lastWindow = windows.indexOf(button);
+            shake(button);
+          }
+          schedule();
+        },
+        3000 + Math.random() * 3000,
+      );
+    }
+
+    windows.forEach((button) => {
+      button.addEventListener(
+        "pointerenter",
+        (event) => {
+          if (hover.matches && event.pointerType !== "touch")
+            shake(button, true);
+        },
+        { signal },
+      );
+      button.addEventListener(
+        "pointerleave",
+        () => {
+          const animation = animations.get(button);
+          if (animation) {
+            // Finish the current cycle instead of snapping back mid-shake.
+            const elapsed = Number(animation.currentTime ?? 0);
+            animation.effect?.updateTiming({
+              iterations: Math.floor(elapsed / 600) + 1,
+            });
+          }
+        },
+        { signal },
+      );
+      button.addEventListener(
+        "click",
+        () => {
+          showArrow();
+          animations.get(button)?.cancel();
+          animations.delete(button);
+          clearTimeout(pressTimers.get(button));
+          button.setAttribute("data-pressed", "");
+          pressTimers.set(
+            button,
+            window.setTimeout(() => {
+              button.removeAttribute("data-pressed");
+              pressTimers.delete(button);
+            }, 160),
+          );
+        },
+        { signal },
+      );
+    });
+
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        if (!visible) stopMotion();
+        schedule();
+      },
+      { threshold: 0.15 },
+    );
+    observer.observe(building);
+    reduceMotion.addEventListener(
+      "change",
+      () => {
+        stopMotion();
+        hideArrow();
+        schedule();
+      },
+      { signal },
+    );
+    document.addEventListener(
+      "visibilitychange",
+      () => {
+        stopMotion();
+        hideArrow();
+        schedule();
+      },
+      { signal },
+    );
+    const cleanup = () => {
+      stopMotion();
+      hideArrow();
+      observer?.disconnect();
+      pressTimers.forEach(clearTimeout);
+      windows.forEach((button) => button.removeAttribute("data-pressed"));
+    };
+    signal.addEventListener("abort", cleanup, { once: true });
+    desktop.addEventListener("change", hideArrow, { signal });
+    document.addEventListener("astro:before-swap", () => controller?.abort(), {
+      signal,
+      once: true,
+    });
+  });
+</script>
