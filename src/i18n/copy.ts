@@ -113,7 +113,7 @@ export const copy: Record<Locale, Copy> = {
     faq: [
       [
         "¿Cuándo se celebra HackUDC?",
-        "HackUDC tendrá lugar del 27 de febrero al 1 de marzo de 2026. La ceremonia de apertura será el viernes 27 por la tarde. El evento termina el domingo con una ceremonia de premios durante el acto de clausura.",
+        "Próximamente anunciaremos las fechas del evento.",
       ],
       [
         "¿Dónde se celebra HackUDC?",
@@ -252,7 +252,7 @@ export const copy: Record<Locale, Copy> = {
     faq: [
       [
         "When does HackUDC take place?",
-        "HackUDC will take place from February 27th to March 1st, 2026. The opening ceremony will be on Friday afternoon, February 27th. The event concludes on Sunday with an awards ceremony during the closing act.",
+        "We will announce the event dates soon.",
       ],
       [
         "Where does HackUDC take place?",
@@ -392,7 +392,7 @@ export const copy: Record<Locale, Copy> = {
     faq: [
       [
         "Cando se celebra HackUDC?",
-        "HackUDC celebrarase do 27 de febreiro ao 1 de marzo de 2026. O acto inaugural será o venres 27 pola tarde. O evento remata o domingo cunha entrega de premios durante o acto de clausura.",
+        "En breve anunciaremos as datas do evento.",
       ],
       [
         "Onde se celebra HackUDC?",
