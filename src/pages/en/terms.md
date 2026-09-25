@@ -21,7 +21,7 @@ By registering for and participating in the Event, participants accept these T&C
 - **Mentor:** any person who accepts these T&C, registers for, and takes part in the Event as an advisor and facilitator supporting Participants and the Organizer.
 - **Sponsor:** a collaborating entity which, according to its sponsorship tier, may propose challenges and/or grant specific prizes.
 - **Challenges:** technical projects or tasks established by the Organizer and/or Sponsors, to be developed exclusively during the Event.
-- **General Prize:** an Organizer prize for the best free-software project, based on the criteria detailed in [Premio GPUL](http://premio.gpul.org).
+- **General Prize:** an Organizer prize for the best free-software project, based on the criteria detailed in <a href="http://premio.gpul.org" target="_blank" rel="noopener noreferrer">Premio GPUL</a>.
 - **DevPost:** the project-submission and management platform; its link will be provided during the Event.
 
 ## 3. Purpose of the Event

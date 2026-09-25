@@ -1,7 +1,7 @@
 ---
+import Github from "@/assets/icons/github.svg";
+import Instagram from "@/assets/icons/instagram.svg";
 import Linkedin from "@/assets/icons/linkedin.svg";
-import Telegram from "@/assets/icons/telegram.svg";
-import X from "@/assets/icons/x.svg";
 import { copy, type Locale } from "@/i18n/copy";
 
 interface Props {
@@ -15,8 +15,12 @@ const sponsorPageUrl =
     : `/${Astro.props.locale}/sponsors/`;
 // The footer lists every network; the floating bar keeps only the main ones.
 const socials = [
-  { label: "X", href: "https://x.com/gpul_", icon: X },
-  { label: "Telegram", href: "https://t.me/+PrK44xhqJ9eP9ZUf", icon: Telegram },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/gpul_",
+    icon: Instagram,
+  },
+  { label: "GitHub", href: "https://github.com/gpul-org", icon: Github },
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/company/gpul/",
@@ -49,6 +53,8 @@ const pill =
             class="grid size-10 origin-bottom place-items-center rounded-full bg-ink/5 text-ink transition duration-200 ease-out group-hover:scale-125 group-hover:bg-ink group-hover:text-cream focus-visible:scale-125 motion-reduce:transition-none"
             href={href}
             aria-label={label}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Icon class="size-4.5" aria-hidden="true" />
           </a>

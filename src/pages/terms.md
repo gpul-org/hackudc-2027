@@ -21,7 +21,7 @@ Al inscribirse y participar en el Evento, las personas participantes aceptan est
 - **Mentor/a:** persona que acepta estos T&C, se registra y participa como asesora y facilitadora para apoyar a las personas participantes y a la Organización.
 - **Patrocinador:** entidad colaboradora que, según su nivel de patrocinio, puede proponer retos y/o conceder premios específicos.
 - **Retos:** proyectos o tareas técnicas establecidos por la Organización y/o los patrocinadores que se desarrollarán exclusivamente durante el Evento.
-- **Premio General:** premio de la Organización al mejor proyecto de software libre, según los criterios detallados en [Premio GPUL](http://premio.gpul.org).
+- **Premio General:** premio de la Organización al mejor proyecto de software libre, según los criterios detallados en <a href="http://premio.gpul.org" target="_blank" rel="noopener noreferrer">Premio GPUL</a>.
 - **DevPost:** plataforma de entrega y gestión de proyectos cuyo enlace se comunicará durante el Evento.
 
 ## 3. Finalidad del Evento
