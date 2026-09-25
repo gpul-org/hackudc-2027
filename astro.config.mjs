@@ -27,15 +27,6 @@ export default defineConfig({
       styles: ["normal"],
       subsets: ["latin", "latin-ext"],
     },
-    {
-      provider: fontProviders.fontsource(),
-      name: "Roboto Slab",
-      cssVariable: "--font-roboto-slab",
-      weights: ["400 900"],
-      styles: ["normal"],
-      subsets: ["latin", "latin-ext"],
-      fallbacks: ["serif"],
-    },
   ],
 
   vite: {
