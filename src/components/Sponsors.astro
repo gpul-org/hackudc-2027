@@ -1,5 +1,6 @@
 ---
-import Download from "@lucide/astro/icons/download";
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import SponsorBuilding from "@/components/SponsorBuilding.astro";
 import { copy, type Locale } from "@/i18n/copy";
 
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
+const sponsorPageUrl = getRelativeLocaleUrl(Astro.props.locale, "sponsors/");
 ---
 
 <section
@@ -37,17 +39,16 @@ const t = copy[Astro.props.locale];
         <a
           class="group reveal inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-transparent bg-cream px-5 py-3 text-xs font-black tracking-wide text-red transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-ink hover:text-cream"
           data-reveal
-          href="/assets/documents/HackUDC2027-Dossier.pdf"
-          download
+          href={sponsorPageUrl}
         >
           {t.sponsorCta}
-          <Download
-            class="size-4 transition group-hover:translate-y-0.5"
+          <ArrowRight
+            class="size-4 transition group-hover:translate-x-0.5"
             aria-hidden="true"
           />
         </a>
         <svg
-          data-dossier-arrow
+          data-sponsor-arrow
           class="pointer-events-none absolute bottom-[-2rem] left-[calc(100%+0.75rem)] hidden w-[clamp(6rem,16vw,17rem)] overflow-visible text-red opacity-0 transition-opacity duration-150 data-visible:opacity-100 motion-reduce:transition-none lg:block"
           viewBox="0 0 300 190"
           fill="none"

@@ -101,7 +101,7 @@ export const copy: Record<Locale, Copy> = {
     sponsorsTitle: "Las mejores ideas necesitan espacio para crecer.",
     sponsorsBody:
       "Conecta tu marca con la próxima generación de personas que construyen el futuro.",
-    sponsorCta: "Descargar dossier de patrocinio",
+    sponsorCta: "¿Te interesa patrocinarnos?",
     sponsorWindow: "Jugar con la ventana",
     sponsorTiers: [
       ["root", "</root>"],
@@ -240,7 +240,7 @@ export const copy: Record<Locale, Copy> = {
     sponsorsTitle: "Great ideas need room to grow.",
     sponsorsBody:
       "Connect your brand with the next generation of people building the future.",
-    sponsorCta: "Download sponsorship deck",
+    sponsorCta: "Interested in sponsoring us?",
     sponsorWindow: "Play with window",
     sponsorTiers: [
       ["root", "</root>"],
@@ -380,7 +380,7 @@ export const copy: Record<Locale, Copy> = {
     sponsorsTitle: "As mellores ideas precisan espazo para medrar.",
     sponsorsBody:
       "Conecta a túa marca coa próxima xeración de persoas que constrúen o futuro.",
-    sponsorCta: "Descargar dossier de patrocinio",
+    sponsorCta: "Interésache patrocinarnos?",
     sponsorWindow: "Xogar coa xanela",
     sponsorTiers: [
       ["root", "</root>"],

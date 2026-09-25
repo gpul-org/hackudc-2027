@@ -155,7 +155,7 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
     const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
     const hover = matchMedia("(any-hover: hover) and (any-pointer: fine)");
     const desktop = matchMedia("(min-width: 1024px)");
-    const arrow = document.querySelector<SVGSVGElement>("[data-dossier-arrow]");
+    const arrow = document.querySelector<SVGSVGElement>("[data-sponsor-arrow]");
     let arrowTimer: number | undefined;
     let arrowAnimations: Animation[] = [];
     const animations = new Map<HTMLButtonElement, Animation>();

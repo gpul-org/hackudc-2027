@@ -1,14 +1,21 @@
 ---
 import ArrowLeft from "@lucide/astro/icons/arrow-left";
 import Download from "@lucide/astro/icons/download";
-import type { Locale } from "@/i18n/copy";
+import Mail from "@lucide/astro/icons/mail";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languages, type Locale } from "@/i18n/copy";
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const homeUrl = locale === "es" ? "/" : `/${locale}/`;
+const homeUrl = getRelativeLocaleUrl(locale, "");
+const localeUrls: Record<Locale, string> = {
+  es: getRelativeLocaleUrl("es", "sponsors/"),
+  en: getRelativeLocaleUrl("en", "sponsors/"),
+  gl: getRelativeLocaleUrl("gl", "sponsors/"),
+};
 const content = {
   es: {
     back: "Volver a HackUDC",
@@ -18,6 +25,7 @@ const content = {
       "En nuestra quinta edición reuniremos a 500 hackers durante 36 horas en la Facultad de Informática de A Coruña.",
     download: "Descargar dossier completo",
     downloadNote: "PDF · Paquetes de patrocinio 2027",
+    emailCta: "Pongámonos en contacto",
     stats: "HackUDC en cifras",
     why: "¿Por qué patrocinar HackUDC?",
     benefits: [
@@ -69,6 +77,7 @@ const content = {
       "For our fifth edition, we will bring 500 hackers together for 36 hours at the Faculty of Computer Science in A Coruña.",
     download: "Download the full deck",
     downloadNote: "PDF · 2027 sponsorship packages",
+    emailCta: "Let's get in touch",
     stats: "HackUDC by the numbers",
     why: "Why sponsor HackUDC?",
     benefits: [
@@ -120,6 +129,7 @@ const content = {
       "Na nosa quinta edición reuniremos 500 hackers durante 36 horas na Facultade de Informática da Coruña.",
     download: "Descargar o dossier completo",
     downloadNote: "PDF · Paquetes de patrocinio 2027",
+    emailCta: "Poñámonos en contacto",
     stats: "HackUDC en cifras",
     why: "Por que patrocinar HackUDC?",
     benefits: [
@@ -213,7 +223,7 @@ const features = [
 ---
 
 <main class="min-h-dvh bg-red text-cream">
-  <header class="page-wrap flex items-center justify-between py-5 sm:py-7">
+  <header class="page-wrap flex flex-wrap items-center justify-between gap-4 py-5 sm:py-7">
     <a
       class="inline-flex min-h-11 items-center gap-2 text-xs font-black tracking-wide uppercase hover:text-blue"
       href={homeUrl}
@@ -221,13 +231,32 @@ const features = [
       <ArrowLeft class="size-4" aria-hidden="true" />
       {t.back}
     </a>
-    <img
-      class="h-7 w-auto sm:h-9"
-      src="/assets/brand/logo-cream.svg"
-      alt="HackUDC27"
-      width="1003"
-      height="153"
-    />
+    <div class="ml-auto flex items-center gap-2 sm:gap-5">
+      <nav
+        class="flex gap-0.5 rounded-full border border-cream/30 p-1"
+        aria-label="Language selector"
+      >
+        {languages.map((language) => (
+          <a
+            class="rounded-full px-2 py-1 text-xs font-extrabold tracking-wide transition-colors hover:bg-cream hover:text-red aria-[current=page]:bg-cream aria-[current=page]:text-red"
+            href={localeUrls[language.code]}
+            hreflang={language.code}
+            aria-current={language.code === locale ? "page" : undefined}
+          >
+            {language.label}
+          </a>
+        ))}
+      </nav>
+      <a href={homeUrl} aria-label="HackUDC27, home">
+        <img
+          class="h-5 w-auto sm:h-9"
+          src="/assets/brand/logo-cream.svg"
+          alt="HackUDC27"
+          width="1003"
+          height="153"
+        />
+      </a>
+    </div>
   </header>
 
   <section
@@ -244,20 +273,29 @@ const features = [
           {t.intro}
         </p>
       </div>
-      <a
-        class="group flex min-h-14 items-center justify-between gap-5 rounded-full bg-cream px-6 py-3 text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-blue"
-        href="/assets/documents/HackUDC2027-Dossier.pdf"
-        download
-      >
-        <span>
-          <span class="block text-sm font-black">{t.download}</span>
-          <span class="mt-0.5 block text-xs">{t.downloadNote}</span>
-        </span>
-        <Download
-          class="size-5 shrink-0 transition group-hover:translate-y-0.5"
-          aria-hidden="true"
-        />
-      </a>
+      <div class="grid gap-3">
+        <a
+          class="group flex min-h-14 items-center justify-between gap-5 rounded-full border-2 border-cream px-6 py-3 text-cream transition duration-200 ease-out hover:-translate-y-0.5 hover:border-blue"
+          href="mailto:hackudc@gpul.org"
+        >
+          <span class="text-sm font-black">{t.emailCta}</span>
+          <Mail class="size-5 shrink-0" aria-hidden="true" />
+        </a>
+        <a
+          class="group flex min-h-14 items-center justify-between gap-5 rounded-full bg-cream px-6 py-3 text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-blue"
+          href="/assets/documents/HackUDC2027-Dossier.pdf"
+          download
+        >
+          <span>
+            <span class="block text-sm font-black">{t.download}</span>
+            <span class="mt-0.5 block text-xs">{t.downloadNote}</span>
+          </span>
+          <Download
+            class="size-5 shrink-0 transition group-hover:translate-y-0.5"
+            aria-hidden="true"
+          />
+        </a>
+      </div>
     </div>
   </section>
 
