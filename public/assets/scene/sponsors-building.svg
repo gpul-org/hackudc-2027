@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1180" fill="none">
   <style>
-    .line{fill:#FAFAFA}.pane{fill:#A3D5FF;stroke:#FAFAFA;stroke-width:12}.label{fill:#A3D5FF;font:700 28px Rockwell,Georgia,serif;text-anchor:middle}.small{fill:#A3D5FF;stroke:#FAFAFA;stroke-width:10}
+    .line{fill:#FAFAFA}.pane{fill:#A3D5FF;stroke:#FAFAFA;stroke-width:12}.label{fill:#A3D5FF;font:700 28px "Roboto Slab",Georgia,serif;text-anchor:middle}.small{fill:#A3D5FF;stroke:#FAFAFA;stroke-width:10}
   </style>
   <!-- Root facade -->
   <rect class="line" x="70" y="40" width="860" height="18" rx="9"/>

@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -17,6 +17,26 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: "Inter",
+      cssVariable: "--font-inter",
+      weights: ["400 900"],
+      styles: ["normal"],
+      subsets: ["latin", "latin-ext"],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: "Roboto Slab",
+      cssVariable: "--font-roboto-slab",
+      weights: ["400 900"],
+      styles: ["normal"],
+      subsets: ["latin", "latin-ext"],
+      fallbacks: ["serif"],
+    },
+  ],
 
   vite: {
     plugins: [tailwindcss()],
