@@ -27,6 +27,52 @@ export default defineConfig({
       styles: ["normal"],
       subsets: ["latin", "latin-ext"],
     },
+    {
+      provider: fontProviders.local(),
+      name: "HackUDC Rockwell",
+      cssVariable: "--font-rockwell",
+      fallbacks: ["Rockwell", "Georgia", "Times New Roman", "serif"],
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/rockwell-light.woff2"],
+            weight: 300,
+            style: "normal",
+            display: "swap",
+          },
+          {
+            src: ["./src/assets/fonts/rockwell-regular.woff2"],
+            weight: 400,
+            style: "normal",
+            display: "swap",
+          },
+          {
+            src: ["./src/assets/fonts/rockwell-italic.woff2"],
+            weight: 400,
+            style: "italic",
+            display: "swap",
+          },
+          {
+            src: ["./src/assets/fonts/rockwell-bold.woff2"],
+            weight: 700,
+            style: "normal",
+            display: "swap",
+          },
+          {
+            src: ["./src/assets/fonts/rockwell-bold-italic.woff2"],
+            weight: 700,
+            style: "italic",
+            display: "swap",
+          },
+          {
+            src: ["./src/assets/fonts/rockwell-extra-bold.woff2"],
+            weight: 800,
+            style: "normal",
+            display: "swap",
+          },
+        ],
+      },
+    },
   ],
 
   vite: {
