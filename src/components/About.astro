@@ -8,6 +8,10 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
+const aftermovieId = "sBOCOznVlHM";
+const aftermovieUrl = `https://www.youtube.com/watch?v=${aftermovieId}`;
+// Linking out instead of embedding keeps YouTube's player off the page's critical path.
+const aftermovieThumb = `https://i.ytimg.com/vi/${aftermovieId}/maxresdefault.jpg`;
 const cardTopline =
   "flex justify-between px-1.5 pt-1 pb-3 text-[0.68rem] font-black tracking-wider uppercase";
 const cardCaption =
@@ -164,19 +168,33 @@ const cardStamp =
             <span>{t.aftermovie}</span>
             <span>02</span>
           </div>
-          <div class="relative flex aspect-video items-center justify-center bg-ink">
-            <span class={cardStamp}>{t.comingSoon}</span>
+          <a
+            class="group relative flex aspect-video items-center justify-center overflow-hidden bg-ink"
+            href={aftermovieUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${t.videoCta}: ${t.aftermovie} (YouTube)`}
+          >
+            <img
+              class="absolute inset-0 size-full object-cover opacity-80 transition-opacity group-hover:opacity-100"
+              src={aftermovieThumb}
+              alt=""
+              width="1280"
+              height="720"
+              loading="lazy"
+              decoding="async"
+            />
             <span
-              class="flex size-14 items-center justify-center rounded-full border-2 border-cream pl-0.5"
+              class="relative flex size-14 items-center justify-center rounded-full border-2 border-cream bg-ink/60 pl-0.5 transition-colors group-hover:bg-red"
               aria-hidden="true"
             >
               <Play class="size-5 fill-current" aria-hidden="true" />
             </span>
-            <span class={cardCaption}>
+            <span class={`${cardCaption} bg-ink px-1.5 py-0.5`}>
               {t.videoCta}
               <ArrowUpRight class="size-3.5" aria-hidden="true" />
             </span>
-          </div>
+          </a>
         </article>
       </div>
     </div>
