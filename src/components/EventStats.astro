@@ -41,7 +41,7 @@ const digits = Array.from({ length: 30 }, (_, index) => index % 10);
       {t.stats.map(([value, label], index) => (
         <div
           class:list={[
-            "reveal flex flex-col items-center gap-2 text-center",
+            "reveal flex flex-col items-center gap-2 text-center max-sm:first:translate-x-3",
             index === t.stats.length - 1 &&
               t.stats.length % 2 === 1 &&
               "col-span-2 lg:col-span-1",
@@ -155,24 +155,31 @@ const digits = Array.from({ length: 30 }, (_, index) => index % 10);
 
   @media (max-width: 639px) {
     .stats-scene {
-      --faro-width: 16rem;
+      /* Narrow enough that the whole tower, lantern included, fits the scene. */
+      --faro-width: 14rem;
+      --faro-left: -1.5rem;
       height: 23rem;
       margin-block: 1rem 0;
     }
 
     .stats-lighthouse {
-      left: -4rem;
+      left: var(--faro-left);
     }
 
     .stats-beam {
+      /* A narrow start at the lantern glass (~38% across, ~1.06 widths up) that
+             opens slowly into a band wide enough to hold the stats. */
+      --beam-x: calc(var(--faro-left) + var(--faro-width) * 0.38);
+      --beam-y: calc(100% - var(--faro-width) * 1.06);
       clip-path: polygon(
-        2% calc(100% - var(--faro-width) - 1.75rem),
-        28% 6%,
-        100% 6%,
-        100% 96%,
-        28% 96%
+        var(--beam-x) calc(var(--beam-y) - 0.35rem),
+        46% 18%,
+        100% 18%,
+        100% 88%,
+        46% 88%,
+        var(--beam-x) calc(var(--beam-y) + 0.35rem)
       );
-      filter: blur(8px);
+      filter: blur(5px);
       mask-image: linear-gradient(
         to right,
         var(--color-ink) 0%,
@@ -182,7 +189,7 @@ const digits = Array.from({ length: 30 }, (_, index) => index % 10);
     }
 
     .stats-content {
-      padding: 2.5rem 1.1rem 2rem 5.7rem;
+      padding: 2.5rem 1.1rem 2rem 6.5rem;
     }
   }
 </style>

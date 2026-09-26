@@ -543,8 +543,16 @@ const sponsorSlots = [
     }
 
     function showArrow() {
-      if (!arrow || !desktop.matches) return;
+      if (!arrow) return;
       hideArrow();
+      // Stacked layouts put the CTA above the building, often out of view.
+      const cta = arrow.closest<HTMLElement>("[data-sponsor-cta]");
+      if (!desktop.matches && cta && cta.getBoundingClientRect().top < 0) {
+        cta.scrollIntoView({
+          block: "center",
+          behavior: reduceMotion.matches ? "instant" : "smooth",
+        });
+      }
       arrow.setAttribute("data-visible", "");
       if (!reduceMotion.matches) {
         arrow

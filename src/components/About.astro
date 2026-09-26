@@ -21,6 +21,19 @@ const cardStamp =
   id="about"
   aria-labelledby="about-title"
 >
+  <!-- Mobile counterpart of the canopy below the title, which would cover the
+       single-column copy; here the mast runs off the section's bottom edge. -->
+  <img
+    class="pointer-events-none absolute bottom-[-4rem] left-[clamp(1.25rem,6vw,7rem)] w-[13rem] max-w-none -rotate-4 opacity-90 sm:hidden"
+    src="/assets/scene/farola.svg"
+    alt=""
+    width="706"
+    height="742"
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+    data-scroll-drift
+  />
   <div
     class="absolute right-4 bottom-10 z-20 flex items-end gap-3 sm:right-8 sm:gap-4 lg:right-[max(1rem,calc(50%-35rem))]"
     data-scroll-drift

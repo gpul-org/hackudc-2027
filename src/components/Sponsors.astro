@@ -35,7 +35,7 @@ const sponsorPageUrl = getRelativeLocaleUrl(Astro.props.locale, "sponsors/");
       >
         {t.sponsorsBody}
       </p>
-      <div class="relative mt-8 w-fit">
+      <div class="relative mt-8 w-fit" data-sponsor-cta>
         <a
           class="group reveal inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-transparent bg-cream px-5 py-3 text-xs font-black tracking-wide text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-ink hover:text-cream"
           data-reveal
@@ -49,7 +49,7 @@ const sponsorPageUrl = getRelativeLocaleUrl(Astro.props.locale, "sponsors/");
         </a>
         <svg
           data-sponsor-arrow
-          class="pointer-events-none absolute bottom-[-2rem] left-[calc(100%+0.75rem)] hidden w-[clamp(6rem,16vw,17rem)] overflow-visible text-red opacity-0 transition-opacity duration-150 data-visible:opacity-100 motion-reduce:transition-none lg:block"
+          class="pointer-events-none absolute bottom-[-2rem] left-[calc(100%+0.75rem)] w-[clamp(6rem,16vw,17rem)] overflow-visible text-red opacity-0 transition-opacity duration-150 data-visible:opacity-100 motion-reduce:transition-none max-lg:bottom-[20%] max-lg:left-[calc(100%+0.25rem)] max-lg:w-[clamp(3.5rem,18vw,6rem)]"
           viewBox="0 0 300 190"
           fill="none"
           stroke="currentColor"
@@ -69,7 +69,7 @@ const sponsorPageUrl = getRelativeLocaleUrl(Astro.props.locale, "sponsors/");
         </svg>
       </div>
     </div>
-    <figure class="relative min-h-[27rem] w-full self-stretch lg:min-h-0">
+    <figure class="relative min-h-[27rem] w-full self-stretch max-lg:mx-auto max-lg:aspect-square max-lg:min-h-0 max-lg:max-w-[32rem] lg:min-h-0">
       <SponsorBuilding locale={Astro.props.locale} />
     </figure>
   </div>

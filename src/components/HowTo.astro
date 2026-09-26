@@ -146,6 +146,40 @@ const t = copy[Astro.props.locale];
       max-width: 22ch;
     }
   }
+  /* Below desktop the rose sits whole above the panel instead of mostly off-canvas. */
+  @media (max-width: 63.999rem) {
+    .compass-stage {
+      /* Declared here so both the rose and the panel padding can read it. */
+      --compass-size: min(70vw, 22rem, calc(100svh - 27rem));
+      flex-direction: column;
+      justify-content: center;
+      overflow-x: clip;
+      overflow-y: visible;
+    }
+    .compass-position {
+      --compass-size: inherit;
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      flex: none;
+      margin: 0 auto calc(var(--compass-size) * -0.2);
+    }
+    /* A card inset like the page gutter; the rose overlaps its top edge. */
+    .compass-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: center;
+      margin-left: 0;
+      width: min(100% - 2 * clamp(1.25rem, 6vw, 7rem), 30rem);
+      min-height: min(20rem, 42svh);
+      padding: calc(var(--compass-size) * 0.2 + 1.75rem) 1.5rem 1.75rem;
+    }
+    [data-enhanced] {
+      height: 240svh;
+    }
+  }
   @media (max-width: 30rem) {
     .compass-copy h3 {
       font-size: clamp(1.5rem, 7vw, 2rem);

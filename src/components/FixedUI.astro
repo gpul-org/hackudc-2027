@@ -33,7 +33,7 @@ const pill =
 
 <!-- Shown while neither the site header nor the footer is in view. -->
 <div
-  class="invisible fixed inset-x-0 bottom-0 z-20 flex translate-y-4 items-end justify-between gap-3 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] opacity-0 transition-[opacity,translate,visibility] duration-300 ease-out data-visible:visible data-visible:translate-y-0 data-visible:opacity-100 sm:p-6"
+  class="invisible fixed inset-x-0 bottom-0 z-20 flex translate-y-4 items-end justify-between gap-3 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] opacity-0 transition-[opacity,translate,visibility] duration-300 ease-out data-visible:visible data-visible:translate-y-0 data-visible:opacity-100 sm:p-6 max-lg:[@media(max-height:30rem)]:px-4 max-lg:[@media(max-height:30rem)]:pt-2 max-lg:[@media(max-height:30rem)]:pb-[calc(0.5rem+env(safe-area-inset-bottom))]"
   data-fixed-ui
 >
   <nav
@@ -64,7 +64,7 @@ const pill =
   </nav>
   <div class="ml-auto flex gap-2">
     <a
-      class={`${pill} bg-ink text-cream hover:bg-red`}
+      class={`${pill} bg-ink text-cream hover:bg-red max-lg:ring-1 max-lg:ring-cream/40`}
       href="https://nocodb.gpul.org/dashboard/#/nc/form/f1137831-84ad-4682-93de-a416cc592ff1"
       target="_blank"
       rel="noopener noreferrer"
