@@ -73,4 +73,38 @@ const sponsorPageUrl = getRelativeLocaleUrl(Astro.props.locale, "sponsors/");
       <SponsorBuilding locale={Astro.props.locale} />
     </figure>
   </div>
+  <div class="page-wrap pb-16" data-sponsor-extras hidden>
+    <h3 class="eyebrow mb-6" id="sponsor-extras-title">
+      {t.sponsorExtras}
+    </h3>
+    <ul
+      class="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6"
+      aria-labelledby="sponsor-extras-title"
+      data-sponsor-extras-list
+    />
+  </div>
 </section>
+
+<style>
+  [data-sponsor-extras] :global(li) {
+    min-width: 0;
+    min-height: 6rem;
+  }
+
+  [data-sponsor-extras] :global(a),
+  [data-sponsor-extras] :global(.sponsor-extra-mark) {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    color: var(--color-ink);
+    font-weight: 800;
+    text-align: center;
+  }
+
+  [data-sponsor-extras] :global(img) {
+    width: 100%;
+    height: 6rem;
+    object-fit: contain;
+  }
+</style>

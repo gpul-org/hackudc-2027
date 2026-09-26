@@ -56,11 +56,17 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
   label,
   top: [5.1, 44.4, 79][index],
 }));
+const sponsorSlots = [
+  { tier: "root", index: 0 },
+  ...Array.from({ length: 6 }, (_, index) => ({ tier: "admin", index })),
+  ...Array.from({ length: 4 }, (_, index) => ({ tier: "user", index })),
+];
 ---
 
 <div
   class="absolute inset-0 [container-type:inline-size]"
   data-sponsor-building
+  data-visit-label={t.sponsorVisit}
 >
   <img
     class="absolute inset-0 h-full w-full"
@@ -85,7 +91,7 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
       type="button"
       data-sponsor-window
       aria-label={`${t.sponsorWindow} ${index + 1}`}
-      class="absolute cursor-pointer rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+      class="absolute cursor-pointer rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink motion-reduce:animate-none"
       style={{
         left: `${window.left}%`,
         top: `${window.top}%`,
@@ -109,9 +115,117 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
       </span>
     </button>
   ))}
+  {sponsorSlots.map(({ tier, index }) => (
+    <div data-sponsor-slot data-tier={tier} data-slot-index={index} inert />
+  ))}
 </div>
 
 <style>
+  [data-sponsor-window] {
+    z-index: 2;
+  }
+
+  [data-sponsor-window][data-falling] {
+    z-index: 20;
+    transform-origin: center bottom;
+  }
+
+  [data-sponsor-slot] {
+    position: absolute;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    transform: translateY(12%);
+    transition:
+      opacity 500ms var(--ease-out),
+      transform 500ms var(--ease-out);
+    pointer-events: none;
+  }
+
+  [data-sponsor-slot][data-visible] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  [data-sponsor-slot][data-tier="root"] {
+    left: 38%;
+    top: 14%;
+    width: 24%;
+    height: 18%;
+  }
+
+  [data-sponsor-slot][data-tier="admin"] {
+    width: 22%;
+    height: 13%;
+  }
+
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="0"],
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="1"],
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="2"] {
+    top: 47.5%;
+  }
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="3"],
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="4"],
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="5"] {
+    top: 62.5%;
+  }
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="0"],
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="3"] {
+    left: 15%;
+  }
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="1"],
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="4"] {
+    left: 39%;
+  }
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="2"],
+  [data-sponsor-slot][data-tier="admin"][data-slot-index="5"] {
+    left: 63%;
+  }
+
+  [data-sponsor-slot][data-tier="user"] {
+    top: 84%;
+    width: 16%;
+    height: 12%;
+  }
+
+  [data-sponsor-slot][data-tier="user"][data-slot-index="0"] {
+    left: 16%;
+  }
+  [data-sponsor-slot][data-tier="user"][data-slot-index="1"] {
+    left: 33%;
+  }
+  [data-sponsor-slot][data-tier="user"][data-slot-index="2"] {
+    left: 50%;
+  }
+  [data-sponsor-slot][data-tier="user"][data-slot-index="3"] {
+    left: 67%;
+  }
+
+  [data-sponsor-slot] :global(a),
+  [data-sponsor-slot] :global(.sponsor-mark) {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    padding: 2%;
+  }
+
+  [data-sponsor-slot] :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  [data-sponsor-slot] :global(.sponsor-name) {
+    color: var(--color-ink);
+    font-size: clamp(0.5rem, 2cqw, 1rem);
+    font-weight: 800;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
   [data-window-press] {
     transition:
       transform 160ms var(--ease-out),
@@ -125,6 +239,10 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
   }
 
   @media (prefers-reduced-motion: reduce) {
+    [data-sponsor-slot] {
+      transform: none;
+      transition: opacity 200ms var(--ease-out);
+    }
     [data-window-press] {
       transition: none;
     }
@@ -136,6 +254,8 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
 </style>
 
 <script>
+  import { getSponsors, type Sponsor } from "@/lib/sponsors";
+
   let controller: AbortController | undefined;
   let observer: IntersectionObserver | undefined;
 
@@ -152,6 +272,13 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
     const windows = [
       ...building.querySelectorAll<HTMLButtonElement>("[data-sponsor-window]"),
     ];
+    const slots = [
+      ...building.querySelectorAll<HTMLElement>("[data-sponsor-slot]"),
+    ];
+    const extras = document.querySelector<HTMLElement>("[data-sponsor-extras]");
+    const extrasList = extras?.querySelector<HTMLUListElement>(
+      "[data-sponsor-extras-list]",
+    );
     const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
     const hover = matchMedia("(any-hover: hover) and (any-pointer: fine)");
     const desktop = matchMedia("(min-width: 1024px)");
@@ -159,6 +286,7 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
     let arrowTimer: number | undefined;
     let arrowAnimations: Animation[] = [];
     const animations = new Map<HTMLButtonElement, Animation>();
+    const fallAnimations = new Map<HTMLButtonElement, Animation>();
     const pressTimers = new Map<HTMLButtonElement, number>();
     let timer: number | undefined;
     let visible = false;
@@ -166,10 +294,223 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
     const easing = getComputedStyle(building)
       .getPropertyValue("--ease-out")
       .trim();
+    const fallEasing = getComputedStyle(building)
+      .getPropertyValue("--ease-in-out")
+      .trim();
+
+    function finishFall(button: HTMLButtonElement) {
+      fallAnimations.get(button)?.cancel();
+      fallAnimations.delete(button);
+      button.hidden = true;
+      button.removeAttribute("data-falling");
+      button.setAttribute("data-revealed", "");
+    }
+
+    function revealAdminWindows() {
+      if (!visible) return;
+      windows.forEach((button, index) => {
+        if (
+          !button.hasAttribute("data-sponsored") ||
+          button.hasAttribute("data-falling") ||
+          button.hasAttribute("data-revealed")
+        )
+          return;
+        animations.get(button)?.cancel();
+        animations.delete(button);
+        if (reduceMotion.matches) {
+          finishFall(button);
+          return;
+        }
+        button.setAttribute("data-falling", "");
+        const rect = button.getBoundingClientRect();
+        const distance = window.innerHeight - rect.top + rect.height + 48;
+        const animation = button.animate(
+          [
+            { transform: "translateY(0) rotate(0deg) scale(1)" },
+            {
+              transform: "translateY(18px) rotate(-4deg) scale(1.04)",
+              offset: 0.18,
+            },
+            {
+              transform: `translateY(${distance}px) rotate(14deg) scale(1.08)`,
+            },
+          ],
+          {
+            duration: 1100,
+            delay: index * 90,
+            easing: fallEasing,
+            fill: "forwards",
+          },
+        );
+        fallAnimations.set(button, animation);
+        animation.onfinish = () => finishFall(button);
+      });
+    }
+
+    function renderSponsors(sponsors: Sponsor[]) {
+      const groups = new Map([
+        ["root", sponsors.filter((sponsor) => sponsor.priority === 1)],
+        ["admin", sponsors.filter((sponsor) => sponsor.priority === 2)],
+        ["user", sponsors.filter((sponsor) => sponsor.priority === 3)],
+      ]);
+
+      slots.forEach((slot) => {
+        const tier = slot.dataset.tier!;
+        const sponsor = groups.get(tier)?.[Number(slot.dataset.slotIndex)];
+        if (!sponsor) {
+          slot.replaceChildren();
+          slot.removeAttribute("data-visible");
+          slot.setAttribute("inert", "");
+          delete slot.dataset.sponsorKey;
+          if (tier === "admin") {
+            const button = windows[Number(slot.dataset.slotIndex)];
+            fallAnimations.get(button)?.cancel();
+            fallAnimations.delete(button);
+            button.hidden = false;
+            button.inert = false;
+            button.removeAttribute("data-sponsored");
+            button.removeAttribute("data-revealed");
+            button.removeAttribute("data-falling");
+          }
+          return;
+        }
+        const key = JSON.stringify(sponsor);
+        if (slot.dataset.sponsorKey === key) return;
+        slot.dataset.sponsorKey = key;
+        slot.removeAttribute("data-visible");
+        if (tier === "admin") {
+          const button = windows[Number(slot.dataset.slotIndex)];
+          fallAnimations.get(button)?.cancel();
+          fallAnimations.delete(button);
+          button.hidden = false;
+          button.removeAttribute("data-falling");
+          button.removeAttribute("data-revealed");
+          button.setAttribute("data-sponsored", "");
+          button.inert = true;
+          if (document.activeElement === button) button.blur();
+        }
+        const link = document.createElement(sponsor.website ? "a" : "div");
+        if (!sponsor.website) {
+          link.className = "sponsor-mark";
+          link.setAttribute("role", "img");
+          link.setAttribute("aria-label", sponsor.name);
+        } else {
+          link.setAttribute(
+            "aria-label",
+            `${building.dataset.visitLabel} ${sponsor.name}`,
+          );
+        }
+        if (sponsor.website) {
+          const anchor = link as HTMLAnchorElement;
+          anchor.href = sponsor.website;
+          anchor.target = "_blank";
+          anchor.rel = "noopener noreferrer";
+        }
+        const logo = sponsor.logoUrl ?? sponsor.logoNegativeUrl;
+        if (logo) {
+          const image = document.createElement("img");
+          image.src = logo;
+          image.alt = "";
+          image.loading = "lazy";
+          image.decoding = "async";
+          image.addEventListener(
+            "error",
+            () => {
+              const name = document.createElement("span");
+              name.className = "sponsor-name";
+              name.textContent = sponsor.name;
+              image.replaceWith(name);
+            },
+            { once: true, signal },
+          );
+          link.append(image);
+        } else {
+          const name = document.createElement("span");
+          name.className = "sponsor-name";
+          name.textContent = sponsor.name;
+          link.append(name);
+        }
+        slot.replaceChildren(link);
+        slot.style.transitionDelay = `${Number(slot.dataset.slotIndex) * 70}ms`;
+        if (visible || reduceMotion.matches) {
+          slot.removeAttribute("inert");
+          requestAnimationFrame(() => slot.setAttribute("data-visible", ""));
+        }
+      });
+      if (extras && extrasList) {
+        const overflow = [
+          ...groups.get("root")!.slice(1),
+          ...groups.get("admin")!.slice(6),
+          ...groups.get("user")!.slice(4),
+          ...sponsors.filter(
+            (sponsor) => ![1, 2, 3].includes(sponsor.priority),
+          ),
+        ];
+        const key = JSON.stringify(overflow);
+        if (extras.dataset.sponsorKey !== key) {
+          extras.dataset.sponsorKey = key;
+          const items = overflow.map((sponsor) => {
+            const item = document.createElement("li");
+            const mark = document.createElement(sponsor.website ? "a" : "div");
+            if (sponsor.website) {
+              const anchor = mark as HTMLAnchorElement;
+              anchor.href = sponsor.website;
+              anchor.target = "_blank";
+              anchor.rel = "noopener noreferrer";
+              anchor.setAttribute(
+                "aria-label",
+                `${building.dataset.visitLabel} ${sponsor.name}`,
+              );
+            } else {
+              mark.className = "sponsor-extra-mark";
+              mark.setAttribute("role", "img");
+              mark.setAttribute("aria-label", sponsor.name);
+            }
+            const logo = sponsor.logoUrl ?? sponsor.logoNegativeUrl;
+            if (logo) {
+              const image = document.createElement("img");
+              image.src = logo;
+              image.alt = "";
+              image.loading = "lazy";
+              image.addEventListener(
+                "error",
+                () => {
+                  image.replaceWith(document.createTextNode(sponsor.name));
+                },
+                { once: true, signal },
+              );
+              mark.append(image);
+            } else {
+              mark.textContent = sponsor.name;
+            }
+            item.append(mark);
+            return item;
+          });
+          extrasList.replaceChildren(...items);
+          extras.hidden = overflow.length === 0;
+        }
+      }
+      revealAdminWindows();
+    }
+
+    function refreshSponsors() {
+      if (document.hidden) return;
+      getSponsors(signal)
+        .then((sponsors) => {
+          if (!signal.aborted) renderSponsors(sponsors);
+        })
+        .catch((error) => {
+          if (!signal.aborted) console.error("Unable to load sponsors", error);
+        });
+    }
+
+    refreshSponsors();
+    const refreshTimer = window.setInterval(refreshSponsors, 5 * 60 * 1000);
 
     function shake(button: HTMLButtonElement, repeat = false) {
       if (
         reduceMotion.matches ||
+        button.hasAttribute("data-sponsored") ||
         button.matches(":active") ||
         button.hasAttribute("data-pressed")
       )
@@ -243,6 +584,7 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
           const candidates = windows.filter(
             (button, index) =>
               index !== lastWindow &&
+              !button.hasAttribute("data-sponsored") &&
               !button.matches(":hover, :focus, :active"),
           );
           const button =
@@ -303,6 +645,15 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
     observer = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
+        if (visible) {
+          slots.forEach((slot) => {
+            if (slot.firstElementChild?.matches("a, .sponsor-mark")) {
+              slot.removeAttribute("inert");
+              slot.setAttribute("data-visible", "");
+            }
+          });
+          revealAdminWindows();
+        }
         if (!visible) stopMotion();
         schedule();
       },
@@ -314,6 +665,11 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
       () => {
         stopMotion();
         hideArrow();
+        if (reduceMotion.matches) {
+          windows
+            .filter((button) => button.hasAttribute("data-falling"))
+            .forEach(finishFall);
+        }
         schedule();
       },
       { signal },
@@ -324,11 +680,15 @@ const tiers = t.sponsorTiers.map(([id, label], index) => ({
         stopMotion();
         hideArrow();
         schedule();
+        if (!document.hidden) refreshSponsors();
       },
       { signal },
     );
     const cleanup = () => {
       stopMotion();
+      fallAnimations.forEach((animation) => animation.cancel());
+      fallAnimations.clear();
+      clearInterval(refreshTimer);
       hideArrow();
       observer?.disconnect();
       pressTimers.forEach(clearTimeout);

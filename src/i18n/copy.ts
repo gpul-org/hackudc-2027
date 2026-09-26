@@ -32,6 +32,8 @@ export type Copy = {
   sponsorsBody: string;
   sponsorCta: string;
   sponsorWindow: string;
+  sponsorVisit: string;
+  sponsorExtras: string;
   sponsorTiers: [string, string][];
   faqKicker: string;
   faqTitle: string;
@@ -105,6 +107,8 @@ export const copy: Record<Locale, Copy> = {
       "Conecta tu marca con la próxima generación de personas que construyen el futuro.",
     sponsorCta: "¿Te interesa patrocinarnos?",
     sponsorWindow: "Jugar con la ventana",
+    sponsorVisit: "Visitar la web de",
+    sponsorExtras: "Más patrocinadores",
     sponsorTiers: [
       ["root", "</root>"],
       ["admin", "</admin>"],
@@ -245,6 +249,8 @@ export const copy: Record<Locale, Copy> = {
       "Connect your brand with the next generation of people building the future.",
     sponsorCta: "Interested in sponsoring us?",
     sponsorWindow: "Play with window",
+    sponsorVisit: "Visit the website of",
+    sponsorExtras: "More sponsors",
     sponsorTiers: [
       ["root", "</root>"],
       ["admin", "</admin>"],
@@ -386,6 +392,8 @@ export const copy: Record<Locale, Copy> = {
       "Conecta a túa marca coa próxima xeración de persoas que constrúen o futuro.",
     sponsorCta: "Interésache patrocinarnos?",
     sponsorWindow: "Xogar coa xanela",
+    sponsorVisit: "Visitar a web de",
+    sponsorExtras: "Máis patrocinadores",
     sponsorTiers: [
       ["root", "</root>"],
       ["admin", "</admin>"],
