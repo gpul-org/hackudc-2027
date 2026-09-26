@@ -18,6 +18,10 @@ export default defineConfig({
     },
   },
 
+  build: {
+    inlineStylesheets: "always",
+  },
+
   fonts: [
     {
       provider: fontProviders.fontsource(),
