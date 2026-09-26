@@ -29,6 +29,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 - No `tailwind.config`: the theme is defined with `@theme` in `src/styles/global.css`. **Use only the brand tokens** (`ink`, `red`, `blue`, `cream`, `yellow`), never arbitrary colors.
 - Reuse the shared utilities before writing new classes: `page-wrap`, `reveal`, `eyebrow`, `display-heading`, `small-link`. `prettier-plugin-tailwindcss` sorts classes: run `pnpm format` before committing.
+- **Always check the mobile layout** after UI changes. Default Tailwind breakpoints (no custom ones): `lg` (1024px) is the desktop/mobile split (`max-lg:` for mobile-only tweaks; e.g. `FloatingNav` is hidden), `sm` (640px) covers small phones, and short landscape viewports use `max-height` queries (`30rem`/`36rem`). Scoped `<style>` and `matchMedia` must use the same values (`64rem`, `1024px`, `639px`).
 - Follow the [HackUDC 2027 brand guidelines](./BRAND_GUIDELINES.md) for logo, colour, typography, voice, and accessibility decisions.
 
 ### Behavior and code conventions
