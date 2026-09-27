@@ -1,4 +1,5 @@
 ---
+import ArrowDownRight from "@lucide/astro/icons/arrow-down-right";
 import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
 import Play from "@lucide/astro/icons/play";
 import { copy, type Locale } from "@/i18n/copy";
@@ -12,6 +13,8 @@ const aftermovieId = "sBOCOznVlHM";
 const aftermovieUrl = `https://www.youtube.com/watch?v=${aftermovieId}`;
 // Linking out instead of embedding keeps YouTube's player off the page's critical path.
 const aftermovieThumb = `https://i.ytimg.com/vi/${aftermovieId}/maxresdefault.jpg`;
+const aboutLink =
+  "inline-flex items-center gap-2 border-b border-current pb-1.5 text-xs font-black tracking-widest uppercase transition-colors hover:text-red";
 const cardTopline =
   "flex justify-between px-1.5 pt-1 pb-3 text-[0.68rem] font-black tracking-wider uppercase";
 const cardCaption =
@@ -20,92 +23,63 @@ const cardStamp =
   "pointer-events-none absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 -rotate-6 bg-red px-4 py-2 text-center text-xs font-black tracking-widest whitespace-nowrap text-cream uppercase shadow-[0_3px_0_var(--color-ink)] sm:px-5 sm:text-sm";
 ---
 
+<!-- Standard section rhythm, except on desktop the lamp sets the bottom edge
+     instead of padding: its mast runs off the section, clipped by overflow-hidden. -->
 <section
-  class="relative overflow-hidden pt-12 pb-40 sm:pb-64 lg:pt-20"
+  class="relative overflow-hidden py-16 lg:pt-24 lg:pb-0"
   id="about"
   aria-labelledby="about-title"
 >
-  <!-- Mobile counterpart of the canopy below the title, which would cover the
-       single-column copy; here the mast runs off the section's bottom edge. -->
-  <img
-    class="pointer-events-none absolute bottom-[-4rem] left-[clamp(1.25rem,6vw,7rem)] w-[13rem] max-w-none -rotate-4 opacity-90 sm:hidden"
-    src="/assets/scene/farola.svg"
-    alt=""
-    width="706"
-    height="742"
-    aria-hidden="true"
-    loading="lazy"
-    decoding="async"
-    data-scroll-drift
-  />
-  <div
-    class="absolute right-4 bottom-10 z-20 flex items-end gap-3 sm:right-8 sm:gap-4 lg:right-[max(1rem,calc(50%-35rem))]"
-    data-scroll-drift
-  >
-    <a
-      class="inline-flex items-center gap-2 border-b border-current pb-1.5 text-xs font-black tracking-wide uppercase transition-colors hover:text-red"
-      href="/assets/manifesto.pdf"
-      download="hackudc-manifesto.pdf"
-    >
-      {t.manifestoCta}
-      <ArrowUpRight class="size-3.5" aria-hidden="true" />
-    </a>
-    <img
-      class="w-16 opacity-95 sm:w-24"
-      src="/assets/scene/mascot.svg"
-      alt=""
-      width="93"
-      height="94"
-      loading="lazy"
-      decoding="async"
-    />
-  </div>
   <div class="page-wrap">
-    <div class="mt-9 grid gap-10 sm:grid-cols-[1.1fr_0.9fr] sm:gap-16 lg:gap-24">
-      <div class="relative max-w-4xl self-start">
-        <!-- The canopy's right arm is aligned to sit just under the title, so it
-             reads as a swash underline; the mast runs off the section's bottom edge. -->
-        <img
-          class="pointer-events-none absolute top-full left-0 hidden max-w-none origin-top -rotate-4 opacity-90 sm:block sm:w-[21.5rem] lg:w-[28.5rem]"
-          src="/assets/scene/farola.svg"
-          alt=""
-          width="706"
-          height="742"
-          loading="lazy"
-          decoding="async"
-          data-scroll-drift
-        />
-        <p class="eyebrow text-red reveal" data-reveal>
-          {t.aboutLabel}
-        </p>
-        <h2
-          class="mt-4 max-w-[12ch] display-heading reveal"
-          data-reveal
-          data-leading-punctuation={
-            t.aboutTitle.startsWith("¿") ? "true" : undefined
-          }
-          id="about-title"
-        >
-          {t.aboutTitle}
-        </h2>
-      </div>
-      <div class="max-w-sm pb-1.5 text-base leading-[1.6] sm:max-w-md lg:text-xl">
+    <p class="eyebrow text-red reveal" data-reveal>
+      {t.aboutLabel}
+    </p>
+    <h2
+      class="mt-4 display-heading reveal"
+      data-reveal
+      data-leading-punctuation={
+        t.aboutTitle.startsWith("¿") ? "true" : undefined
+      }
+      id="about-title"
+    >
+      {t.aboutTitle}
+    </h2>
+
+    <div class="mt-10 lg:mt-6 lg:flex lg:items-start lg:gap-12 xl:gap-16">
+      <!-- Anchored to the bottom so the mast always runs off the edge, even when
+           the copy wraps taller than the lamp; the copy keeps its own bottom space. -->
+      <img
+        class="pointer-events-none hidden max-w-none shrink-0 lg:-mb-12 lg:block lg:self-end lg:w-[clamp(25rem,30vw,28rem)]"
+        src="/assets/scene/farola.svg"
+        alt=""
+        width="706"
+        height="742"
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        data-scroll-drift
+      />
+      <div class="min-w-0 flex-1 text-lg leading-normal lg:pt-6 lg:pb-16 lg:text-xl">
         <p class="reveal" data-reveal>
           {t.aboutBody}
         </p>
-        <p
-          class="mt-5 max-w-sm text-[0.95rem] leading-[1.6] text-ink/70 reveal"
-          data-reveal
-        >
+        <p class="mt-5 text-base text-ink/70 reveal lg:text-lg" data-reveal>
           {t.aboutDetail}
         </p>
-        <a
-          class="mt-8 inline-flex gap-3 border-b border-current pb-1.5 text-xs font-black tracking-widest uppercase reveal"
-          data-reveal
-          href="#experience"
-        >
-          {t.nav[1]} <span aria-hidden="true">↘</span>
-        </a>
+        <div class="mt-8 flex flex-col items-start gap-4 reveal" data-reveal>
+          <a class={aboutLink} href="#experience">
+            {t.nav[1]}
+            <ArrowDownRight class="size-3.5" aria-hidden="true" />
+          </a>
+          <a
+            class={aboutLink}
+            href="/assets/manifesto.pdf"
+            download="hackudc-manifesto.pdf"
+          >
+            {t.manifestoCta}
+            <ArrowUpRight class="size-3.5" aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </div>
   </div>
