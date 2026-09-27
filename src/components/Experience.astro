@@ -1,6 +1,9 @@
 ---
 import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import Pause from "@lucide/astro/icons/pause";
 import Play from "@lucide/astro/icons/play";
+import Volume2 from "@lucide/astro/icons/volume-2";
+import VolumeX from "@lucide/astro/icons/volume-x";
 import { copy, type Locale } from "@/i18n/copy";
 
 interface Props {
@@ -10,82 +13,105 @@ interface Props {
 const t = copy[Astro.props.locale];
 const aftermovieId = "sBOCOznVlHM";
 const aftermovieUrl = `https://www.youtube.com/watch?v=${aftermovieId}`;
-// Linking out instead of embedding keeps YouTube's player off the page's critical path.
 const aftermovieThumb = `https://i.ytimg.com/vi/${aftermovieId}/maxresdefault.jpg`;
-const cardTopline =
-  "flex justify-between px-1.5 pt-1 pb-3 text-[0.68rem] font-black tracking-wider uppercase";
-const cardCaption =
-  "absolute bottom-3 left-3 inline-flex items-center gap-1 text-xs font-black tracking-wide uppercase";
-const cardStamp =
-  "pointer-events-none absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 -rotate-6 bg-red px-4 py-2 text-center text-xs font-black tracking-widest whitespace-nowrap text-cream uppercase shadow-[0_3px_0_var(--color-ink)] sm:px-5 sm:text-sm";
+// Only a teaser plays here; the full aftermovie lives on YouTube.
+const teaserSeconds = 25;
+// Muted autoplay of the teaser, no captions, and `enablejsapi` so the script can
+// follow playback. The script adds `controls`: hidden on desktop, where our own
+// buttons drive it, kept on phones and tablets.
+const aftermovieEmbed = `https://www.youtube-nocookie.com/embed/${aftermovieId}?autoplay=1&mute=1&end=${teaserSeconds}&cc_load_policy=0&iv_load_policy=3&rel=0&playsinline=1&enablejsapi=1`;
+const controlButton =
+  "flex size-11 cursor-pointer items-center justify-center rounded-full bg-cream/15 text-cream backdrop-blur-sm transition-colors hover:bg-cream hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream";
 ---
 
 <section
-  class="relative isolate bg-blue py-16 lg:py-24"
+  class="experience relative min-h-[160px] bg-ink py-16 lg:pt-24 lg:pb-0"
   id="experience"
   aria-labelledby="experience-title"
 >
-  <div class="page-wrap relative z-1">
-    <div class="mt-14 grid gap-14 lg:mt-0 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start lg:gap-16">
-      <div class="max-w-4xl">
-        <p class="eyebrow text-ink reveal" data-reveal>
-          {t.experienceKicker}
-        </p>
-        <h2
-          class="mt-5 max-w-[12ch] display-heading reveal"
-          data-reveal
-          id="experience-title"
-        >
-          {t.experienceTitle}
-        </h2>
-        <p
-          class="reveal mt-8 max-w-md text-base leading-[1.55] lg:text-xl"
-          data-reveal
-        >
-          {t.experienceBody}
-        </p>
-      </div>
-
-      <div class="grid gap-4 lg:grid-cols-2 lg:items-start lg:gap-[3vw]">
-        <article class="border-2 border-ink bg-cream p-3 reveal" data-reveal>
-          <div class={cardTopline}>
-            <span>{t.gallery}</span>
-            <span>01</span>
-          </div>
-          <div class="relative aspect-video overflow-hidden bg-blue">
-            <span class={cardStamp}>{t.comingSoon}</span>
-            <img
-              class="absolute bottom-0 left-[5%] w-[90%]"
-              src="/assets/scene/building-wide.svg"
-              alt=""
-              width="990"
-              height="459"
-              loading="lazy"
-              decoding="async"
-            />
-            <span class={cardCaption}>
-              {t.galleryCta}
+  <!-- Same padding as About. On desktop the card is centred in a full-screen
+       block, which also gives it room below despite `lg:pb-0`. -->
+  <div class="flex flex-col justify-center lg:min-h-svh">
+    <div class="page-wrap">
+      <div
+        class="group/card relative"
+        data-aftermovie
+        data-embed={aftermovieEmbed}
+        data-full={aftermovieUrl}
+        data-full-label={`${t.videoCta}: ${t.aftermovie}`}
+        data-title={`${t.aftermovie} (YouTube)`}
+      >
+        <!-- Above the card on phones and tablets; laid over its foot on desktop,
+             stacked above the card that follows it. -->
+        <div class="experience-overlay mb-10 text-cream lg:pointer-events-none lg:absolute lg:inset-x-0 lg:bottom-0 lg:z-1 lg:mb-0 lg:flex lg:items-end lg:justify-between lg:gap-8 lg:p-10">
+          <div>
+            <p class="eyebrow text-blue">{t.aftermovie}</p>
+            <h2
+              class="mt-3 display-heading lg:max-w-[14ch]"
+              id="experience-title"
+            >
+              {t.experienceTitle}
+            </h2>
+            <a
+              class="pointer-events-auto mt-5 inline-flex items-center gap-2 border-b border-current pb-1.5 text-xs font-black tracking-widest uppercase transition-colors hover:text-blue"
+              href={aftermovieUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t.videoCta}
               <ArrowUpRight class="size-3.5" aria-hidden="true" />
-            </span>
+            </a>
           </div>
-        </article>
-        <article
-          class="border-2 border-ink bg-ink p-3 text-cream reveal lg:mt-20"
-          data-reveal
+
+          <!-- Desktop only, while playing; phones and tablets get YouTube's controls. -->
+          <div class="pointer-events-auto hidden gap-3 lg:group-data-playing/card:flex">
+            <button
+              class={`group/sound ${controlButton}`}
+              type="button"
+              aria-label={t.videoSound}
+              aria-pressed="false"
+              data-aftermovie-sound
+            >
+              <VolumeX
+                class="size-5 group-aria-pressed/sound:hidden"
+                aria-hidden="true"
+              />
+              <Volume2
+                class="hidden size-5 group-aria-pressed/sound:block"
+                aria-hidden="true"
+              />
+            </button>
+            <button
+              class={controlButton}
+              type="button"
+              aria-label={t.videoPause}
+              data-aftermovie-pause
+            >
+              <Pause class="size-5 fill-current" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Full content width, like About, at the video's own 16:9. On short
+             desktop screens the height is capped instead, so the card turns
+             wider and the video crops to fill it. The player is prepended here
+             once the card is on screen, so it sits under the thumbnail. The
+             border is drawn on top (::after) so no sub-pixel gap between it and
+             the video can let the dark background show through. -->
+        <div
+          class="experience-card relative aspect-video w-full overflow-hidden rounded-2xl bg-ink @container-size after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border-2 after:border-blue/60 lg:max-h-[calc(100svh-12rem)] lg:rounded-3xl"
+          data-aftermovie-card
         >
-          <div class={cardTopline}>
-            <span>{t.aftermovie}</span>
-            <span>02</span>
-          </div>
-          <a
-            class="group relative flex aspect-video items-center justify-center overflow-hidden bg-ink"
-            href={aftermovieUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${t.videoCta}: ${t.aftermovie} (YouTube)`}
+          <!-- Covers the player until it plays (and, on desktop, whenever it
+               stops), so YouTube's own UI never shows through. -->
+          <button
+            class="group absolute inset-0 size-full cursor-pointer transition-opacity duration-500 group-data-playing/card:pointer-events-none group-data-playing/card:opacity-0 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-cream motion-reduce:transition-none"
+            type="button"
+            aria-label={t.videoPlay}
+            data-aftermovie-play
           >
             <img
-              class="absolute inset-0 size-full object-cover opacity-80 transition-opacity group-hover:opacity-100"
+              class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none"
               src={aftermovieThumb}
               alt=""
               width="1280"
@@ -94,18 +120,259 @@ const cardStamp =
               decoding="async"
             />
             <span
-              class="relative flex size-14 items-center justify-center rounded-full border-2 border-cream bg-ink/60 pl-0.5 transition-colors group-hover:bg-red"
+              class="absolute top-1/2 left-1/2 flex size-16 -translate-1/2 items-center justify-center rounded-full bg-cream text-ink transition-[scale,background-color,color] duration-200 ease-out group-hover:scale-110 group-hover:bg-red group-hover:text-cream motion-reduce:transition-none sm:size-20 lg:size-24"
               aria-hidden="true"
             >
-              <Play class="size-5 fill-current" aria-hidden="true" />
+              <Play class="size-6 translate-x-0.5 fill-current lg:size-8" />
             </span>
-            <span class={`${cardCaption} bg-ink px-1.5 py-0.5`}>
-              {t.videoCta}
-              <ArrowUpRight class="size-3.5" aria-hidden="true" />
-            </span>
-          </a>
-        </article>
+          </button>
+
+          <!-- Desktop keeps the title on the video, so it needs a scrim. -->
+          <div class="experience-overlay pointer-events-none absolute inset-0 hidden bg-linear-to-t from-ink/85 via-ink/15 to-transparent lg:block"></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* A faint brand-blue glow around the video; no negative spread, so it
+     follows the rounded corners evenly. */
+  .experience-card {
+    box-shadow: 0 0 2.5rem 0
+      color-mix(in oklab, var(--color-blue) 14%, transparent);
+  }
+
+  /* Desktop only: the card fades and grows in as the section scrolls into
+     view, rests at full size mid-screen and eases smaller on the way out; the
+     title follows. Phones and tablets get everything as-is, with no motion. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) and (min-width: 64rem) {
+      .experience {
+        view-timeline: --experience block;
+      }
+
+      .experience-card {
+        animation: experience-card linear both;
+        animation-timeline: --experience;
+        animation-range: cover 0% cover 100%;
+      }
+
+      .experience-overlay {
+        animation: experience-fade linear both;
+        animation-timeline: --experience;
+        animation-range: cover 30% cover 50%;
+      }
+    }
+  }
+
+  @keyframes experience-card {
+    0% {
+      opacity: 0;
+      scale: 0.9;
+    }
+    40%,
+    60% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      scale: 0.94;
+    }
+  }
+
+  @keyframes experience-fade {
+    from {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  const youtubeOrigin = "https://www.youtube-nocookie.com";
+  const endedState = 0;
+  const playingState = 1;
+  // Grace period before a stall brings the thumbnail back, so a short buffer
+  // doesn't make it flicker.
+  const coverDelayMs = 400;
+
+  let controller: AbortController | undefined;
+  let observer: IntersectionObserver | undefined;
+
+  document.addEventListener("astro:page-load", () => {
+    controller?.abort();
+    observer?.disconnect();
+    controller = new AbortController();
+    const { signal } = controller;
+
+    const root = document.querySelector<HTMLElement>("[data-aftermovie]");
+    const card = root?.querySelector<HTMLElement>("[data-aftermovie-card]");
+    const [play, sound, pause] = ["play", "sound", "pause"].map((name) =>
+      root?.querySelector<HTMLButtonElement>(`[data-aftermovie-${name}]`),
+    );
+    if (!root || !card || !play || !sound || !pause) return;
+
+    let player: HTMLIFrameElement | undefined;
+    let desktop = false;
+    let ended = false;
+    let retry: number | undefined;
+    let cover: number | undefined;
+    signal.addEventListener("abort", () => {
+      window.clearInterval(retry);
+      window.clearTimeout(cover);
+    });
+
+    const command = (func: string, args: unknown[] = []) =>
+      player?.contentWindow?.postMessage(
+        JSON.stringify({ event: "command", func, args }),
+        youtubeOrigin,
+      );
+
+    // Swaps between the thumbnail and the live player.
+    const setPlaying = (playing: boolean) => {
+      window.clearTimeout(cover);
+      cover = undefined;
+      root.toggleAttribute("data-playing", playing);
+      play.inert = playing;
+    };
+
+    const load = () => {
+      if (player) return;
+      desktop = matchMedia("(min-width: 64rem)").matches;
+      player = document.createElement("iframe");
+      if (desktop) {
+        // Covers the card like object-cover at 130%, so YouTube's title bar
+        // and watermark sit well outside the visible area. Sized and centred
+        // without transforms: scaled video layers can show seams in Chrome.
+        player.className =
+          "pointer-events-none absolute -inset-full m-auto h-[max(130%,73.125cqw)] w-[max(130%,231.11cqh)] border-0";
+        player.src = `${root.dataset.embed}&controls=0&disablekb=1&fs=0`;
+        player.tabIndex = -1;
+        player.setAttribute("aria-hidden", "true");
+      } else {
+        // Covers the card like object-cover: the border leaves the inner box
+        // slightly off 16:9, and an exact fit would show YouTube's black bars.
+        player.className =
+          "absolute -inset-full m-auto h-[max(100%,56.25cqw)] w-[max(100%,177.78cqh)] border-0";
+        player.src = `${root.dataset.embed}&controls=1`;
+        player.allowFullscreen = true;
+      }
+      player.title = root.dataset.title ?? "";
+      player.allow = "autoplay; encrypted-media; fullscreen";
+      player.referrerPolicy = "strict-origin-when-cross-origin";
+      // The player ignores this until its own script is ready, so keep asking
+      // until it answers; from then on it reports every state change.
+      player.addEventListener(
+        "load",
+        () => {
+          window.clearInterval(retry);
+          retry = window.setInterval(
+            () =>
+              player?.contentWindow?.postMessage(
+                JSON.stringify({
+                  event: "listening",
+                  id: 1,
+                  channel: "widget",
+                }),
+                youtubeOrigin,
+              ),
+            250,
+          );
+        },
+        { signal },
+      );
+      card.prepend(player);
+    };
+
+    window.addEventListener(
+      "message",
+      (event) => {
+        if (
+          event.origin !== youtubeOrigin ||
+          event.source !== player?.contentWindow
+        )
+          return;
+        window.clearInterval(retry);
+
+        let data;
+        try {
+          data = JSON.parse(event.data);
+        } catch {
+          return;
+        }
+        // `cc_load_policy=0` only stops YouTube forcing captions on; a viewer's
+        // own caption preference would still show them, so drop the module.
+        if (data.event === "onReady") command("unloadModule", ["captions"]);
+
+        const state =
+          data.event === "onStateChange" ? data.info : data.info?.playerState;
+        if (state === playingState) {
+          setPlaying(true);
+        } else if (state === endedState) {
+          // Back to the thumbnail, hiding YouTube's end screen; from now on
+          // play leads to the full video.
+          ended = true;
+          setPlaying(false);
+          play.setAttribute("aria-label", root.dataset.fullLabel ?? "");
+        } else if (
+          // With YouTube's controls on screen (phones and tablets), the
+          // viewer is in charge; on desktop any stall hides the player again.
+          desktop &&
+          typeof state === "number" &&
+          root.hasAttribute("data-playing") &&
+          cover === undefined
+        ) {
+          cover = window.setTimeout(() => setPlaying(false), coverDelayMs);
+        }
+
+        if (typeof data.info?.muted === "boolean") {
+          sound.setAttribute("aria-pressed", String(!data.info.muted));
+        }
+      },
+      { signal },
+    );
+
+    play.addEventListener(
+      "click",
+      () => {
+        if (ended) window.open(root.dataset.full, "_blank", "noopener");
+        else if (player) command("playVideo");
+        else load();
+      },
+      { signal },
+    );
+
+    sound.addEventListener(
+      "click",
+      () => {
+        const on = sound.getAttribute("aria-pressed") !== "true";
+        command(on ? "unMute" : "mute");
+        sound.setAttribute("aria-pressed", String(on));
+      },
+      { signal },
+    );
+
+    pause.addEventListener(
+      "click",
+      () => {
+        command("pauseVideo");
+        setPlaying(false);
+        // Hand focus to the play button that the pause reveals.
+        play.focus();
+      },
+      { signal },
+    );
+
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        load();
+        observer?.disconnect();
+      },
+      { threshold: 0.4 },
+    );
+    observer.observe(card);
+  });
+</script>

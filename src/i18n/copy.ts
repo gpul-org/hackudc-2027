@@ -17,14 +17,12 @@ export type Copy = {
   aboutDetail: string;
   statsTitle: string;
   stats: [string, string][];
-  experienceKicker: string;
   experienceTitle: string;
-  experienceBody: string;
-  gallery: string;
   aftermovie: string;
-  galleryCta: string;
   videoCta: string;
-  comingSoon: string;
+  videoPlay: string;
+  videoSound: string;
+  videoPause: string;
   stepsKicker: string;
   stepsTitle: string;
   steps: [string, string, string][];
@@ -76,15 +74,12 @@ export const copy: Record<Locale, Copy> = {
       // ["X€", "en premios"],
       ["100%", "open source"],
     ],
-    experienceKicker: "La experiencia",
-    experienceTitle: "Ven con una idea. Vuelve con una historia.",
-    experienceBody:
-      "No hace falta saberlo todo. Solo traer curiosidad, ganas de probar y alguien con quien celebrarlo cuando compile a la primera.",
-    gallery: "Galería de 2026",
+    experienceTitle: "Así se vivió HackUDC 2026.",
     aftermovie: "Aftermovie 2026",
-    galleryCta: "Ver fotos",
-    videoCta: "Ver vídeo",
-    comingSoon: "Próximamente",
+    videoCta: "Ver en YouTube",
+    videoPlay: "Reproducir el aftermovie",
+    videoSound: "Sonido",
+    videoPause: "Pausar",
     stepsKicker: "Cómo funciona",
     stepsTitle: "Tu próximo proyecto empieza aquí.",
     steps: [
@@ -224,15 +219,12 @@ export const copy: Record<Locale, Copy> = {
       // ["X€", "in prizes"],
       ["100%", "open source"],
     ],
-    experienceKicker: "The experience",
-    experienceTitle: "Bring an idea. Leave with a story.",
-    experienceBody:
-      "You do not need to know everything. Just bring curiosity, a willingness to try and someone to celebrate with when it compiles on the first go.",
-    gallery: "2026 gallery",
+    experienceTitle: "This is how HackUDC 2026 felt.",
     aftermovie: "2026 aftermovie",
-    galleryCta: "View photos",
-    videoCta: "Watch video",
-    comingSoon: "Coming soon",
+    videoCta: "Watch on YouTube",
+    videoPlay: "Play the aftermovie",
+    videoSound: "Sound",
+    videoPause: "Pause",
     stepsKicker: "How it works",
     stepsTitle: "Your next project starts here.",
     steps: [
@@ -365,15 +357,12 @@ export const copy: Record<Locale, Copy> = {
       // ["X€", "en premios"],
       ["100%", "open source"],
     ],
-    experienceKicker: "A experiencia",
-    experienceTitle: "Vén cunha idea. Volve cunha historia.",
-    experienceBody:
-      "Non tes que sabelo todo. Só traer curiosidade, ganas de probar e alguén con quen celebralo cando compile á primeira.",
-    gallery: "Galería de 2026",
+    experienceTitle: "Así se viviu HackUDC 2026.",
     aftermovie: "Aftermovie 2026",
-    galleryCta: "Ver fotos",
-    videoCta: "Ver vídeo",
-    comingSoon: "Proximamente",
+    videoCta: "Ver en YouTube",
+    videoPlay: "Reproducir o aftermovie",
+    videoSound: "Son",
+    videoPause: "Pausar",
     stepsKicker: "Como funciona",
     stepsTitle: "O teu próximo proxecto comeza aquí.",
     steps: [
