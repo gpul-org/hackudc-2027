@@ -167,8 +167,8 @@ const digits = Array.from({ length: 30 }, (_, index) => index % 10);
     }
 
     .stats-beam {
-      /* A narrow start at the lantern glass (~38% across, ~1.06 widths up) that
-             opens slowly into a band wide enough to hold the stats. */
+      /* A narrow start at the lantern glass (~38% across, ~1.06 widths up) */
+      /* that opens slowly into a band wide enough to hold the stats. */
       --beam-x: calc(var(--faro-left) + var(--faro-width) * 0.38);
       --beam-y: calc(100% - var(--faro-width) * 1.06);
       clip-path: polygon(
