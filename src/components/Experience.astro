@@ -1,0 +1,111 @@
+---
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import Play from "@lucide/astro/icons/play";
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const t = copy[Astro.props.locale];
+const aftermovieId = "sBOCOznVlHM";
+const aftermovieUrl = `https://www.youtube.com/watch?v=${aftermovieId}`;
+// Linking out instead of embedding keeps YouTube's player off the page's critical path.
+const aftermovieThumb = `https://i.ytimg.com/vi/${aftermovieId}/maxresdefault.jpg`;
+const cardTopline =
+  "flex justify-between px-1.5 pt-1 pb-3 text-[0.68rem] font-black tracking-wider uppercase";
+const cardCaption =
+  "absolute bottom-3 left-3 inline-flex items-center gap-1 text-xs font-black tracking-wide uppercase";
+const cardStamp =
+  "pointer-events-none absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 -rotate-6 bg-red px-4 py-2 text-center text-xs font-black tracking-widest whitespace-nowrap text-cream uppercase shadow-[0_3px_0_var(--color-ink)] sm:px-5 sm:text-sm";
+---
+
+<section
+  class="relative isolate bg-blue py-16 lg:py-24"
+  id="experience"
+  aria-labelledby="experience-title"
+>
+  <div class="page-wrap relative z-1">
+    <div class="mt-14 grid gap-14 lg:mt-0 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start lg:gap-16">
+      <div class="max-w-4xl">
+        <p class="eyebrow text-ink reveal" data-reveal>
+          {t.experienceKicker}
+        </p>
+        <h2
+          class="mt-5 max-w-[12ch] display-heading reveal"
+          data-reveal
+          id="experience-title"
+        >
+          {t.experienceTitle}
+        </h2>
+        <p
+          class="reveal mt-8 max-w-md text-base leading-[1.55] lg:text-xl"
+          data-reveal
+        >
+          {t.experienceBody}
+        </p>
+      </div>
+
+      <div class="grid gap-4 lg:grid-cols-2 lg:items-start lg:gap-[3vw]">
+        <article class="border-2 border-ink bg-cream p-3 reveal" data-reveal>
+          <div class={cardTopline}>
+            <span>{t.gallery}</span>
+            <span>01</span>
+          </div>
+          <div class="relative aspect-video overflow-hidden bg-blue">
+            <span class={cardStamp}>{t.comingSoon}</span>
+            <img
+              class="absolute bottom-0 left-[5%] w-[90%]"
+              src="/assets/scene/building-wide.svg"
+              alt=""
+              width="990"
+              height="459"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class={cardCaption}>
+              {t.galleryCta}
+              <ArrowUpRight class="size-3.5" aria-hidden="true" />
+            </span>
+          </div>
+        </article>
+        <article
+          class="border-2 border-ink bg-ink p-3 text-cream reveal lg:mt-20"
+          data-reveal
+        >
+          <div class={cardTopline}>
+            <span>{t.aftermovie}</span>
+            <span>02</span>
+          </div>
+          <a
+            class="group relative flex aspect-video items-center justify-center overflow-hidden bg-ink"
+            href={aftermovieUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${t.videoCta}: ${t.aftermovie} (YouTube)`}
+          >
+            <img
+              class="absolute inset-0 size-full object-cover opacity-80 transition-opacity group-hover:opacity-100"
+              src={aftermovieThumb}
+              alt=""
+              width="1280"
+              height="720"
+              loading="lazy"
+              decoding="async"
+            />
+            <span
+              class="relative flex size-14 items-center justify-center rounded-full border-2 border-cream bg-ink/60 pl-0.5 transition-colors group-hover:bg-red"
+              aria-hidden="true"
+            >
+              <Play class="size-5 fill-current" aria-hidden="true" />
+            </span>
+            <span class={`${cardCaption} bg-ink px-1.5 py-0.5`}>
+              {t.videoCta}
+              <ArrowUpRight class="size-3.5" aria-hidden="true" />
+            </span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
