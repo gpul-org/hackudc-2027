@@ -9,6 +9,7 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
+const [bodyStart, bodyEnd] = t.aboutBody;
 const aftermovieId = "sBOCOznVlHM";
 const aftermovieUrl = `https://www.youtube.com/watch?v=${aftermovieId}`;
 // Linking out instead of embedding keeps YouTube's player off the page's critical path.
@@ -61,7 +62,20 @@ const cardStamp =
       />
       <div class="min-w-0 flex-1 text-lg leading-normal lg:pt-6 lg:pb-16 lg:text-xl">
         <p class="reveal" data-reveal>
-          {t.aboutBody}
+          {bodyStart}
+          <a
+            class="whitespace-nowrap underline decoration-1 underline-offset-4 transition-colors hover:text-red"
+            href="https://gpul.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GPUL
+            <ArrowUpRight
+              class="ml-0.5 inline size-[0.8em] align-baseline"
+              aria-hidden="true"
+            />
+          </a>
+          {bodyEnd}
         </p>
         <p class="mt-5 text-base text-ink/70 reveal lg:text-lg" data-reveal>
           {t.aboutDetail}
