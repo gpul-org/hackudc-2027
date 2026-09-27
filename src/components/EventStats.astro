@@ -1,4 +1,7 @@
 ---
+import Clock from "@lucide/astro/icons/clock";
+import CodeXml from "@lucide/astro/icons/code-xml";
+import Users from "@lucide/astro/icons/users";
 import { copy, type Locale } from "@/i18n/copy";
 
 interface Props {
@@ -6,228 +9,193 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
-const digits = Array.from({ length: 30 }, (_, index) => index % 10);
+
+// One icon per stat, in the same order as `t.stats`.
+const icons = [Users, Clock, CodeXml];
+// Three rounds of 0–9, so every digit rolls through at least two full turns
+// before landing on its value in the last round.
+const reel = Array.from({ length: 30 }, (_, index) => index % 10);
+const stats = t.stats.map(([value, label], index) => ({
+  value,
+  label,
+  Icon: icons[index] ?? Users,
+  characters: [...value].map((character) => ({
+    character,
+    end: /\d/.test(character) ? 20 + Number(character) : undefined,
+  })),
+}));
 ---
 
+<!-- The scene (lighthouse, beam and sea in one image, as drawn) stands on the
+     section's floor from the left edge, outside the page width; its sea and
+     beam fade out to the right into the background. Below desktop it follows
+     the cards; on desktop the cards keep to the page width, pushed right just
+     enough to clear the tower. `--faro` is the tower's width: the image is
+     4.32 times wider and 0.485 times as tall as it is wide. -->
 <section
-  class="stats-scene relative isolate"
   id="stats"
+  class="relative z-1 overflow-x-clip bg-blue/30 pt-10 [--faro:clamp(5.5rem,22vw,7rem)] lg:flex lg:min-h-[calc(var(--faro)*4.32*0.485)] lg:items-center lg:py-16 lg:[--faro:clamp(10rem,14vw,13rem)]"
   aria-labelledby="stats-title"
+  data-stats
 >
-  <h2 class="sr-only" id="stats-title">
-    {t.statsTitle}
-  </h2>
+  <div class="page-wrap z-1">
+    <div class="stats-content">
+      <h2 class="display-heading reveal" data-reveal id="stats-title">
+        {t.statsTitle}
+      </h2>
 
-  <div
-    class="stats-beam pointer-events-none absolute inset-0 -z-1"
-    aria-hidden="true"
-  ></div>
+      <dl
+        class="mt-6 grid gap-2 sm:grid-cols-(--stats-cols) sm:gap-4 lg:mt-10 lg:gap-6"
+        style={`--stats-cols: repeat(${stats.length}, minmax(0, 1fr))`}
+      >
+        {stats.map(({ value, label, Icon, characters }, index) => (
+          <div
+            class="reveal flex items-center gap-3 rounded-2xl border border-cream bg-cream/90 px-4 py-2.5 sm:flex-col sm:gap-2 sm:px-4 sm:py-5"
+            style={`transition-delay: ${index * 80}ms`}
+            data-reveal
+          >
+            <dt class="order-last ml-auto eyebrow text-ink/60 sm:ml-0">
+              {label}
+            </dt>
+            <dd class="flex items-center gap-3 sm:flex-col">
+              <span
+                class="grid size-9 shrink-0 place-items-center rounded-full bg-blue/50"
+                aria-hidden="true"
+              >
+                <Icon class="size-4.5" />
+              </span>
+              <span class="sr-only">{value}</span>
+              <span
+                class="flex font-sans text-[2rem] leading-none font-bold tracking-[-0.03em] tabular-nums lg:text-[clamp(2.25rem,2.8vw,2.75rem)]"
+                aria-hidden="true"
+              >
+                {characters.map(({ character, end }) =>
+                  end === undefined ? (
+                    <span class="stat-window">{character}</span>
+                  ) : (
+                    <span class="stat-window" style={`--end: ${end}`}>
+                      <span class="stat-reel">
+                        {reel.map((digit) => (
+                          <span>{digit}</span>
+                        ))}
+                      </span>
+                    </span>
+                  ),
+                )}
+              </span>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+
   <img
-    class="stats-lighthouse pointer-events-none absolute bottom-0 left-0 z-1 max-w-none select-none"
-    src="/assets/scene/faro.svg"
+    class="pointer-events-none mt-4 block w-[calc(var(--faro)*4.32)] max-w-none select-none lg:absolute lg:bottom-0 lg:left-0 lg:mt-0"
+    src="/assets/scene/stats-scene.webp"
     alt=""
-    width="253"
-    height="383"
-    aria-hidden="true"
+    width="1400"
+    height="679"
     loading="lazy"
     decoding="async"
   />
-
-  <div class="stats-content relative z-2 mx-auto flex h-full w-full max-w-7xl items-center">
-    <div
-      class="grid w-full grid-cols-2 gap-x-3 gap-y-9 sm:gap-x-6 lg:grid-cols-(--stats-cols)"
-      style={`--stats-cols: repeat(${t.stats.length}, minmax(0, 1fr))`}
-    >
-      {t.stats.map(([value, label], index) => (
-        <div
-          class:list={[
-            "reveal flex flex-col items-center gap-2 text-center max-sm:first:translate-x-3",
-            index === t.stats.length - 1 &&
-              t.stats.length % 2 === 1 &&
-              "col-span-2 lg:col-span-1",
-          ]}
-          style={`transition-delay: ${index * 70}ms`}
-          data-reveal
-        >
-          <strong
-            class="stat-value inline-flex items-baseline font-serif text-[clamp(2.35rem,10.5vw,3rem)] leading-none tracking-[-0.035em] whitespace-nowrap tabular-nums lg:text-[clamp(3.75rem,6vw,5.75rem)]"
-            data-stat-value
-          >
-            <span class="sr-only">{value}</span>
-            <span class="inline-flex items-baseline" aria-hidden="true">
-              {[...value].map((character, digitIndex) =>
-                /\d/.test(character) ? (
-                  <span
-                    class="stat-digit"
-                    style={`--end: ${20 + Number(character)}; --order: ${digitIndex}`}
-                  >
-                    <span class="stat-digit-track">
-                      {digits.map((digit) => (
-                        <span>{digit}</span>
-                      ))}
-                    </span>
-                  </span>
-                ) : (
-                  <span>{character}</span>
-                ),
-              )}
-            </span>
-          </strong>
-          <span class="text-[clamp(0.7rem,1.1vw,0.95rem)] leading-tight font-black tracking-wider uppercase">
-            {label}
-          </span>
-        </div>
-      ))}
-    </div>
-  </div>
+  <!-- The same sea, mirrored, rises from the right edge so the waves meet
+       mid-section instead of the right side ending empty. -->
+  <img
+    class="pointer-events-none absolute right-0 bottom-0 hidden w-[calc(var(--faro)*4.32)] max-w-none select-none lg:block"
+    src="/assets/scene/stats-sea.webp"
+    alt=""
+    width="1400"
+    height="307"
+    loading="lazy"
+    decoding="async"
+  />
+  <!-- Mirrored so it kicks outwards. A quarter of it runs off the right edge
+       and its foot 2px past the floor: the section only clips horizontally
+       and sits above the next one. -->
+  <img
+    class="pointer-events-none absolute right-0 -bottom-[2px] w-[clamp(4.5rem,10vw,10rem)] max-w-none translate-x-[25%] select-none"
+    src="/assets/scene/stats-seagull.webp"
+    alt=""
+    width="700"
+    height="821"
+    loading="lazy"
+    decoding="async"
+  />
 </section>
 
 <style>
-  .stat-digit {
-    display: inline-block;
-    height: 1.3em;
-    overflow: hidden;
-    vertical-align: bottom;
+  /* On desktop the copy starts clear of the tower, measured from page-wrap's */
+  /* content edge (80rem max width, clamp(1.25rem, 6vw, 7rem) padding). */
+  @media (min-width: 64rem) {
+    .stats-content {
+      margin-left: max(
+        0px,
+        calc(
+          var(--faro) + 2rem - max(0px, (100vw - 80rem) / 2) -
+            clamp(1.25rem, 6vw, 7rem)
+        )
+      );
+    }
   }
 
-  .stat-digit-track {
+  /* Every character sits in a one-line window, so all share a baseline. */
+  /* Digits hold a reel that shows its last round by default. */
+  .stat-window {
+    display: block;
+    height: 1.1em;
+    line-height: 1.1em;
+    /* Clips vertically only: `overflow: hidden` would shave the "%" glyph. */
+    clip-path: inset(0 -0.25em);
+  }
+
+  .stat-reel {
     display: flex;
     flex-direction: column;
-    transform: translateY(calc(var(--end) * -1.3em));
+    transform: translateY(calc(var(--end) * -1.1em));
   }
 
-  .stat-digit-track > span {
-    display: block;
-    height: 1.3em;
-    flex: none;
-    line-height: 1.3em;
-  }
-
-  .stat-value[data-ready] .stat-digit-track {
+  /* The script parks the reels at 0 and rolls them in view. */
+  [data-stats][data-ready] .stat-reel {
     transform: translateY(0);
   }
 
-  .stat-value[data-rolled] .stat-digit-track {
-    transform: translateY(calc(var(--end) * -1.3em));
+  [data-stats][data-rolled] .stat-reel {
+    transform: translateY(calc(var(--end) * -1.1em));
     transition: transform 1400ms var(--ease-out);
-    transition-delay: calc(var(--order) * 70ms);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .stat-value[data-rolled] .stat-digit-track {
-      transition: none;
-    }
-  }
-
-  .stats-scene {
-    --faro-width: clamp(17rem, 23vw, 21rem);
-    height: clamp(23rem, 31vw, 30rem);
-    margin-block: 2.5rem 1.5rem;
-  }
-
-  .stats-lighthouse {
-    width: var(--faro-width);
-  }
-
-  .stats-beam {
-    background: var(--color-yellow);
-    opacity: 0.78;
-    /* The tip follows the third blue pane as the lighthouse scales. */
-    clip-path: polygon(
-      7% calc(100% - var(--faro-width) - 1.75rem),
-      31% 9%,
-      100% 9%,
-      100% 91%,
-      31% 91%
-    );
-    filter: blur(13px);
-    mask-image: linear-gradient(
-      to right,
-      var(--color-ink) 0%,
-      var(--color-ink) 68%,
-      transparent 100%
-    );
-  }
-
-  .stats-content {
-    padding: 1rem clamp(2rem, 5vw, 5rem) 1rem clamp(17rem, 26vw, 24rem);
-  }
-
-  @media (max-width: 639px) {
-    .stats-scene {
-      /* Narrow enough that the whole tower, lantern included, fits the scene. */
-      --faro-width: 14rem;
-      --faro-left: -1.5rem;
-      height: 23rem;
-      margin-block: 1rem 0;
-    }
-
-    .stats-lighthouse {
-      left: var(--faro-left);
-    }
-
-    .stats-beam {
-      /* A narrow start at the lantern glass (~38% across, ~1.06 widths up) */
-      /* that opens slowly into a band wide enough to hold the stats. */
-      --beam-x: calc(var(--faro-left) + var(--faro-width) * 0.38);
-      --beam-y: calc(100% - var(--faro-width) * 1.06);
-      clip-path: polygon(
-        var(--beam-x) calc(var(--beam-y) - 0.35rem),
-        46% 18%,
-        100% 18%,
-        100% 88%,
-        46% 88%,
-        var(--beam-x) calc(var(--beam-y) + 0.35rem)
-      );
-      filter: blur(5px);
-      mask-image: linear-gradient(
-        to right,
-        var(--color-ink) 0%,
-        var(--color-ink) 78%,
-        transparent 100%
-      );
-    }
-
-    .stats-content {
-      padding: 2.5rem 1.1rem 2rem 6.5rem;
-    }
   }
 </style>
 
 <script>
-  let statsObserver: IntersectionObserver | undefined;
-  let statsController: AbortController | undefined;
+  let observer: IntersectionObserver | undefined;
+  let controller: AbortController | undefined;
 
   document.addEventListener("astro:page-load", () => {
-    statsObserver?.disconnect();
-    statsController?.abort();
-    statsController = new AbortController();
+    observer?.disconnect();
+    controller?.abort();
+    controller = new AbortController();
     document.addEventListener(
       "astro:before-swap",
-      () => statsObserver?.disconnect(),
-      { signal: statsController.signal },
+      () => observer?.disconnect(),
+      {
+        signal: controller.signal,
+      },
     );
 
-    const section = document.querySelector<HTMLElement>("#stats");
-    if (!section) return;
-
-    const values = section.querySelectorAll<HTMLElement>("[data-stat-value]");
-    if (
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      !("IntersectionObserver" in window)
-    ) {
+    const section = document.querySelector<HTMLElement>("[data-stats]");
+    if (!section || matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
 
-    values.forEach((value) => value.setAttribute("data-ready", ""));
-    statsObserver = new IntersectionObserver(
-      (entries, observer) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        values.forEach((value) => value.setAttribute("data-rolled", ""));
-        observer.disconnect();
+    section.toggleAttribute("data-ready", true);
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        section.toggleAttribute("data-rolled", true);
+        observer?.disconnect();
       },
-      { threshold: 0.25 },
+      { threshold: 0.4 },
     );
-    statsObserver.observe(section);
+    observer.observe(section);
   });
 </script>

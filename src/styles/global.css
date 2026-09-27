@@ -10,7 +10,7 @@
   --color-blue: #a3d5ff;
   --color-cream: #fafafa;
   --color-black: #000000;
-  /* Intentional semantic exception: the stats shape is a ray of light. */
+  /* Reserved accent: step numbers and markers on the HowTo ink panel. */
   --color-yellow: #f5dc8f;
 
   --font-sans:
