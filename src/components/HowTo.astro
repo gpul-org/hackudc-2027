@@ -29,7 +29,7 @@ const total = String(steps.length).padStart(2, "0");
      flow. -->
 <section
   id="steps"
-  class="bg-cream pinned:h-[310svh] lg:pinned:h-[400svh]"
+  class="bg-cream pinned:h-[200svh] lg:pinned:h-[260svh]"
   aria-labelledby="steps-title"
   data-steps
 >
@@ -125,8 +125,8 @@ const total = String(steps.length).padStart(2, "0");
   // panel's arrow. It only turns while the text crossfades, between 0.35 and
   // 0.65 of the way to the next step, and holds still otherwise.
   const STEP_ANGLE = 45;
-  const TURN_START = 0.35;
-  const TURN_END = 0.65;
+  const TURN_START = 0.3;
+  const TURN_END = 0.7;
 
   const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 
@@ -137,9 +137,8 @@ const total = String(steps.length).padStart(2, "0");
     return (step + t * t * (3 - 2 * t)) * STEP_ANGLE;
   }
 
-  // Fully shown up to 0.35 steps away and gone by 0.55, so two neighbouring
-  // steps crossfade over the same window the rose turns in.
-  const stepOpacity = (distance: number) => clamp01((0.55 - distance) / 0.2);
+  // Crossfade matches the rose turn window (0.3–0.7) for more scroll per step.
+  const stepOpacity = (distance: number) => clamp01((TURN_END - distance) / (TURN_END - TURN_START));
 
   document.addEventListener("astro:page-load", () => {
     const section = document.querySelector<HTMLElement>("[data-steps]");
