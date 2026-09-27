@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Set by scroll-driven sections (HowTo) while their stage is pinned. */
+@custom-variant pinned (&:where([data-pinned], [data-pinned] *));
+
 @theme {
   --color-ink: #030846;
   --color-red: #bf2100;

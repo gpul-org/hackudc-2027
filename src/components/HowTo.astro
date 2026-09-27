@@ -1,54 +1,118 @@
 ---
 import { copy, type Locale } from "@/i18n/copy";
+
 interface Props {
   locale: Locale;
 }
+
 const t = copy[Astro.props.locale];
+
+// One photo per step, in the same order as `t.steps`.
+const images = [
+  "/img/how_to_team.webp",
+  "/img/how_to_challenge.webp",
+  "/img/how_to_coding.webp",
+  "/img/how_to_presentation.webp",
+];
+const steps = t.steps.map(([number, title, body], index) => ({
+  number,
+  title,
+  body,
+  image: images[index],
+}));
+const total = String(steps.length).padStart(2, "0");
 ---
 
+<!-- When everything fits on screen, the script sets `data-pinned`: the section
+     grows to about one screen of scroll per step, the stage sticks for one
+     screen and the steps stack in place. Otherwise everything stays in normal
+     flow. -->
 <section
   id="steps"
-  class="compass-section bg-cream"
+  class="bg-cream pinned:h-[310svh] lg:pinned:h-[400svh]"
   aria-labelledby="steps-title"
-  data-compass-section
+  data-steps
 >
-  <div class="compass-sticky" data-compass-sticky>
-    <header class="page-wrap pt-8 sm:pt-12">
+  <div
+    class="page-wrap py-16 pinned:sticky pinned:top-0 pinned:flex pinned:h-svh pinned:flex-col pinned:pb-24 lg:pt-24 lg:pinned:pb-16"
+    data-steps-stage
+  >
+    <header>
       <p class="eyebrow">{t.stepsKicker}</p>
-      <h2 id="steps-title" class="mt-4 max-w-[18ch] display-heading">
+      <h2 id="steps-title" class="mt-4 display-heading">
         {t.stepsTitle}
       </h2>
     </header>
-    <div class="compass-stage">
-      <div class="compass-position" aria-hidden="true">
+
+    <!-- `--rose` is the rose's size; the panel reads it to tuck under the rose.
+         Pinned, the row is a size container, so the rose and the panel grow
+         into whatever height the heading leaves (`cqh`) instead of guessing it
+         from the viewport. -->
+    <div
+      class="relative mt-6 flex flex-col items-center [--rose:min(70%,20rem)] pinned:min-h-0 pinned:flex-1 pinned:[container-type:size] pinned:[--rose:min(70cqw,22rem,45cqh)] lg:mt-10 lg:flex-row lg:[--rose:min(26rem,28vw)] lg:pinned:[--rose:min(88cqh,36rem)]"
+      data-steps-row
+    >
+      <!-- Below desktop the panel slides out from under the rose. On desktop
+           the rose leaves the flow and only its right half shows, on top of
+           the panel's left edge: the half the steps turn towards. -->
+      <div
+        class="pointer-events-none relative z-1 w-(--rose) flex-none lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:w-[calc(var(--rose)/2)] lg:items-center lg:justify-end lg:overflow-hidden"
+        aria-hidden="true"
+      >
         <img
-          class="compass-art motion-reduce:animate-none"
-          data-compass-art
+          class="block h-auto w-full lg:h-full lg:max-h-(--rose) lg:w-auto lg:max-w-none lg:flex-none"
+          data-steps-rose
           src="/assets/scene/rosa-ventos.svg"
           alt=""
-          width="2048"
-          height="2042"
+          width="1057"
+          height="1054"
           loading="lazy"
           decoding="async"
         />
       </div>
-      <div class="compass-copy bg-ink text-cream">
-        <div class="compass-panels">
-          {t.steps.map(([number, title, body]) => (
-            <article data-compass-step>
-              <span class="eyebrow text-yellow">{number}</span>
-              <h3 class="mt-4 font-serif text-3xl leading-tight sm:text-4xl">
-                {title}
-              </h3>
-              <p class="mt-5 max-w-sm text-base leading-relaxed sm:text-lg">
-                {body}
-              </p>
+
+      <div class="relative -mt-[calc(var(--rose)*0.2)] flex flex-col justify-center self-stretch overflow-hidden bg-ink px-6 pt-[calc(var(--rose)*0.2+1.75rem)] pb-7 text-cream pinned:flex-1 lg:m-0 lg:flex-1 lg:self-center lg:p-10 lg:pl-[calc(var(--rose)/2+2.5rem)] lg:pinned:min-h-[calc(var(--rose)*0.8)]">
+        <div class="grid gap-8">
+          {steps.map(({ number, title, body, image }) => (
+            <article
+              class="max-lg:text-center pinned:[grid-area:1/1]"
+              data-step
+            >
+              <div class="relative z-1 lg:w-1/2">
+                <p class="eyebrow text-yellow">
+                  {number} <span class="text-cream/40">/ {total}</span>
+                </p>
+                <h3 class="mt-4 font-serif text-3xl leading-tight max-[30rem]:text-[clamp(1.5rem,7vw,2rem)] max-[30rem]:wrap-anywhere sm:text-4xl">
+                  {title}
+                </h3>
+                <p class="mt-5 max-w-sm text-base leading-relaxed max-lg:mx-auto max-[30rem]:mt-4 sm:text-lg">
+                  {body}
+                </p>
+              </div>
+              <!-- Pinned desktop only: the photo fades in from the panel's
+                     ink and swaps with its step. -->
+              <img
+                class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[45%] object-cover mask-[linear-gradient(to_right,transparent,black_70%)] lg:pinned:block"
+                src={image}
+                alt=""
+                width="1200"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
             </article>
           ))}
         </div>
-        <div class="mt-8 flex gap-2" aria-hidden="true">
-          {t.steps.map(() => (
-            <span class="compass-marker" data-compass-marker />
+
+        <div
+          class="relative z-1 mt-8 flex gap-2 max-lg:justify-center"
+          aria-hidden="true"
+        >
+          {steps.map(() => (
+            <span
+              class="h-0.75 w-8 bg-cream opacity-25 data-active:bg-yellow data-active:opacity-100"
+              data-step-marker
+            />
           ))}
         </div>
       </div>
@@ -56,204 +120,93 @@ const t = copy[Astro.props.locale];
   </div>
 </section>
 
-<style>
-  .compass-section {
-    position: relative;
-  }
-  .compass-sticky {
-    padding-bottom: 2rem;
-  }
-  .compass-stage {
-    position: relative;
-    display: flex;
-    align-items: center;
-    min-height: 30rem;
-    margin-top: 1.5rem;
-    overflow: clip;
-  }
-  .compass-position {
-    --compass-size: clamp(20rem, 90vw, 38rem);
-    position: absolute;
-    width: var(--compass-size);
-    left: calc(27vw - var(--compass-size));
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    pointer-events: none;
-  }
-  .compass-art {
-    display: block;
-    width: 100%;
-    height: auto;
-    transform-origin: 50% 50%;
-  }
-  .compass-copy {
-    position: relative;
-    margin-left: 18%;
-    width: 82%;
-    padding: 2rem 1.25rem 2rem calc(12vw + 0.5rem);
-  }
-  .compass-panels {
-    display: grid;
-    gap: 2rem;
-  }
-  .compass-marker {
-    width: 2rem;
-    height: 3px;
-    background: var(--color-cream);
-    opacity: 0.25;
-  }
-  .compass-marker[data-active] {
-    opacity: 1;
-    background: var(--color-yellow);
-  }
-  [data-enhanced] {
-    height: 300svh;
-  }
-  [data-enhanced] .compass-sticky {
-    position: sticky;
-    top: 0;
-    height: 100svh;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 3rem;
-  }
-  [data-enhanced] .compass-stage {
-    flex: 1;
-    min-height: 0;
-  }
-  [data-enhanced] .compass-panels > article {
-    grid-area: 1 / 1;
-  }
-  @media (min-width: 64rem) {
-    .compass-position {
-      --compass-size: min(49vw, 42rem, calc(100svh - 22rem));
-      left: calc(49% - var(--compass-size));
-    }
-    .compass-copy {
-      margin-left: 30%;
-      width: 64%;
-      padding: 3rem 3rem 3rem 24%;
-    }
-    .compass-stage {
-      min-height: 42rem;
-    }
-    [data-enhanced] .compass-stage {
-      min-height: 0;
-    }
-    .compass-sticky header h2 {
-      font-size: clamp(3rem, 4vw, 3.75rem);
-      max-width: 22ch;
-    }
-  }
-  /* Below desktop the rose sits whole above the panel instead of mostly off-canvas. */
-  @media (max-width: 63.999rem) {
-    .compass-stage {
-      /* Declared here so both the rose and the panel padding can read it. */
-      --compass-size: min(70vw, 22rem, calc(100svh - 27rem));
-      flex-direction: column;
-      justify-content: center;
-      overflow-x: clip;
-      overflow-y: visible;
-    }
-    .compass-position {
-      --compass-size: inherit;
-      position: relative;
-      left: auto;
-      top: auto;
-      transform: none;
-      flex: none;
-      margin: 0 auto calc(var(--compass-size) * -0.2);
-    }
-    /* A card inset like the page gutter; the rose overlaps its top edge. */
-    .compass-copy {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-self: center;
-      margin-left: 0;
-      width: min(100% - 2 * clamp(1.25rem, 6vw, 7rem), 30rem);
-      min-height: min(20rem, 42svh);
-      padding: calc(var(--compass-size) * 0.2 + 1.75rem) 1.5rem 1.75rem;
-    }
-    [data-enhanced] {
-      height: 240svh;
-    }
-  }
-  @media (max-width: 30rem) {
-    .compass-copy h3 {
-      font-size: clamp(1.5rem, 7vw, 2rem);
-      overflow-wrap: anywhere;
-    }
-    .compass-copy p {
-      margin-top: 1rem;
-    }
-  }
-  @media (max-height: 36rem) {
-    .compass-sticky header {
-      padding-top: 1.5rem;
-    }
-    .compass-sticky header h2 {
-      font-size: 2rem;
-    }
-  }
-</style>
-
 <script>
+  // Each step turns the rose one eighth, so a point of the star lands on the
+  // panel's arrow. It only turns while the text crossfades, between 0.35 and
+  // 0.65 of the way to the next step, and holds still otherwise.
+  const STEP_ANGLE = 45;
+  const TURN_START = 0.35;
+  const TURN_END = 0.65;
+
+  const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
+
+  function roseAngle(position: number) {
+    const step = Math.floor(position);
+    const t = clamp01((position - step - TURN_START) / (TURN_END - TURN_START));
+    // Smoothstep, so each turn eases in and out of its locked angle.
+    return (step + t * t * (3 - 2 * t)) * STEP_ANGLE;
+  }
+
+  // Fully shown up to 0.35 steps away and gone by 0.55, so two neighbouring
+  // steps crossfade over the same window the rose turns in.
+  const stepOpacity = (distance: number) => clamp01((0.55 - distance) / 0.2);
+
   document.addEventListener("astro:page-load", () => {
-    const section = document.querySelector<HTMLElement>(
-      "[data-compass-section]",
-    );
-    const art = section?.querySelector<HTMLElement>("[data-compass-art]");
-    const stage = section?.querySelector<HTMLElement>("[data-compass-sticky]");
-    if (!section || !art || !stage) return;
-    const steps = [
-      ...section.querySelectorAll<HTMLElement>("[data-compass-step]"),
-    ];
+    const section = document.querySelector<HTMLElement>("[data-steps]");
+    const stage = section?.querySelector<HTMLElement>("[data-steps-stage]");
+    const row = section?.querySelector<HTMLElement>("[data-steps-row]");
+    const rose = section?.querySelector<HTMLElement>("[data-steps-rose]");
+    if (!section || !stage || !row || !rose) return;
+
+    const steps = [...section.querySelectorAll<HTMLElement>("[data-step]")];
     const markers = [
-      ...section.querySelectorAll<HTMLElement>("[data-compass-marker]"),
+      ...section.querySelectorAll<HTMLElement>("[data-step-marker]"),
     ];
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     const controller = new AbortController();
     const { signal } = controller;
-    const motion = matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
+    let pinned = false;
 
-    function update() {
+    // 0 when the stage sticks, 1 when it lets go.
+    const scrollProgress = () =>
+      clamp01(
+        -section.getBoundingClientRect().top /
+          Math.max(1, section.offsetHeight - stage.offsetHeight),
+      );
+
+    // Pins on trial and measures: if the tallest step (they all keep their
+    // box while stacked) pushes the panel past the row, the screen is too
+    // short and the steps go back to normal flow instead of being cut off.
+    // Only runs when the layout can change, never on scroll.
+    const measure = () => {
+      section.toggleAttribute("data-pinned", !reducedMotion.matches);
+      pinned = !reducedMotion.matches && row.scrollHeight <= row.clientHeight;
+      section.toggleAttribute("data-pinned", pinned);
+    };
+
+    const update = () => {
       frame = 0;
-      if (!section || !art || !stage) return;
-      // Short viewports and reduced motion retain all steps in normal document flow.
-      const enhanced = !motion.matches && innerHeight >= 560;
-      section.toggleAttribute("data-enhanced", enhanced);
-      const progress = enhanced
-        ? Math.max(
-            0,
-            Math.min(
-              1,
-              -section.getBoundingClientRect().top /
-                Math.max(1, section.offsetHeight - stage.offsetHeight),
-            ),
-          )
-        : 0;
-      const position = progress * (steps.length - 1);
-      art.style.transform = `rotate(${position * 90}deg)`;
+
+      const position = pinned ? scrollProgress() * (steps.length - 1) : 0;
+      const current = Math.round(position);
+      rose.style.transform = `rotate(${roseAngle(position)}deg)`;
+
       steps.forEach((step, index) => {
-        const distance = Math.abs(position - index);
-        const active = !enhanced || index === Math.round(position);
-        step.style.opacity = enhanced
-          ? String(Math.max(0, Math.min(1, (0.55 - distance) / 0.2)))
-          : "1";
-        step.style.visibility = active ? "visible" : "hidden";
-        step.toggleAttribute("inert", !active);
-        step.setAttribute("aria-hidden", String(!active));
+        const active = !pinned || index === current;
+        const opacity = pinned ? stepOpacity(Math.abs(position - index)) : 1;
+        step.style.opacity = pinned ? String(opacity) : "";
+        // A step stays painted until it has fully faded out, but only the
+        // current one is reachable by keyboard and assistive tech.
+        step.style.visibility = opacity > 0 ? "" : "hidden";
+        step.inert = !active;
         markers[index]?.toggleAttribute("data-active", active);
       });
-    }
-    function requestUpdate() {
+    };
+
+    const requestUpdate = () => {
       if (!frame) frame = requestAnimationFrame(update);
-    }
+    };
+    const remeasure = () => {
+      measure();
+      requestUpdate();
+    };
+
     window.addEventListener("scroll", requestUpdate, { passive: true, signal });
-    window.addEventListener("resize", requestUpdate, { signal });
-    motion.addEventListener("change", requestUpdate, { signal });
+    window.addEventListener("resize", remeasure, { signal });
+    reducedMotion.addEventListener("change", remeasure, { signal });
+    // Web fonts change the text's height once they load.
+    document.fonts.ready.then(() => signal.aborted || remeasure());
     document.addEventListener(
       "astro:before-swap",
       () => {
@@ -262,6 +215,7 @@ const t = copy[Astro.props.locale];
       },
       { once: true, signal },
     );
+    measure();
     update();
   });
 </script>
