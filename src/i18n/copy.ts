@@ -85,18 +85,23 @@ export const copy: Record<Locale, Copy> = {
     steps: [
       [
         "01",
-        "Trae una idea",
-        "Una intuición, un problema o una pregunta que no te deje dormir.",
+        "Forma equipo",
+        "Hasta cuatro personas. Ven con tu equipo o únete a uno en el evento.",
       ],
       [
         "02",
-        "Forma equipo",
-        "Encuentra personas distintas a ti y reparte el caos con cariño.",
+        "Elige un reto",
+        "Inspírate en los retos de patrocinadores y organización para crear algo original.",
       ],
       [
         "03",
-        "Constrúyelo",
-        "Mentoría, herramientas y 36 horas para hacer que pase.",
+        "Programa",
+        "36 horas para darle vida, con tu lenguaje de siempre o probando algo nuevo.",
+      ],
+      [
+        "04",
+        "Presenta",
+        "Documentación, una buena demo y código abierto. Los premios se anuncian en la clausura.",
       ],
     ],
     sponsorsKicker: "Con el apoyo de",
@@ -230,15 +235,24 @@ export const copy: Record<Locale, Copy> = {
     steps: [
       [
         "01",
-        "Bring an idea",
-        "A hunch, a problem or a question that will not let you sleep.",
+        "Build a team",
+        "Up to four people. Bring your own team or join one at the event.",
       ],
       [
         "02",
-        "Build a team",
-        "Find people different from you and share the chaos with care.",
+        "Pick a challenge",
+        "Get inspired by the sponsors' and organizers' challenges to build something original.",
       ],
-      ["03", "Make it real", "Mentors, tools and 36 hours to make it happen."],
+      [
+        "03",
+        "Code",
+        "36 hours to bring it to life, in your go-to language or something new.",
+      ],
+      [
+        "04",
+        "Submit",
+        "Docs, a compelling demo and open-source code. Winners are announced at the closing ceremony.",
+      ],
     ],
     sponsorsKicker: "Supported by",
     sponsorsTitle: "Great ideas need room to grow.",
@@ -368,18 +382,23 @@ export const copy: Record<Locale, Copy> = {
     steps: [
       [
         "01",
-        "Trae unha idea",
-        "Unha intuición, un problema ou unha pregunta que non che deixe durmir.",
+        "Forma equipo",
+        "Ata catro persoas. Ven co teu equipo ou únete a un no evento.",
       ],
       [
         "02",
-        "Forma equipo",
-        "Atopa persoas diferentes a ti e reparte o caos con cariño.",
+        "Escolle un reto",
+        "Inspírate nos retos de patrocinadores e organización para crear algo orixinal.",
       ],
       [
         "03",
-        "Constrúeo",
-        "Mentoría, ferramentas e 36 horas para facer que pase.",
+        "Programa",
+        "36 horas para darlle vida, coa túa linguaxe de sempre ou probando algo novo.",
+      ],
+      [
+        "04",
+        "Presenta",
+        "Documentación, unha boa demo e código aberto. Os premios anúncianse na clausura.",
       ],
     ],
     sponsorsKicker: "Co apoio de",
