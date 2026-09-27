@@ -20,18 +20,100 @@ const teaserSeconds = 25;
 // follow playback. The script adds `controls`: hidden on desktop, where our own
 // buttons drive it, kept on phones and tablets.
 const aftermovieEmbed = `https://www.youtube-nocookie.com/embed/${aftermovieId}?autoplay=1&mute=1&end=${teaserSeconds}&cc_load_policy=0&iv_load_policy=3&rel=0&playsinline=1&enablejsapi=1`;
+// Last year's stickers, scattered behind the card. Phones keep only the ones
+// clear of the title so it stays legible.
+const code = { src: "/assets/stickers/2026_code.svg", width: 203, height: 486 };
+const event = {
+  src: "/assets/stickers/2026_event.svg",
+  width: 1123,
+  height: 216,
+};
+const gpul = { src: "/assets/stickers/gpul.svg", width: 414, height: 417 };
+const lanyard = {
+  src: "/assets/stickers/lanyard.png",
+  width: 539,
+  height: 754,
+};
+const logo = {
+  src: "/assets/stickers/2026_event_logo.svg",
+  width: 600,
+  height: 520,
+};
+// The code sticker is drawn upright, so it needs ~90deg to read level.
+const stickers = [
+  {
+    ...event,
+    class:
+      "top-2 -right-16 w-60 rotate-6 sm:w-80 lg:top-[3%] lg:-right-24 lg:w-[34rem]",
+  },
+  // Big and sunk into the bottom edge, so only its upper ~60% shows.
+  {
+    ...gpul,
+    class:
+      "-bottom-14 -left-6 w-36 -rotate-6 sm:w-44 lg:-bottom-28 lg:left-[3%] lg:w-72",
+  },
+  {
+    ...lanyard,
+    class:
+      "right-4 -bottom-12 w-24 -rotate-6 sm:w-32 lg:right-[6%] lg:-bottom-14 lg:w-52",
+  },
+  // Some tuck behind the card's edges so it looks stuck on top of them.
+  {
+    ...event,
+    class: "top-[24%] left-[13%] hidden w-80 -rotate-[10deg] lg:block",
+  },
+  {
+    ...logo,
+    class: "top-[15%] right-[30%] hidden w-36 rotate-[14deg] lg:block",
+  },
+  {
+    ...logo,
+    class: "top-[4%] left-[4%] hidden w-28 -rotate-[12deg] lg:block",
+  },
+  {
+    ...code,
+    class: "top-[54%] left-[4%] hidden w-24 rotate-[96deg] lg:block",
+  },
+  {
+    ...code,
+    class: "top-[46%] right-[3%] hidden w-16 rotate-[84deg] lg:block",
+  },
+];
 const controlButton =
   "flex size-11 cursor-pointer items-center justify-center rounded-full bg-cream/15 text-cream backdrop-blur-sm transition-colors hover:bg-cream hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream";
 ---
 
 <section
-  class="experience relative min-h-[160px] bg-ink py-16 lg:pt-24 lg:pb-0"
+  class="experience relative min-h-[160px] overflow-clip bg-ink py-16 lg:py-24"
   id="experience"
   aria-labelledby="experience-title"
 >
-  <!-- Same padding as About. On desktop the card is centred in a full-screen
-       block, which also gives it room below despite `lg:pb-0`. -->
-  <div class="flex flex-col justify-center lg:min-h-svh">
+  <!-- The stickers pop in one by one when the section scrolls into view (the
+       shared reveal observer sets `data-visible`). Only opacity and scale
+       animate: `translate` belongs to the scroll drift. -->
+  <div
+    class="group/stickers pointer-events-none absolute inset-0"
+    aria-hidden="true"
+    data-reveal
+  >
+    {stickers.map((sticker, index) => (
+      <img
+        class={`absolute max-w-none scale-75 opacity-0 transition-[opacity,scale] duration-700 ease-out group-data-visible/stickers:scale-100 group-data-visible/stickers:opacity-100 motion-reduce:transition-none ${sticker.class}`}
+        style={`transition-delay: ${index * 180}ms`}
+        src={sticker.src}
+        alt=""
+        width={sticker.width}
+        height={sticker.height}
+        loading="lazy"
+        decoding="async"
+        data-scroll-drift
+      />
+    ))}
+  </div>
+
+  <!-- Same padding as About. On desktop the card is centred in a block that
+       fills the rest of the screen, so the section is exactly one screen tall. -->
+  <div class="relative flex flex-col justify-center lg:min-h-[calc(100svh-12rem)]">
     <div class="page-wrap">
       <div
         class="group/card relative"
