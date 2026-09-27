@@ -13,10 +13,32 @@ const sponsorPageUrl =
 ---
 
 <section
-  class="relative isolate flex min-h-svh flex-col items-center overflow-hidden bg-linear-to-b from-blue via-blue to-cream px-5 pt-[clamp(6rem,16svh,10rem)] text-center max-lg:pt-[clamp(7.5rem,16svh,10rem)] [--building:90vw] [--mobile-logo-width:min(78vw,24rem)] sm:[--building:72vw] lg:[--building:min(62vw,62rem)]"
+  class="relative isolate flex min-h-svh flex-col items-center overflow-hidden bg-linear-to-b from-blue via-blue to-cream px-5 pt-[clamp(11rem,27svh,15rem)] text-center max-lg:pt-[clamp(10.5rem,23svh,13rem)] [--building:90vw] [--mobile-logo-width:min(78vw,24rem)] sm:[--building:72vw] lg:[--building:min(62vw,62rem)]"
   id="top"
   aria-labelledby="hero-title"
 >
+  <div
+    class="hero-gull pointer-events-none absolute top-[8%] left-0 z-50 w-28 sm:w-32 lg:top-[7%] lg:w-36"
+    aria-hidden="true"
+  >
+    <img
+      class="hero-gull__frame hero-gull__wings-up"
+      src="/assets/scene/gaviota-alas-arriba.svg"
+      alt=""
+      width="430"
+      height="395"
+      decoding="async"
+    />
+    <img
+      class="hero-gull__frame hero-gull__wings-down"
+      src="/assets/scene/gaviota-alas-abajo.svg"
+      alt=""
+      width="430"
+      height="395"
+      decoding="async"
+    />
+  </div>
+
   <div class="relative z-2 flex flex-col items-center">
     <div class="relative flex flex-col items-center">
       <span class="absolute right-0 bottom-full mb-3 animate-hero-enter bg-red py-1.5 pr-5 pl-6 text-sm font-black tracking-wide text-cream [animation-delay:140ms] [clip-path:polygon(0_0,calc(100%-0.75rem)_0,100%_50%,calc(100%-0.75rem)_100%,0_100%,0.75rem_50%)] motion-reduce:animate-none sm:text-base lg:text-xl">
@@ -40,25 +62,17 @@ const sponsorPageUrl =
         <span class="sr-only">{t.title}</span>
       </h1>
 
-      <div class="group mt-5 inline-grid -rotate-1 animate-hero-enter place-items-center border-2 border-ink bg-cream text-xs font-black tracking-[0.14em] whitespace-nowrap uppercase [animation-delay:260ms] motion-reduce:animate-none sm:mt-7 sm:text-sm">
-        <span
-          class="col-start-1 row-start-1 select-none px-5 py-2 text-ink blur-[6px]"
-          aria-hidden="true"
-        >
-          {t.datePlaceholder}
-        </span>
-        <span class="z-1 col-start-1 row-start-1 -m-0.5 grid min-h-11 place-items-center self-stretch border-2 border-ink bg-blue px-5 py-2 text-ink shadow-[0_3px_0_var(--color-ink)] transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:-rotate-2 motion-reduce:transform-none motion-reduce:transition-none">
-          {t.dateComingSoon}
-        </span>
-      </div>
+      <p class="mt-5 animate-hero-enter text-sm font-black tracking-wide text-ink [animation-delay:260ms] motion-reduce:animate-none sm:mt-7 sm:text-base">
+        {t.dateComingSoon}
+      </p>
     </div>
 
     <div
-      class="mt-10 flex w-[min(68vw,20rem)] flex-col items-stretch gap-2 sm:mt-14 sm:w-auto sm:flex-row sm:items-center sm:gap-10"
+      class="mt-10 flex w-[min(84vw,24rem)] flex-row items-center gap-2.5 sm:mt-14 sm:w-auto sm:gap-6"
       id="waitlist"
     >
       <a
-        class="cta-plaque animate-hero-enter bg-[url(/assets/scene/button-primary.svg)] text-base text-cream [animation-delay:390ms] motion-reduce:animate-none sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
+        class="cta-plaque animate-hero-enter bg-[url(/assets/scene/button-primary.svg)] text-xs text-cream [animation-delay:390ms] motion-reduce:animate-none sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
         href="https://nocodb.gpul.org/dashboard/#/nc/form/f1137831-84ad-4682-93de-a416cc592ff1"
         target="_blank"
         rel="noopener noreferrer"
@@ -66,7 +80,7 @@ const sponsorPageUrl =
         {t.waitlistShort}
       </a>
       <a
-        class="cta-plaque animate-hero-enter bg-[url(/assets/scene/button-secondary.svg)] text-base text-ink [animation-delay:460ms] motion-reduce:animate-none sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
+        class="cta-plaque animate-hero-enter bg-[url(/assets/scene/button-secondary.svg)] text-xs text-blue [animation-delay:460ms] motion-reduce:animate-none sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
         href={sponsorPageUrl}
       >
         {t.sponsor}
@@ -76,7 +90,7 @@ const sponsorPageUrl =
 
   {/* Fills the height left below the CTAs so the hero is always one viewport tall. */}
   <div
-    class="relative z-1 -mx-5 mt-10 min-h-40 flex-1 self-stretch"
+    class="relative z-1 -mx-5 mt-2 min-h-40 flex-1 self-stretch"
     aria-hidden="true"
   >
     <div class="absolute top-[26%] left-[-4%] z-4 w-[108%] -rotate-5 animate-hero-enter overflow-hidden bg-cream py-3 text-sm font-black whitespace-nowrap text-ink [animation-delay:500ms] motion-reduce:animate-none sm:top-[38%] lg:text-lg">
@@ -87,6 +101,21 @@ const sponsorPageUrl =
         </span>
       </div>
     </div>
+    <a
+      class="absolute right-5 bottom-5 z-4 block w-14 transition-transform duration-200 ease-out hover:-translate-y-0.5 active:scale-[0.96] motion-reduce:transform-none motion-reduce:transition-none sm:right-8 sm:bottom-8 sm:w-20"
+      href="https://gpul.org"
+      aria-label="GPUL"
+    >
+      <img
+        class="w-full"
+        src="/assets/scene/mascot.svg"
+        alt=""
+        width="93"
+        height="94"
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
     <img
       class="absolute bottom-0 left-1/2 z-2 aspect-1123/501 h-full max-h-(--building) w-auto max-w-(--building) -translate-x-1/2 animate-hero-scene object-cover object-top [animation-delay:100ms] motion-reduce:animate-none"
       src="/assets/scene/compass_bg.svg"
@@ -97,3 +126,175 @@ const sponsorPageUrl =
     <div class="absolute inset-x-0 bottom-0 z-3 h-[clamp(14rem,34svh,26rem)] bg-linear-to-b from-transparent to-cream"></div>
   </div>
 </section>
+
+<style>
+  .hero-gull {
+    aspect-ratio: 430.29 / 395.3;
+  }
+
+  .hero-gull__frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(-1);
+    object-fit: contain;
+  }
+
+  .hero-gull__wings-up {
+    opacity: 1;
+  }
+
+  .hero-gull__wings-down {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-gull {
+      animation:
+        gull-flight 18s linear 800ms infinite,
+        gull-wave 18s ease-in-out 800ms infinite;
+    }
+
+    .hero-gull__wings-up {
+      animation: gull-wings-up 420ms steps(1, end) 800ms infinite;
+    }
+
+    .hero-gull__wings-down {
+      animation: gull-wings-down 420ms steps(1, end) 800ms infinite;
+    }
+
+    @keyframes gull-flight {
+      from {
+        transform: translateX(-14vw);
+      }
+
+      to {
+        transform: translateX(114vw);
+      }
+    }
+
+    @keyframes gull-wave {
+      0% {
+        translate: 0 0;
+      }
+
+      12% {
+        translate: 0 -1svh;
+      }
+
+      26% {
+        translate: 0 3svh;
+      }
+
+      39% {
+        translate: 0 1svh;
+      }
+
+      52% {
+        translate: 0 0;
+      }
+
+      65% {
+        translate: 0 1svh;
+      }
+
+      77% {
+        translate: 0 4svh;
+      }
+
+      88% {
+        translate: 0 9svh;
+      }
+
+      100% {
+        translate: 0 13svh;
+      }
+    }
+
+    @keyframes gull-wings-up {
+      0%,
+      49.99% {
+        opacity: 1;
+      }
+
+      50%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes gull-wings-down {
+      0%,
+      49.99% {
+        opacity: 0;
+      }
+
+      50%,
+      100% {
+        opacity: 1;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (width < 64rem) {
+    .hero-gull {
+      animation-name: gull-flight, gull-wave-mobile;
+      animation-duration: 9s, 9s;
+    }
+
+    @keyframes gull-wave-mobile {
+      0% {
+        translate: 0 0;
+      }
+
+      12% {
+        translate: 0 -0.5svh;
+      }
+
+      26% {
+        translate: 0 1.5svh;
+      }
+
+      39% {
+        translate: 0 0.5svh;
+      }
+
+      52% {
+        translate: 0 0;
+      }
+
+      65% {
+        translate: 0 0.5svh;
+      }
+
+      77% {
+        translate: 0 1.5svh;
+      }
+
+      88% {
+        translate: 0 4svh;
+      }
+
+      100% {
+        translate: 0 6svh;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-gull {
+      top: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .hero-gull__wings-up {
+      opacity: 1;
+    }
+
+    .hero-gull__wings-down {
+      opacity: 0;
+    }
+  }
+</style>
