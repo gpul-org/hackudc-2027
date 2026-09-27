@@ -13,10 +13,10 @@ const aboutLink =
   "inline-flex items-center gap-2 border-b border-current pb-1.5 text-xs font-black tracking-widest uppercase transition-colors hover:text-red";
 ---
 
-<!-- Standard section rhythm, except on desktop the lamp sets the bottom edge
-     instead of padding: its mast runs off the section, clipped by overflow-hidden. -->
+<!-- Standard section rhythm. On desktop the lamp's mast runs off the bottom
+     edge through the padding, clipped by overflow-hidden. -->
 <section
-  class="relative overflow-hidden py-16 lg:pt-24 lg:pb-0"
+  class="relative overflow-hidden py-16 lg:py-24"
   id="about"
   aria-labelledby="about-title"
 >
@@ -37,9 +37,9 @@ const aboutLink =
 
     <div class="mt-10 lg:mt-6 lg:flex lg:items-start lg:gap-12 xl:gap-16">
       <!-- Anchored to the bottom so the mast always runs off the edge, even when
-           the copy wraps taller than the lamp; the copy keeps its own bottom space. -->
+           the copy wraps taller than the lamp. -->
       <img
-        class="pointer-events-none hidden max-w-none shrink-0 lg:-mb-12 lg:block lg:self-end lg:w-[clamp(25rem,30vw,28rem)]"
+        class="pointer-events-none hidden max-w-none shrink-0 lg:-mb-36 lg:block lg:self-end lg:w-[clamp(25rem,30vw,28rem)]"
         src="/assets/scene/farola.svg"
         alt=""
         width="706"
@@ -49,7 +49,7 @@ const aboutLink =
         decoding="async"
         data-scroll-drift
       />
-      <div class="min-w-0 flex-1 text-lg leading-normal lg:pt-6 lg:pb-16 lg:text-xl">
+      <div class="min-w-0 flex-1 text-lg leading-normal lg:pt-6 lg:text-xl">
         <p class="reveal" data-reveal>
           {bodyStart}
           <a
