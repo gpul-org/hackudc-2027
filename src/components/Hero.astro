@@ -18,8 +18,12 @@ const sponsorPageUrl =
   aria-labelledby="hero-title"
 >
   <div
-    class="hero-gull pointer-events-none absolute top-[8%] left-0 z-50 w-28 sm:w-32 lg:top-[7%] lg:w-36"
+    class="hero-gull absolute top-[8%] left-0 z-50 w-28 sm:w-32 lg:top-[7%] lg:w-36 cursor-pointer"
     aria-hidden="true"
+    id="hero-gull"
+    role="button"
+    tabindex="0"
+    aria-label="Gaviota"
   >
     <img
       class="hero-gull__frame hero-gull__wings-up"
@@ -126,6 +130,49 @@ const sponsorPageUrl =
     <div class="absolute inset-x-0 bottom-0 z-3 h-[clamp(14rem,34svh,26rem)] bg-linear-to-b from-transparent to-cream"></div>
   </div>
 </section>
+
+<script>
+  import confetti from "canvas-confetti";
+
+  const gull = document.getElementById("hero-gull");
+
+  function triggerConfetti() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+    const duration = 3 * 1000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+      confetti({
+        particleCount: 7,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.5 },
+        colors: ["#002B5C", "#E53E3E", "#F5E6C8", "#FFD700", "#FFFFFF"],
+      });
+      confetti({
+        particleCount: 7,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.5 },
+        colors: ["#002B5C", "#E53E3E", "#F5E6C8", "#FFD700", "#FFFFFF"],
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  }
+
+  gull?.addEventListener("click", triggerConfetti);
+  gull?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      triggerConfetti();
+    }
+  });
+</script>
 
 <style>
   .hero-gull {
