@@ -122,64 +122,32 @@ export const copy: Record<Locale, Copy> = {
         "Próximamente anunciaremos las fechas del evento.",
       ],
       [
-        "¿Dónde se celebra HackUDC?",
-        "El evento tendrá lugar en la Facultad de Informática (FIC) de la Universidade da Coruña (UDC), en el campus de Elviña, en A Coruña.",
+        "¿Dónde se celebra y dónde puedo descansar?",
+        "El evento tendrá lugar en la Facultad de Informática (FIC) de la Universidade da Coruña (UDC), en el campus de Elviña, en A Coruña. Si lo necesitas, habrá zonas de descanso en las aulas para echar una siesta rápida.",
       ],
       [
         "¿Qué incluye HackUDC?",
         "HackUDC es completamente gratuito. Tendrás WiFi y espacios de trabajo, además de desayunos, comidas, cenas y tentempiés durante todo el evento. No olvides indicar cualquier restricción alimentaria al registrarte.",
       ],
       [
-        "¿Dónde puedo descansar?",
-        "Si no tienes alojamiento, habrá zonas de descanso en las aulas. Recuerda que la Facultad no es un hotel y que estas zonas están pensadas para echar una siesta rápida y volver a programar.",
-      ],
-      [
-        "¿Podré ducharme durante el evento?",
-        "¡Claro! La Facultad permanecerá abierta durante todo el evento y habrá horarios reservados para que puedas ducharte y mantenerte fresco.",
-      ],
-      [
-        "¿Qué puedo crear?",
-        "Puedes crear cualquier proyecto relacionado con la tecnología. No hay restricciones sobre el tema. El único requisito es publicar el proyecto desarrollado durante la hackathon bajo una licencia libre. Puedes hacer aplicaciones web o móviles, proyectos de hardware, juegos, APIs y mucho más.",
-      ],
-      [
-        "¿Qué tengo que llevar?",
-        "Para acceder tendrás que verificar tu identidad con un documento oficial válido. También te recomendamos llevar un portátil y su cargador, ropa cómoda y ganas de crear. Si tienes algún hardware específico que quieras usar, tráelo contigo.",
+        "¿Qué puedo crear y qué tengo que llevar?",
+        "Puedes crear cualquier proyecto relacionado con la tecnología, siempre que lo publiques bajo una licencia libre. Trae un documento oficial válido, tu portátil y cargador, ropa cómoda y cualquier hardware que quieras usar.",
       ],
       [
         "¿Quién puede participar?",
-        "Pueden participar estudiantes o personas recién graduadas, hasta un año después de graduarse, de universidades, ciclos de formación profesional, bachillerato u otros itinerarios educativos.",
+        "Pueden participar estudiantes y personas recién graduadas, hasta un año después de graduarse, de universidades, formación profesional, bachillerato u otros itinerarios educativos. No necesitas experiencia programando: también puedes aportar desde diseño, pruebas o gestión de proyectos.",
       ],
       [
-        "¿Cómo puedo registrarme?",
-        "¡El registro ya está cerrado! Cubrimos todas las plazas disponibles casi un mes antes del evento. Gracias por tu interés. Esperamos verte en la próxima edición.",
+        "¿Cómo funcionan los equipos?",
+        "No necesitas venir con equipo: organizaremos una actividad para que conozcas a otras personas y forméis uno. Los equipos pueden tener hasta cuatro personas y pueden cambiar durante el evento.",
       ],
       [
-        "¿Y si no soy estudiante?",
-        "También puedes participar como mentor o mentora para disfrutar del evento y ayudar a las personas participantes con sus proyectos. El registro de mentores abrirá más adelante.",
-      ],
-      [
-        "¿Y si no tengo experiencia programando?",
-        "HackUDC es un lugar para aprender, así que no necesitas experiencia previa programando. También puedes contribuir en otras áreas, como diseño, pruebas o gestión de proyectos.",
-      ],
-      [
-        "¿Y si no tengo equipo?",
-        "Parte de la diversión de una hackathon es conocer gente nueva. Al principio del evento organizaremos una actividad para que puedas conocer a otras personas y formar equipo.",
-      ],
-      [
-        "¿Cuál es el tamaño máximo de un equipo?",
-        "Los equipos pueden tener hasta 4 hackers.",
-      ],
-      [
-        "¿Puedo cambiar de equipo durante el evento?",
-        "¡Sí! Solo cuenta la entrega final, así que asegúrate de enviar correctamente tu proyecto. Durante el evento compartiremos las instrucciones de entrega.",
+        "¿Puedo participar como mentor o mentora?",
+        "Sí. Habrá mentores durante todo el evento para resolver dudas. Si quieres colaborar como mentor o mentora, podrás inscribirte cuando abramos el registro.",
       ],
       [
         "Sobre los créditos ECTS",
         "Si eres estudiante de la UDC, puedes conseguir 1,5 créditos ECTS por participar en HackUDC. Controlaremos la asistencia durante el evento. Si quieres reconocer los créditos, tendrás que solicitarlo a través de la VEE. Daremos más información antes, durante y después del evento.",
-      ],
-      [
-        "¿Habrá mentores?",
-        "Sí. Habrá mentores disponibles durante todo el evento para responder a tus preguntas. Si quieres participar como mentor o mentora, puedes cubrir el formulario que aparece debajo del registro de participantes. Si tienes alguna duda, escríbenos a hackudc@gpul.org.",
       ],
       [
         "¿Y si tengo otras preguntas?",
@@ -270,61 +238,32 @@ export const copy: Record<Locale, Copy> = {
         "We will announce the event dates soon.",
       ],
       [
-        "Where does HackUDC take place?",
-        "The event will take place at the Faculty of Computer Science (FIC) of the University of A Coruña (UDC), on the Elviña Campus in A Coruña.",
+        "Where does it take place and where can I rest?",
+        "The event will take place at the Faculty of Computer Science (FIC) of the University of A Coruña (UDC), on the Elviña Campus in A Coruña. If you need one, rest areas in classrooms will be available for a quick nap.",
       ],
       [
         "What does HackUDC include?",
         "HackUDC is completely free for participants. WiFi and workspaces are provided, as well as breakfasts, lunches, dinners and snacks throughout the event. Do not forget to include any dietary restrictions when registering.",
       ],
       [
-        "Where can I rest?",
-        "If you do not have accommodation, rest areas will be available in classrooms. Keep in mind that the Faculty is not a hotel, and these areas are meant for quick naps so that you can get back to hacking.",
-      ],
-      [
-        "Will I be able to take a shower during the event?",
-        "Of course! The Faculty will be open throughout the event, and there will be designated times for you to take a shower and stay fresh.",
-      ],
-      [
-        "What can I create?",
-        "You can create any project related to technology. We have no restrictions on the topic. The only requirement is that the project developed during the hackathon is published under a free license. Some examples are web applications, mobile applications, hardware projects, games and APIs.",
-      ],
-      [
-        "What do I need to bring?",
-        "For admission, you will need to verify your identity with a valid government-issued ID. Other common things to bring are a laptop and charger, comfortable clothing and eagerness to create. If you have any specific hardware you want to use, feel free to bring it along.",
+        "What can I create and what should I bring?",
+        "You can create any technology-related project, as long as you publish it under a free licence. Bring a valid government-issued ID, your laptop and charger, comfortable clothes and any hardware you want to use.",
       ],
       [
         "Who can participate?",
-        "Students or recent graduates, up to one year after graduation, from universities, vocational training programs, high schools or other educational backgrounds are all welcome.",
+        "Students and recent graduates, up to one year after graduation, from universities, vocational training, high schools or other educational backgrounds can participate. No coding experience is needed: you can also contribute through design, testing or project management.",
       ],
       [
-        "How can I register?",
-        "Registration has already closed! We filled all the available spots almost a month before the event. Thanks for your interest in the hackathon. We hope to see you in next year's edition.",
+        "How do teams work?",
+        "You do not need to arrive with a team: we will organise an activity to help you meet people and form one. Teams can have up to four people, and you can change teams during the event.",
       ],
       [
-        "What if I am not a student?",
-        "You can still participate as a mentor to enjoy the event and help participants with their projects. Mentor registration will open later.",
-      ],
-      [
-        "What if I have no coding experience?",
-        "HackUDC is a place to learn, so no prior programming experience is required. There are many other areas where you can contribute, such as design, testing and project management.",
-      ],
-      [
-        "What if I do not have a team?",
-        "Part of the fun of a hackathon is meeting new people. We will have a team-building activity at the beginning of the event so that everyone can meet and form teams.",
-      ],
-      ["What is the maximum team size?", "Teams can have up to 4 hackers."],
-      [
-        "Can I switch teams during the event?",
-        "Yes! Only the final submission counts, so make sure your project is submitted correctly. Submission instructions will be provided during the event.",
+        "Can I take part as a mentor?",
+        "Yes. Mentors will be available throughout the event to answer questions. If you would like to help as a mentor, you will be able to sign up when registration opens.",
       ],
       [
         "About ECTS credits",
         "If you are a UDC student, you can earn 1.5 ECTS credits by participating in HackUDC. Attendance will be monitored during the event. UDC students interested in receiving credits must request recognition through the VEE. More detailed information will be provided before, during and after the event.",
-      ],
-      [
-        "Will there be mentors?",
-        "Yes. Mentors will be available throughout the event to answer any questions you may have. If you would like to participate as a mentor, you can fill out the form linked below the participant registration. For any questions, email us at hackudc@gpul.org.",
       ],
       [
         "What if I have other questions?",
@@ -415,64 +354,32 @@ export const copy: Record<Locale, Copy> = {
         "En breve anunciaremos as datas do evento.",
       ],
       [
-        "Onde se celebra HackUDC?",
-        "O evento terá lugar na Facultade de Informática (FIC) da Universidade da Coruña (UDC), no campus de Elviña, na Coruña.",
+        "Onde se celebra e onde podo descansar?",
+        "O evento terá lugar na Facultade de Informática (FIC) da Universidade da Coruña (UDC), no campus de Elviña, na Coruña. Se o precisas, haberá zonas de descanso nas aulas para botar unha sesta rápida.",
       ],
       [
         "Que inclúe HackUDC?",
         "HackUDC é totalmente gratuíta. Terás WiFi e espazos de traballo, ademais de almorzos, xantares, ceas e petiscos durante todo o evento. Non esquezas indicar calquera restrición alimentaria ao rexistrarte.",
       ],
       [
-        "Onde podo descansar?",
-        "Se non tes aloxamento, haberá zonas de descanso nas aulas. Lembra que a Facultade non é un hotel e que estas zonas están pensadas para botar unha sesta rápida e volver ao hacking.",
-      ],
-      [
-        "Poderei ducharme durante o evento?",
-        "Por suposto! A Facultade permanecerá aberta durante todo o evento e haberá horarios establecidos para que poidas ducharte e manterte fresco.",
-      ],
-      [
-        "Que podo crear?",
-        "Podes crear calquera proxecto relacionado coa tecnoloxía. Non hai restricións sobre o tema. O único requisito é publicar o proxecto desenvolvido durante a hackathon baixo unha licenza libre. Podes facer aplicacións web ou móbiles, proxectos de hardware, xogos, APIs e moito máis.",
-      ],
-      [
-        "Que teño que levar?",
-        "Para acceder terás que verificar a túa identidade cun documento oficial válido. Tamén recomendamos levar un portátil e o seu cargador, roupa cómoda e ganas de crear. Se tes algún hardware específico que queiras usar, tráeo contigo.",
+        "Que podo crear e que teño que levar?",
+        "Podes crear calquera proxecto relacionado coa tecnoloxía, sempre que o publiques baixo unha licenza libre. Trae un documento oficial válido, o teu portátil e cargador, roupa cómoda e calquera hardware que queiras usar.",
       ],
       [
         "Quen pode participar?",
-        "Poden participar estudantes ou persoas recentemente graduadas, ata un ano despois de graduarse, de universidades, ciclos de formación profesional, institutos ou outros itinerarios educativos.",
+        "Poden participar estudantes e persoas recentemente graduadas, ata un ano despois de graduarse, de universidades, formación profesional, institutos ou outros itinerarios educativos. Non precisas experiencia programando: tamén podes contribuír desde deseño, probas ou xestión de proxectos.",
       ],
       [
-        "Como podo rexistrarme?",
-        "A inscrición xa pechou! Cubrimos todas as prazas dispoñibles case un mes antes do evento. Grazas polo teu interese. Agardamos verte na próxima edición.",
+        "Como funcionan os equipos?",
+        "Non necesitas vir con equipo: organizaremos unha actividade para que coñezas outras persoas e formedes un. Os equipos poden ter ata catro persoas e podes cambiar de equipo durante o evento.",
       ],
       [
-        "E se non son estudante?",
-        "Tamén podes participar como mentor ou mentora para gozar do evento e axudar ás persoas participantes cos seus proxectos. A inscrición de mentores abrirá máis adiante.",
-      ],
-      [
-        "E se non teño experiencia programando?",
-        "HackUDC é un lugar para aprender, así que non precisas experiencia previa programando. Tamén podes contribuír noutras áreas, como deseño, probas ou xestión de proxectos.",
-      ],
-      [
-        "E se non teño equipo?",
-        "Parte da diversión dunha hackathon é coñecer xente nova. Ao comezo do evento organizaremos unha actividade para que poidas coñecer outras persoas e formar un equipo.",
-      ],
-      [
-        "Cal é o tamaño máximo dun equipo?",
-        "Os equipos poden ter ata 4 hackers.",
-      ],
-      [
-        "Podo cambiar de equipo durante o evento?",
-        "Si! Só conta a entrega final, así que asegúrate de enviar correctamente o teu proxecto. Durante o evento compartiremos as instrucións de entrega.",
+        "Podo participar como mentor ou mentora?",
+        "Si. Haberá mentores durante todo o evento para resolver dúbidas. Se queres colaborar como mentor ou mentora, poderás inscribirte cando abramos o rexistro.",
       ],
       [
         "Sobre os créditos ECTS",
         "Se es estudante da UDC, podes conseguir 1,5 créditos ECTS por participar en HackUDC. Controlaremos a asistencia durante o evento. Se queres recoñecer os créditos, terás que solicitalo a través da VEE. Daremos máis información antes, durante e despois do evento.",
-      ],
-      [
-        "Haberá mentores?",
-        "Si. Haberá mentores dispoñibles durante todo o evento para responder as túas preguntas. Se queres participar como mentor ou mentora, podes cubrir o formulario que aparece debaixo do rexistro de participantes. Se tes algunha dúbida, escríbenos a hackudc@gpul.org.",
       ],
       [
         "E se teño outras preguntas?",
