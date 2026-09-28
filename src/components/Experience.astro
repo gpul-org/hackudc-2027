@@ -296,7 +296,7 @@ const controlButton =
 
     let player: HTMLIFrameElement | undefined;
     let desktop = false;
-    let ended = false;
+    let handedOff = false;
     let retry: number | undefined;
     let cover: number | undefined;
     signal.addEventListener("abort", () => {
@@ -316,6 +316,13 @@ const controlButton =
       cover = undefined;
       root.toggleAttribute("data-playing", playing);
       play.inert = playing;
+    };
+
+    // From now on play leads to the full video on YouTube.
+    const handOff = () => {
+      handedOff = true;
+      setPlaying(false);
+      play.setAttribute("aria-label", root.dataset.fullLabel ?? "");
     };
 
     const load = () => {
@@ -386,16 +393,21 @@ const controlButton =
         // own caption preference would still show them, so drop the module.
         if (data.event === "onReady") command("unloadModule", ["captions"]);
 
+        // YouTube can refuse to play in the embed (e.g. its "confirm you're
+        // not a bot" check, reported as `videoData.errorCode`); the thumbnail
+        // then stays up and play goes straight to YouTube instead.
+        if (data.event === "onError" || data.info?.videoData?.errorCode) {
+          handOff();
+          return;
+        }
+
         const state =
           data.event === "onStateChange" ? data.info : data.info?.playerState;
         if (state === playingState) {
           setPlaying(true);
         } else if (state === endedState) {
-          // Back to the thumbnail, hiding YouTube's end screen; from now on
-          // play leads to the full video.
-          ended = true;
-          setPlaying(false);
-          play.setAttribute("aria-label", root.dataset.fullLabel ?? "");
+          // Back to the thumbnail, hiding YouTube's end screen.
+          handOff();
         } else if (
           // With YouTube's controls on screen (phones and tablets), the
           // viewer is in charge; on desktop any stall hides the player again.
@@ -417,7 +429,7 @@ const controlButton =
     play.addEventListener(
       "click",
       () => {
-        if (ended) window.open(root.dataset.full, "_blank", "noopener");
+        if (handedOff) window.open(root.dataset.full, "_blank", "noopener");
         else if (player) command("playVideo");
         else load();
       },
