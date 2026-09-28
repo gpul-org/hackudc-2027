@@ -120,3 +120,19 @@
 @utility plaque-frame-secondary {
   @apply rounded-[1.5rem] border-4 border-cream bg-cream;
 }
+
+/* A compact translucent lens keeps floating controls distinct over light sections. */
+@utility liquid-glass {
+  @apply rounded-[1.5rem] border border-cream/80 bg-cream/55 shadow-sm backdrop-blur-md;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-ink) 12%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--color-cream) 92%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--color-ink) 10%, transparent);
+  backdrop-filter: blur(12px) saturate(1.15);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .liquid-glass {
+    background-color: var(--color-cream);
+  }
+}
