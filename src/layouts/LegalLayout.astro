@@ -5,7 +5,7 @@ import SiteFooter from "@/components/SiteFooter.astro";
 import { copy, languages, type Locale } from "@/i18n/copy";
 import Layout from "@/layouts/Layout.astro";
 
-type Policy = "terms" | "privacy" | "conduct";
+type Policy = "terms" | "privacy" | "conduct" | "manifesto";
 
 const { frontmatter } = Astro.props;
 const locale = frontmatter.locale as Locale;
