@@ -136,7 +136,7 @@ export const copy: Record<Locale, Copy> = {
       [
         "</root>",
         [
-          "Hasta 6 entradas",
+          "Desde 6 entradas",
           "Stand grande",
           "2 h de charlas",
           "Proponer un reto",
@@ -145,13 +145,13 @@ export const copy: Record<Locale, Copy> = {
       [
         "</admin>",
         [
-          "Hasta 4 entradas",
+          "Desde 4 entradas",
           "Stand regular",
           "1 h de charla",
           "Posibilidad de proponer reto",
         ],
       ],
-      ["</user>", ["Hasta 2 entradas", "Logo regular", "30 min de charla"]],
+      ["</user>", ["Desde 2 entradas", "Logo regular", "30 min de charla"]],
       [
         "</collab>",
         ["Logo en la web", "Mención en redes", "Aportación en especie"],
@@ -292,7 +292,7 @@ export const copy: Record<Locale, Copy> = {
       [
         "</root>",
         [
-          "Up to 6 tickets",
+          "From 6 tickets",
           "Large stand",
           "2 h of talks",
           "Propose a challenge",
@@ -301,13 +301,13 @@ export const copy: Record<Locale, Copy> = {
       [
         "</admin>",
         [
-          "Up to 4 tickets",
+          "From 4 tickets",
           "Standard stand",
           "1 h talk",
           "Option to propose a challenge",
         ],
       ],
-      ["</user>", ["Up to 2 tickets", "Standard logo", "30 min talk"]],
+      ["</user>", ["From 2 tickets", "Standard logo", "30 min talk"]],
       [
         "</collab>",
         ["Website logo", "Social media mention", "In-kind contribution"],
@@ -447,7 +447,7 @@ export const copy: Record<Locale, Copy> = {
       [
         "</root>",
         [
-          "Ata 6 entradas",
+          "Desde 6 entradas",
           "Stand grande",
           "2 h de charlas",
           "Propoñer un reto",
@@ -456,13 +456,13 @@ export const copy: Record<Locale, Copy> = {
       [
         "</admin>",
         [
-          "Ata 4 entradas",
+          "Desde 4 entradas",
           "Stand normal",
           "1 h de charla",
           "Posibilidade de propoñer un reto",
         ],
       ],
-      ["</user>", ["Ata 2 entradas", "Logo normal", "30 min de charla"]],
+      ["</user>", ["Desde 2 entradas", "Logo normal", "30 min de charla"]],
       [
         "</collab>",
         ["Logo na web", "Mención en redes", "Aportación en especie"],
