@@ -33,6 +33,18 @@ export type Copy = {
   sponsorExtras: string;
   sponsorCollaborators: string;
   sponsorTiers: [string, string][];
+  sponsorPackageSummaries: [string, string][];
+  sponsorPackageHighlights: [
+    string,
+    [string, string, string] | [string, string, string, string],
+  ][];
+  sponsorCopyEmail: string;
+  sponsorEmailCopied: string;
+  sponsorDetails: string;
+  sponsorDetailsSummary: string;
+  sponsorDetailsCaption: string;
+  sponsorContactTitle: string;
+  sponsorContactBody: string;
   faqKicker: string;
   faqTitle: string;
   faq: [string, string][];
@@ -114,6 +126,46 @@ export const copy: Record<Locale, Copy> = {
       ["admin", "</admin>"],
       ["user", "</user>"],
     ],
+    sponsorPackageSummaries: [
+      ["</root>", "La máxima presencia de marca y participación en el evento."],
+      ["</admin>", "Una presencia destacada para conectar con la comunidad."],
+      ["</user>", "Visibilidad y acceso a la experiencia HackUDC."],
+      ["</collab>", "Colaboración en especie para hacer posible el evento."],
+    ],
+    sponsorPackageHighlights: [
+      [
+        "</root>",
+        [
+          "Hasta 6 entradas",
+          "Stand grande",
+          "2 h de charlas",
+          "Proponer un reto",
+        ],
+      ],
+      [
+        "</admin>",
+        [
+          "Hasta 4 entradas",
+          "Stand regular",
+          "1 h de charla",
+          "Posibilidad de proponer reto",
+        ],
+      ],
+      ["</user>", ["Hasta 2 entradas", "Logo regular", "30 min de charla"]],
+      [
+        "</collab>",
+        ["Logo en la web", "Mención en redes", "Aportación en especie"],
+      ],
+    ],
+    sponsorCopyEmail: "Copiar hackudc@gpul.org",
+    sponsorEmailCopied: "Correo copiado",
+    sponsorDetails: "Comparar todas las prestaciones",
+    sponsorDetailsSummary: "Consulta el detalle de cada paquete.",
+    sponsorDetailsCaption:
+      "Prestaciones incluidas en cada paquete de patrocinio",
+    sponsorContactTitle: "¿Te interesa patrocinar?",
+    sponsorContactBody:
+      "Escríbenos si quieres patrocinar HackUDC o preparar una colaboración a medida.",
     faqKicker: "Preguntas frecuentes",
     faqTitle: "Lo importante, antes de hacer las maletas.",
     faq: [
@@ -230,6 +282,45 @@ export const copy: Record<Locale, Copy> = {
       ["admin", "</admin>"],
       ["user", "</user>"],
     ],
+    sponsorPackageSummaries: [
+      ["</root>", "Maximum brand presence and participation at the event."],
+      ["</admin>", "A prominent presence for connecting with the community."],
+      ["</user>", "Visibility and access to the HackUDC experience."],
+      ["</collab>", "In-kind collaboration to help make the event happen."],
+    ],
+    sponsorPackageHighlights: [
+      [
+        "</root>",
+        [
+          "Up to 6 tickets",
+          "Large stand",
+          "2 h of talks",
+          "Propose a challenge",
+        ],
+      ],
+      [
+        "</admin>",
+        [
+          "Up to 4 tickets",
+          "Standard stand",
+          "1 h talk",
+          "Option to propose a challenge",
+        ],
+      ],
+      ["</user>", ["Up to 2 tickets", "Standard logo", "30 min talk"]],
+      [
+        "</collab>",
+        ["Website logo", "Social media mention", "In-kind contribution"],
+      ],
+    ],
+    sponsorCopyEmail: "Copy hackudc@gpul.org",
+    sponsorEmailCopied: "Email copied",
+    sponsorDetails: "Compare every benefit",
+    sponsorDetailsSummary: "See the detail for each package.",
+    sponsorDetailsCaption: "Benefits included in each sponsorship package",
+    sponsorContactTitle: "Interested in sponsoring?",
+    sponsorContactBody:
+      "Get in touch to sponsor HackUDC or put together a partnership that fits your needs.",
     faqKicker: "Frequently asked",
     faqTitle: "The useful stuff, before you pack your bags.",
     faq: [
@@ -346,6 +437,46 @@ export const copy: Record<Locale, Copy> = {
       ["admin", "</admin>"],
       ["user", "</user>"],
     ],
+    sponsorPackageSummaries: [
+      ["</root>", "A máxima presenza de marca e participación no evento."],
+      ["</admin>", "Unha presenza destacada para conectar coa comunidade."],
+      ["</user>", "Visibilidade e acceso á experiencia HackUDC."],
+      ["</collab>", "Colaboración en especie para facer posible o evento."],
+    ],
+    sponsorPackageHighlights: [
+      [
+        "</root>",
+        [
+          "Ata 6 entradas",
+          "Stand grande",
+          "2 h de charlas",
+          "Propoñer un reto",
+        ],
+      ],
+      [
+        "</admin>",
+        [
+          "Ata 4 entradas",
+          "Stand normal",
+          "1 h de charla",
+          "Posibilidade de propoñer un reto",
+        ],
+      ],
+      ["</user>", ["Ata 2 entradas", "Logo normal", "30 min de charla"]],
+      [
+        "</collab>",
+        ["Logo na web", "Mención en redes", "Aportación en especie"],
+      ],
+    ],
+    sponsorCopyEmail: "Copiar hackudc@gpul.org",
+    sponsorEmailCopied: "Correo copiado",
+    sponsorDetails: "Comparar todas as prestacións",
+    sponsorDetailsSummary: "Consulta o detalle de cada paquete.",
+    sponsorDetailsCaption:
+      "Prestacións incluídas en cada paquete de patrocinio",
+    sponsorContactTitle: "Interésache patrocinar?",
+    sponsorContactBody:
+      "Escríbenos se queres patrocinar HackUDC ou preparar unha colaboración á medida.",
     faqKicker: "Preguntas frecuentes",
     faqTitle: "O importante, antes de facer as maletas.",
     faq: [

@@ -3,7 +3,8 @@ import ArrowLeft from "@lucide/astro/icons/arrow-left";
 import Download from "@lucide/astro/icons/download";
 import Mail from "@lucide/astro/icons/mail";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { languages, type Locale } from "@/i18n/copy";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { copy, languages, type Locale } from "@/i18n/copy";
 
 interface Props {
   locale: Locale;
@@ -25,7 +26,6 @@ const content = {
       "En nuestra quinta edición reuniremos a 500 hackers durante 36 horas en la Facultad de Informática de A Coruña.",
     download: "Descargar dossier completo",
     downloadNote: "PDF · Paquetes de patrocinio 2027",
-    emailCta: "Pongámonos en contacto",
     stats: "HackUDC en cifras",
     why: "¿Por qué patrocinar HackUDC?",
     benefits: [
@@ -64,10 +64,6 @@ const content = {
     sizeL: "Grande",
     sizeXL: "Más grande",
     taxes: "Impuestos y premios de los retos no incluidos en el precio.",
-    contact: "¿Listos para colaborar?",
-    contactBody:
-      "Cuéntanos qué te gustaría construir con la comunidad de HackUDC.",
-    email: "Escribir a hackudc@gpul.org",
   },
   en: {
     back: "Back to HackUDC",
@@ -77,7 +73,6 @@ const content = {
       "For our fifth edition, we will bring 500 hackers together for 36 hours at the Faculty of Computer Science in A Coruña.",
     download: "Download the full deck",
     downloadNote: "PDF · 2027 sponsorship packages",
-    emailCta: "Let's get in touch",
     stats: "HackUDC by the numbers",
     why: "Why sponsor HackUDC?",
     benefits: [
@@ -116,10 +111,6 @@ const content = {
     sizeL: "Large",
     sizeXL: "Extra large",
     taxes: "Taxes and challenge prizes are not included in the price.",
-    contact: "Ready to partner?",
-    contactBody:
-      "Tell us what you would like to build with the HackUDC community.",
-    email: "Email hackudc@gpul.org",
   },
   gl: {
     back: "Volver a HackUDC",
@@ -129,7 +120,6 @@ const content = {
       "Na nosa quinta edición reuniremos 500 hackers durante 36 horas na Facultade de Informática da Coruña.",
     download: "Descargar o dossier completo",
     downloadNote: "PDF · Paquetes de patrocinio 2027",
-    emailCta: "Poñámonos en contacto",
     stats: "HackUDC en cifras",
     why: "Por que patrocinar HackUDC?",
     benefits: [
@@ -168,19 +158,18 @@ const content = {
     sizeL: "Grande",
     sizeXL: "Máis grande",
     taxes: "Os impostos e os premios dos retos non están incluídos no prezo.",
-    contact: "Listos para colaborar?",
-    contactBody:
-      "Cóntanos que che gustaría construír coa comunidade de HackUDC.",
-    email: "Escribir a hackudc@gpul.org",
   },
 } as const;
 const t = content[locale];
+const siteCopy = copy[locale];
 
 const no = "—";
 const packages = [
   {
     name: "</root>",
     price: "7.000€",
+    summary: siteCopy.sponsorPackageSummaries[0][1],
+    highlights: siteCopy.sponsorPackageHighlights[0][1],
     details: [
       "~6",
       "+1",
@@ -196,16 +185,22 @@ const packages = [
   {
     name: "</admin>",
     price: "3.500€",
+    summary: siteCopy.sponsorPackageSummaries[1][1],
+    highlights: siteCopy.sponsorPackageHighlights[1][1],
     details: ["~4", "1", t.sizeM, t.yes, t.sizeL, t.yes, t.yes, "1 h", t.yes],
   },
   {
     name: "</user>",
     price: "1.000€",
+    summary: siteCopy.sponsorPackageSummaries[2][1],
+    highlights: siteCopy.sponsorPackageHighlights[2][1],
     details: ["~2", no, no, no, t.sizeM, no, t.yes, "30 min", t.yes],
   },
   {
     name: "</collab>",
     price: "In-kind",
+    summary: siteCopy.sponsorPackageSummaries[3][1],
+    highlights: siteCopy.sponsorPackageHighlights[3][1],
     details: [no, no, no, no, t.sizeS, no, t.yes, no, no],
   },
 ];
@@ -222,10 +217,10 @@ const features = [
 ];
 ---
 
-<main class="min-h-dvh bg-red text-cream">
+<main class="min-h-dvh bg-cream text-ink">
   <header class="page-wrap flex flex-wrap items-center justify-between gap-4 py-5 sm:py-7">
     <a
-      class="inline-flex min-h-11 items-center gap-2 text-xs font-black tracking-wide uppercase hover:text-blue"
+      class="inline-flex min-h-11 items-center gap-2 text-xs font-black tracking-wide uppercase hover:text-red"
       href={homeUrl}
     >
       <ArrowLeft class="size-4" aria-hidden="true" />
@@ -233,12 +228,12 @@ const features = [
     </a>
     <div class="ml-auto flex items-center gap-2 sm:gap-5">
       <nav
-        class="flex gap-0.5 rounded-full border border-cream/30 p-1"
+        class="flex gap-0.5 rounded-full border border-ink/30 p-1"
         aria-label="Language selector"
       >
         {languages.map((language) => (
           <a
-            class="rounded-full px-2 py-1 text-xs font-extrabold tracking-wide transition-colors hover:bg-cream hover:text-red aria-[current=page]:bg-cream aria-[current=page]:text-red"
+            class="rounded-full px-2 py-1 text-xs font-extrabold tracking-wide transition-colors hover:bg-ink hover:text-cream aria-[current=page]:bg-ink aria-[current=page]:text-cream"
             href={localeUrls[language.code]}
             hreflang={language.code}
             aria-current={language.code === locale ? "page" : undefined}
@@ -250,7 +245,7 @@ const features = [
       <a href={homeUrl} aria-label="HackUDC27, home">
         <img
           class="h-5 w-auto sm:h-9"
-          src="/assets/brand/logo-cream.svg"
+          src="/assets/brand/logo-navy.svg"
           alt="HackUDC27"
           width="1003"
           height="153"
@@ -263,10 +258,10 @@ const features = [
     class="page-wrap pt-16 pb-24 sm:pt-24 lg:pt-32"
     aria-labelledby="sponsors-title"
   >
-    <p class="eyebrow text-sm text-blue">{t.kicker}</p>
+    <p class="eyebrow text-sm text-red">{t.kicker}</p>
     <div class="mt-6 grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
       <div>
-        <h1 id="sponsors-title" class="display-heading max-w-[11ch] text-cream">
+        <h1 id="sponsors-title" class="display-heading max-w-[11ch]">
           {t.title}
         </h1>
         <p class="mt-8 max-w-xl text-pretty text-lg leading-snug sm:text-xl">
@@ -274,15 +269,20 @@ const features = [
         </p>
       </div>
       <div class="grid gap-3">
-        <a
-          class="cta-outline flex min-h-14 items-center justify-between gap-5 rounded-full px-6 py-3"
-          href="mailto:hackudc@gpul.org"
+        <button
+          class="flex min-h-14 items-center justify-between gap-5 rounded-full border-2 border-ink px-6 py-3 text-left transition duration-200 ease-out hover:-translate-y-0.5 hover:border-red hover:text-red"
+          type="button"
+          data-copy-email="hackudc@gpul.org"
+          data-copy-label={siteCopy.sponsorCopyEmail}
+          data-copied-label={siteCopy.sponsorEmailCopied}
         >
-          <span class="text-sm font-black">{t.emailCta}</span>
+          <span class="text-sm font-black" data-copy-label aria-live="polite">
+            {siteCopy.sponsorCopyEmail}
+          </span>
           <Mail class="size-5 shrink-0" aria-hidden="true" />
-        </a>
+        </button>
         <a
-          class="group flex min-h-14 items-center justify-between gap-5 rounded-full bg-cream px-6 py-3 text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-blue"
+          class="group flex min-h-14 items-center justify-between gap-5 rounded-full bg-ink px-6 py-3 text-cream transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-red"
           href="/assets/documents/HackUDC2027-Dossier.pdf"
           download
         >
@@ -300,18 +300,18 @@ const features = [
   </section>
 
   <section
-    class="border-y border-cream/30 bg-cream text-ink"
+    class="border-y border-ink/20 bg-ink text-cream"
     aria-labelledby="why-title"
   >
     <div class="page-wrap py-20 lg:py-28">
-      <p class="eyebrow text-red">{t.stats}</p>
+      <p class="eyebrow text-blue">{t.stats}</p>
       <h2 id="why-title" class="display-heading mt-5 max-w-[12ch]">
         {t.why}
       </h2>
       <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {t.benefits.map(([number, label]) => (
-          <div class="border-t-4 border-red pt-4">
-            <strong class="block font-serif text-5xl leading-none text-red tabular-nums">
+          <div class="border-t-4 border-blue pt-4">
+            <strong class="block font-serif text-5xl leading-none text-blue tabular-nums">
               {number}
             </strong>
             <span class="mt-3 block max-w-[15ch] text-sm font-bold leading-snug">
@@ -323,7 +323,7 @@ const features = [
       <div class="mt-20 grid gap-10 lg:grid-cols-3">
         {t.reasons.map(([title, body]) => (
           <article>
-            <h3 class="font-serif text-2xl text-red">{title}</h3>
+            <h3 class="font-serif text-2xl text-blue">{title}</h3>
             <p class="mt-4 max-w-sm text-pretty leading-snug">{body}</p>
           </article>
         ))}
@@ -332,46 +332,146 @@ const features = [
   </section>
 
   <section class="page-wrap py-20 lg:py-28" aria-labelledby="packages-title">
-    <p class="eyebrow text-sm text-blue">HackUDC 2027</p>
+    <p class="eyebrow text-sm text-red">HackUDC 2027</p>
     <h2 id="packages-title" class="display-heading mt-5">
       {t.packages}
     </h2>
     <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
       {packages.map((pkg) => (
-        <article class="flex flex-col border-2 border-cream p-6">
+        <article class="flex flex-col border-2 border-ink p-6">
           <h3 class="font-serif text-3xl">{pkg.name}</h3>
-          <p class="mt-4 text-4xl font-black tabular-nums text-blue">
+          <p class="mt-4 text-4xl font-black tabular-nums text-red">
             {pkg.price}
           </p>
-          <dl class="mt-8 space-y-3 border-t border-cream/30 pt-5 text-sm">
-            {features.map((feature, index) => (
-              <div class="grid grid-cols-[1fr_auto] gap-3">
-                <dt>{feature}</dt>
-                <dd class="font-bold text-blue">{pkg.details[index]}</dd>
-              </div>
+          <p class="mt-6 min-h-24 text-pretty leading-snug text-ink/70">
+            {pkg.summary}
+          </p>
+          <ul class="mt-8 space-y-2 border-t border-ink/20 pt-5 text-sm font-bold">
+            {pkg.highlights.map((highlight) => (
+              <li>{highlight}</li>
             ))}
-          </dl>
+          </ul>
         </article>
       ))}
     </div>
-    <p class="mt-6 text-sm text-cream/80">{t.taxes}</p>
-  </section>
-
-  <section class="border-t border-cream/30 bg-ink">
-    <div class="page-wrap grid gap-8 py-16 sm:grid-cols-[1fr_auto] sm:items-center">
-      <div>
-        <p class="eyebrow text-sm text-blue">HackUDC · GPUL</p>
-        <h2 class="mt-4 font-serif text-4xl text-balance sm:text-5xl">
-          {t.contact}
-        </h2>
-        <p class="mt-4 max-w-xl text-pretty leading-snug">{t.contactBody}</p>
+    <details class="mt-8 border-y border-ink/20">
+      <summary class="cursor-pointer py-5 font-black text-red marker:text-ink">
+        <span class="ml-2 inline-flex flex-col gap-1 align-middle sm:inline-flex">
+          <span>{siteCopy.sponsorDetails}</span>
+          <span class="font-normal text-sm text-ink/70">
+            {siteCopy.sponsorDetailsSummary}
+          </span>
+        </span>
+      </summary>
+      <div class="overflow-x-auto border-t border-ink/20">
+        <table class="w-full min-w-180 border-collapse text-left text-sm">
+          <caption class="sr-only">{siteCopy.sponsorDetailsCaption}</caption>
+          <thead class="border-b border-ink/20 text-xs text-ink/70">
+            <tr>
+              <th class="px-4 py-4 font-bold" scope="col">
+                &nbsp;
+              </th>
+              {packages.map((pkg) => (
+                <th class="px-4 py-4 font-bold" scope="col">
+                  {pkg.name}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {features.map((feature, index) => (
+              <tr class="border-b border-ink/15 last:border-0">
+                <th class="px-4 py-4 font-bold" scope="row">
+                  {feature}
+                </th>
+                {packages.map((pkg) => (
+                  <td class="px-4 py-4 text-ink/70">{pkg.details[index]}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <a
-        class="inline-flex min-h-12 items-center justify-center rounded-full bg-cream px-6 py-3 text-sm font-black text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-blue"
-        href="mailto:hackudc@gpul.org"
+    </details>
+    <p class="mt-6 text-sm text-ink/70">{t.taxes}</p>
+    <aside class="mt-12 grid gap-6 border-2 border-ink p-6 sm:grid-cols-[1fr_auto] sm:items-center">
+      <div>
+        <h3 class="font-serif text-3xl text-balance">
+          {siteCopy.sponsorContactTitle}
+        </h3>
+        <p class="mt-3 max-w-2xl text-pretty leading-snug">
+          {siteCopy.sponsorContactBody}
+        </p>
+      </div>
+      <button
+        class="inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-black text-cream transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-red"
+        type="button"
+        data-copy-email="hackudc@gpul.org"
+        data-copy-label={siteCopy.sponsorCopyEmail}
+        data-copied-label={siteCopy.sponsorEmailCopied}
       >
-        {t.email}
-      </a>
-    </div>
+        <span data-copy-label aria-live="polite">
+          {siteCopy.sponsorCopyEmail}
+        </span>
+      </button>
+    </aside>
   </section>
 </main>
+
+<SiteFooter locale={locale} />
+
+<script>
+  let copyController: AbortController | undefined;
+
+  document.addEventListener("astro:page-load", () => {
+    copyController?.abort();
+    copyController = new AbortController();
+    const { signal } = copyController;
+
+    async function copyText(value: string) {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+        return;
+      }
+
+      const input = document.createElement("textarea");
+      input.value = value;
+      input.style.position = "fixed";
+      input.style.opacity = "0";
+      document.body.append(input);
+      input.select();
+      const copied = document.execCommand("copy");
+      input.remove();
+      if (!copied) throw new Error("Unable to copy email");
+    }
+
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-copy-email]")
+      .forEach((button) => {
+        const label = button.querySelector<HTMLElement>("[data-copy-label]");
+        const email = button.dataset.copyEmail;
+        const defaultLabel = button.dataset.copyLabel;
+        const copiedLabel = button.dataset.copiedLabel;
+        let resetTimer: number | undefined;
+
+        if (!label || !email || !defaultLabel || !copiedLabel) return;
+
+        button.addEventListener(
+          "click",
+          async () => {
+            try {
+              await copyText(email);
+              window.clearTimeout(resetTimer);
+              label.textContent = copiedLabel;
+              resetTimer = window.setTimeout(() => {
+                label.textContent = defaultLabel;
+              }, 2000);
+            } catch (error) {
+              console.error("Unable to copy sponsor email", error);
+            }
+          },
+          { signal },
+        );
+      });
+  });
+</script>
