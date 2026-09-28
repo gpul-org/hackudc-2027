@@ -1,6 +1,4 @@
 ---
-import ArrowRight from "@lucide/astro/icons/arrow-right";
-import { getRelativeLocaleUrl } from "astro:i18n";
 import SponsorBuilding from "@/components/SponsorBuilding.astro";
 import { copy, type Locale } from "@/i18n/copy";
 
@@ -9,102 +7,28 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
-const sponsorPageUrl = getRelativeLocaleUrl(Astro.props.locale, "sponsors/");
 ---
 
 <section
-  class="bg-blue pt-16 text-ink lg:pt-24"
+  class="bg-blue py-16 text-ink lg:py-24"
   id="sponsors"
   aria-labelledby="sponsors-title"
 >
-  <div class="page-wrap grid items-end gap-6 lg:min-h-[calc(90svh-6rem)] lg:max-w-none lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-6 lg:pr-6">
-    <div class="max-w-4xl lg:pb-24">
+  <div class="page-wrap">
+    <div class="mx-auto max-w-2xl text-center">
       <p class="eyebrow reveal" data-reveal>
         {t.sponsorsKicker}
       </p>
       <h2
-        class="mt-5 max-w-[10ch] display-heading reveal"
+        class="display-heading reveal mt-5 text-balance"
         data-reveal
         id="sponsors-title"
       >
         {t.sponsorsTitle}
       </h2>
-      <p
-        class="reveal mt-8 max-w-md text-base leading-snug lg:text-xl"
-        data-reveal
-      >
-        {t.sponsorsBody}
-      </p>
-      <div class="relative mt-8 w-fit" data-sponsor-cta>
-        <a
-          class="group reveal inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-transparent bg-cream px-5 py-3 text-xs font-black tracking-wide text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-ink hover:text-cream"
-          data-reveal
-          href={sponsorPageUrl}
-        >
-          {t.sponsorCta}
-          <ArrowRight
-            class="size-4 transition group-hover:translate-x-0.5"
-            aria-hidden="true"
-          />
-        </a>
-        <svg
-          data-sponsor-arrow
-          class="pointer-events-none absolute bottom-[-2rem] left-[calc(100%+0.75rem)] w-[clamp(6rem,16vw,17rem)] overflow-visible text-red opacity-0 transition-opacity duration-150 data-visible:opacity-100 motion-reduce:transition-none max-lg:bottom-[20%] max-lg:left-[calc(100%+0.25rem)] max-lg:w-[clamp(3.5rem,18vw,6rem)]"
-          viewBox="0 0 300 190"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path
-            data-arrow-line
-            d="M286 15 C280 34 258 43 252 63 C245 90 214 111 183 119 C155 127 112 135 108 114 C101 92 134 70 165 73 C191 74 207 99 190 128 C175 157 134 174 96 165 C72 159 42 142 12 135"
-          />
-          <path
-            data-arrow-head
-            d="M61 114 C42 122 26 132 12 135 C21 148 31 158 40 169"
-          />
-        </svg>
-      </div>
     </div>
-    <figure class="relative min-h-[27rem] w-full self-stretch max-lg:mx-auto max-lg:aspect-square max-lg:min-h-0 max-lg:max-w-[32rem] lg:min-h-0">
+    <div class="reveal mt-10 lg:mt-14" data-reveal>
       <SponsorBuilding locale={Astro.props.locale} />
-    </figure>
-  </div>
-  <div class="page-wrap pb-16" data-sponsor-extras hidden>
-    <h3 class="eyebrow mb-6" id="sponsor-extras-title">
-      {t.sponsorExtras}
-    </h3>
-    <ul
-      class="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6"
-      aria-labelledby="sponsor-extras-title"
-      data-sponsor-extras-list
-    />
+    </div>
   </div>
 </section>
-
-<style>
-  [data-sponsor-extras] :global(li) {
-    min-width: 0;
-    min-height: 6rem;
-  }
-
-  [data-sponsor-extras] :global(a),
-  [data-sponsor-extras] :global(.sponsor-extra-mark) {
-    display: grid;
-    width: 100%;
-    height: 100%;
-    place-items: center;
-    color: var(--color-ink);
-    font-weight: 800;
-    text-align: center;
-  }
-
-  [data-sponsor-extras] :global(img) {
-    width: 100%;
-    height: 6rem;
-    object-fit: contain;
-  }
-</style>

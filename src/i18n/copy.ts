@@ -27,11 +27,11 @@ export type Copy = {
   steps: [string, string, string][];
   sponsorsKicker: string;
   sponsorsTitle: string;
-  sponsorsBody: string;
   sponsorCta: string;
   sponsorWindow: string;
   sponsorVisit: string;
   sponsorExtras: string;
+  sponsorCollaborators: string;
   sponsorTiers: [string, string][];
   faqKicker: string;
   faqTitle: string;
@@ -102,14 +102,13 @@ export const copy: Record<Locale, Copy> = {
         "Documentación, una buena demo y código abierto. Los premios se anuncian en la clausura.",
       ],
     ],
-    sponsorsKicker: "Con el apoyo de",
-    sponsorsTitle: "Las mejores ideas necesitan espacio para crecer.",
-    sponsorsBody:
-      "Conecta tu marca con la próxima generación de personas que construyen el futuro.",
+    sponsorsKicker: "Patrocinadores",
+    sponsorsTitle: "Gracias a quienes hacen posible HackUDC.",
     sponsorCta: "¿Te interesa patrocinarnos?",
     sponsorWindow: "Jugar con la ventana",
     sponsorVisit: "Visitar la web de",
     sponsorExtras: "Más patrocinadores",
+    sponsorCollaborators: "Colaboradores",
     sponsorTiers: [
       ["root", "</root>"],
       ["admin", "</admin>"],
@@ -251,14 +250,13 @@ export const copy: Record<Locale, Copy> = {
         "Docs, a compelling demo and open-source code. Winners are announced at the closing ceremony.",
       ],
     ],
-    sponsorsKicker: "Supported by",
-    sponsorsTitle: "Great ideas need room to grow.",
-    sponsorsBody:
-      "Connect your brand with the next generation of people building the future.",
+    sponsorsKicker: "Sponsors",
+    sponsorsTitle: "Thanks to the companies that make HackUDC possible.",
     sponsorCta: "Interested in sponsoring us?",
     sponsorWindow: "Play with window",
     sponsorVisit: "Visit the website of",
     sponsorExtras: "More sponsors",
+    sponsorCollaborators: "Collaborators",
     sponsorTiers: [
       ["root", "</root>"],
       ["admin", "</admin>"],
@@ -397,14 +395,13 @@ export const copy: Record<Locale, Copy> = {
         "Documentación, unha boa demo e código aberto. Os premios anúncianse na clausura.",
       ],
     ],
-    sponsorsKicker: "Co apoio de",
-    sponsorsTitle: "As mellores ideas precisan espazo para medrar.",
-    sponsorsBody:
-      "Conecta a túa marca coa próxima xeración de persoas que constrúen o futuro.",
+    sponsorsKicker: "Patrocinadores",
+    sponsorsTitle: "Grazas a quen fai posible HackUDC.",
     sponsorCta: "Interésache patrocinarnos?",
     sponsorWindow: "Xogar coa xanela",
     sponsorVisit: "Visitar a web de",
     sponsorExtras: "Máis patrocinadores",
+    sponsorCollaborators: "Colaboradores",
     sponsorTiers: [
       ["root", "</root>"],
       ["admin", "</admin>"],
