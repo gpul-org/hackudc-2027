@@ -37,83 +37,87 @@ const total = String(steps.length).padStart(2, "0");
     class="page-wrap py-16 pinned:sticky pinned:top-0 pinned:flex pinned:h-svh pinned:flex-col pinned:pb-24 lg:pt-24 lg:pinned:pb-16"
     data-steps-stage
   >
-    <header>
-      <p class="eyebrow">{t.stepsKicker}</p>
-      <h2 id="steps-title" class="mt-4 display-heading">
-        {t.stepsTitle}
-      </h2>
-    </header>
+    <!-- Keep the headline and stage as one composition on ultrawide displays,
+         rather than letting the photo panel span the entire available canvas. -->
+    <div class="flex min-h-0 w-full flex-1 flex-col lg:mx-auto lg:max-w-[68.75rem]">
+      <header>
+        <p class="eyebrow">{t.stepsKicker}</p>
+        <h2 id="steps-title" class="mt-4 display-heading">
+          {t.stepsTitle}
+        </h2>
+      </header>
 
-    <!-- `--rose` is the rose's size; the panel reads it to tuck under the rose.
+      <!-- `--rose` is the rose's size; the panel reads it to tuck under the rose.
          Pinned, the row is a size container, so the rose and the panel grow
          into whatever height the heading leaves (`cqh`) instead of guessing it
          from the viewport. -->
-    <div
-      class="relative mt-6 flex flex-col items-center [--rose:min(70%,20rem)] pinned:min-h-0 pinned:flex-1 pinned:[container-type:size] pinned:[--rose:min(70cqw,22rem,45cqh)] lg:mt-10 lg:flex-row lg:[--rose:min(26rem,28vw)] lg:pinned:[--rose:min(88cqh,36rem)]"
-      data-steps-row
-    >
-      <!-- Below desktop the panel slides out from under the rose. On desktop
-           the rose leaves the flow and only its right half shows, on top of
-           the panel's left edge: the half the steps turn towards. -->
       <div
-        class="pointer-events-none relative z-1 w-(--rose) flex-none lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:w-[calc(var(--rose)/2)] lg:items-center lg:justify-end lg:overflow-hidden"
-        aria-hidden="true"
+        class="relative mt-6 flex flex-col items-center [--rose:min(70%,20rem)] pinned:min-h-0 pinned:flex-1 pinned:[container-type:size] pinned:[--rose:min(70cqw,22rem,45cqh)] lg:mt-10 lg:flex-row lg:[--rose:min(26rem,28vw)] lg:pinned:[--rose:min(88cqh,36rem)]"
+        data-steps-row
       >
-        <img
-          class="block h-auto w-full lg:h-full lg:max-h-(--rose) lg:w-auto lg:max-w-none lg:flex-none"
-          data-steps-rose
-          src="/assets/scene/rosa-ventos.svg"
-          alt=""
-          width="1057"
-          height="1054"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-
-      <div class="relative -mt-[calc(var(--rose)*0.2)] flex flex-col justify-center self-stretch overflow-hidden bg-ink px-6 pt-[calc(var(--rose)*0.2+1.75rem)] pb-7 text-cream pinned:flex-1 lg:m-0 lg:flex-1 lg:self-center lg:p-10 lg:pl-[calc(var(--rose)/2+2.5rem)] lg:pinned:min-h-[calc(var(--rose)*0.8)]">
-        <div class="grid gap-8">
-          {steps.map(({ number, title, body, image }) => (
-            <article
-              class="max-lg:text-center pinned:[grid-area:1/1]"
-              data-step
-            >
-              <div class="relative z-1 lg:w-1/2">
-                <p class="eyebrow text-yellow">
-                  {number} <span class="text-cream/40">/ {total}</span>
-                </p>
-                <h3 class="mt-4 font-serif text-3xl leading-tight max-[30rem]:text-[clamp(1.5rem,7vw,2rem)] max-[30rem]:wrap-anywhere sm:text-4xl">
-                  {title}
-                </h3>
-                <p class="mt-5 max-w-sm text-base leading-relaxed max-lg:mx-auto max-[30rem]:mt-4 sm:text-lg">
-                  {body}
-                </p>
-              </div>
-              <!-- Pinned desktop only: the photo fades in from the panel's
-                     ink and swaps with its step. -->
-              <img
-                class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[45%] object-cover mask-[linear-gradient(to_right,transparent,black_70%)] lg:pinned:block"
-                src={image}
-                alt=""
-                width="1200"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
-            </article>
-          ))}
-        </div>
-
+        <!-- Below desktop the panel slides out from under the rose. On desktop
+           its centre aligns with the panel edge, leaving only the right half
+           visible on top of the card. -->
         <div
-          class="relative z-1 mt-8 flex gap-2 max-lg:justify-center"
+          class="pointer-events-none relative z-1 w-(--rose) flex-none lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:w-[calc(var(--rose)/2)] lg:items-center lg:justify-end lg:overflow-hidden"
           aria-hidden="true"
         >
-          {steps.map(() => (
-            <span
-              class="h-0.75 w-8 bg-cream opacity-25 data-active:bg-yellow data-active:opacity-100"
-              data-step-marker
-            />
-          ))}
+          <img
+            class="block h-auto w-full lg:h-full lg:max-h-(--rose) lg:w-auto lg:max-w-none lg:flex-none"
+            data-steps-rose
+            src="/assets/scene/rosa-ventos.svg"
+            alt=""
+            width="1057"
+            height="1054"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <div class="relative -mt-[calc(var(--rose)*0.2)] flex flex-col justify-center self-stretch overflow-hidden bg-ink px-6 pt-[calc(var(--rose)*0.2+1.75rem)] pb-7 text-cream pinned:flex-1 lg:m-0 lg:flex-1 lg:self-center lg:p-10 lg:pl-[calc(var(--rose)/2+2.5rem)] lg:pinned:min-h-[calc(var(--rose)*0.8)]">
+          <div class="grid gap-8">
+            {steps.map(({ number, title, body, image }) => (
+              <article
+                class="max-lg:text-center pinned:[grid-area:1/1]"
+                data-step
+              >
+                <div class="relative z-1 lg:w-1/2">
+                  <p class="eyebrow text-yellow">
+                    {number} <span class="text-cream/40">/ {total}</span>
+                  </p>
+                  <h3 class="mt-4 font-serif text-3xl leading-tight max-[30rem]:text-[clamp(1.5rem,7vw,2rem)] max-[30rem]:wrap-anywhere sm:text-4xl">
+                    {title}
+                  </h3>
+                  <p class="mt-5 max-w-sm text-base leading-relaxed max-lg:mx-auto max-[30rem]:mt-4 sm:text-lg">
+                    {body}
+                  </p>
+                </div>
+                <!-- Pinned desktop only: the photo fades in from the panel's
+                     ink and swaps with its step. -->
+                <img
+                  class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[45%] object-cover mask-[linear-gradient(to_right,transparent,black_70%)] lg:pinned:block"
+                  src={image}
+                  alt=""
+                  width="1200"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+            ))}
+          </div>
+
+          <div
+            class="relative z-1 mt-8 flex gap-2 max-lg:justify-center"
+            aria-hidden="true"
+          >
+            {steps.map(() => (
+              <span
+                class="h-0.75 w-8 bg-cream opacity-25 data-active:bg-yellow data-active:opacity-100"
+                data-step-marker
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -127,6 +131,7 @@ const total = String(steps.length).padStart(2, "0");
   const STEP_ANGLE = 45;
   const TURN_START = 0.3;
   const TURN_END = 0.7;
+  const ROSE_SCALE = 1.2;
 
   const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 
@@ -138,7 +143,8 @@ const total = String(steps.length).padStart(2, "0");
   }
 
   // Crossfade matches the rose turn window (0.3–0.7) for more scroll per step.
-  const stepOpacity = (distance: number) => clamp01((TURN_END - distance) / (TURN_END - TURN_START));
+  const stepOpacity = (distance: number) =>
+    clamp01((TURN_END - distance) / (TURN_END - TURN_START));
 
   document.addEventListener("astro:page-load", () => {
     const section = document.querySelector<HTMLElement>("[data-steps]");
@@ -179,7 +185,7 @@ const total = String(steps.length).padStart(2, "0");
 
       const position = pinned ? scrollProgress() * (steps.length - 1) : 0;
       const current = Math.round(position);
-      rose.style.transform = `rotate(${roseAngle(position)}deg)`;
+      rose.style.transform = `scale(${ROSE_SCALE}) rotate(${roseAngle(position)}deg)`;
 
       steps.forEach((step, index) => {
         const active = !pinned || index === current;
