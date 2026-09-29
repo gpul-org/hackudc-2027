@@ -1,8 +1,8 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
-import ArrowLeft from "@lucide/astro/icons/arrow-left";
+import PageHeader from "@/components/PageHeader.astro";
 import SiteFooter from "@/components/SiteFooter.astro";
-import { copy, languages, type Locale } from "@/i18n/copy";
+import { copy, type Locale } from "@/i18n/copy";
 import Layout from "@/layouts/Layout.astro";
 
 type Policy = "terms" | "privacy" | "conduct" | "manifesto";
@@ -25,41 +25,13 @@ const localeUrls: Record<Locale, string> = {
   description={frontmatter.description}
 >
   <div class="min-h-dvh bg-cream text-ink">
-    <header class="page-wrap flex items-center justify-between gap-4 py-5 sm:py-7">
-      <a
-        class="inline-flex min-h-11 items-center gap-2 text-xs font-black tracking-wide uppercase hover:text-red"
-        href={homeUrl}
-      >
-        <ArrowLeft class="size-4" aria-hidden="true" />
-        {t.backHome}
-      </a>
-      <div class="flex items-center gap-3 sm:gap-5">
-        <nav
-          class="flex gap-0.5 rounded-full border border-ink/30 p-1"
-          aria-label="Language selector"
-        >
-          {languages.map((language) => (
-            <a
-              class="rounded-full px-2 py-1 text-xs font-extrabold tracking-wide transition-colors hover:bg-ink hover:text-cream aria-[current=page]:bg-ink aria-[current=page]:text-cream"
-              href={localeUrls[language.code]}
-              hreflang={language.code}
-              aria-current={language.code === locale ? "page" : undefined}
-            >
-              {language.label}
-            </a>
-          ))}
-        </nav>
-        <a href={homeUrl} aria-label="HackUDC27, home">
-          <img
-            class="h-7 w-auto sm:h-9"
-            src="/assets/brand/logo-navy.svg"
-            alt="HackUDC27"
-            width="1003"
-            height="153"
-          />
-        </a>
-      </div>
-    </header>
+    <PageHeader
+      locale={locale}
+      localeUrls={localeUrls}
+      homeUrl={homeUrl}
+      backLabel={t.backHome}
+      backShortLabel={t.backHomeShort}
+    />
 
     <main class="page-wrap pb-16 sm:pb-24">
       <article class="legal-copy mx-auto max-w-3xl">

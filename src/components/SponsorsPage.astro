@@ -1,10 +1,10 @@
 ---
-import ArrowLeft from "@lucide/astro/icons/arrow-left";
 import Download from "@lucide/astro/icons/download";
 import Mail from "@lucide/astro/icons/mail";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import PageHeader from "@/components/PageHeader.astro";
 import SiteFooter from "@/components/SiteFooter.astro";
-import { copy, languages, type Locale } from "@/i18n/copy";
+import { copy, type Locale } from "@/i18n/copy";
 
 interface Props {
   locale: Locale;
@@ -20,6 +20,7 @@ const localeUrls: Record<Locale, string> = {
 const content = {
   es: {
     back: "Volver a HackUDC",
+    backShort: "Volver",
     kicker: "Patrocinio · HackUDC 2027",
     title: "Construyamos el futuro tecnológico de Galicia.",
     intro:
@@ -67,6 +68,7 @@ const content = {
   },
   en: {
     back: "Back to HackUDC",
+    backShort: "Back",
     kicker: "Sponsorship · HackUDC 2027",
     title: "Let’s build Galicia’s tech future.",
     intro:
@@ -114,6 +116,7 @@ const content = {
   },
   gl: {
     back: "Volver a HackUDC",
+    backShort: "Volver",
     kicker: "Patrocinio · HackUDC 2027",
     title: "Construamos o futuro tecnolóxico de Galicia.",
     intro:
@@ -218,46 +221,15 @@ const features = [
 ---
 
 <main class="min-h-dvh bg-cream text-ink">
-  <header class="page-wrap flex flex-wrap items-center justify-between gap-4 py-5 sm:py-7">
-    <a
-      class="inline-flex min-h-11 items-center gap-2 text-xs font-black tracking-wide uppercase hover:text-red"
-      href={homeUrl}
-    >
-      <ArrowLeft class="size-4" aria-hidden="true" />
-      {t.back}
-    </a>
-    <div class="ml-auto flex items-center gap-2 sm:gap-5">
-      <nav
-        class="flex gap-0.5 rounded-full border border-ink/30 p-1"
-        aria-label="Language selector"
-      >
-        {languages.map((language) => (
-          <a
-            class="rounded-full px-2 py-1 text-xs font-extrabold tracking-wide transition-colors hover:bg-ink hover:text-cream aria-[current=page]:bg-ink aria-[current=page]:text-cream"
-            href={localeUrls[language.code]}
-            hreflang={language.code}
-            aria-current={language.code === locale ? "page" : undefined}
-          >
-            {language.label}
-          </a>
-        ))}
-      </nav>
-      <a href={homeUrl} aria-label="HackUDC27, home">
-        <img
-          class="h-5 w-auto sm:h-9"
-          src="/assets/brand/logo-navy.svg"
-          alt="HackUDC27"
-          width="1003"
-          height="153"
-        />
-      </a>
-    </div>
-  </header>
+  <PageHeader
+    locale={locale}
+    localeUrls={localeUrls}
+    homeUrl={homeUrl}
+    backLabel={t.back}
+    backShortLabel={t.backShort}
+  />
 
-  <section
-    class="page-wrap pt-16 pb-24 sm:pt-24 lg:pt-32"
-    aria-labelledby="sponsors-title"
-  >
+  <section class="page-wrap pt-4 pb-24" aria-labelledby="sponsors-title">
     <p class="eyebrow text-sm text-red">{t.kicker}</p>
     <div class="mt-6 grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
       <div>

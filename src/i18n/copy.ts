@@ -56,6 +56,7 @@ export type Copy = {
   privacy: string;
   conduct: string;
   backHome: string;
+  backHomeShort: string;
 };
 
 export const copy: Record<Locale, Copy> = {
@@ -214,6 +215,7 @@ export const copy: Record<Locale, Copy> = {
     privacy: "Política de privacidad",
     conduct: "Código de conducta",
     backHome: "Volver al inicio",
+    backHomeShort: "Volver",
   },
   en: {
     nav: ["What is it", "The experience", "Sponsorship", "FAQ"],
@@ -369,6 +371,7 @@ export const copy: Record<Locale, Copy> = {
     privacy: "Privacy policy",
     conduct: "Code of conduct",
     backHome: "Back to home",
+    backHomeShort: "Back",
   },
   gl: {
     nav: ["Que é", "A experiencia", "Patrocinio", "FAQ"],
@@ -525,6 +528,7 @@ export const copy: Record<Locale, Copy> = {
     privacy: "Política de privacidade",
     conduct: "Código de conduta",
     backHome: "Volver ao inicio",
+    backHomeShort: "Volver",
   },
 };
 

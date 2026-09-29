@@ -1,0 +1,166 @@
+---
+import ArrowLeft from "@lucide/astro/icons/arrow-left";
+import { languages, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+  localeUrls: Record<Locale, string>;
+  homeUrl: string;
+  backLabel: string;
+  backShortLabel: string;
+}
+
+const { locale, localeUrls, homeUrl, backLabel, backShortLabel } = Astro.props;
+const current = languages.find(({ code }) => code === locale)!;
+const alternateLanguages = languages.filter(({ code }) => code !== locale);
+const languageLink =
+  "rounded-full px-3 py-2 text-sm font-extrabold tracking-wide transition-colors";
+const languageOption =
+  "page-header-language-option max-w-0 overflow-hidden transition-[max-width,margin] duration-200 ease-out motion-reduce:transition-none";
+---
+
+<header
+  class="page-wrap flex items-center gap-2 py-4 sm:gap-5 sm:py-7"
+  data-page-header
+>
+  <a
+    class="inline-flex min-h-11 shrink-0 items-center gap-2 text-xs font-black tracking-wide uppercase hover:text-red"
+    href={homeUrl}
+    aria-label={backLabel}
+  >
+    <ArrowLeft class="size-4" aria-hidden="true" />
+    <span class="page-header-back-short">{backShortLabel}</span>
+    <span class="page-header-back-full">{backLabel}</span>
+  </a>
+  <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-5">
+    <nav
+      class="group relative z-10"
+      aria-label="Language selector"
+      data-page-language-menu
+    >
+      <div class="relative size-12">
+        <div class="page-header-language-panel absolute top-0 right-0 flex items-center rounded-full border border-transparent bg-cream p-1">
+          {alternateLanguages.map((language) => (
+            <div class={languageOption}>
+              <a
+                class={`${languageLink} block shrink-0 whitespace-nowrap hover:bg-ink hover:text-cream`}
+                href={localeUrls[language.code]}
+                hreflang={language.code}
+                data-page-language-option
+                tabindex="-1"
+              >
+                {language.label}
+              </a>
+            </div>
+          ))}
+          <button
+            class={`${languageLink} shrink-0 bg-ink text-cream`}
+            type="button"
+            aria-label={`Language: ${current.label}`}
+            aria-expanded="false"
+          >
+            {current.label}
+          </button>
+        </div>
+      </div>
+    </nav>
+    <a class="shrink-0" href={homeUrl} aria-label="HackUDC27, home">
+      <img
+        class="h-4 w-auto sm:h-9"
+        src="/assets/brand/logo-navy.svg"
+        alt=""
+        width="1003"
+        height="153"
+      />
+    </a>
+  </div>
+</header>
+
+<style>
+  .page-header-back-short,
+  .page-header-back-full {
+    display: none;
+  }
+
+  @media (min-width: 22rem) {
+    .page-header-back-short {
+      display: inline;
+    }
+  }
+
+  @media (min-width: 24rem) {
+    .page-header-back-short {
+      display: none;
+    }
+
+    .page-header-back-full {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 639px) {
+    [data-page-header][data-language-menu-open] .page-header-back-short,
+    [data-page-header][data-language-menu-open] .page-header-back-full {
+      visibility: hidden;
+    }
+  }
+
+  [data-page-language-menu].is-open .page-header-language-option {
+    margin-inline-start: 0.125rem;
+    max-width: 3.5rem;
+  }
+
+  [data-page-language-menu].is-open .page-header-language-panel {
+    border-color: color-mix(in oklab, var(--color-ink) 30%, transparent);
+  }
+</style>
+
+<script>
+  let controller: AbortController | undefined;
+
+  document.addEventListener("astro:page-load", () => {
+    controller?.abort();
+
+    const menu = document.querySelector<HTMLElement>(
+      "[data-page-language-menu]",
+    );
+    const header = menu?.closest<HTMLElement>("[data-page-header]");
+    const toggle = menu?.querySelector("button");
+    const options = menu?.querySelectorAll<HTMLAnchorElement>(
+      "[data-page-language-option]",
+    );
+    if (!menu || !toggle) return;
+
+    controller = new AbortController();
+    const { signal } = controller;
+    const setOpen = (open: boolean) => {
+      menu.toggleAttribute("data-open", open);
+      menu.classList.toggle("is-open", open);
+      header?.toggleAttribute("data-language-menu-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      options?.forEach((option) => {
+        option.tabIndex = open ? 0 : -1;
+      });
+    };
+
+    toggle.addEventListener(
+      "click",
+      () => setOpen(!menu.hasAttribute("data-open")),
+      { signal },
+    );
+    document.addEventListener(
+      "click",
+      (event) => {
+        if (!menu.contains(event.target as Node)) setOpen(false);
+      },
+      { signal },
+    );
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape") setOpen(false);
+      },
+      { signal },
+    );
+  });
+</script>
