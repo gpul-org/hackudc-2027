@@ -7,6 +7,8 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
+const midpoint = Math.ceil(t.faq.length / 2);
+const columns = [t.faq.slice(0, midpoint), t.faq.slice(midpoint)];
 ---
 
 <section
@@ -29,54 +31,151 @@ const t = copy[Astro.props.locale];
     </div>
 
     <div
-      class="mt-16 grid grid-cols-1 gap-x-8 gap-y-0 sm:grid-cols-2"
+      class="mt-16 grid grid-cols-1 items-start gap-x-8 lg:grid-cols-2"
       data-faq-accordion
     >
-      {t.faq.map(([question, answer]) => (
-        <details class="group border-t border-ink/15 py-5 reveal" data-reveal>
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 select-none font-serif text-xl leading-[1.15] font-normal tracking-[-0.01em] sm:text-2xl [&::-webkit-details-marker]:hidden">
-            <span>{question}</span>
-            <span
-              class="inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-current font-sans text-xl leading-none transition duration-200 ease-out group-open:rotate-45 group-open:bg-ink group-open:text-cream"
-              aria-hidden="true"
+      {columns.map((questions) => (
+        <div class="contents lg:flex lg:flex-col">
+          {questions.map(([question, answer]) => (
+            <details
+              class="group border-t border-ink/15 py-5 reveal motion-reduce:animate-none"
+              data-reveal
+              data-faq-item
             >
-              <Plus class="size-4" aria-hidden="true" />
-            </span>
-          </summary>
-          <p class="mt-4 mr-11 max-w-xl text-[0.95rem] leading-[1.6]">
-            {answer}
-          </p>
-        </details>
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 select-none font-serif text-xl leading-[1.15] font-normal tracking-[-0.01em] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red sm:text-2xl [&::-webkit-details-marker]:hidden">
+                <span>{question}</span>
+                <span
+                  class="faq-icon inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-current font-sans text-xl leading-none"
+                  aria-hidden="true"
+                >
+                  <Plus class="size-4" aria-hidden="true" />
+                </span>
+              </summary>
+              <div data-faq-answer>
+                <p class="mt-4 mr-11 max-w-xl text-[0.95rem] leading-[1.6]">
+                  {answer}
+                </p>
+              </div>
+            </details>
+          ))}
+        </div>
       ))}
     </div>
   </div>
 </section>
 
+<style>
+  .faq-icon {
+    transition:
+      transform 200ms var(--ease-out),
+      background-color 200ms var(--ease-out),
+      color 200ms var(--ease-out);
+  }
+
+  details[open]:not([data-expanded="false"]) .faq-icon {
+    transform: rotate(45deg);
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-icon {
+      transition: none;
+    }
+  }
+</style>
+
 <script>
   document.addEventListener("astro:page-load", () => {
-    const accordions = document.querySelectorAll<HTMLElement>(
-      "[data-faq-accordion]",
-    );
     const controller = new AbortController();
+    const { signal } = controller;
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    const animations = new Map<HTMLDetailsElement, Animation>();
+    const easing = getComputedStyle(document.documentElement)
+      .getPropertyValue("--ease-out")
+      .trim();
 
-    accordions.forEach((accordion) => {
-      accordion.querySelectorAll("details").forEach((current) => {
-        current.addEventListener(
-          "toggle",
-          () => {
-            if (!current.open) return;
+    const setOpen = (
+      item: HTMLDetailsElement,
+      open: boolean,
+      animate: boolean,
+    ) => {
+      const startHeight = item.getBoundingClientRect().height;
+      animations.get(item)?.cancel();
+      animations.delete(item);
+      item.dataset.expanded = String(open);
+      const answer = item.querySelector<HTMLElement>("[data-faq-answer]")!;
+      answer.inert = !open;
 
-            accordion.querySelectorAll("details[open]").forEach((item) => {
-              if (item !== current) item.open = false;
-            });
-          },
-          { signal: controller.signal },
-        );
+      if (!animate || reducedMotion.matches) {
+        item.open = open;
+        item.style.overflow = "";
+        return;
+      }
+
+      // Measure both native states so the final height stays responsive.
+      item.open = open;
+      const endHeight = item.getBoundingClientRect().height;
+      item.open = true;
+      item.style.overflow = "hidden";
+      const animation = item.animate(
+        { height: [`${startHeight}px`, `${endHeight}px`] },
+        { duration: 200, easing },
+      );
+      animations.set(item, animation);
+      animation.onfinish = () => {
+        item.open = open;
+        item.style.overflow = "";
+        animations.delete(item);
+      };
+    };
+
+    document
+      .querySelectorAll<HTMLElement>("[data-faq-accordion]")
+      .forEach((accordion) => {
+        accordion
+          .querySelectorAll<HTMLDetailsElement>("[data-faq-item]")
+          .forEach((item) => {
+            const summary = item.querySelector("summary")!;
+            summary.addEventListener(
+              "click",
+              (event) => {
+                event.preventDefault();
+                const open = item.dataset.expanded
+                  ? item.dataset.expanded !== "true"
+                  : !item.open;
+                const animate = event.detail > 0;
+                if (open) {
+                  accordion
+                    .querySelectorAll<HTMLDetailsElement>("details[open]")
+                    .forEach((other) => {
+                      if (other !== item) setOpen(other, false, animate);
+                    });
+                }
+                setOpen(item, open, animate);
+              },
+              { signal },
+            );
+          });
       });
-    });
 
-    document.addEventListener("astro:before-swap", () => controller.abort(), {
-      once: true,
-    });
+    reducedMotion.addEventListener(
+      "change",
+      () => {
+        if (reducedMotion.matches)
+          animations.forEach((animation) => animation.finish());
+      },
+      { signal },
+    );
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        controller.abort();
+        animations.forEach((animation) => animation.cancel());
+        animations.clear();
+      },
+      { once: true, signal },
+    );
   });
 </script>
