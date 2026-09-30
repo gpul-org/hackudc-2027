@@ -1,4 +1,8 @@
 ---
+import { Image } from "astro:assets";
+import assetEmiliaSimpatica from "@/assets/scene/emilia-simpatica.webp";
+import assetStatsScene from "@/assets/scene/stats-scene.webp";
+import assetStatsSea from "@/assets/scene/stats-sea.webp";
 import Clock from "@lucide/astro/icons/clock";
 import CodeXml from "@lucide/astro/icons/code-xml";
 import Users from "@lucide/astro/icons/users";
@@ -9,6 +13,10 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
+// Match the scene width to the section's --faro clamps, including the sea.
+const sceneWidths = [400, 480, 700, 800, 900, 1000, 1200, 1400];
+const sceneSizes =
+  "(min-width: 1024px) clamp(43.2rem, 60.48vw, 56.16rem), clamp(23.76rem, 95.04vw, 30.24rem)";
 
 // One icon per stat, in the same order as `t.stats`.
 const icons = [Users, Clock, CodeXml];
@@ -90,9 +98,13 @@ const stats = t.stats.map(([value, label], index) => ({
     </div>
   </div>
 
-  <img
+  <Image
     class="pointer-events-none mt-4 block w-[calc(var(--faro)*4.32)] max-w-none select-none lg:absolute lg:bottom-0 lg:left-0 lg:mt-0"
-    src="/assets/scene/stats-scene.webp"
+    src={assetStatsScene}
+    format="avif"
+    quality={60}
+    widths={sceneWidths}
+    sizes={sceneSizes}
     alt=""
     width="1400"
     height="679"
@@ -101,9 +113,11 @@ const stats = t.stats.map(([value, label], index) => ({
   />
   <!-- The same sea, mirrored, rises from the right edge so the waves meet
        mid-section instead of the right side ending empty. -->
-  <img
+  <Image
     class="pointer-events-none absolute right-0 bottom-0 hidden w-[calc(var(--faro)*4.32)] max-w-none select-none lg:block"
-    src="/assets/scene/stats-sea.webp"
+    src={assetStatsSea}
+    widths={sceneWidths}
+    sizes={sceneSizes}
     alt=""
     width="1400"
     height="307"
@@ -113,9 +127,11 @@ const stats = t.stats.map(([value, label], index) => ({
   <!-- Mirrored so it kicks outwards. A quarter of it runs off the right edge
        and its foot 2px past the floor: the section only clips horizontally
        and sits above the next one. -->
-  <img
+  <Image
     class="pointer-events-none absolute right-0 -bottom-[2px] z-2 w-[clamp(4.5rem,10vw,10rem)] max-w-none translate-x-[25%] select-none"
-    src="/assets/scene/emilia-simpatica.webp"
+    src={assetEmiliaSimpatica}
+    widths={[160, 320]}
+    sizes="(min-width: 1600px) 160px, (min-width: 720px) 10vw, 72px"
     alt=""
     width="700"
     height="821"

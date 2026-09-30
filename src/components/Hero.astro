@@ -1,4 +1,13 @@
 ---
+import { Image } from "astro:assets";
+import assetLogoMobileNavy from "@/assets/brand/logo-mobile-navy.svg?url";
+import assetLogoNavy from "@/assets/brand/logo-navy.svg?url";
+import assetButtonPrimary from "@/assets/scene/button-primary.svg?url";
+import assetButtonSecondary from "@/assets/scene/button-secondary.svg?url";
+import assetCompassBg from "@/assets/scene/compass_bg.svg?url";
+import assetGaviotaAlasAbajo from "@/assets/scene/gaviota-alas-abajo.svg?url";
+import assetGaviotaAlasArriba from "@/assets/scene/gaviota-alas-arriba.svg?url";
+import assetMascot from "@/assets/scene/mascot.svg?url";
 import { copy, type Locale } from "@/i18n/copy";
 
 interface Props {
@@ -25,21 +34,23 @@ const sponsorPageUrl =
     tabindex="0"
     aria-label="Gaviota"
   >
-    <img
+    <Image
       class="hero-gull__frame hero-gull__wings-up"
-      src="/assets/scene/gaviota-alas-arriba.svg"
+      src={assetGaviotaAlasArriba}
       alt=""
       width="430"
       height="395"
       decoding="async"
+      loading="eager"
     />
-    <img
+    <Image
       class="hero-gull__frame hero-gull__wings-down"
-      src="/assets/scene/gaviota-alas-abajo.svg"
+      src={assetGaviotaAlasAbajo}
       alt=""
       width="430"
       height="395"
       decoding="async"
+      loading="eager"
     />
   </div>
 
@@ -50,17 +61,15 @@ const sponsorPageUrl =
       </span>
       <h1 id="hero-title">
         <picture class="block w-(--mobile-logo-width) sm:w-[min(60vw,56rem,80svh)]">
-          <source
-            media="(width < 40rem)"
-            srcset="/assets/brand/logo-mobile-navy.svg"
-          />
-          <img
+          <source media="(width < 40rem)" srcset={assetLogoMobileNavy} />
+          <Image
             class="w-full animate-hero-logo motion-reduce:animate-none"
-            src="/assets/brand/logo-navy.svg"
+            src={assetLogoNavy}
             alt="HackUDC27"
             width="1003"
             height="153"
             fetchpriority="high"
+            loading="eager"
           />
         </picture>
         <span class="sr-only">{t.title}</span>
@@ -76,7 +85,8 @@ const sponsorPageUrl =
       id="waitlist"
     >
       <a
-        class="cta-plaque animate-hero-enter bg-[url(/assets/scene/button-primary.svg)] text-xs text-cream [animation-delay:390ms] motion-reduce:animate-none sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
+        style={`background-image: url(${assetButtonPrimary})`}
+        class="cta-plaque animate-hero-enter text-xs text-cream [animation-delay:390ms] motion-reduce:animate-none sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
         href="https://nocodb.gpul.org/dashboard/#/nc/form/f1137831-84ad-4682-93de-a416cc592ff1"
         target="_blank"
         rel="noopener noreferrer"
@@ -84,7 +94,8 @@ const sponsorPageUrl =
         {t.waitlistShort}
       </a>
       <a
-        class="cta-plaque animate-hero-enter bg-[url(/assets/scene/button-secondary.svg)] text-xs text-blue [animation-delay:460ms] motion-reduce:animate-none sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
+        style={`background-image: url(${assetButtonSecondary})`}
+        class="cta-plaque animate-hero-enter text-xs text-blue [animation-delay:460ms] motion-reduce:animate-none sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
         href={sponsorPageUrl}
       >
         {t.sponsor}
@@ -110,9 +121,9 @@ const sponsorPageUrl =
       href="https://gpul.org"
       aria-label="GPUL"
     >
-      <img
+      <Image
         class="w-full"
-        src="/assets/scene/mascot.svg"
+        src={assetMascot}
         alt=""
         width="93"
         height="94"
@@ -120,12 +131,13 @@ const sponsorPageUrl =
         decoding="async"
       />
     </a>
-    <img
+    <Image
       class="absolute bottom-0 left-1/2 z-2 aspect-1123/501 h-full max-h-(--building) w-auto max-w-(--building) -translate-x-1/2 animate-hero-scene object-cover object-top [animation-delay:100ms] motion-reduce:animate-none"
-      src="/assets/scene/compass_bg.svg"
+      src={assetCompassBg}
       alt=""
       width="1123"
       height="1121"
+      loading="eager"
     />
     <div class="absolute inset-x-0 bottom-0 z-3 h-[clamp(14rem,34svh,26rem)] bg-linear-to-b from-transparent to-cream"></div>
   </div>

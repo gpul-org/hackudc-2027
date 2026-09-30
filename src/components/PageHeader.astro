@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import assetLogoNavy from "@/assets/brand/logo-navy.svg?url";
 import ArrowLeft from "@lucide/astro/icons/arrow-left";
 import { languages, type Locale } from "@/i18n/copy";
 
@@ -65,12 +67,13 @@ const languageOption =
       </div>
     </nav>
     <a class="shrink-0" href={homeUrl} aria-label="HackUDC27, home">
-      <img
+      <Image
         class="h-4 w-auto sm:h-9"
-        src="/assets/brand/logo-navy.svg"
+        src={assetLogoNavy}
         alt=""
         width="1003"
         height="153"
+        loading="eager"
       />
     </a>
   </div>

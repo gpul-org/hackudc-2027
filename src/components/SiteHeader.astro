@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import assetLogoNavy from "@/assets/brand/logo-navy.svg?url";
 import { copy, languages, type Locale } from "@/i18n/copy";
 
 interface Props {
@@ -25,12 +27,13 @@ const languageOption =
     href={localeUrls[locale]}
     aria-label="HackUDC27, home"
   >
-    <img
+    <Image
       class="h-6 w-auto sm:h-7"
-      src="/assets/brand/logo-navy.svg"
+      src={assetLogoNavy}
       alt=""
       width="1003"
       height="153"
+      loading="eager"
     />
   </a>
 

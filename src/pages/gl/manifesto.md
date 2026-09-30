@@ -80,4 +80,4 @@ Queremos que poidan saír fóra, coñecer outros lugares e aprender deles, pero 
 
 Se HackUDC pode achegar a súa parte para que cada vez se poidan facer máis cousas desde Galicia, ese tamén será o noso éxito.
 
-<p><a href="/assets/manifesto.pdf" target="_blank" rel="noopener noreferrer">Ver en PDF</a></p>
+<p><a href="/assets/documents/manifesto.pdf" target="_blank" rel="noopener noreferrer">Ver en PDF</a></p>

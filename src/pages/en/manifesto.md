@@ -80,4 +80,4 @@ We want them to be able to go elsewhere, see other places, and learn from them, 
 
 If HackUDC can do its part so that more and more things can be built from Galicia, that will be our success too.
 
-<p><a href="/assets/manifesto.pdf" target="_blank" rel="noopener noreferrer">View as PDF</a></p>
+<p><a href="/assets/documents/manifesto.pdf" target="_blank" rel="noopener noreferrer">View as PDF</a></p>

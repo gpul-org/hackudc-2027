@@ -18,6 +18,16 @@ export default defineConfig({
     },
   },
 
+  image: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        pathname: "/vi/sBOCOznVlHM/maxresdefault.jpg",
+      },
+    ],
+  },
+
   build: {
     inlineStylesheets: "always",
   },

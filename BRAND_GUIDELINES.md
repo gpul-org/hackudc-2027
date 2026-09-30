@@ -16,7 +16,7 @@ references.
 
 ## Logo
 
-Use only the supplied files in `public/assets/brand/`.
+Use only the supplied files in `src/assets/brand/`.
 
 | Variant          | Use                                                |
 | ---------------- | -------------------------------------------------- |

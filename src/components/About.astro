@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import assetFarola from "@/assets/scene/farola.svg?url";
 import ArrowDownRight from "@lucide/astro/icons/arrow-down-right";
 import ArrowRight from "@lucide/astro/icons/arrow-right";
 import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
@@ -40,9 +42,9 @@ const aboutLink =
     <div class="mt-10 lg:mt-6 lg:flex lg:items-start lg:gap-12 xl:gap-16">
       <!-- Anchored to the bottom so the mast always runs off the edge, even when
            the copy wraps taller than the lamp. -->
-      <img
+      <Image
         class="pointer-events-none hidden max-w-none shrink-0 lg:-mb-36 lg:block lg:self-end lg:w-[clamp(25rem,30vw,28rem)]"
-        src="/assets/scene/farola.svg"
+        src={assetFarola}
         alt=""
         width="706"
         height="742"

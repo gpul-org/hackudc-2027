@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import assetLogoCream from "@/assets/brand/logo-cream.svg?url";
+import assetEmiliaFooter from "@/assets/scene/emilia-footer.webp";
 import ArrowUp from "@lucide/astro/icons/arrow-up";
 import Github from "@/assets/icons/github.svg";
 import Instagram from "@/assets/icons/instagram.svg";
@@ -42,9 +45,11 @@ const socials = [
   class="relative overflow-x-clip bg-ink px-[clamp(1.25rem,6vw,7rem)] pt-8 pb-5 text-cream"
   data-site-footer
 >
-  <img
+  <Image
     class="pointer-events-none absolute right-[-3.5rem] bottom-full z-10 h-[clamp(6rem,18vw,12rem)] w-auto max-w-none translate-y-4 select-none"
-    src="/assets/scene/emilia-footer.webp"
+    src={assetEmiliaFooter}
+    widths={[240, 480]}
+    sizes="(min-width: 1067px) 226px, (min-width: 534px) 21.2vw, 113px"
     alt=""
     width="848"
     height="720"
@@ -53,9 +58,9 @@ const socials = [
     decoding="async"
   />
   <div class="flex flex-col items-start gap-8 border-b border-cream/30 pb-8 sm:flex-row sm:items-center sm:justify-between">
-    <img
+    <Image
       class="w-full max-w-[80vw] sm:max-w-[min(50vw,26rem)]"
-      src="/assets/brand/logo-cream.svg"
+      src={assetLogoCream}
       alt="HackUDC27"
       width="1003"
       height="153"

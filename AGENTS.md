@@ -13,7 +13,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 ### Structure and stack
 
 - **Astro 7 + Tailwind 4 + pnpm** + React. Internal imports **always use `@/`**; the one exception is the `layout:` key in `.md` frontmatter, which must stay relative.
-- `src/components/` (PascalCase) · `src/i18n/copy.ts` · `src/layouts/` · `src/styles/global.css`. UI icons come from `@lucide/astro/icons/*`, brand icons from `@/assets/icons/*.svg`, illustrations from `public/assets/{brand,scene}/`.
+- `src/components/` (PascalCase) · `src/i18n/copy.ts` · `src/layouts/` · `src/styles/global.css`. UI icons come from `@lucide/astro/icons/*`, brand icons from `@/assets/icons/*.svg`, illustrations from `src/assets/{brand,scene}/`. Use `Image` from `astro:assets` with imported raster images and explicit `widths` + `sizes`; import SVG URLs for responsive `<picture>` sources, CSS backgrounds, and client-side image swaps. Preserve existing image proportions and cropping.
 
 ### i18n
 

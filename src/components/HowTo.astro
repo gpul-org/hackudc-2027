@@ -1,4 +1,10 @@
 ---
+import { Image } from "astro:assets";
+import assetRosaVentos from "@/assets/scene/rosa-ventos.webp";
+import photoTeam from "@/assets/photos/how_to_team.webp";
+import photoChallenge from "@/assets/photos/how_to_challenge.webp";
+import photoCoding from "@/assets/photos/how_to_coding.webp";
+import photoPresentation from "@/assets/photos/how_to_presentation.webp";
 import { copy, type Locale } from "@/i18n/copy";
 
 interface Props {
@@ -8,12 +14,7 @@ interface Props {
 const t = copy[Astro.props.locale];
 
 // One photo per step, in the same order as `t.steps`.
-const images = [
-  "/img/how_to_team.webp",
-  "/img/how_to_challenge.webp",
-  "/img/how_to_coding.webp",
-  "/img/how_to_presentation.webp",
-];
+const images = [photoTeam, photoChallenge, photoCoding, photoPresentation];
 const steps = t.steps.map(([number, title, body], index) => ({
   number,
   title,
@@ -61,11 +62,13 @@ const total = String(steps.length).padStart(2, "0");
           aria-hidden="true"
         >
           {steps.map(({ image }, index) => (
-            <img
+            <Image
               class="absolute inset-0 h-full w-full object-cover mask-[linear-gradient(to_bottom,black_30%,transparent)]"
               data-step-photo
               style={`opacity: ${index === 0 ? 1 : 0}`}
               src={image}
+              widths={[400, 800, 1200]}
+              sizes="(min-width: 1024px) 500px, 100vw"
               alt=""
               width="1200"
               height="900"
@@ -79,10 +82,12 @@ const total = String(steps.length).padStart(2, "0");
           class="pointer-events-none relative z-1 hidden w-(--rose) flex-none lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:w-[calc(var(--rose)/2)] lg:items-center lg:justify-end lg:overflow-hidden"
           aria-hidden="true"
         >
-          <img
+          <Image
             class="block h-auto w-full lg:h-full lg:max-h-(--rose) lg:w-auto lg:max-w-none lg:flex-none"
             data-steps-rose
-            src="/assets/scene/rosa-ventos.webp"
+            src={assetRosaVentos}
+            widths={[480, 960, 1440]}
+            sizes="(min-width: 1024px) 576px, 352px"
             alt=""
             width="1440"
             height="1440"
@@ -111,9 +116,11 @@ const total = String(steps.length).padStart(2, "0");
                 </div>
                 <!-- Pinned desktop only: the photo fades in from the panel's
                      ink and swaps with its step. -->
-                <img
+                <Image
                   class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[45%] object-cover mask-[linear-gradient(to_right,transparent,black_70%)] lg:pinned:block"
                   src={image}
+                  widths={[400, 800, 1200]}
+                  sizes="(min-width: 1024px) 500px, 100vw"
                   alt=""
                   width="1200"
                   height="900"

@@ -1,4 +1,11 @@
 ---
+import { Image } from "astro:assets";
+import assetSponsorsAdminClosed from "@/assets/scene/sponsors-admin-closed.svg?url";
+import assetSponsorsAdminTerminal from "@/assets/scene/sponsors-admin-terminal.svg?url";
+import assetSponsorsRootDesktop from "@/assets/scene/sponsors-root-desktop.svg?url";
+import assetSponsorsRootMobile from "@/assets/scene/sponsors-root-mobile.svg?url";
+import assetSponsorsUsersDesktop from "@/assets/scene/sponsors-users-desktop.svg?url";
+import assetSponsorsUsersMobile from "@/assets/scene/sponsors-users-mobile.svg?url";
 import { copy, type Locale } from "@/i18n/copy";
 
 interface Props {
@@ -17,13 +24,10 @@ const userSlots = Array.from({ length: 6 });
 >
   <div class="relative mx-auto max-w-6xl" data-sponsor-root>
     <picture>
-      <source
-        media="(max-width: 639px)"
-        srcset="/assets/scene/sponsors-root-mobile.svg"
-      />
-      <img
+      <source media="(max-width: 639px)" srcset={assetSponsorsRootMobile} />
+      <Image
         class="h-auto w-full"
-        src="/assets/scene/sponsors-root-desktop.svg"
+        src={assetSponsorsRootDesktop}
         width="990"
         height="459"
         alt=""
@@ -44,10 +48,10 @@ const userSlots = Array.from({ length: 6 });
     >
       {adminSlots.map((_, index) => (
         <div class="relative aspect-[1.6]" data-sponsor-admin-slot={index}>
-          <img
+          <Image
             class="absolute inset-0 h-full w-full object-fill"
             data-admin-window
-            src="/assets/scene/sponsors-admin-closed.svg"
+            src={assetSponsorsAdminClosed}
             width="223"
             height="139"
             alt=""
@@ -59,20 +63,20 @@ const userSlots = Array.from({ length: 6 });
       ))}
       {[1, 2].map((row) => (
         <>
-          <img
+          <Image
             class="h-full w-full self-stretch object-fill"
             data-sponsor-admin-terminal={`left-${row}`}
-            src="/assets/scene/sponsors-admin-terminal.svg"
+            src={assetSponsorsAdminTerminal}
             width="119"
             height="139"
             alt=""
             loading="lazy"
             decoding="async"
           />
-          <img
+          <Image
             class="h-full w-full self-stretch object-fill"
             data-sponsor-admin-terminal={`right-${row}`}
-            src="/assets/scene/sponsors-admin-terminal.svg"
+            src={assetSponsorsAdminTerminal}
             width="119"
             height="139"
             alt=""
@@ -90,13 +94,10 @@ const userSlots = Array.from({ length: 6 });
 
   <div class="relative mt-3" data-sponsor-users>
     <picture>
-      <source
-        media="(max-width: 639px)"
-        srcset="/assets/scene/sponsors-users-mobile.svg"
-      />
-      <img
+      <source media="(max-width: 639px)" srcset={assetSponsorsUsersMobile} />
+      <Image
         class="h-auto w-full"
-        src="/assets/scene/sponsors-users-desktop.svg"
+        src={assetSponsorsUsersDesktop}
         width="969"
         height="217"
         alt=""
@@ -121,13 +122,10 @@ const userSlots = Array.from({ length: 6 });
   <div class="relative mt-8" data-sponsor-collaborators hidden>
     <h3 class="eyebrow mb-4 text-center">{t.sponsorCollaborators}</h3>
     <picture>
-      <source
-        media="(max-width: 639px)"
-        srcset="/assets/scene/sponsors-users-mobile.svg"
-      />
-      <img
+      <source media="(max-width: 639px)" srcset={assetSponsorsUsersMobile} />
+      <Image
         class="h-auto w-full"
-        src="/assets/scene/sponsors-users-desktop.svg"
+        src={assetSponsorsUsersDesktop}
         width="969"
         height="217"
         alt=""
@@ -287,6 +285,8 @@ const userSlots = Array.from({ length: 6 });
 </style>
 
 <script>
+  import assetSponsorsAdminOpened from "@/assets/scene/sponsors-admin-opened.svg?url";
+  import assetSponsorsAdminClosed from "@/assets/scene/sponsors-admin-closed.svg?url";
   import { getSponsors, type Sponsor } from "@/lib/sponsors";
 
   let controller: AbortController | undefined;
@@ -390,8 +390,8 @@ const userSlots = Array.from({ length: 6 });
         );
         if (window)
           window.src = sponsor
-            ? "/assets/scene/sponsors-admin-opened.svg"
-            : "/assets/scene/sponsors-admin-closed.svg";
+            ? assetSponsorsAdminOpened
+            : assetSponsorsAdminClosed;
       });
     }
 

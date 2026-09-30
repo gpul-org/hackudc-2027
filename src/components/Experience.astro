@@ -1,4 +1,10 @@
 ---
+import { Image } from "astro:assets";
+import asset2026Code from "@/assets/stickers/2026_code.svg?url";
+import asset2026Event from "@/assets/stickers/2026_event.svg?url";
+import asset2026EventLogo from "@/assets/stickers/2026_event_logo.svg?url";
+import assetGpul from "@/assets/stickers/gpul.svg?url";
+import assetLanyard from "@/assets/stickers/lanyard.png";
 import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
 import Pause from "@lucide/astro/icons/pause";
 import Play from "@lucide/astro/icons/play";
@@ -22,20 +28,20 @@ const teaserSeconds = 25;
 const aftermovieEmbed = `https://www.youtube-nocookie.com/embed/${aftermovieId}?autoplay=1&mute=1&end=${teaserSeconds}&cc_load_policy=0&iv_load_policy=3&rel=0&playsinline=1&enablejsapi=1`;
 // Last year's stickers, scattered behind the card. Phones keep only the ones
 // clear of the title so it stays legible.
-const code = { src: "/assets/stickers/2026_code.svg", width: 203, height: 486 };
+const code = { src: asset2026Code, width: 203, height: 486 };
 const event = {
-  src: "/assets/stickers/2026_event.svg",
+  src: asset2026Event,
   width: 1123,
   height: 216,
 };
-const gpul = { src: "/assets/stickers/gpul.svg", width: 414, height: 417 };
+const gpul = { src: assetGpul, width: 414, height: 417 };
 const lanyard = {
-  src: "/assets/stickers/lanyard.png",
+  src: assetLanyard,
   width: 539,
   height: 754,
 };
 const logo = {
-  src: "/assets/stickers/2026_event_logo.svg",
+  src: asset2026EventLogo,
   width: 600,
   height: 520,
 };
@@ -97,10 +103,14 @@ const controlButton =
     data-reveal
   >
     {stickers.map((sticker, index) => (
-      <img
+      <Image
         class={`absolute max-w-none scale-75 opacity-0 transition-[opacity,scale] duration-700 ease-out group-data-visible/stickers:scale-100 group-data-visible/stickers:opacity-100 motion-reduce:transition-none ${sticker.class}`}
         style={`transition-delay: ${index * 180}ms`}
         src={sticker.src}
+        widths={
+          typeof sticker.src === "string" ? undefined : [128, 256, 416, 539]
+        }
+        sizes="(min-width: 1024px) 208px, (min-width: 640px) 128px, 96px"
         alt=""
         width={sticker.width}
         height={sticker.height}
@@ -192,9 +202,11 @@ const controlButton =
             aria-label={t.videoPlay}
             data-aftermovie-play
           >
-            <img
+            <Image
               class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none"
               src={aftermovieThumb}
+              widths={[480, 800, 1280]}
+              sizes="(min-width: 1280px) 1056px, 88vw"
               alt=""
               width="1280"
               height="720"
