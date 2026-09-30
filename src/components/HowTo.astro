@@ -52,14 +52,31 @@ const total = String(steps.length).padStart(2, "0");
          into whatever height the heading leaves (`cqh`) instead of guessing it
          from the viewport. -->
       <div
-        class="relative mt-6 flex flex-col items-center [--rose:min(70%,20rem)] pinned:min-h-0 pinned:flex-1 pinned:[container-type:size] pinned:[--rose:min(70cqw,22rem,45cqh)] lg:mt-10 lg:flex-row lg:[--rose:min(26rem,28vw)] lg:pinned:[--rose:min(88cqh,36rem)]"
+        class="relative mt-6 flex flex-col items-center max-lg:bg-ink [--photo:min(34cqh,14rem)] [--rose:min(70%,20rem)] pinned:min-h-0 pinned:flex-1 pinned:[container-type:size] pinned:[--rose:min(70cqw,22rem,45cqh)] lg:mt-10 lg:flex-row lg:[--rose:min(26rem,28vw)] lg:pinned:[--rose:min(88cqh,36rem)]"
         data-steps-row
       >
-        <!-- Below desktop the panel slides out from under the rose. On desktop
-           its centre aligns with the panel edge, leaving only the right half
-           visible on top of the card. -->
+        <div class="h-(--photo) flex-none lg:hidden" aria-hidden="true" />
         <div
-          class="pointer-events-none relative z-1 w-(--rose) flex-none lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:w-[calc(var(--rose)/2)] lg:items-center lg:justify-end lg:overflow-hidden"
+          class="pointer-events-none absolute inset-x-0 top-0 h-[calc(var(--photo)+3rem)] overflow-hidden lg:hidden"
+          aria-hidden="true"
+        >
+          {steps.map(({ image }, index) => (
+            <img
+              class="absolute inset-0 h-full w-full object-cover mask-[linear-gradient(to_bottom,black_30%,transparent)]"
+              data-step-photo
+              style={`opacity: ${index === 0 ? 1 : 0}`}
+              src={image}
+              alt=""
+              width="1200"
+              height="900"
+              loading="lazy"
+              decoding="async"
+            />
+          ))}
+        </div>
+        <!-- On desktop, only the right half of the rose overlaps the panel. -->
+        <div
+          class="pointer-events-none relative z-1 hidden w-(--rose) flex-none lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:w-[calc(var(--rose)/2)] lg:items-center lg:justify-end lg:overflow-hidden"
           aria-hidden="true"
         >
           <img
@@ -74,7 +91,7 @@ const total = String(steps.length).padStart(2, "0");
           />
         </div>
 
-        <div class="relative -mt-[calc(var(--rose)*0.2)] flex flex-col justify-center self-stretch overflow-hidden bg-ink px-6 pt-[calc(var(--rose)*0.2+1.75rem)] pb-7 text-cream pinned:flex-1 lg:m-0 lg:flex-1 lg:self-center lg:p-10 lg:pl-[calc(var(--rose)/2+2.5rem)] lg:pinned:min-h-[calc(var(--rose)*0.8)]">
+        <div class="relative flex flex-col justify-center self-stretch overflow-hidden bg-ink px-6 max-lg:bg-transparent pt-7 pb-7 text-cream pinned:flex-1 lg:m-0 lg:flex-1 lg:self-center lg:p-10 lg:pl-[calc(var(--rose)/2+2.5rem)] lg:pinned:min-h-[calc(var(--rose)*0.8)]">
           <div class="grid gap-8">
             {steps.map(({ number, title, body, image }) => (
               <article
@@ -154,6 +171,9 @@ const total = String(steps.length).padStart(2, "0");
     if (!section || !stage || !row || !rose) return;
 
     const steps = [...section.querySelectorAll<HTMLElement>("[data-step]")];
+    const photos = [
+      ...section.querySelectorAll<HTMLElement>("[data-step-photo]"),
+    ];
     const markers = [
       ...section.querySelectorAll<HTMLElement>("[data-step-marker]"),
     ];
@@ -191,6 +211,9 @@ const total = String(steps.length).padStart(2, "0");
         const active = !pinned || index === current;
         const opacity = pinned ? stepOpacity(Math.abs(position - index)) : 1;
         step.style.opacity = pinned ? String(opacity) : "";
+        photos[index].style.opacity = String(
+          pinned ? opacity : index === 0 ? 1 : 0,
+        );
         // A step stays painted until it has fully faded out, but only the
         // current one is reachable by keyboard and assistive tech.
         step.style.visibility = opacity > 0 ? "" : "hidden";
