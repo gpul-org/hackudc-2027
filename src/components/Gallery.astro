@@ -1,0 +1,302 @@
+---
+import { Image } from "astro:assets";
+import ArrowLeft from "@lucide/astro/icons/arrow-left";
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+import Pause from "@lucide/astro/icons/pause";
+import Play from "@lucide/astro/icons/play";
+import { copy, type Locale } from "@/i18n/copy";
+import { galleryImages } from "@/data/gallery";
+
+interface Props {
+  locale: Locale;
+}
+const t = copy[Astro.props.locale];
+const photos = t.galleryPhotos.map(([file, description]) => {
+  const image = galleryImages[`/src/assets/gallery/${file}`]?.default;
+  if (!image || !description.trim())
+    throw new Error(`Missing gallery image or description: ${file}`);
+  return { image, description };
+});
+const buttonClass =
+  "inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-ink bg-cream px-4 text-sm font-bold transition-colors hover:bg-ink hover:text-cream";
+---
+
+{photos.length > 0 && (
+  <section
+    id="gallery"
+    aria-labelledby="gallery-title"
+    class="bg-blue py-16 pb-24 lg:py-24 lg:pb-32"
+    data-gallery
+    data-play-label={t.galleryPlay}
+    data-pause-label={t.galleryPause}
+  >
+    <div class="page-wrap">
+      <p class="eyebrow">{t.galleryKicker}</p>
+      <div class="mt-5 flex flex-wrap items-end justify-between gap-8">
+        <h2 id="gallery-title" class="display-heading max-w-[16ch]">
+          {t.galleryTitle}
+        </h2>
+      </div>
+    </div>
+    <div class="gallery-viewport mt-10 lg:mt-14" data-gallery-viewport>
+      <div id="gallery-photos" class="gallery-track" data-gallery-track>
+        {photos.map(({ image, description }, index) => (
+          <figure
+            class="gallery-photo shrink-0"
+            data-gallery-photo
+            role="group"
+            aria-label={`${index + 1} / ${photos.length}`}
+            style={`--photo-ratio: ${image.width / image.height}`}
+          >
+            <div class="gallery-frame border border-ink/30 bg-cream p-2">
+              <Image
+                src={image}
+                alt={description}
+                widths={[400, 800, 1200, 1800]}
+                sizes="(min-width: 1024px) 80vw, 88vw"
+                class="h-full w-full object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </figure>
+        ))}
+      </div>
+    </div>
+    <div class="page-wrap">
+      <div class="mt-8 flex justify-center gap-3" data-gallery-controls hidden>
+        <button
+          type="button"
+          class={buttonClass}
+          data-gallery-prev
+          aria-label={t.galleryPrevious}
+          aria-controls="gallery-photos"
+        >
+          <ArrowLeft class="size-5" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          class={buttonClass}
+          data-gallery-toggle
+          aria-label={t.galleryPause}
+          aria-controls="gallery-photos"
+        >
+          <Pause class="size-4" aria-hidden="true" data-pause-icon />
+          <Play class="size-4" aria-hidden="true" data-play-icon hidden />
+        </button>
+        <button
+          type="button"
+          class={buttonClass}
+          data-gallery-next
+          aria-label={t.galleryNext}
+          aria-controls="gallery-photos"
+        >
+          <ArrowRight class="size-5" aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+    <p class="sr-only" role="status" data-gallery-status></p>
+  </section>
+)}
+
+<style>
+  [hidden] {
+    display: none !important;
+  }
+  .gallery-viewport {
+    overflow-x: auto;
+    padding-block: 4px;
+  }
+  .gallery-track {
+    position: relative;
+    display: flex;
+    align-items: start;
+    gap: 1.5rem;
+    padding-inline: 6vw;
+  }
+  .gallery-photo {
+    width: min(calc(22rem * var(--photo-ratio)), 88vw);
+  }
+  .gallery-frame {
+    height: 22rem;
+  }
+  [data-gallery-ready] .gallery-viewport {
+    overflow: hidden;
+  }
+  [data-gallery-ready] .gallery-track {
+    padding-inline: 0;
+  }
+  @media (min-width: 64rem) {
+    .gallery-photo {
+      width: min(calc(28rem * var(--photo-ratio)), 80vw);
+    }
+    .gallery-frame {
+      height: 28rem;
+    }
+  }
+  @media (max-width: 639px) {
+    .gallery-photo {
+      width: min(calc(16rem * var(--photo-ratio)), 88vw);
+    }
+    .gallery-frame {
+      height: 16rem;
+    }
+  }
+  @media (max-height: 30rem) {
+    .gallery-frame {
+      height: 14rem;
+    }
+  }
+</style>
+
+<script>
+  let controller: AbortController | undefined;
+  document.addEventListener("astro:page-load", () => {
+    controller?.abort();
+    controller = new AbortController();
+    const { signal } = controller;
+    const gallery = document.querySelector<HTMLElement>("[data-gallery]");
+    if (!gallery) return;
+    const track = gallery.querySelector<HTMLElement>("[data-gallery-track]")!;
+    const viewport = gallery.querySelector<HTMLElement>(
+      "[data-gallery-viewport]",
+    )!;
+    const originals = Array.from(
+      track.querySelectorAll<HTMLElement>("[data-gallery-photo]"),
+    );
+    const count = originals.length;
+    if (count < 2) return;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    let paused = false;
+    const isPaused = () => paused || reduced.matches;
+    let index = count;
+    let animation: Animation | undefined;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const toggle = gallery.querySelector<HTMLButtonElement>(
+      "[data-gallery-toggle]",
+    )!;
+    const status = gallery.querySelector<HTMLElement>("[data-gallery-status]")!;
+    // Copies provide the loop but never duplicate content for screen readers.
+    const clone = (photo: HTMLElement) => {
+      const item = photo.cloneNode(true) as HTMLElement;
+      item.dataset.galleryClone = "";
+      item.setAttribute("aria-hidden", "true");
+      item.inert = true;
+      return item;
+    };
+    track.prepend(...originals.map(clone));
+    track.append(...originals.map(clone));
+    const items = Array.from(track.children) as HTMLElement[];
+    gallery.dataset.galleryReady = "";
+    gallery.querySelector<HTMLElement>("[data-gallery-controls]")!.hidden =
+      false;
+    const logicalIndex = () => (((index - count) % count) + count) % count;
+    const offset = () =>
+      viewport.clientWidth / 2 -
+      items[index].offsetLeft -
+      items[index].offsetWidth / 2;
+    const position = () => {
+      track.style.transform = `translateX(${offset()}px)`;
+    };
+    const refresh = () => {
+      clearTimeout(timer);
+      const label = isPaused()
+        ? gallery.dataset.playLabel!
+        : gallery.dataset.pauseLabel!;
+      toggle.setAttribute("aria-label", label);
+      gallery
+        .querySelector<SVGElement>("[data-play-icon]")!
+        .toggleAttribute("hidden", !isPaused());
+      gallery
+        .querySelector<SVGElement>("[data-pause-icon]")!
+        .toggleAttribute("hidden", isPaused());
+      if (!isPaused()) timer = setTimeout(() => move(1, false), 5000);
+    };
+    const settle = () => {
+      animation?.cancel();
+      animation = undefined;
+      index = count + logicalIndex();
+      position();
+    };
+    const move = (direction: number, manual = true) => {
+      settle();
+      const start = track.style.transform;
+      index += direction;
+      position();
+      if (!reduced.matches) {
+        animation = track.animate(
+          [{ transform: start }, { transform: track.style.transform }],
+          { duration: 400, easing: "ease-out" },
+        );
+        animation.onfinish = settle;
+      } else settle();
+      if (manual) {
+        status.textContent = `${logicalIndex() + 1} / ${count}: ${originals[logicalIndex()].querySelector("img")!.alt}`;
+      }
+      refresh();
+    };
+    gallery
+      .querySelector("[data-gallery-prev]")!
+      .addEventListener("click", () => move(-1), { signal });
+    gallery
+      .querySelector("[data-gallery-next]")!
+      .addEventListener("click", () => move(1), { signal });
+    toggle.addEventListener(
+      "click",
+      () => {
+        paused = !paused;
+        refresh();
+      },
+      { signal },
+    );
+    gallery.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+          event.preventDefault();
+          move(event.key === "ArrowLeft" ? -1 : 1);
+        }
+      },
+      { signal },
+    );
+    let touchStart = 0;
+    viewport.addEventListener(
+      "touchstart",
+      (event) => {
+        touchStart = event.touches[0].clientX;
+      },
+      { passive: true, signal },
+    );
+    viewport.addEventListener(
+      "touchend",
+      (event) => {
+        const distance = event.changedTouches[0].clientX - touchStart;
+        if (Math.abs(distance) > 50) move(distance > 0 ? -1 : 1);
+      },
+      { passive: true, signal },
+    );
+    window.addEventListener("resize", settle, { signal });
+    reduced.addEventListener(
+      "change",
+      () => {
+        settle();
+        refresh();
+      },
+      { signal },
+    );
+    position();
+    refresh();
+    signal.addEventListener(
+      "abort",
+      () => {
+        clearTimeout(timer);
+        animation?.cancel();
+      },
+      { once: true },
+    );
+    document.addEventListener("astro:before-swap", () => controller?.abort(), {
+      once: true,
+      signal,
+    });
+  });
+</script>

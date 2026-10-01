@@ -48,6 +48,13 @@ export type Copy = {
   faqKicker: string;
   faqTitle: string;
   faq: [string, string][];
+  galleryKicker: string;
+  galleryTitle: string;
+  galleryPrevious: string;
+  galleryNext: string;
+  galleryPause: string;
+  galleryPlay: string;
+  galleryPhotos: [string, string][];
   footer: string;
   developedBy: string;
   manifestoCta: string;
@@ -207,6 +214,54 @@ export const copy: Record<Locale, Copy> = {
         "Puedes contactarnos a través de las redes sociales o escribirnos a hackudc@gpul.org.",
       ],
     ],
+    galleryKicker: "En imágenes",
+    galleryTitle: "Esto también es HackUDC.",
+    galleryPrevious: "Foto anterior",
+    galleryNext: "Foto siguiente",
+    galleryPause: "Pausar galería",
+    galleryPlay: "Reproducir galería",
+    galleryPhotos: [
+      [
+        "conversations.webp",
+        "Un grupo de participantes conversa de pie en un pasillo, con acreditaciones de HackUDC.",
+      ],
+      [
+        "team-coding.webp",
+        "Un equipo programa con sus portátiles alrededor de una mesa en un aula, con acreditaciones de HackUDC y pegatinas en los equipos.",
+      ],
+      [
+        "virtual-reality.webp",
+        "Un participante prueba un visor de realidad virtual con un mando en cada mano, junto a otras personas con visores.",
+      ],
+      [
+        "stairs.webp",
+        "Varios participantes se sientan en los peldaños de una escalera y consultan portátiles y teléfonos.",
+      ],
+      [
+        "food-break.webp",
+        "Un participante se sirve salsa de un dispensador para acompañar su comida en un puesto al aire libre.",
+      ],
+      [
+        "outdoor-break.webp",
+        "Participantes comparten una pausa alrededor de mesas rojas al aire libre durante la noche.",
+      ],
+      [
+        "last-minute-changes.webp",
+        "Un equipo sentado en el suelo de un pasillo hace cambios de última hora en un portátil antes de presentar su proyecto.",
+      ],
+      [
+        "project-presentation.webp",
+        "Un equipo presenta su proyecto ante el público; una participante explica el código proyectado mientras sus compañeros están a su lado.",
+      ],
+      [
+        "yellow-shirts.webp",
+        "El equipo detrás de HackUDC 2026 posa en dos filas sobre el escenario; la mayoría lleva camisetas amarillas del evento.",
+      ],
+      [
+        "group-photo.webp",
+        "Foto de grupo de HackUDC en el auditorio, con participantes y personas con camisetas amarillas saludando a la cámara.",
+      ],
+    ],
     footer: "Cinco años iluminando el camino.",
     developedBy: "Web desarrollada por",
     manifestoCta: "Leer el manifiesto",
@@ -361,6 +416,54 @@ export const copy: Record<Locale, Copy> = {
       [
         "What if I have other questions?",
         "If you have any other questions, feel free to contact us via social media or at hackudc@gpul.org.",
+      ],
+    ],
+    galleryKicker: "In pictures",
+    galleryTitle: "This is HackUDC, too.",
+    galleryPrevious: "Previous photo",
+    galleryNext: "Next photo",
+    galleryPause: "Pause gallery",
+    galleryPlay: "Play gallery",
+    galleryPhotos: [
+      [
+        "conversations.webp",
+        "A group of participants chats while standing in a corridor, wearing HackUDC badges.",
+      ],
+      [
+        "team-coding.webp",
+        "A team codes on laptops around a classroom table, wearing HackUDC badges, with stickers on their computers.",
+      ],
+      [
+        "virtual-reality.webp",
+        "A participant tries a virtual reality headset with a controller in each hand, alongside others wearing headsets.",
+      ],
+      [
+        "stairs.webp",
+        "Participants sit on staircase steps, looking at laptops and phones.",
+      ],
+      [
+        "food-break.webp",
+        "A participant serves himself sauce from a dispenser to go with his food at an outdoor stall.",
+      ],
+      [
+        "outdoor-break.webp",
+        "Participants share a break around red tables outdoors at night.",
+      ],
+      [
+        "last-minute-changes.webp",
+        "A team sitting on a corridor floor makes last-minute changes on a laptop before presenting their project.",
+      ],
+      [
+        "project-presentation.webp",
+        "A team presents its project to an audience; a participant explains the projected code while her teammates stand beside her.",
+      ],
+      [
+        "yellow-shirts.webp",
+        "The team behind HackUDC 2026 poses in two rows on the stage; most wear yellow event T-shirts.",
+      ],
+      [
+        "group-photo.webp",
+        "A HackUDC group photo in the auditorium, with participants and people in yellow T-shirts waving at the camera.",
       ],
     ],
     footer: "Five years beaming the way.",
@@ -518,6 +621,54 @@ export const copy: Record<Locale, Copy> = {
       [
         "E se teño outras preguntas?",
         "Podes contactar connosco a través das redes sociais ou escribirnos a hackudc@gpul.org.",
+      ],
+    ],
+    galleryKicker: "En imaxes",
+    galleryTitle: "Isto tamén é HackUDC.",
+    galleryPrevious: "Foto anterior",
+    galleryNext: "Foto seguinte",
+    galleryPause: "Pausar galería",
+    galleryPlay: "Reproducir galería",
+    galleryPhotos: [
+      [
+        "conversations.webp",
+        "Un grupo de participantes conversa de pé nun corredor, con acreditacións de HackUDC.",
+      ],
+      [
+        "team-coding.webp",
+        "Un equipo programa cos seus portátiles arredor dunha mesa nunha aula, con acreditacións de HackUDC e adhesivos nos equipos.",
+      ],
+      [
+        "virtual-reality.webp",
+        "Un participante proba un visor de realidade virtual cun mando en cada man, xunto a outras persoas con visores.",
+      ],
+      [
+        "stairs.webp",
+        "Varios participantes sentan nos chanzos dunha escaleira e consultan portátiles e teléfonos.",
+      ],
+      [
+        "food-break.webp",
+        "Un participante sérvese salsa dun dispensador para acompañar a súa comida nun posto ao aire libre.",
+      ],
+      [
+        "outdoor-break.webp",
+        "Participantes comparten unha pausa arredor de mesas vermellas ao aire libre durante a noite.",
+      ],
+      [
+        "last-minute-changes.webp",
+        "Un equipo sentado no chan dun corredor fai cambios de última hora nun portátil antes de presentar o seu proxecto.",
+      ],
+      [
+        "project-presentation.webp",
+        "Un equipo presenta o seu proxecto ante o público; unha participante explica o código proxectado mentres os seus compañeiros están ao seu lado.",
+      ],
+      [
+        "yellow-shirts.webp",
+        "O equipo detrás de HackUDC 2026 posa en dúas filas sobre o escenario; a maioría leva camisetas amarelas do evento.",
+      ],
+      [
+        "group-photo.webp",
+        "Foto de grupo de HackUDC no auditorio, con participantes e persoas con camisetas amarelas saudando á cámara.",
       ],
     ],
     footer: "Cinco anos iluminando o camiño.",
