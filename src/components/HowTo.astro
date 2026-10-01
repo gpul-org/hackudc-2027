@@ -53,11 +53,12 @@ const total = String(steps.length).padStart(2, "0");
          into whatever height the heading leaves (`cqh`) instead of guessing it
          from the viewport. -->
       <div
-        class="relative mt-6 flex flex-col items-center max-lg:bg-ink [--photo:min(34cqh,14rem)] [--rose:min(70%,20rem)] pinned:min-h-0 pinned:flex-1 pinned:[container-type:size] pinned:[--rose:min(70cqw,22rem,45cqh)] lg:mt-10 lg:flex-row lg:[--rose:min(26rem,28vw)] lg:pinned:[--rose:min(88cqh,36rem)]"
+        class="relative mt-6 flex flex-col items-center max-lg:bg-ink [--photo:min(34cqh,14rem)] [--rose:min(80%,16.25rem)] pinned:min-h-0 pinned:flex-1 pinned:[container-type:size] pinned:[--rose:min(80cqw,16.25rem,50cqh)] lg:mt-10 lg:flex-row lg:[--rose:min(26rem,28vw)] lg:pinned:[--rose:min(88cqh,36rem)]"
         data-steps-row
       >
         <div class="h-(--photo) flex-none lg:hidden" aria-hidden="true" />
         <div
+          data-steps-photo-layer
           class="pointer-events-none absolute inset-x-0 top-0 h-[calc(var(--photo)+3rem)] overflow-hidden lg:hidden"
           aria-hidden="true"
         >
@@ -79,7 +80,8 @@ const total = String(steps.length).padStart(2, "0");
         </div>
         <!-- On desktop, only the right half of the rose overlaps the panel. -->
         <div
-          class="pointer-events-none relative z-1 hidden w-(--rose) flex-none lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:w-[calc(var(--rose)/2)] lg:items-center lg:justify-end lg:overflow-hidden"
+          data-steps-rose-clip
+          class="pointer-events-none relative z-1 w-(--rose) flex-none max-lg:-mt-[calc(var(--rose)/2)] max-lg:h-[calc(var(--rose)/2)] max-lg:overflow-hidden lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:w-[calc(var(--rose)/2)] lg:items-center lg:justify-end lg:overflow-hidden"
           aria-hidden="true"
         >
           <Image
@@ -96,7 +98,10 @@ const total = String(steps.length).padStart(2, "0");
           />
         </div>
 
-        <div class="relative flex flex-col justify-center self-stretch overflow-hidden bg-ink px-6 max-lg:bg-transparent pt-7 pb-7 text-cream pinned:flex-1 lg:m-0 lg:flex-1 lg:self-center lg:p-10 lg:pl-[calc(var(--rose)/2+2.5rem)] lg:pinned:min-h-[calc(var(--rose)*0.8)]">
+        <div
+          data-steps-panel
+          class="relative flex flex-col justify-center self-stretch overflow-hidden bg-ink px-6 max-lg:bg-transparent pt-7 pb-7 text-cream lg:pinned:flex-1 lg:m-0 lg:flex-1 lg:self-center lg:p-10 lg:pl-[calc(var(--rose)/2+2.5rem)] lg:pinned:min-h-[calc(var(--rose)*0.8)]"
+        >
           <div class="grid gap-8">
             {steps.map(({ number, title, body, image }) => (
               <article
@@ -148,10 +153,38 @@ const total = String(steps.length).padStart(2, "0");
   </div>
 </section>
 
+<style>
+  @media (width < 64rem) {
+    /* The mobile card keeps its content height, even on tall viewports. */
+    [data-steps-row] {
+      --photo: clamp(12rem, calc(38svh - 5rem), 18rem);
+      --rose: min(80vw, 16.25rem);
+    }
+    [data-steps][data-pinned] [data-steps-row] {
+      flex: none;
+      container-type: normal;
+    }
+    [data-steps-panel] {
+      padding-top: 0.75rem;
+      padding-bottom: 2.5rem;
+    }
+    [data-steps-photo-layer] {
+      height: var(--photo);
+    }
+    [data-step-photo] {
+      mask-image: linear-gradient(to bottom, var(--color-ink) 45%, transparent);
+    }
+    [data-steps-rose-clip] {
+      margin-top: calc(var(--rose) / -2);
+      margin-bottom: 0;
+    }
+  }
+</style>
+
 <script>
   // Each step turns the rose one eighth, so a point of the star lands on the
-  // panel's arrow. It only turns while the text crossfades, between 0.35 and
-  // 0.65 of the way to the next step, and holds still otherwise.
+  // panel's arrow. It only turns while the text crossfades, between 0.3 and
+  // 0.7 of the way to the next step, and holds still otherwise.
   const STEP_ANGLE = 45;
   const TURN_START = 0.3;
   const TURN_END = 0.7;
@@ -184,6 +217,7 @@ const total = String(steps.length).padStart(2, "0");
     const markers = [
       ...section.querySelectorAll<HTMLElement>("[data-step-marker]"),
     ];
+    const desktop = matchMedia("(min-width: 1024px)");
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     const controller = new AbortController();
     const { signal } = controller;
@@ -203,7 +237,10 @@ const total = String(steps.length).padStart(2, "0");
     // Only runs when the layout can change, never on scroll.
     const measure = () => {
       section.toggleAttribute("data-pinned", !reducedMotion.matches);
-      pinned = !reducedMotion.matches && row.scrollHeight <= row.clientHeight;
+      pinned =
+        !reducedMotion.matches &&
+        row.scrollHeight <= row.clientHeight &&
+        (desktop.matches || stage.scrollHeight <= stage.clientHeight);
       section.toggleAttribute("data-pinned", pinned);
     };
 
@@ -212,7 +249,7 @@ const total = String(steps.length).padStart(2, "0");
 
       const position = pinned ? scrollProgress() * (steps.length - 1) : 0;
       const current = Math.round(position);
-      rose.style.transform = `scale(${ROSE_SCALE}) rotate(${roseAngle(position)}deg)`;
+      rose.style.transform = `scale(${desktop.matches ? ROSE_SCALE : 1}) rotate(${reducedMotion.matches ? 0 : roseAngle(position)}deg)`;
 
       steps.forEach((step, index) => {
         const active = !pinned || index === current;
