@@ -62,7 +62,9 @@
   }
 
   body {
-    @apply overflow-x-hidden;
+    /* Clip horizontal decoration without creating a scroll container that
+       prevents Safari from painting content beneath its translucent toolbar. */
+    @apply overflow-x-clip;
   }
 
   ::selection {
@@ -77,6 +79,8 @@
 /* Shared styles for elements that repeat across sections. */
 @utility page-wrap {
   @apply relative mx-auto w-full max-w-7xl px-[clamp(1.25rem,6vw,7rem)];
+  padding-left: max(clamp(1.25rem, 6vw, 7rem), env(safe-area-inset-left));
+  padding-right: max(clamp(1.25rem, 6vw, 7rem), env(safe-area-inset-right));
 }
 
 /* Paired with `data-reveal`, which the scroll observer in HomePage toggles. */
