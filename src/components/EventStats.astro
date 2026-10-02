@@ -81,7 +81,10 @@ const stats = t.stats.map(([value, label], index) => ({
                   end === undefined ? (
                     <span class="stat-window">{character}</span>
                   ) : (
-                    <span class="stat-window" style={`--end: ${end}`}>
+                    <span
+                      class="stat-window stat-digit"
+                      style={`--end: ${end}`}
+                    >
                       <span class="stat-reel">
                         {reel.map((digit) => (
                           <span>{digit}</span>
@@ -161,8 +164,11 @@ const stats = t.stats.map(([value, label], index) => ({
     display: block;
     height: 1.1em;
     line-height: 1.1em;
-    /* Clips vertically only: `overflow: hidden` would shave the "%" glyph. */
-    clip-path: inset(0 -0.25em);
+  }
+
+  /* Contain the reels independently of clip-path repainting during scroll. */
+  .stat-digit {
+    overflow: hidden;
   }
 
   .stat-reel {
