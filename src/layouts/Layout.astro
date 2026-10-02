@@ -1,5 +1,8 @@
 ---
-import socialImage from "@/assets/brand/og-image.jpg";
+import socialImageEs from "@/assets/brand/og-es.jpg";
+import socialImageEn from "@/assets/brand/og-en.jpg";
+import socialImageGl from "@/assets/brand/og-gl.jpg";
+import { copy } from "@/i18n/copy";
 import { getAbsoluteLocaleUrl } from "astro:i18n";
 import { Font } from "astro:assets";
 import { ClientRouter, fade } from "astro:transitions";
@@ -23,10 +26,16 @@ const localePrefix = new RegExp(`^/(${locales.join("|")})(?=/|$)`);
 const path = Astro.url.pathname.replace(localePrefix, "").replace(/^\//, "");
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const locale = lang in ogLocales ? (lang as Locale) : defaultLocale;
+const socialImages = {
+  es: socialImageEs,
+  en: socialImageEn,
+  gl: socialImageGl,
+};
+const socialImage = socialImages[locale];
 const ogImage = new URL(socialImage.src, Astro.site);
-const ogImageAlt =
-  "HackUDC 2027, 5th edition. Code. Create. Connect. 36 hours to build something amazing.";
-const ogLocale = ogLocales[lang as Locale] ?? ogLocales[defaultLocale];
+const ogImageAlt = copy[locale].ogImageAlt;
+const ogLocale = ogLocales[locale];
 ---
 
 <!doctype html>
@@ -78,8 +87,8 @@ const ogLocale = ogLocales[lang as Locale] ?? ogLocales[defaultLocale];
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content={socialImage.width} />
+    <meta property="og:image:height" content={socialImage.height} />
     <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:locale" content={ogLocale} />
     {Object.values(ogLocales)

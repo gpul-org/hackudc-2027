@@ -1,6 +1,7 @@
 export type Locale = "es" | "en" | "gl";
 
 export type Copy = {
+  ogImageAlt: string;
   nav: string[];
   edition: string;
   title: string;
@@ -68,6 +69,8 @@ export type Copy = {
 
 export const copy: Record<Locale, Copy> = {
   es: {
+    ogImageAlt:
+      "HackUDC 2027, 5ª edición. Programa. Crea. Conecta. 36 horas para construir algo increíble.",
     nav: ["Qué es", "La experiencia", "Patrocinio", "FAQ"],
     edition: "5ª EDICIÓN",
     title: "Hackea el futuro desde Galicia.",
@@ -273,6 +276,8 @@ export const copy: Record<Locale, Copy> = {
     backHomeShort: "Volver",
   },
   en: {
+    ogImageAlt:
+      "HackUDC 2027, 5th edition. Code. Create. Connect. 36 hours to build something amazing.",
     nav: ["What is it", "The experience", "Sponsorship", "FAQ"],
     edition: "5TH EDITION",
     title: "Hack the future from Galicia.",
@@ -477,6 +482,8 @@ export const copy: Record<Locale, Copy> = {
     backHomeShort: "Back",
   },
   gl: {
+    ogImageAlt:
+      "HackUDC 2027, 5ª edición. Programa. Crea. Conecta. 36 horas para construír algo incrible.",
     nav: ["Que é", "A experiencia", "Patrocinio", "FAQ"],
     edition: "5ª EDICIÓN",
     title: "Hackea o futuro desde Galicia.",
