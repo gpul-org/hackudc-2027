@@ -20,18 +20,18 @@ const sceneSizes =
 
 // One icon per stat, in the same order as `t.stats`.
 const icons = [Users, Clock, CodeXml];
-// Three rounds of 0–9, so every digit rolls through at least two full turns
-// before landing on its value in the last round.
 const reel = Array.from({ length: 30 }, (_, index) => index % 10);
-const stats = t.stats.map(([value, label], index) => ({
-  value,
-  label,
-  Icon: icons[index] ?? Users,
-  characters: [...value].map((character) => ({
-    character,
-    end: /\d/.test(character) ? 20 + Number(character) : undefined,
-  })),
-}));
+const stats = t.stats.map(([value, label], index) => {
+  return {
+    value,
+    label,
+    Icon: icons[index] ?? Users,
+    characters: [...value].map((character) => ({
+      character,
+      digit: /^\d$/.test(character) ? Number(character) : undefined,
+    })),
+  };
+});
 ---
 
 <!-- The scene (lighthouse, beam and sea in one image, as drawn) stands on the
@@ -48,19 +48,23 @@ const stats = t.stats.map(([value, label], index) => ({
 >
   <div class="page-wrap z-1">
     <div class="stats-content">
-      <h2 class="display-heading reveal" data-reveal id="stats-title">
+      <h2
+        class="display-heading motion-reduce:animate-none"
+        data-stats-heading
+        id="stats-title"
+      >
         {t.statsTitle}
       </h2>
 
       <dl
         class="mt-6 grid gap-2 sm:grid-cols-(--stats-cols) sm:gap-4 lg:mt-10 lg:gap-6"
         style={`--stats-cols: repeat(${stats.length}, minmax(0, 1fr))`}
+        data-stats-trigger
       >
-        {stats.map(({ value, label, Icon, characters }, index) => (
+        {stats.map(({ value, label, Icon, characters }) => (
           <div
-            class="reveal flex items-center gap-3 rounded-2xl border border-cream bg-cream/90 px-4 py-2.5 sm:flex-col sm:gap-2 sm:px-4 sm:py-5"
-            style={`transition-delay: ${index * 80}ms`}
-            data-reveal
+            class="flex items-center gap-3 rounded-2xl border border-cream bg-cream/90 px-4 py-2.5 motion-reduce:animate-none sm:flex-col sm:gap-2 sm:px-4 sm:py-5"
+            data-stat-card
           >
             <dt class="order-last ml-auto eyebrow text-ink/60 sm:ml-0">
               {label}
@@ -74,21 +78,32 @@ const stats = t.stats.map(([value, label], index) => ({
               </span>
               <span class="sr-only">{value}</span>
               <span
-                class="flex font-sans text-[2rem] leading-none font-bold tracking-[-0.03em] tabular-nums lg:text-[clamp(2.25rem,2.8vw,2.75rem)]"
+                class="font-sans text-[2rem] leading-[1.1] font-bold tracking-[-0.03em] tabular-nums lg:text-[clamp(2.25rem,2.8vw,2.75rem)]"
                 aria-hidden="true"
+                data-stat-value
               >
-                {characters.map(({ character, end }) =>
-                  end === undefined ? (
-                    <span class="stat-window">{character}</span>
+                {characters.map(({ character, digit }) =>
+                  digit === undefined ? (
+                    character
                   ) : (
-                    <span
-                      class="stat-window stat-digit"
-                      style={`--end: ${end}`}
-                    >
-                      <span class="stat-reel">
-                        {reel.map((digit) => (
-                          <span>{digit}</span>
-                        ))}
+                    <span class="stat-digit">
+                      <span class="stat-digit-static" data-stat-static>
+                        {character}
+                      </span>
+                      <span
+                        class="stat-reel-window"
+                        aria-hidden="true"
+                        data-stat-window
+                      >
+                        <span
+                          class="stat-reel"
+                          data-stat-reel
+                          data-stat-digit={digit}
+                        >
+                          {reel.map((reelDigit) => (
+                            <span class="stat-reel-row">{reelDigit}</span>
+                          ))}
+                        </span>
                       </span>
                     </span>
                   ),
@@ -144,6 +159,43 @@ const stats = t.stats.map(([value, label], index) => ({
 </section>
 
 <style>
+  /* Give Safari an explicit, isolated clipping box around every rolling digit. */
+  .stat-digit {
+    position: relative;
+    display: inline-block;
+    height: 1.1em;
+    line-height: 1.1em;
+    vertical-align: baseline;
+  }
+
+  .stat-digit-static {
+    display: block;
+    height: 1.1em;
+    line-height: 1.1em;
+  }
+
+  .stat-reel-window {
+    position: absolute;
+    inset: 0;
+    display: block;
+    overflow: hidden;
+    clip-path: inset(0);
+    visibility: hidden;
+  }
+
+  .stat-reel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-reel-row {
+    display: block;
+    height: 1.1em;
+    flex: none;
+    line-height: 1.1em;
+    white-space: nowrap;
+  }
+
   /* On desktop the copy starts clear of the tower, measured from page-wrap's */
   /* content edge (80rem max width, clamp(1.25rem, 6vw, 7rem) padding). */
   @media (min-width: 64rem) {
@@ -157,67 +209,156 @@ const stats = t.stats.map(([value, label], index) => ({
       );
     }
   }
-
-  /* Every character sits in a one-line window, so all share a baseline. */
-  /* Digits hold a reel that shows its last round by default. */
-  .stat-window {
-    display: block;
-    height: 1.1em;
-    line-height: 1.1em;
-  }
-
-  /* Contain the reels independently of clip-path repainting during scroll. */
-  .stat-digit {
-    overflow: hidden;
-  }
-
-  .stat-reel {
-    display: flex;
-    flex-direction: column;
-    transform: translateY(calc(var(--end) * -1.1em));
-  }
-
-  /* The script parks the reels at 0 and rolls them in view. */
-  [data-stats][data-ready] .stat-reel {
-    transform: translateY(0);
-  }
-
-  [data-stats][data-rolled] .stat-reel {
-    transform: translateY(calc(var(--end) * -1.1em));
-    transition: transform 1400ms var(--ease-out);
-  }
 </style>
 
 <script>
+  import { gsap } from "gsap";
+
   let observer: IntersectionObserver | undefined;
   let controller: AbortController | undefined;
+  let timeline: gsap.core.Timeline | undefined;
 
   document.addEventListener("astro:page-load", () => {
     observer?.disconnect();
+    timeline?.kill();
     controller?.abort();
     controller = new AbortController();
-    document.addEventListener(
-      "astro:before-swap",
-      () => observer?.disconnect(),
-      {
-        signal: controller.signal,
-      },
-    );
 
     const section = document.querySelector<HTMLElement>("[data-stats]");
-    if (!section || matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
+    const heading = section?.querySelector<HTMLElement>("[data-stats-heading]");
+    const trigger = section?.querySelector<HTMLElement>("[data-stats-trigger]");
+    const cards = Array.from(
+      section?.querySelectorAll<HTMLElement>("[data-stat-card]") ?? [],
+    );
+    const values = Array.from(
+      section?.querySelectorAll<HTMLElement>("[data-stat-value]") ?? [],
+    );
+    const reels = Array.from(
+      section?.querySelectorAll<HTMLElement>("[data-stat-reel]") ?? [],
+    );
+    const windows = Array.from(
+      section?.querySelectorAll<HTMLElement>("[data-stat-window]") ?? [],
+    );
+    const staticDigits = Array.from(
+      section?.querySelectorAll<HTMLElement>("[data-stat-static]") ?? [],
+    );
 
-    section.toggleAttribute("data-ready", true);
+    if (!section || !heading || !trigger || !cards.length) return;
+
+    const animatedElements = [heading, ...cards];
+    const showStaticValues = () => {
+      values.forEach((value) => {
+        value.removeAttribute("data-rolling");
+      });
+      gsap.set([...animatedElements, ...reels, ...windows, ...staticDigits], {
+        clearProps: "opacity,transform,visibility",
+      });
+    };
+    const clearAnimation = () => {
+      observer?.disconnect();
+      observer = undefined;
+      timeline?.kill();
+      timeline = undefined;
+      showStaticValues();
+    };
+    const finishAnimation = () => {
+      showStaticValues();
+      timeline = undefined;
+    };
+    const motionPreference = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    document.addEventListener("astro:before-swap", clearAnimation, {
+      signal: controller.signal,
+    });
+    motionPreference.addEventListener(
+      "change",
+      () => {
+        if (motionPreference.matches) clearAnimation();
+      },
+      { signal: controller.signal },
+    );
+    document.addEventListener(
+      "visibilitychange",
+      () => {
+        if (!document.hidden) timeline?.progress(1);
+      },
+      { signal: controller.signal },
+    );
+
+    if (motionPreference.matches || !("IntersectionObserver" in window)) return;
+
     observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting) return;
-        section.toggleAttribute("data-rolled", true);
         observer?.disconnect();
+        observer = undefined;
+
+        timeline = gsap.timeline({ onComplete: finishAnimation });
+        timeline
+          .fromTo(
+            heading,
+            { opacity: 0, y: 18 },
+            { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" },
+          )
+          .fromTo(
+            cards,
+            { opacity: 0, y: 18 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.55,
+              stagger: 0.1,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          );
+
+        values.forEach((value, index) => {
+          const valueReels = Array.from(
+            value.querySelectorAll<HTMLElement>("[data-stat-reel]"),
+          );
+          const valueWindows = Array.from(
+            value.querySelectorAll<HTMLElement>("[data-stat-window]"),
+          );
+          const valueStaticDigits = Array.from(
+            value.querySelectorAll<HTMLElement>("[data-stat-static]"),
+          );
+
+          gsap.set(valueReels, { y: 0 });
+          gsap.set(valueWindows, { visibility: "visible" });
+          gsap.set(valueStaticDigits, { visibility: "hidden" });
+          value.toggleAttribute("data-rolling", true);
+
+          valueReels.forEach((reel, digitIndex) => {
+            const digit = Number(reel.dataset.statDigit);
+            const rowHeight =
+              reel.firstElementChild?.getBoundingClientRect().height ?? 0;
+
+            if (
+              !Number.isInteger(digit) ||
+              digit < 0 ||
+              digit > 9 ||
+              !rowHeight
+            )
+              return;
+
+            timeline?.to(
+              reel,
+              {
+                y: -(20 + digit) * rowHeight,
+                duration: 1.35,
+                ease: "power3.out",
+                force3D: false,
+              },
+              0.42 + index * 0.1 + digitIndex * 0.045,
+            );
+          });
+        });
       },
-      { threshold: 0.4 },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
     );
-    observer.observe(section);
+    observer.observe(trigger);
   });
 </script>
