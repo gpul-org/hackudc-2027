@@ -19,6 +19,7 @@ interface Props {
 const t = copy[Astro.props.locale];
 const locale = Astro.props.locale;
 const legalLinks = [
+  { label: t.brand.title, href: getRelativeLocaleUrl(locale, "brand") },
   { label: t.terms, href: getRelativeLocaleUrl(locale, "terms") },
   { label: t.privacy, href: getRelativeLocaleUrl(locale, "privacy") },
   { label: t.conduct, href: getRelativeLocaleUrl(locale, "conduct") },

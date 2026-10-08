@@ -18,13 +18,28 @@ references.
 
 Use only the supplied files in `src/assets/brand/`.
 
-| Variant          | Use                                                |
-| ---------------- | -------------------------------------------------- |
-| Navy horizontal  | Default mark on cream or light-blue surfaces.      |
-| Cream horizontal | Mark on ink or red surfaces.                       |
-| Navy vertical    | Narrow or stacked formats on light surfaces.       |
-| Cream vertical   | Narrow or stacked formats on dark or red surfaces. |
-| Mobile navy      | Compact light-surface layouts only.                |
+| Variant          | Use                                                 |
+| ---------------- | --------------------------------------------------- |
+| Navy horizontal  | Default mark on cream or light-blue surfaces.       |
+| Cream horizontal | Mark on ink or black surfaces.                      |
+| Navy vertical    | Narrow or stacked formats on light surfaces.        |
+| Cream vertical   | Narrow or stacked formats on ink or black surfaces. |
+| Mobile navy      | Compact light-surface layouts only.                 |
+
+Horizontal is the general-use version. Use compact horizontal when fitting the
+horizontal name would make the text too small. Vertical is for narrow surfaces
+such as bottles or other merchandise; prefer compact horizontal when it fits.
+
+All three formats (horizontal, compact horizontal, and vertical) follow these
+logo/background combinations:
+
+| Logo colour | Backgrounds                                                                      |
+| ----------- | -------------------------------------------------------------------------------- |
+| Navy        | Sky blue or white. Primary version.                                              |
+| Cream       | Navy or black.                                                                   |
+| Red         | White preferred; light blue is also allowed.                                     |
+| Black       | White. Exceptional use when navy clashes with the composition.                   |
+| Sky blue    | Navy or other dark surfaces if the combination works and contrast is sufficient. |
 
 Keep the logo intact, legible, and surrounded by clear space. Do not stretch,
 crop, rotate, redraw, add effects, place it on a low-contrast surface, or
@@ -44,9 +59,30 @@ introduce raw colours into components.
 | <span style="display:inline-block;width:4rem;height:1.5rem;background:#f5dc8f;border:1px solid #030846"></span> | `yellow` | `#f5dc8f` | Reserved decorative highlight; use sparingly.              |
 | <span style="display:inline-block;width:4rem;height:1.5rem;background:#000000;border:1px solid #030846"></span> | `black`  | `#000000` | Technical exception only; prefer `ink` for interface text. |
 
+### Alternative tones from hackOS
+
+The event software uses these sRGB mixes of brand tokens. They are acceptable
+for surfaces, secondary text and interface states; logo colours remain unchanged.
+The hex values below are rounded to 8-bit sRGB. Mix percentages total 100%.
+Cream means `#FAFAFA`, not pure white. Use the resulting HEX at 100% opacity
+in design tools, or `color-mix(in srgb, <colour> <percentage>, <colour>
+<percentage>)` in CSS. Element opacity depends on the background and is not
+a substitute for a solid mix. To derive other shades, adjust the ratio of the
+same two colours and check text contrast on the final surface.
+
+| Tone        | Hex       | Mix                      | Use                                         |
+| ----------- | --------- | ------------------------ | ------------------------------------------- |
+| Soft blue   | `#DCEDFC` | 35% `blue` + 65% `cream` | Controls and selected surfaces.             |
+| Pale blue   | `#EDF4FB` | 15% `blue` + 85% `cream` | Secondary surfaces.                         |
+| Blue canvas | `#F0F6FB` | 12% `blue` + 88% `cream` | Page backgrounds.                           |
+| Soft navy   | `#484C78` | 72% `ink` + 28% `cream`  | Secondary text on light surfaces.           |
+| Blue navy   | `#3B5087` | 65% `ink` + 35% `blue`   | Informational icons/text on light surfaces. |
+| Soft red    | `#DF988A` | 45% `red` + 55% `cream`  | Notices and actions on dark surfaces.       |
+
 ### Colour application
 
 - `cream` is the default background; `ink` is the default text colour.
+- White and sky blue can both be background colours; use sky blue sparingly.
 - Use `blue` for spacious, light surfaces and `red` for high-attention brand
   moments, especially sponsorship.
 - Use one dominant surface colour per composition. Let `ink`, `cream`, or a
@@ -58,18 +94,11 @@ introduce raw colours into components.
 - Keep transitions between colour surfaces flat. Do not use gradients as a
   general separator.
 
-### Red and light-blue text rule
+### Red and light blue
 
-This directional rule applies when red and light blue form the text and
-background pair. It does not replace accessibility testing.
-
-| Combination                      | Status      | Rule                                          |
-| -------------------------------- | ----------- | --------------------------------------------- |
-| Light-blue text on a red surface | Allowed     | Reserve for short, high-emphasis labels.      |
-| Red text on a light-blue surface | Not allowed | Use `ink` for body text and headings instead. |
-
-A red banner with `cream` text is valid: it is not red text on a light-blue
-background.
+The red logo may appear on white (preferred) or light blue. This logo rule
+is separate from text accessibility: check contrast for each text/background
+combination and prefer ink for body text on light blue.
 
 ## Typography
 

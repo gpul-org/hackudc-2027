@@ -1,0 +1,394 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { copy, type Locale } from "@/i18n/copy";
+import Layout from "@/layouts/Layout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import Download from "@lucide/astro/icons/download";
+interface Props {
+  locale: Locale;
+}
+const t = copy[Astro.props.locale];
+const { locale } = Astro.props;
+const b = t.brand;
+const localeUrls = {
+  es: getRelativeLocaleUrl("es", "brand"),
+  en: getRelativeLocaleUrl("en", "brand"),
+  gl: getRelativeLocaleUrl("gl", "brand"),
+};
+const logoBackgrounds: Record<string, string[]> = {
+  navy: ["blue", "cream"],
+  cream: ["ink", "black"],
+  red: ["cream", "blue"],
+  black: ["cream"],
+  blue: ["ink", "black"],
+};
+const logos = b.shapes.map(([shape, title]) => ({
+  shape,
+  title,
+  description: b.shapeDescriptions.find(([key]) => key === shape)![1],
+}));
+const colors = b.colorVariants.map(([color, text]) => ({
+  color,
+  label: text.split(" · ")[0],
+  description: text.split(" · ")[1],
+  backgrounds: logoBackgrounds[color],
+}));
+const palette = [
+  { hex: "#030846", class: "bg-ink" },
+  { hex: "#fafafa", class: "bg-cream" },
+  { hex: "#a3d5ff", class: "bg-blue" },
+  { hex: "#bf2100", class: "bg-red" },
+  { hex: "#f5dc8f", class: "bg-yellow" },
+  { hex: "#000000", class: "bg-black" },
+];
+const alternativePalette = [
+  {
+    hex: "#DCEDFC",
+    mix: "color-mix(in srgb, var(--color-blue) 35%, var(--color-cream))",
+  },
+  {
+    hex: "#EDF4FB",
+    mix: "color-mix(in srgb, var(--color-blue) 15%, var(--color-cream))",
+  },
+  {
+    hex: "#F0F6FB",
+    mix: "color-mix(in srgb, var(--color-blue) 12%, var(--color-cream))",
+  },
+  {
+    hex: "#484C78",
+    mix: "color-mix(in srgb, var(--color-ink) 72%, var(--color-cream))",
+  },
+  {
+    hex: "#3B5087",
+    mix: "color-mix(in srgb, var(--color-ink) 65%, var(--color-blue))",
+  },
+  {
+    hex: "#DF988A",
+    mix: "color-mix(in srgb, var(--color-red) 45%, var(--color-cream))",
+  },
+];
+const sectionClass = "border-t border-ink/20 py-10 sm:py-12";
+const downloadClass =
+  "inline-flex min-h-11 items-center gap-1.5 border border-ink px-2.5 py-2 text-xs font-bold hover:bg-ink hover:text-cream";
+---
+
+<Layout lang={locale} title={`${b.title} | HackUDC 2027`} description={b.intro}>
+  <div id="top">
+    <PageHeader
+      locale={locale}
+      localeUrls={localeUrls}
+      homeUrl={getRelativeLocaleUrl(locale, "")}
+      backLabel={t.backHome}
+      backShortLabel={t.backHomeShort}
+    />
+    <main class="page-wrap pb-20 sm:pb-28">
+      <section
+        id="brand"
+        aria-labelledby="brand-title"
+        class="pt-8 pb-10 sm:pt-12 sm:pb-14"
+      >
+        <p class="eyebrow text-red">HackUDC 2027</p>
+        <h1 id="brand-title" class="sr-only">
+          {b.title}
+        </h1>
+        <p aria-hidden="true" class="display-heading mt-5 max-w-3xl">
+          {b.title}
+        </p>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed">{b.intro}</p>
+        <a
+          class="mt-8 inline-flex min-h-12 items-center gap-3 bg-ink px-6 py-3 font-bold text-cream hover:bg-red"
+          href="/brand/hackudc-2027-logos.zip"
+          download
+        >
+          <Download class="size-5" aria-hidden="true" />
+          {b.download} <span class="text-xs">SVG + PNG</span>
+        </a>
+      </section>
+      <section id="who-we-are" aria-labelledby="who-title" class={sectionClass}>
+        <h2
+          id="who-title"
+          class="font-serif text-2xl leading-tight sm:text-3xl"
+        >
+          {b.whoTitle}
+        </h2>
+        <div class="mt-5 grid gap-5 lg:grid-cols-2">
+          <p class="leading-relaxed">{b.whoIntro}</p>
+          <p class="leading-relaxed">{b.whoBody}</p>
+        </div>
+        <a
+          class="small-link mt-5 inline-flex min-h-11 items-center underline underline-offset-4"
+          href={getRelativeLocaleUrl(locale, "manifesto")}
+        >
+          {t.manifestoCta}
+        </a>
+      </section>
+      <section
+        id="colours"
+        aria-labelledby="colours-title"
+        class={sectionClass}
+      >
+        <h2
+          id="colours-title"
+          class="font-serif text-2xl leading-tight sm:text-3xl"
+        >
+          {b.colors}
+        </h2>
+        <p class="mt-5 max-w-2xl leading-relaxed">{b.colorIntro}</p>
+        <ul class="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-3">
+          {palette.map((color, index) => (
+            <li>
+              <div
+                class:list={["h-28 border border-ink/20", color.class]}
+                aria-hidden="true"
+              />
+              <p class="mt-3 font-bold">{b.colorNames[index]}</p>
+              <p class="mt-1 font-mono text-sm">{color.hex.toUpperCase()}</p>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-10">
+          <h3 class="font-serif text-xl sm:text-2xl">{b.alternativeTitle}</h3>
+          <p class="mt-4 max-w-2xl leading-relaxed">{b.alternativeIntro}</p>
+          <ul class="mt-6 grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-3">
+            {alternativePalette.map((color, index) => (
+              <li>
+                <div
+                  class="h-20 border border-ink/20"
+                  style={{ background: color.mix }}
+                  aria-hidden="true"
+                />
+                <h4 class="mt-3 text-sm font-bold">
+                  {b.alternatives[index][0]}
+                </h4>
+                <p class="mt-1 font-mono text-sm">{color.hex}</p>
+                <p class="mt-2 text-xs leading-relaxed font-bold">
+                  {b.recipes[index][1]}
+                </p>
+                <p class="mt-2 text-sm leading-relaxed">
+                  {b.alternatives[index][1]}
+                </p>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-8 max-w-2xl space-y-4">
+            <h4 class="text-lg font-bold">{b.mixTitle}</h4>
+            <p class="leading-relaxed">{b.mixBody}</p>
+            <details class="border border-ink/20 p-4">
+              <summary class="cursor-pointer font-bold">{b.mixCss}</summary>
+              <pre class="mt-4 overflow-x-auto text-sm"><code>{`background: color-mix(
+  in srgb,
+  #A3D5FF 35%,
+  #FAFAFA 65%
+);`}</code></pre>
+            </details>
+          </div>
+        </div>
+      </section>
+      <section id="logos" aria-labelledby="logos-title" class={sectionClass}>
+        <h2
+          id="logos-title"
+          class="font-serif text-2xl leading-tight sm:text-3xl"
+        >
+          {b.logos}
+        </h2>
+        <p class="mt-5 max-w-2xl leading-relaxed">{b.formats}</p>
+        <div class="mt-10 space-y-12">
+          {logos.map((logo) => (
+            <div>
+              <h3 class="font-serif text-2xl sm:text-3xl">{logo.title}</h3>
+              <p class="mt-3 max-w-2xl leading-relaxed">{logo.description}</p>
+              <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+                {colors.map((color) => (
+                  <article class="flex min-w-0 flex-col" data-logo-picker>
+                    <div
+                      class="flex h-44 items-center justify-center border border-ink/20 p-5"
+                      data-logo-preview
+                      data-background={color.backgrounds[0]}
+                    >
+                      <img
+                        src={`/brand/hackudc-2027-${logo.shape}-${color.color}.svg`}
+                        alt={`HackUDC 2027 — ${logo.title} · ${color.label}`}
+                        class="h-full w-full object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h4 class="mt-4 text-sm font-bold">{color.label}</h4>
+                    <div
+                      class="mt-2 flex flex-wrap gap-1"
+                      role="group"
+                      aria-label={`${b.previewBackground} — ${logo.title} · ${color.label}`}
+                    >
+                      {color.backgrounds.map((background, index) => (
+                        <button
+                          type="button"
+                          class="grid size-11 place-items-center rounded-full"
+                          data-logo-background={background}
+                          aria-pressed={index === 0 ? "true" : "false"}
+                          aria-label={
+                            b.backgrounds.find(
+                              ([key]) => key === background,
+                            )![1]
+                          }
+                          title={
+                            b.backgrounds.find(
+                              ([key]) => key === background,
+                            )![1]
+                          }
+                        >
+                          <span
+                            class="size-6 rounded-full border border-ink/30"
+                            data-background-swatch={background}
+                            aria-hidden="true"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                    <p class="mt-2 pb-4 text-sm leading-relaxed">
+                      {color.description}
+                    </p>
+                    <div class="mt-auto flex flex-wrap gap-2">
+                      {["svg", "png"].map((format) => (
+                        <a
+                          class={downloadClass}
+                          href={`/brand/hackudc-2027-${logo.shape}-${color.color}.${format}`}
+                          download
+                          aria-label={`${b.get} ${logo.title} — ${color.label} (${format.toUpperCase()})`}
+                        >
+                          <Download class="size-3.5" aria-hidden="true" />
+                          {format.toUpperCase()}
+                        </a>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section id="logo-use" aria-labelledby="usage-title" class={sectionClass}>
+        <h2
+          id="usage-title"
+          class="font-serif text-2xl leading-tight sm:text-3xl"
+        >
+          {b.usage}
+        </h2>
+        <div class="mt-8 grid gap-8 lg:grid-cols-3">
+          {b.rules.map(([title, body]) => (
+            <div>
+              <h3 class="text-lg font-bold">{title}</h3>
+              <p class="mt-3 leading-relaxed">{body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section
+        id="typography"
+        aria-labelledby="type-title"
+        class={sectionClass}
+      >
+        <h2
+          id="type-title"
+          class="font-serif text-2xl leading-tight sm:text-3xl"
+        >
+          {b.type}
+        </h2>
+        <div class="mt-8 grid gap-10 lg:grid-cols-2">
+          {b.fonts.map(([name, description], index) => (
+            <div>
+              <h3
+                class:list={[
+                  "text-4xl",
+                  index === 0 ? "font-serif" : "font-sans font-bold",
+                ]}
+              >
+                {name}
+              </h3>
+              <p class="mt-4 max-w-lg leading-relaxed">{description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <div class="grid gap-x-10 lg:grid-cols-2">
+        <section id="voice" aria-labelledby="voice-title" class={sectionClass}>
+          <h2
+            id="voice-title"
+            class="font-serif text-2xl leading-tight sm:text-3xl"
+          >
+            {b.voice}
+          </h2>
+          <p class="mt-5 max-w-2xl leading-relaxed">{b.voiceBody}</p>
+        </section>
+        <section
+          id="accessibility"
+          aria-labelledby="access-title"
+          class={sectionClass}
+        >
+          <h2
+            id="access-title"
+            class="font-serif text-2xl leading-tight sm:text-3xl"
+          >
+            {b.access}
+          </h2>
+          <p class="mt-5 max-w-2xl leading-relaxed">{b.accessBody}</p>
+        </section>
+      </div>
+    </main>
+    <SiteFooter locale={locale} />
+  </div>
+</Layout>
+
+<style>
+  [data-logo-preview][data-background="blue"],
+  [data-background-swatch="blue"] {
+    background: var(--color-blue);
+  }
+  [data-logo-preview][data-background="cream"],
+  [data-background-swatch="cream"] {
+    background: var(--color-cream);
+  }
+  [data-logo-preview][data-background="ink"],
+  [data-background-swatch="ink"] {
+    background: var(--color-ink);
+  }
+  [data-logo-preview][data-background="black"],
+  [data-background-swatch="black"] {
+    background: var(--color-black);
+  }
+  [data-logo-background][aria-pressed="true"] span {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+</style>
+<script>
+  let controller: AbortController | undefined;
+  document.addEventListener("astro:page-load", () => {
+    controller?.abort();
+    controller = new AbortController();
+    const { signal } = controller;
+    document
+      .querySelectorAll<HTMLElement>("[data-logo-picker]")
+      .forEach((picker) => {
+        const preview = picker.querySelector<HTMLElement>(
+          "[data-logo-preview]",
+        )!;
+        const buttons = picker.querySelectorAll<HTMLButtonElement>(
+          "[data-logo-background]",
+        );
+        buttons.forEach((button) =>
+          button.addEventListener(
+            "click",
+            () => {
+              preview.dataset.background = button.dataset.logoBackground;
+              buttons.forEach((option) =>
+                option.setAttribute("aria-pressed", String(option === button)),
+              );
+            },
+            { signal },
+          ),
+        );
+      });
+  });
+</script>
