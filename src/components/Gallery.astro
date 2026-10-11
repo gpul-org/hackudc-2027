@@ -18,7 +18,7 @@ const photos = t.galleryPhotos.map(([file, description]) => {
   return { image, description };
 });
 const buttonClass =
-  "inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-ink bg-cream px-4 text-sm font-bold transition-colors hover:bg-ink hover:text-cream";
+  "inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-2 rounded-full border border-ink bg-cream px-4 text-sm font-bold transition-colors hover:bg-ink hover:text-cream";
 ---
 
 {photos.length > 0 && (
