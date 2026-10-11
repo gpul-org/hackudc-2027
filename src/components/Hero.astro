@@ -211,7 +211,7 @@ const sponsorPageUrl =
   @media (prefers-reduced-motion: no-preference) {
     .hero-gull {
       animation:
-        gull-flight 18s linear 800ms infinite,
+        gull-flight 18s linear 800ms infinite backwards,
         gull-wave 18s ease-in-out 800ms infinite;
     }
 
@@ -225,7 +225,7 @@ const sponsorPageUrl =
 
     @keyframes gull-flight {
       from {
-        transform: translateX(-14vw);
+        transform: translateX(-100%);
       }
 
       to {
