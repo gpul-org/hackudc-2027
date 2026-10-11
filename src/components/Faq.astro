@@ -9,6 +9,20 @@ interface Props {
 const t = copy[Astro.props.locale];
 const midpoint = Math.ceil(t.faq.length / 2);
 const columns = [t.faq.slice(0, midpoint), t.faq.slice(midpoint)];
+// Answers may carry Markdown-style links: [label](href).
+const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
+const parseAnswer = (answer: string) => {
+  const parts: (string | { label: string; href: string })[] = [];
+  let end = 0;
+  for (const match of answer.matchAll(linkPattern)) {
+    parts.push(answer.slice(end, match.index), {
+      label: match[1],
+      href: match[2],
+    });
+    end = match.index + match[0].length;
+  }
+  return [...parts, answer.slice(end)];
+};
 ---
 
 <section
@@ -53,7 +67,18 @@ const columns = [t.faq.slice(0, midpoint), t.faq.slice(midpoint)];
               </summary>
               <div data-faq-answer>
                 <p class="mt-4 mr-11 max-w-xl text-[0.95rem] leading-[1.6]">
-                  {answer}
+                  {parseAnswer(answer).map((part) =>
+                    typeof part === "string" ? (
+                      part
+                    ) : (
+                      <a
+                        class="whitespace-nowrap underline decoration-1 underline-offset-4 transition-colors hover:text-red"
+                        href={part.href}
+                      >
+                        {part.label}
+                      </a>
+                    ),
+                  )}
                 </p>
               </div>
             </details>

@@ -367,7 +367,7 @@ export const copy: Record<Locale, Copy> = {
       ],
       [
         "¿Y si tengo otras preguntas?",
-        "Puedes contactarnos a través de las redes sociales o escribirnos a hackudc@gpul.org.",
+        "Puedes contactarnos a través de las [redes sociales](#footer) o escribirnos a [hackudc@gpul.org](mailto:hackudc@gpul.org).",
       ],
     ],
     galleryKicker: "En imágenes",
@@ -677,7 +677,7 @@ export const copy: Record<Locale, Copy> = {
       ],
       [
         "What if I have other questions?",
-        "If you have any other questions, feel free to contact us via social media or at hackudc@gpul.org.",
+        "If you have any other questions, feel free to contact us via [social media](#footer) or at [hackudc@gpul.org](mailto:hackudc@gpul.org).",
       ],
     ],
     galleryKicker: "In pictures",
@@ -1001,7 +1001,7 @@ export const copy: Record<Locale, Copy> = {
       ],
       [
         "E se teño outras preguntas?",
-        "Podes contactar connosco a través das redes sociais ou escribirnos a hackudc@gpul.org.",
+        "Podes contactar connosco a través das [redes sociais](#footer) ou escribirnos a [hackudc@gpul.org](mailto:hackudc@gpul.org).",
       ],
     ],
     galleryKicker: "En imaxes",
