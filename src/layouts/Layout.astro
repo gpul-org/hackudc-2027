@@ -39,7 +39,7 @@ const ogLocale = ogLocales[locale];
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} transition:animate={fade({ duration: "0.35s" })}>
   <head>
     <meta charset="utf-8" />
     <meta
@@ -105,9 +105,7 @@ const ogLocale = ogLocales[locale];
     <ClientRouter />
   </head>
   <body>
-    <div transition:animate={fade({ duration: "0.35s" })}>
-      <slot />
-    </div>
+    <slot />
   </body>
 </html>
 
