@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import emilia from "@/assets/scene/emilia-404.png";
+import cloud from "@/assets/scene/error-cloud.png";
+import { copy } from "@/i18n/copy";
+import Layout from "@/layouts/Layout.astro";
+
+const locale = "es";
+const t = copy[locale];
+---
+
+<Layout
+  title={`404 · ${t.errorTitle} | HackUDC 2027`}
+  description={t.errorDescription}
+  lang={locale}
+>
+  <main class="flex min-h-dvh items-center justify-center overflow-hidden bg-blue px-6 py-8 text-ink sm:py-12">
+    <section
+      id="not-found"
+      aria-labelledby="error-title"
+      class="grid w-full max-w-6xl items-center gap-4 lg:grid-cols-2 lg:gap-0"
+    >
+      <div
+        class="relative mx-auto aspect-square w-full max-w-60 sm:max-w-sm lg:max-w-md"
+        aria-hidden="true"
+      >
+        <Image
+          src={cloud}
+          alt=""
+          widths={[300, 600, 900]}
+          sizes="(min-width: 1024px) 34rem, (min-width: 640px) 24rem, 15rem"
+          class="pointer-events-none absolute top-0 left-1/2 w-full max-w-none opacity-65 lg:-top-[4%] lg:w-[120%]"
+        />
+        <Image
+          src={emilia}
+          alt=""
+          widths={[155, 310]}
+          sizes="(min-width: 1024px) 11rem, 9rem"
+          class="absolute bottom-0 left-1/2 h-[88%] w-auto max-w-full -translate-x-1/2 object-contain"
+        />
+      </div>
+      <div class="relative flex flex-col items-center text-center lg:items-start lg:text-left">
+        <p
+          aria-hidden="true"
+          class="font-serif text-[clamp(7rem,20vw,17rem)] leading-none font-bold text-red tabular-nums"
+        >
+          404
+        </p>
+        <h1
+          id="error-title"
+          class="mt-4 font-serif text-3xl leading-tight text-balance sm:text-4xl"
+        >
+          {t.errorTitle}
+        </h1>
+        <p class="mt-2 max-w-md text-pretty text-ink/75">
+          {t.errorDescription}
+        </p>
+        <a
+          href={getRelativeLocaleUrl(locale, "")}
+          class="mt-6 rounded-full bg-ink px-6 py-3 font-bold text-cream hover:bg-red"
+        >
+          {t.backHome}
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>

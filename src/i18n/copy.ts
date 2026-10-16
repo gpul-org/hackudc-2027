@@ -37,6 +37,8 @@ export type Copy = {
     accessBody: string;
   };
 
+  errorTitle: string;
+  errorDescription: string;
   ogImageAlt: string;
   nav: string[];
   edition: string;
@@ -222,6 +224,9 @@ export const copy: Record<Locale, Copy> = {
         ["Rojo", "45% rojo + 55% crema"],
       ],
     },
+    errorTitle: "Página no encontrada",
+    errorDescription:
+      "Esta página no existe o ha cambiado de dirección. Puedes volver al inicio para seguir explorando HackUDC.",
     ogImageAlt:
       "HackUDC 2027, 5ª edición. Programa. Crea. Conecta. 36 horas para construir algo increíble.",
     nav: ["Qué es", "La experiencia", "Patrocinio", "FAQ"],
@@ -533,6 +538,9 @@ export const copy: Record<Locale, Copy> = {
         ["Red", "45% red + 55% cream"],
       ],
     },
+    errorTitle: "Page not found",
+    errorDescription:
+      "This page does not exist or has moved. Return home to keep exploring HackUDC.",
     ogImageAlt:
       "HackUDC 2027, 5th edition. Code. Create. Connect. 36 hours to build something amazing.",
     nav: ["What is it", "The experience", "Sponsorship", "FAQ"],
@@ -856,6 +864,9 @@ export const copy: Record<Locale, Copy> = {
         ["Vermello", "45% vermello + 55% crema"],
       ],
     },
+    errorTitle: "Páxina non atopada",
+    errorDescription:
+      "Esta páxina non existe ou cambiou de enderezo. Podes volver ao inicio para seguir explorando HackUDC.",
     ogImageAlt:
       "HackUDC 2027, 5ª edición. Programa. Crea. Conecta. 36 horas para construír algo incrible.",
     nav: ["Que é", "A experiencia", "Patrocinio", "FAQ"],
