@@ -303,7 +303,11 @@ const features = [
     </div>
   </section>
 
-  <section class="page-wrap py-20 lg:py-28" aria-labelledby="packages-title">
+  <!-- Extra bottom room keeps the footer gull clear of the contact box until the wrap is wide enough to leave it beside. -->
+  <section
+    class="page-wrap pt-20 pb-[clamp(7rem,calc(18vw+1rem),13rem)] lg:pt-28 min-[96rem]:pb-28"
+    aria-labelledby="packages-title"
+  >
     <p class="eyebrow text-sm text-red">HackUDC 2027</p>
     <h2 id="packages-title" class="display-heading mt-5">
       {t.packages}
