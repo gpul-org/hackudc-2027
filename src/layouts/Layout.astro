@@ -1,4 +1,5 @@
 ---
+import eventPhoto from "@/assets/gallery/group-photo.webp";
 import socialImageEs from "@/assets/brand/og-es.jpg";
 import socialImageEn from "@/assets/brand/og-en.jpg";
 import socialImageGl from "@/assets/brand/og-gl.jpg";
@@ -33,9 +34,89 @@ const socialImages = {
   gl: socialImageGl,
 };
 const socialImage = socialImages[locale];
-const ogImage = new URL(socialImage.src, Astro.site);
-const ogImageAlt = copy[locale].ogImageAlt;
+const isHomePage = path === "";
+const previewImage = isHomePage ? eventPhoto : socialImage;
+const ogImage = new URL(previewImage.src, Astro.site);
+const ogImageAlt = isHomePage
+  ? copy[locale].primaryPhotoAlt
+  : copy[locale].ogImageAlt;
 const ogLocale = ogLocales[locale];
+const siteUrl = new URL("/", Astro.site);
+const websiteId = new URL("#website", siteUrl).href;
+const organizerId = "https://gpul.org/#organization";
+const primaryImageId = new URL("#primaryimage", canonicalUrl).href;
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": organizerId,
+      name: "GPUL",
+      alternateName: "Grupo de Programadores e Usuarios de Linux",
+      url: "https://gpul.org/",
+      email: "hackudc@gpul.org",
+      sameAs: [
+        "https://www.linkedin.com/company/gpul/",
+        "https://github.com/gpul-org",
+        "https://www.instagram.com/gpul_",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      name: "HackUDC",
+      url: siteUrl.href,
+      publisher: { "@id": organizerId },
+      inLanguage: locales,
+    },
+    {
+      "@type": "ImageObject",
+      "@id": primaryImageId,
+      contentUrl: ogImage.href,
+      width: previewImage.width,
+      height: previewImage.height,
+      caption: ogImageAlt,
+    },
+    {
+      "@type": "WebPage",
+      "@id": new URL("#webpage", canonicalUrl).href,
+      url: canonicalUrl.href,
+      name: title,
+      description,
+      inLanguage: locale,
+      isPartOf: { "@id": websiteId },
+      publisher: { "@id": organizerId },
+      primaryImageOfPage: { "@id": primaryImageId },
+      ...(isHomePage
+        ? { mainEntity: { "@id": new URL("#hackudc", siteUrl).href } }
+        : {}),
+    },
+    ...(isHomePage
+      ? [
+          {
+            "@type": "EventSeries",
+            "@id": new URL("#hackudc", siteUrl).href,
+            name: "HackUDC",
+            url: siteUrl.href,
+            description: copy[locale].homeDescription,
+            organizer: { "@id": organizerId },
+            isAccessibleForFree: true,
+            image: { "@id": primaryImageId },
+            location: {
+              "@type": "Place",
+              name: "Facultade de Informática da Universidade da Coruña",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Campus de Elviña",
+                addressLocality: "A Coruña",
+                addressCountry: "ES",
+              },
+            },
+          },
+        ]
+      : []),
+  ],
+};
 ---
 
 <!doctype html>
@@ -63,6 +144,11 @@ const ogLocale = ogLocales[locale];
     <link rel="manifest" href="/site.webmanifest?v=20261001" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <meta name="robots" content="max-image-preview:large" />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData).replace(/</g, "\\u003c")}
+    ></script>
     <Font cssVariable="--font-inter" />
     <Font cssVariable="--font-rockwell" />
 
@@ -86,9 +172,12 @@ const ogLocale = ogLocales[locale];
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content={socialImage.width} />
-    <meta property="og:image:height" content={socialImage.height} />
+    <meta
+      property="og:image:type"
+      content={isHomePage ? "image/webp" : "image/jpeg"}
+    />
+    <meta property="og:image:width" content={previewImage.width} />
+    <meta property="og:image:height" content={previewImage.height} />
     <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:locale" content={ogLocale} />
     {Object.values(ogLocales)

@@ -37,6 +37,11 @@ export type Copy = {
     accessBody: string;
   };
 
+  legalContents: string;
+  homeDescription: string;
+  primaryPhotoAlt: string;
+  organizationIntro: string;
+  organizationFaq: [string, string][];
   errorTitle: string;
   errorDescription: string;
   ogImageAlt: string;
@@ -194,7 +199,7 @@ export const copy: Record<Locale, Copy> = {
         "HackUDC es un evento para todo el mundo. Su marca también debe serlo. Usa texto que se lea bien, con suficiente contraste y sin depender solo del color. Revisa el diseño en móvil y añade texto alternativo a las imágenes informativas. En medios digitales, permite navegar con teclado y respeta las preferencias de movimiento reducido.",
       whoTitle: "Quiénes somos",
       whoIntro:
-        "HackUDC es un hackathon organizado por estudiantes dentro de GPUL en la Facultad de Informática de la Universidade da Coruña. Después de participar en hackathones fuera y ver lo que otras personas construían, sentimos que Galicia necesitaba un lugar así. Aquí hay mucho talento esperando una oportunidad para mostrar lo que puede hacer.",
+        "HackUDC es un hackathon organizado por la comunidad de GPUL y hecho posible gracias a sus patrocinadores. Se celebra en los espacios cedidos por la Facultad de Informática de la Universidade da Coruña. Después de participar en hackathones fuera y ver lo que otras personas construían, sentimos que Galicia necesitaba un lugar así. Aquí hay mucho talento esperando una oportunidad para mostrar lo que puede hacer.",
       whoBody:
         "Queremos que HackUDC ayude a aprender, construir los primeros proyectos y abrirse camino profesionalmente. GPUL es una asociación de software libre, y creemos que se avanza mejor en comunidad. Por eso los proyectos se publican como software libre: para compartir lo aprendido y que otras personas puedan continuar el trabajo. Lo que empieza aquí puede llevar a una comunidad, un primer trabajo o algo propio, desde Galicia.",
       alternativeTitle: "Variaciones de color",
@@ -224,6 +229,19 @@ export const copy: Record<Locale, Copy> = {
         ["Rojo", "45% rojo + 55% crema"],
       ],
     },
+    legalContents: "En esta página",
+    homeDescription:
+      "HackUDC: hackathon de software libre de 36 horas en A Coruña, organizado por GPUL y hecho posible gracias a sus patrocinadores. Lista de espera para 2027 abierta.",
+    primaryPhotoAlt:
+      "Foto de grupo de participantes y organización de HackUDC 2026 en el auditorio de la FIC.",
+    organizationIntro:
+      "HackUDC lo organiza el voluntariado de GPUL (Grupo de Programadores e Usuarios de Linux), una asociación de estudiantes de software libre fundada en 1998 para acercar el software, el hardware y la cultura libre a tantas personas como sea posible. En cada edición, quienes deciden asumir la organización se encargan de planificar el evento y de su logística. Venimos de GPUL y tenemos distintas trayectorias técnicas y niveles de experiencia: algunas personas somos estudiantes y otras no.",
+    organizationFaq: [
+      [
+        "¿Quién hace posible HackUDC?",
+        "Nuestros patrocinadores y colaboradores son el pilar fundamental de HackUDC: gracias a su apoyo, edición tras edición, la participación sigue siendo gratuita. El evento mantiene su independencia y no se organiza en torno a los intereses concretos de ninguna empresa, como explicamos en nuestro [manifiesto]({manifestoUrl}). Sin nuestros maravillosos patrocinadores y colaboradores, HackUDC no sería posible. Agradecemos también a la Facultad de Informática de la Universidade da Coruña que nos ceda los espacios para celebrarlo.",
+      ],
+    ],
     errorTitle: "Página no encontrada",
     errorDescription:
       "Esta página no existe o ha cambiado de dirección. Puedes volver al inicio para seguir explorando HackUDC.",
@@ -368,7 +386,7 @@ export const copy: Record<Locale, Copy> = {
       ],
       [
         "Sobre los créditos ECTS",
-        "Si eres estudiante de la UDC, puedes conseguir 1,5 créditos ECTS por participar en HackUDC. Controlaremos la asistencia durante el evento. Si quieres reconocer los créditos, tendrás que solicitarlo a través de la VEE. Daremos más información antes, durante y después del evento.",
+        "Si eres estudiante de grado de la UDC, con la [normativa vigente]({creditsPolicyUrl}) puedes obtener hasta 1,5 créditos ECTS por esta edición. El máximo acumulable por participar en HackUDC es de 3 ECTS: según el criterio comunicado a la organización por la Vicerrectoría, las distintas ediciones se consideran una misma actividad a efectos de reconocimiento.\n\nControlaremos la asistencia durante el evento. Para obtener la acreditación, tendrás que solicitarla a la Vicerrectoría competente en materia de estudiantes, a la que facilitaremos la relación de participantes de la UDC y su asistencia. La incorporación de los créditos a tu expediente se tramita después en tu centro, conforme al procedimiento de la UDC. Daremos más información antes, durante y después del evento.\n\nSi estudias en otra universidad, sus criterios pueden permitir un reconocimiento distinto de créditos u otros beneficios. Después del evento puedes escribirnos a [hackudc@gpul.org](mailto:hackudc@gpul.org) para solicitar un certificado de participación con las horas de asistencia acreditadas. Tu universidad determinará el reconocimiento que corresponda.",
       ],
       [
         "¿Y si tengo otras preguntas?",
@@ -508,7 +526,7 @@ export const copy: Record<Locale, Copy> = {
         "HackUDC is an event for everyone. Its brand should be too. Make text readable, use sufficient contrast and do not rely on colour alone. Check designs on mobile and add alt text to informative images. In digital media, support keyboard navigation and respect reduced-motion preferences.",
       whoTitle: "Who we are",
       whoIntro:
-        "HackUDC is a hackathon organised by students within GPUL at the Faculty of Computer Science of the University of A Coruña. After taking part in hackathons elsewhere and seeing what people were building, we felt Galicia needed a place like that too. There is a lot of talent here waiting for a chance to show what it can do.",
+        "HackUDC is a hackathon organised by the GPUL community and made possible by its sponsors. It takes place in spaces provided by the Faculty of Computer Science of the Universidade da Coruña. After taking part in hackathons elsewhere and seeing what people were building, we felt Galicia needed a place like that too. There is a lot of talent here waiting for a chance to show what it can do.",
       whoBody:
         "We want HackUDC to help people learn, build their first projects and find a path into a career. GPUL is a free and open-source software association, and we believe progress is better made in community. That is why projects are published as free software: to share what we learn and let others continue the work. What starts here can lead to a community, a first job or something of your own, from Galicia.",
       alternativeTitle: "Colour variations",
@@ -538,6 +556,19 @@ export const copy: Record<Locale, Copy> = {
         ["Red", "45% red + 55% cream"],
       ],
     },
+    legalContents: "On this page",
+    homeDescription:
+      "HackUDC: a free-software hackathon in A Coruña. Organized by GPUL and made possible by its sponsors. 36 hours of building. Join the 2027 waitlist.",
+    primaryPhotoAlt:
+      "Group photo of HackUDC 2026 participants and organizers in the FIC auditorium.",
+    organizationIntro:
+      "HackUDC is organized by volunteers from GPUL (Grupo de Programadores e Usuarios de Linux), a student free-software association founded in 1998 to bring free software, hardware and culture to as many people as possible. Each edition is planned and run by the volunteers who choose to take on its organization and logistics. We come from GPUL and have different technical backgrounds and levels of experience: some of us are students and others are not.",
+    organizationFaq: [
+      [
+        "Who makes HackUDC possible?",
+        "Our sponsors and collaborators are the foundation of HackUDC: their support keeps participation free, year after year. The event remains independent and is not organized around any individual company’s interests, as we explain in our [manifesto]({manifestoUrl}). HackUDC would not be possible without our wonderful sponsors and collaborators. We also thank the Faculty of Computer Science of the Universidade da Coruña for providing the spaces for the event.",
+      ],
+    ],
     errorTitle: "Page not found",
     errorDescription:
       "This page does not exist or has moved. Return home to keep exploring HackUDC.",
@@ -681,7 +712,7 @@ export const copy: Record<Locale, Copy> = {
       ],
       [
         "About ECTS credits",
-        "If you are a UDC student, you can earn 1.5 ECTS credits by participating in HackUDC. Attendance will be monitored during the event. UDC students interested in receiving credits must request recognition through the VEE. More detailed information will be provided before, during and after the event.",
+        "If you are an undergraduate student at UDC, under the [current regulations]({creditsPolicyUrl}) you can earn up to 1.5 ECTS credits for this edition. A maximum of 3 ECTS can be accumulated through HackUDC: according to the criterion communicated to the organizers by the Vice-Rectorate, different editions count as the same activity for credit recognition.\n\nWe will monitor attendance during the event. To obtain accreditation, you must apply to the Vice-Rectorate responsible for student affairs, to which we will provide the list of UDC participants and their attendance. Credits are then added to your academic record through your faculty, following the UDC procedure. We will share more information before, during and after the event.\n\nIf you study at another university, its rules may allow different credit recognition or other benefits. After the event, you can email [hackudc@gpul.org](mailto:hackudc@gpul.org) to request a participation certificate showing your verified attendance hours. Your university will determine the recognition available.",
       ],
       [
         "What if I have other questions?",
@@ -834,7 +865,7 @@ export const copy: Record<Locale, Copy> = {
         "HackUDC é un evento para todo o mundo. A súa marca tamén debe selo. Usa texto que se lea ben, con contraste suficiente e sen depender só da cor. Revisa o deseño no móbil e engade texto alternativo ás imaxes informativas. En medios dixitais, permite navegar co teclado e respecta as preferencias de movemento reducido.",
       whoTitle: "Quen somos",
       whoIntro:
-        "HackUDC é un hackathon organizado por estudantes dentro de GPUL na Facultade de Informática da Universidade da Coruña. Despois de participar en hackathones fóra e ver o que outras persoas construían, sentimos que Galicia necesitaba un lugar así. Aquí hai moito talento agardando unha oportunidade para mostrar o que pode facer.",
+        "HackUDC é un hackathon organizado pola comunidade de GPUL e feito posible grazas aos seus patrocinadores. Celébrase nos espazos cedidos pola Facultade de Informática da Universidade da Coruña. Despois de participar en hackathones fóra e ver o que outras persoas construían, sentimos que Galicia necesitaba un lugar así. Aquí hai moito talento agardando unha oportunidade para mostrar o que pode facer.",
       whoBody:
         "Queremos que HackUDC axude a aprender, construír os primeiros proxectos e abrirse camiño profesionalmente. GPUL é unha asociación de software libre, e cremos que se avanza mellor en comunidade. Por iso os proxectos publícanse como software libre: para compartir o aprendido e que outras persoas poidan continuar o traballo. O que comeza aquí pode levar a unha comunidade, un primeiro traballo ou algo propio, desde Galicia.",
       alternativeTitle: "Variacións de cor",
@@ -864,6 +895,19 @@ export const copy: Record<Locale, Copy> = {
         ["Vermello", "45% vermello + 55% crema"],
       ],
     },
+    legalContents: "Nesta páxina",
+    homeDescription:
+      "HackUDC: hackathon de software libre de 36 horas na Coruña, organizado por GPUL e feito posible grazas aos seus patrocinadores. Lista de espera para 2027 aberta.",
+    primaryPhotoAlt:
+      "Foto de grupo de participantes e organización de HackUDC 2026 no auditorio da FIC.",
+    organizationIntro:
+      "HackUDC organízao o voluntariado de GPUL (Grupo de Programadores e Usuarios de Linux), unha asociación de estudantes de software libre fundada en 1998 para achegar o software, o hardware e a cultura libre a tantas persoas como sexa posible. En cada edición, quen decide asumir a organización encárgase de planificar o evento e da súa loxística. Vimos de GPUL e temos distintas traxectorias técnicas e niveis de experiencia: algunhas persoas somos estudantes e outras non.",
+    organizationFaq: [
+      [
+        "Quen fai posible HackUDC?",
+        "Os nosos patrocinadores e colaboradores son o piar fundamental de HackUDC: grazas ao seu apoio, edición tras edición, a participación segue sendo gratuíta. O evento mantén a súa independencia e non se organiza arredor dos intereses concretos de ningunha empresa, como explicamos no noso [manifesto]({manifestoUrl}). Sen os nosos marabillosos patrocinadores e colaboradores, HackUDC non sería posible. Agradecemos tamén á Facultade de Informática da Universidade da Coruña que nos ceda os espazos para celebralo.",
+      ],
+    ],
     errorTitle: "Páxina non atopada",
     errorDescription:
       "Esta páxina non existe ou cambiou de enderezo. Podes volver ao inicio para seguir explorando HackUDC.",
@@ -1008,7 +1052,7 @@ export const copy: Record<Locale, Copy> = {
       ],
       [
         "Sobre os créditos ECTS",
-        "Se es estudante da UDC, podes conseguir 1,5 créditos ECTS por participar en HackUDC. Controlaremos a asistencia durante o evento. Se queres recoñecer os créditos, terás que solicitalo a través da VEE. Daremos máis información antes, durante e despois do evento.",
+        "Se es estudante de grao da UDC, coa [normativa vixente]({creditsPolicyUrl}) podes obter ata 1,5 créditos ECTS por esta edición. O máximo acumulable por participar en HackUDC é de 3 ECTS: segundo o criterio comunicado á organización pola Vicerreitoría, as distintas edicións considéranse unha mesma actividade para os efectos do recoñecemento.\n\nControlaremos a asistencia durante o evento. Para obter a acreditación, terás que solicitala á Vicerreitoría competente en materia de estudantado, á que facilitaremos a relación de participantes da UDC e a súa asistencia. A incorporación dos créditos ao teu expediente tramítase despois no teu centro, conforme ao procedemento da UDC. Daremos máis información antes, durante e despois do evento.\n\nSe estudas noutra universidade, os seus criterios poden permitir un recoñecemento distinto de créditos ou outros beneficios. Despois do evento podes escribirnos a [hackudc@gpul.org](mailto:hackudc@gpul.org) para solicitar un certificado de participación coas horas de asistencia acreditadas. A túa universidade determinará o recoñecemento que corresponda.",
       ],
       [
         "E se teño outras preguntas?",

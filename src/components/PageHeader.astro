@@ -108,12 +108,12 @@ const languageOption =
     }
   }
 
-  [data-page-language-menu].is-open .page-header-language-option {
+  [data-page-language-menu][data-open] .page-header-language-option {
     margin-inline-start: 0.125rem;
     max-width: 3.5rem;
   }
 
-  [data-page-language-menu].is-open .page-header-language-panel {
+  [data-page-language-menu][data-open] .page-header-language-panel {
     border-color: color-mix(in oklab, var(--color-ink) 30%, transparent);
   }
 </style>
@@ -138,13 +138,46 @@ const languageOption =
     const { signal } = controller;
     const setOpen = (open: boolean) => {
       menu.toggleAttribute("data-open", open);
-      menu.classList.toggle("is-open", open);
       header?.toggleAttribute("data-language-menu-open", open);
       toggle.setAttribute("aria-expanded", String(open));
       options?.forEach((option) => {
         option.tabIndex = open ? 0 : -1;
       });
     };
+
+    menu.addEventListener(
+      "pointerenter",
+      (event) => {
+        if (event.pointerType === "mouse") setOpen(true);
+      },
+      { signal },
+    );
+    menu.addEventListener(
+      "pointerleave",
+      (event) => {
+        if (
+          event.pointerType === "mouse" &&
+          !menu.contains(document.activeElement)
+        ) {
+          setOpen(false);
+        }
+      },
+      { signal },
+    );
+    menu.addEventListener(
+      "focusin",
+      () => {
+        if (menu.querySelector(":focus-visible")) setOpen(true);
+      },
+      { signal },
+    );
+    menu.addEventListener(
+      "focusout",
+      (event) => {
+        if (!menu.contains(event.relatedTarget as Node)) setOpen(false);
+      },
+      { signal },
+    );
 
     toggle.addEventListener(
       "click",
@@ -161,7 +194,10 @@ const languageOption =
     document.addEventListener(
       "keydown",
       (event) => {
-        if (event.key === "Escape") setOpen(false);
+        if (event.key === "Escape") {
+          if (menu.contains(document.activeElement)) toggle.focus();
+          setOpen(false);
+        }
       },
       { signal },
     );

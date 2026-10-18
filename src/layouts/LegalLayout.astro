@@ -1,5 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
+import LegalContents from "@/components/LegalContents.astro";
 import PageHeader from "@/components/PageHeader.astro";
 import SiteFooter from "@/components/SiteFooter.astro";
 import { copy, type Locale } from "@/i18n/copy";
@@ -12,6 +13,11 @@ const locale = frontmatter.locale as Locale;
 const policy = frontmatter.policy as Policy;
 const t = copy[locale];
 const homeUrl = getRelativeLocaleUrl(locale, "");
+// Markdown encodes braces in link destinations before the layout receives HTML.
+const legalContent = (await Astro.slots.render("default")).replace(
+  /(?:\{|%7B)(privacy|terms|conduct)Url(?:\}|%7D)/gi,
+  (_, policyPath: string) => getRelativeLocaleUrl(locale, policyPath),
+);
 const localeUrls: Record<Locale, string> = {
   es: getRelativeLocaleUrl("es", policy),
   en: getRelativeLocaleUrl("en", policy),
@@ -33,10 +39,11 @@ const localeUrls: Record<Locale, string> = {
       backShortLabel={t.backHomeShort}
     />
 
-    <main class="page-wrap pb-16 sm:pb-24">
-      <article class="legal-copy mx-auto max-w-3xl">
+    <main class="page-wrap pb-16 sm:pb-24 lg:grid lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[16rem_minmax(0,1fr)]">
+      <LegalContents locale={locale} headings={Astro.props.headings} />
+      <article class="legal-copy min-w-0 max-w-3xl" data-legal-content>
         <p class="eyebrow text-red">HackUDC 2027</p>
-        <slot />
+        <Fragment set:html={legalContent} />
       </article>
     </main>
 
@@ -45,6 +52,11 @@ const localeUrls: Record<Locale, string> = {
 </Layout>
 
 <style>
+  .legal-copy :global(h2),
+  .legal-copy :global(h3) {
+    scroll-margin-top: 2rem;
+  }
+
   .legal-copy :global(h1) {
     margin-top: 1rem;
     font-family: var(--font-serif);

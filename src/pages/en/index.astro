@@ -1,11 +1,9 @@
 ---
+import { copy } from "@/i18n/copy";
 import HomePage from "@/components/HomePage.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
 
-<Layout
-  lang="en"
-  description="36-hour open-source student hackathon in A Coruña, organized by GPUL."
->
+<Layout lang="en" description={copy.en.homeDescription}>
   <HomePage locale="en" />
 </Layout>

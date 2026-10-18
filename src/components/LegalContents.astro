@@ -1,0 +1,172 @@
+---
+import type { MarkdownHeading } from "astro";
+import ChevronDown from "@lucide/astro/icons/chevron-down";
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+  headings: MarkdownHeading[];
+}
+
+const t = copy[Astro.props.locale];
+const sections = Astro.props.headings.filter(
+  ({ depth }) => depth >= 2 && depth <= 3,
+);
+const linkClass =
+  "block border-s-2 border-transparent py-1.5 ps-3 text-sm leading-snug text-pretty text-ink/65 hover:border-ink/30 hover:text-ink aria-[current=location]:border-red aria-[current=location]:font-bold aria-[current=location]:text-red data-[depth=3]:ps-6 data-[depth=3]:text-xs";
+---
+
+{sections.length > 0 && (
+  <aside class="min-w-0 lg:sticky lg:top-6 lg:self-start" data-legal-contents>
+    <nav class="hidden lg:block" aria-label={t.legalContents}>
+      <p class="eyebrow mb-4 ps-3">{t.legalContents}</p>
+      <div
+        class="max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain p-2"
+        data-legal-contents-scroll
+      >
+        <ul class="space-y-0.5">
+          {sections.map(({ slug, text, depth }) => (
+            <li>
+              <a
+                class={linkClass}
+                href={`#${slug}`}
+                data-depth={depth}
+                data-legal-section={slug}
+              >
+                {text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+    <details
+      class="group mb-8 border-y border-ink/20 lg:hidden"
+      data-legal-contents-mobile
+    >
+      <summary class="flex min-h-12 cursor-pointer items-center justify-between gap-4 py-3 text-sm font-bold [&::-webkit-details-marker]:hidden">
+        {t.legalContents}
+        <ChevronDown
+          class="size-4 shrink-0 group-open:rotate-180"
+          aria-hidden="true"
+        />
+      </summary>
+      <nav
+        class="max-h-[60dvh] overflow-y-auto overscroll-contain px-2 pb-4"
+        aria-label={t.legalContents}
+      >
+        <ul class="space-y-0.5">
+          {sections.map(({ slug, text, depth }) => (
+            <li>
+              <a
+                class={linkClass}
+                href={`#${slug}`}
+                data-depth={depth}
+                data-legal-section={slug}
+              >
+                {text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </details>
+  </aside>
+)}
+
+<script>
+  let controller: AbortController | undefined;
+  let frame = 0;
+
+  document.addEventListener("astro:page-load", () => {
+    controller?.abort();
+    window.cancelAnimationFrame(frame);
+    frame = 0;
+
+    const contents = document.querySelector<HTMLElement>(
+      "[data-legal-contents]",
+    );
+    const article = document.querySelector<HTMLElement>("[data-legal-content]");
+    if (!contents || !article) return;
+
+    controller = new AbortController();
+    const { signal } = controller;
+    const headings = Array.from(
+      article.querySelectorAll<HTMLElement>("h2[id], h3[id]"),
+    );
+    const links = contents.querySelectorAll<HTMLAnchorElement>(
+      "[data-legal-section]",
+    );
+    const mobile = contents.querySelector<HTMLDetailsElement>(
+      "[data-legal-contents-mobile]",
+    );
+    const scroller = contents.querySelector<HTMLElement>(
+      "[data-legal-contents-scroll]",
+    );
+    let currentId: string | undefined;
+
+    const update = () => {
+      frame = 0;
+      let current = headings[0];
+      for (const heading of headings) {
+        if (heading.getBoundingClientRect().top > 96) break;
+        current = heading;
+      }
+      if (!current || current.id === currentId) return;
+      currentId = current.id;
+      links.forEach((link) => {
+        if (link.dataset.legalSection === currentId) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+
+      // Keep the active subsection visible without scrolling the document.
+      if (scroller && !contents.matches(":hover, :focus-within")) {
+        const active = scroller.querySelector<HTMLElement>(
+          '[aria-current="location"]',
+        );
+        if (!active) return;
+        const bounds = scroller.getBoundingClientRect();
+        const linkBounds = active.getBoundingClientRect();
+        if (linkBounds.top < bounds.top || linkBounds.bottom > bounds.bottom) {
+          scroller.scrollTop += linkBounds.top - bounds.top - bounds.height / 2;
+        }
+      }
+    };
+    const requestUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
+    contents.addEventListener(
+      "click",
+      (event) => {
+        const link = (event.target as Element).closest<HTMLAnchorElement>(
+          "[data-legal-section]",
+        );
+        if (
+          !link ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        )
+          return;
+        const target = document.getElementById(link.dataset.legalSection ?? "");
+        if (mobile) mobile.open = false;
+        if (target) {
+          target.tabIndex = -1;
+          target.focus({ preventScroll: true });
+        }
+      },
+      { signal },
+    );
+
+    window.addEventListener("scroll", requestUpdate, { passive: true, signal });
+    window.addEventListener("resize", requestUpdate, { signal });
+    window.addEventListener("hashchange", requestUpdate, { signal });
+    update();
+  });
+</script>

@@ -1,4 +1,5 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import Plus from "@lucide/astro/icons/plus";
 import { copy, type Locale } from "@/i18n/copy";
 
@@ -7,11 +8,19 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
-const midpoint = Math.ceil(t.faq.length / 2);
-const columns = [t.faq.slice(0, midpoint), t.faq.slice(midpoint)];
+const questions = [...t.organizationFaq, ...t.faq];
+const midpoint = Math.ceil(questions.length / 2);
+const columns = [questions.slice(0, midpoint), questions.slice(midpoint)];
 // Answers may carry Markdown-style links: [label](href).
+const creditsPolicyUrl =
+  "https://sede.udc.gal/services/electronic_board/EXP2026/006159/document?documentCsv=DJ01GM3IEGSLN3U132D9497H&logicalId=0405c945-9fe6-4cc2-a94f-250a0dac40c6";
 const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
 const parseAnswer = (answer: string) => {
+  answer = answer.replaceAll(
+    "{manifestoUrl}",
+    getRelativeLocaleUrl(Astro.props.locale, "manifesto"),
+  );
+  answer = answer.replaceAll("{creditsPolicyUrl}", creditsPolicyUrl);
   const parts: (string | { label: string; href: string })[] = [];
   let end = 0;
   for (const match of answer.matchAll(linkPattern)) {
@@ -66,20 +75,22 @@ const parseAnswer = (answer: string) => {
                 </span>
               </summary>
               <div data-faq-answer>
-                <p class="mt-4 mr-11 max-w-xl text-[0.95rem] leading-[1.6]">
-                  {parseAnswer(answer).map((part) =>
-                    typeof part === "string" ? (
-                      part
-                    ) : (
-                      <a
-                        class="whitespace-nowrap underline decoration-1 underline-offset-4 transition-colors hover:text-red"
-                        href={part.href}
-                      >
-                        {part.label}
-                      </a>
-                    ),
-                  )}
-                </p>
+                {answer.split("\n\n").map((paragraph) => (
+                  <p class="mt-4 mr-11 max-w-xl text-[0.95rem] leading-[1.6]">
+                    {parseAnswer(paragraph).map((part) =>
+                      typeof part === "string" ? (
+                        part
+                      ) : (
+                        <a
+                          class="whitespace-nowrap underline decoration-1 underline-offset-4 transition-colors hover:text-red"
+                          href={part.href}
+                        >
+                          {part.label}
+                        </a>
+                      ),
+                    )}
+                  </p>
+                ))}
               </div>
             </details>
           ))}
