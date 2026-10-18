@@ -1,4 +1,5 @@
 ---
+import LogIn from "@lucide/astro/icons/log-in";
 import { Image } from "astro:assets";
 import assetLogoNavy from "@/assets/brand/logo-navy.svg?url";
 import { copy, languages, type Locale } from "@/i18n/copy";
@@ -10,7 +11,7 @@ interface Props {
 
 const { locale, localeUrls } = Astro.props;
 const t = copy[locale];
-const navTargets = ["#about", "#experience", "#sponsors", "#faq"];
+const navTargets = ["#about", "#steps", "#sponsors", "#faq"];
 const current = languages.find(({ code }) => code === locale)!;
 const languageLink =
   "rounded-full px-3.5 py-2 text-sm font-extrabold tracking-wide transition-colors";
@@ -19,16 +20,16 @@ const languageOption =
 ---
 
 <header
-  class="absolute inset-x-0 top-0 z-10 flex items-center justify-between gap-8 px-5 py-4 sm:px-[4vw]"
+  class="absolute inset-x-0 top-0 z-10 flex flex-row items-center justify-between gap-2 py-4 pr-20 pl-5 sm:gap-5 sm:pr-60 sm:pl-[4vw]"
   data-site-header
 >
   <a
-    class="inline-flex items-center gap-2"
+    class="inline-flex w-40 min-w-0 shrink items-center gap-2 sm:w-52 sm:shrink-0"
     href={localeUrls[locale]}
     aria-label="HackUDC27, home"
   >
     <Image
-      class="h-6 w-auto sm:h-7"
+      class="h-auto w-full"
       src={assetLogoNavy}
       alt=""
       width="1003"
@@ -37,15 +38,21 @@ const languageOption =
     />
   </a>
 
-  <nav class="hidden gap-[2.5vw] lg:flex" aria-label="Primary navigation">
+  <nav
+    class="hidden items-center gap-4 lg:flex xl:gap-7"
+    aria-label="Primary navigation"
+  >
     {t.nav.map((label, index) => (
-      <a class="small-link" href={navTargets[index]}>
+      <a
+        class="inline-flex min-h-11 items-center text-sm font-extrabold whitespace-nowrap transition-colors hover:text-red xl:text-base"
+        href={navTargets[index]}
+      >
         {label}
       </a>
     ))}
   </nav>
 
-  <div class="ml-auto flex items-center gap-3">
+  <div class="ml-auto flex shrink-0 items-center gap-1 sm:gap-3">
     <nav
       class="group flex items-center rounded-full border border-transparent p-1 transition-colors duration-300 focus-within:border-ink/30 hover:border-ink/30 data-open:border-ink/30 motion-reduce:transition-none"
       aria-label="Language selector"
@@ -78,16 +85,29 @@ const languageOption =
         )}
       </div>
     </nav>
-    <a
-      class="hidden rounded-full bg-ink px-4 py-3 text-xs font-extrabold tracking-wide text-cream transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-red sm:block"
-      href="https://nocodb.gpul.org/dashboard/#/nc/form/f1137831-84ad-4682-93de-a416cc592ff1"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {t.waitlist}
-    </a>
   </div>
 </header>
+
+<a
+  class="fixed top-5 right-5 z-40 inline-flex h-9 min-w-11 items-center justify-center gap-2 rounded-full px-3 text-sm font-extrabold tracking-wide text-ink transition-opacity hover:opacity-70 motion-reduce:transition-none sm:right-[4vw] sm:px-4"
+  href="https://os.hackudc.com"
+  aria-label={t.login}
+  data-login
+>
+  <LogIn class="size-4" stroke-width="2.5" aria-hidden="true" />
+  <span class="hidden sm:inline">{t.login}</span>
+</a>
+
+<style>
+  [data-login][data-dark-background] {
+    color: var(--color-cream);
+    background-color: color-mix(in oklab, var(--color-ink) 65%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 0 1px
+      color-mix(in oklab, var(--color-cream) 20%, transparent);
+  }
+</style>
 
 <script>
   let controller: AbortController | undefined;
@@ -103,6 +123,48 @@ const languageOption =
 
     controller = new AbortController();
     const { signal } = controller;
+    const login = document.querySelector<HTMLElement>("[data-login]");
+    let frame = 0;
+    const updateLoginOutline = () => {
+      frame = 0;
+      if (!login) return;
+      const rect = login.getBoundingClientRect();
+      const layers = document.elementsFromPoint(
+        rect.left + rect.width / 2,
+        rect.top + rect.height / 2,
+      );
+      const canvas = document.createElement("canvas");
+      canvas.width = canvas.height = 1;
+      const context = canvas.getContext("2d", { willReadFrequently: true });
+      if (!context) return;
+      context.fillStyle = getComputedStyle(
+        document.documentElement,
+      ).getPropertyValue("--color-cream");
+      context.fillRect(0, 0, 1, 1);
+      for (const layer of layers.reverse()) {
+        if (layer === login || login.contains(layer)) continue;
+        context.fillStyle = getComputedStyle(layer).backgroundColor;
+        context.fillRect(0, 0, 1, 1);
+      }
+      const [r, g, b] = context.getImageData(0, 0, 1, 1).data;
+      login.toggleAttribute(
+        "data-dark-background",
+        r * 0.2126 + g * 0.7152 + b * 0.0722 < 140,
+      );
+    };
+    const scheduleOutline = () => {
+      if (!frame) frame = requestAnimationFrame(updateLoginOutline);
+    };
+    window.addEventListener("scroll", scheduleOutline, {
+      signal,
+      passive: true,
+    });
+    window.addEventListener("resize", scheduleOutline, { signal });
+    signal.addEventListener("abort", () => cancelAnimationFrame(frame), {
+      once: true,
+    });
+    updateLoginOutline();
+
     const setOpen = (open: boolean) => {
       menu.toggleAttribute("data-open", open);
       toggle.setAttribute("aria-expanded", String(open));

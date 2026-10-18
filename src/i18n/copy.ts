@@ -50,6 +50,7 @@ export type Copy = {
   title: string;
   dateComingSoon: string;
   waitlist: string;
+  login: string;
   waitlistShort: string;
   sponsor: string;
   marquee: string;
@@ -66,10 +67,8 @@ export type Copy = {
   videoPlay: string;
   videoSound: string;
   videoPause: string;
-  stepsKicker: string;
   stepsTitle: string;
   steps: [string, string, string][];
-  sponsorsKicker: string;
   sponsorsTitle: string;
   sponsorCta: string;
   sponsorWindow: string;
@@ -89,10 +88,8 @@ export type Copy = {
   sponsorDetailsCaption: string;
   sponsorContactTitle: string;
   sponsorContactBody: string;
-  faqKicker: string;
   faqTitle: string;
   faq: [string, string][];
-  galleryKicker: string;
   galleryTitle: string;
   galleryPrevious: string;
   galleryNext: string;
@@ -247,11 +244,12 @@ export const copy: Record<Locale, Copy> = {
       "Esta página no existe o ha cambiado de dirección. Puedes volver al inicio para seguir explorando HackUDC.",
     ogImageAlt:
       "HackUDC 2027, 5ª edición. Programa. Crea. Conecta. 36 horas para construir algo increíble.",
-    nav: ["Qué es", "La experiencia", "Patrocinio", "FAQ"],
+    nav: ["HackUDC", "Participa", "Patrocinadores", "Dudas"],
     edition: "5ª EDICIÓN",
     title: "Hackea el futuro desde Galicia.",
     dateComingSoon: "Fechas próximamente",
     waitlist: "Apúntate a la lista de espera",
+    login: "Entrar en hackOS",
     waitlistShort: "Lista de espera",
     sponsor: "Patrocinar",
     marquee: "LISTA DE ESPERA ABIERTA · ÚNETE AHORA · HACKUDC27 · ",
@@ -277,7 +275,6 @@ export const copy: Record<Locale, Copy> = {
     videoPlay: "Reproducir el aftermovie",
     videoSound: "Sonido",
     videoPause: "Pausar",
-    stepsKicker: "Cómo funciona",
     stepsTitle: "Tu próximo proyecto empieza aquí.",
     steps: [
       [
@@ -301,7 +298,6 @@ export const copy: Record<Locale, Copy> = {
         "Documentación, una buena demo y código abierto. Los premios se anuncian en la clausura.",
       ],
     ],
-    sponsorsKicker: "Patrocinadores",
     sponsorsTitle: "Gracias a quienes hacen posible HackUDC.",
     sponsorCta: "¿Te interesa patrocinarnos?",
     sponsorWindow: "Jugar con la ventana",
@@ -353,8 +349,7 @@ export const copy: Record<Locale, Copy> = {
     sponsorContactTitle: "¿Te interesa patrocinar?",
     sponsorContactBody:
       "Escríbenos si quieres patrocinar HackUDC o preparar una colaboración a medida.",
-    faqKicker: "Preguntas frecuentes",
-    faqTitle: "Lo importante, antes de hacer las maletas.",
+    faqTitle: "Sabemos que tienes dudas.",
     faq: [
       [
         "¿Cuándo se celebra HackUDC?",
@@ -393,7 +388,6 @@ export const copy: Record<Locale, Copy> = {
         "Puedes contactarnos a través de las [redes sociales](#footer) o escribirnos a [hackudc@gpul.org](mailto:hackudc@gpul.org).",
       ],
     ],
-    galleryKicker: "En imágenes",
     galleryTitle: "Esto también es HackUDC.",
     galleryPrevious: "Foto anterior",
     galleryNext: "Foto siguiente",
@@ -574,11 +568,12 @@ export const copy: Record<Locale, Copy> = {
       "This page does not exist or has moved. Return home to keep exploring HackUDC.",
     ogImageAlt:
       "HackUDC 2027, 5th edition. Code. Create. Connect. 36 hours to build something amazing.",
-    nav: ["What is it", "The experience", "Sponsorship", "FAQ"],
+    nav: ["HackUDC", "Take part", "Sponsors", "Questions"],
     edition: "5TH EDITION",
     title: "Hack the future from Galicia.",
     dateComingSoon: "Dates coming soon",
     waitlist: "Join the waitlist",
+    login: "Log in to hackOS",
     waitlistShort: "Waitlist",
     sponsor: "Sponsor",
     marquee: "WAITLIST NOW OPEN · JOIN US · HACKUDC27 · ",
@@ -604,7 +599,6 @@ export const copy: Record<Locale, Copy> = {
     videoPlay: "Play the aftermovie",
     videoSound: "Sound",
     videoPause: "Pause",
-    stepsKicker: "How it works",
     stepsTitle: "Your next project starts here.",
     steps: [
       [
@@ -628,7 +622,6 @@ export const copy: Record<Locale, Copy> = {
         "Docs, a compelling demo and open-source code. Winners are announced at the closing ceremony.",
       ],
     ],
-    sponsorsKicker: "Sponsors",
     sponsorsTitle: "Thanks to the companies that make HackUDC possible.",
     sponsorCta: "Interested in sponsoring us?",
     sponsorWindow: "Play with window",
@@ -679,8 +672,7 @@ export const copy: Record<Locale, Copy> = {
     sponsorContactTitle: "Interested in sponsoring?",
     sponsorContactBody:
       "Get in touch to sponsor HackUDC or put together a partnership that fits your needs.",
-    faqKicker: "Frequently asked",
-    faqTitle: "The useful stuff, before you pack your bags.",
+    faqTitle: "We know you have questions.",
     faq: [
       [
         "When does HackUDC take place?",
@@ -719,7 +711,6 @@ export const copy: Record<Locale, Copy> = {
         "If you have any other questions, feel free to contact us via [social media](#footer) or at [hackudc@gpul.org](mailto:hackudc@gpul.org).",
       ],
     ],
-    galleryKicker: "In pictures",
     galleryTitle: "This is HackUDC, too.",
     galleryPrevious: "Previous photo",
     galleryNext: "Next photo",
@@ -913,11 +904,12 @@ export const copy: Record<Locale, Copy> = {
       "Esta páxina non existe ou cambiou de enderezo. Podes volver ao inicio para seguir explorando HackUDC.",
     ogImageAlt:
       "HackUDC 2027, 5ª edición. Programa. Crea. Conecta. 36 horas para construír algo incrible.",
-    nav: ["Que é", "A experiencia", "Patrocinio", "FAQ"],
+    nav: ["HackUDC", "Participa", "Patrocinadores", "Dúbidas"],
     edition: "5ª EDICIÓN",
     title: "Hackea o futuro desde Galicia.",
     dateComingSoon: "Datas proximamente",
     waitlist: "Apúntate á lista de espera",
+    login: "Entrar en hackOS",
     waitlistShort: "Lista de espera",
     sponsor: "Patrocinar",
     marquee: "LISTA DE ESPERA ABERTA · ÚNETE AGORA · HACKUDC27 · ",
@@ -943,7 +935,6 @@ export const copy: Record<Locale, Copy> = {
     videoPlay: "Reproducir o aftermovie",
     videoSound: "Son",
     videoPause: "Pausar",
-    stepsKicker: "Como funciona",
     stepsTitle: "O teu próximo proxecto comeza aquí.",
     steps: [
       [
@@ -967,7 +958,6 @@ export const copy: Record<Locale, Copy> = {
         "Documentación, unha boa demo e código aberto. Os premios anúncianse na clausura.",
       ],
     ],
-    sponsorsKicker: "Patrocinadores",
     sponsorsTitle: "Grazas a quen fai posible HackUDC.",
     sponsorCta: "Interésache patrocinarnos?",
     sponsorWindow: "Xogar coa xanela",
@@ -1019,8 +1009,7 @@ export const copy: Record<Locale, Copy> = {
     sponsorContactTitle: "Interésache patrocinar?",
     sponsorContactBody:
       "Escríbenos se queres patrocinar HackUDC ou preparar unha colaboración á medida.",
-    faqKicker: "Preguntas frecuentes",
-    faqTitle: "O importante, antes de facer as maletas.",
+    faqTitle: "Sabemos que tes dúbidas.",
     faq: [
       [
         "Cando se celebra HackUDC?",
@@ -1059,7 +1048,6 @@ export const copy: Record<Locale, Copy> = {
         "Podes contactar connosco a través das [redes sociais](#footer) ou escribirnos a [hackudc@gpul.org](mailto:hackudc@gpul.org).",
       ],
     ],
-    galleryKicker: "En imaxes",
     galleryTitle: "Isto tamén é HackUDC.",
     galleryPrevious: "Foto anterior",
     galleryNext: "Foto seguinte",

@@ -119,36 +119,58 @@ const userSlots = Array.from({ length: 6 });
     />
   </div>
 
-  <div class="relative mt-8" data-sponsor-collaborators hidden>
-    <h3 class="eyebrow mb-4 text-center">{t.sponsorCollaborators}</h3>
-    <picture>
-      <source media="(max-width: 639px)" srcset={assetSponsorsUsersMobile} />
-      <Image
-        class="h-auto w-full"
-        src={assetSponsorsUsersDesktop}
-        width="969"
-        height="217"
-        alt=""
-        loading="lazy"
-        decoding="async"
-      />
-    </picture>
+  <section
+    class="mt-8 border-t border-ink/15 pt-6 sm:mt-10 sm:pt-8"
+    id="collaborators"
+    aria-labelledby="collaborators-title"
+    data-sponsor-collaborators
+    hidden
+  >
+    <h3 id="collaborators-title" class="eyebrow text-center">
+      {t.sponsorCollaborators}
+    </h3>
     <div
-      class="absolute inset-x-[7%] top-[calc(12%+2.25rem)] grid h-[calc(76%-2.25rem)] grid-cols-2 auto-rows-fr gap-x-[6%] gap-y-[5%] overflow-hidden p-[1%] sm:inset-x-[4%] sm:top-[calc(13%+2.25rem)] sm:h-[calc(72%-2.25rem)] sm:grid-cols-6 sm:gap-x-[2%] sm:gap-y-0"
-      data-sponsor-collaborator-slots
-    >
-      {userSlots.map((_, index) => (
-        <div data-sponsor-collaborator-slot={index} />
-      ))}
-    </div>
-    <div
-      class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3"
+      class="mt-5 grid grid-cols-2 items-center gap-x-6 gap-y-4 sm:grid-cols-4 sm:gap-x-8"
       data-sponsor-collaborator-overflow
     />
-  </div>
+  </section>
 </div>
 
 <style>
+  [data-sponsor-collaborator-overflow] :global(a),
+  [data-sponsor-collaborator-overflow] :global(.sponsor-mark) {
+    display: grid;
+    width: 100%;
+    min-height: 6rem;
+    place-items: center;
+    padding: 0.5rem;
+  }
+
+  [data-sponsor-collaborator-overflow] :global(img) {
+    width: 100%;
+    max-width: 12rem;
+    height: 4.5rem;
+    object-fit: contain;
+  }
+
+  [data-sponsor-building]
+    [data-sponsor-collaborator-overflow]
+    :global(.sponsor-name) {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  [data-sponsor-collaborator-overflow] :global([data-enterprise-id="16"] img) {
+    transform: scale(1.1);
+  }
+
+  /* Compensate for the whitespace built into the UDC SVG viewBox. */
+  [data-sponsor-collaborator-overflow] :global([data-enterprise-id="15"] img) {
+    transform: scale(1.25);
+  }
+
   [data-sponsor-admin-terminal] {
     display: none;
   }
@@ -319,17 +341,13 @@ const userSlots = Array.from({ length: 6 });
     const collaborators = building.querySelector<HTMLElement>(
       "[data-sponsor-collaborators]",
     );
-    const collaboratorSlots = [
-      ...building.querySelectorAll<HTMLElement>(
-        "[data-sponsor-collaborator-slot]",
-      ),
-    ];
     const collaboratorOverflow = building.querySelector<HTMLElement>(
       "[data-sponsor-collaborator-overflow]",
     );
 
     function sponsorMark(sponsor: Sponsor) {
       const mark = document.createElement(sponsor.website ? "a" : "div");
+      mark.dataset.enterpriseId = String(sponsor.enterpriseId);
       if (sponsor.website) {
         const anchor = mark as HTMLAnchorElement;
         anchor.href = sponsor.website;
@@ -420,11 +438,7 @@ const userSlots = Array.from({ length: 6 });
       fillOverflow(userOverflow, userSponsors.slice(userSlots.length));
       if (collaborators)
         collaborators.hidden = collaboratorSponsors.length === 0;
-      fillSlots(collaboratorSlots, collaboratorSponsors);
-      fillOverflow(
-        collaboratorOverflow,
-        collaboratorSponsors.slice(collaboratorSlots.length),
-      );
+      fillOverflow(collaboratorOverflow, collaboratorSponsors);
     }
 
     function refreshSponsors() {
