@@ -48,7 +48,7 @@ export type Copy = {
   nav: string[];
   edition: string;
   title: string;
-  dateComingSoon: string;
+  eventDates: string;
   waitlist: string;
   login: string;
   waitlistShort: string;
@@ -228,7 +228,7 @@ export const copy: Record<Locale, Copy> = {
     },
     legalContents: "En esta página",
     homeDescription:
-      "HackUDC: hackathon de software libre de 36 horas en A Coruña, organizado por GPUL y hecho posible gracias a sus patrocinadores. Lista de espera para 2027 abierta.",
+      "HackUDC: hackathon de software libre de 36 horas en A Coruña, organizado por GPUL y hecho posible gracias a sus patrocinadores. Del 26 al 28 de febrero de 2027. Lista de espera para 2027 abierta.",
     primaryPhotoAlt:
       "Foto de grupo de participantes y organización de HackUDC 2026 en el auditorio de la FIC.",
     organizationIntro:
@@ -247,7 +247,7 @@ export const copy: Record<Locale, Copy> = {
     nav: ["HackUDC", "Participa", "Patrocinadores", "Dudas"],
     edition: "5ª EDICIÓN",
     title: "Hackea el futuro desde Galicia.",
-    dateComingSoon: "Fechas próximamente",
+    eventDates: "26–28 de febrero de 2027",
     waitlist: "Apúntate a la lista de espera",
     login: "Entrar en hackOS",
     waitlistShort: "Lista de espera",
@@ -353,7 +353,7 @@ export const copy: Record<Locale, Copy> = {
     faq: [
       [
         "¿Cuándo se celebra HackUDC?",
-        "Próximamente anunciaremos las fechas del evento.",
+        "HackUDC 2027 se celebra del 26 al 28 de febrero de 2027.",
       ],
       [
         "¿Dónde se celebra y dónde puedo descansar?",
@@ -552,7 +552,7 @@ export const copy: Record<Locale, Copy> = {
     },
     legalContents: "On this page",
     homeDescription:
-      "HackUDC: a free-software hackathon in A Coruña. Organized by GPUL and made possible by its sponsors. 36 hours of building. Join the 2027 waitlist.",
+      "HackUDC: a free-software hackathon in A Coruña. Organized by GPUL and made possible by its sponsors. 36 hours of building. 26–28 February 2027. Join the 2027 waitlist.",
     primaryPhotoAlt:
       "Group photo of HackUDC 2026 participants and organizers in the FIC auditorium.",
     organizationIntro:
@@ -571,7 +571,7 @@ export const copy: Record<Locale, Copy> = {
     nav: ["HackUDC", "Take part", "Sponsors", "Questions"],
     edition: "5TH EDITION",
     title: "Hack the future from Galicia.",
-    dateComingSoon: "Dates coming soon",
+    eventDates: "26–28 February 2027",
     waitlist: "Join the waitlist",
     login: "Log in to hackOS",
     waitlistShort: "Waitlist",
@@ -676,7 +676,7 @@ export const copy: Record<Locale, Copy> = {
     faq: [
       [
         "When does HackUDC take place?",
-        "We will announce the event dates soon.",
+        "HackUDC 2027 takes place on 26–28 February 2027.",
       ],
       [
         "Where does it take place and where can I rest?",
@@ -888,7 +888,7 @@ export const copy: Record<Locale, Copy> = {
     },
     legalContents: "Nesta páxina",
     homeDescription:
-      "HackUDC: hackathon de software libre de 36 horas na Coruña, organizado por GPUL e feito posible grazas aos seus patrocinadores. Lista de espera para 2027 aberta.",
+      "HackUDC: hackathon de software libre de 36 horas na Coruña, organizado por GPUL e feito posible grazas aos seus patrocinadores. Do 26 ao 28 de febreiro de 2027. Lista de espera para 2027 aberta.",
     primaryPhotoAlt:
       "Foto de grupo de participantes e organización de HackUDC 2026 no auditorio da FIC.",
     organizationIntro:
@@ -907,7 +907,7 @@ export const copy: Record<Locale, Copy> = {
     nav: ["HackUDC", "Participa", "Patrocinadores", "Dúbidas"],
     edition: "5ª EDICIÓN",
     title: "Hackea o futuro desde Galicia.",
-    dateComingSoon: "Datas proximamente",
+    eventDates: "26–28 de febreiro de 2027",
     waitlist: "Apúntate á lista de espera",
     login: "Entrar en hackOS",
     waitlistShort: "Lista de espera",
@@ -1013,7 +1013,7 @@ export const copy: Record<Locale, Copy> = {
     faq: [
       [
         "Cando se celebra HackUDC?",
-        "En breve anunciaremos as datas do evento.",
+        "HackUDC 2027 celébrase do 26 ao 28 de febreiro de 2027.",
       ],
       [
         "Onde se celebra e onde podo descansar?",
