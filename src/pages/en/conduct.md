@@ -8,34 +8,57 @@ description: HackUDC 2027 code of conduct.
 
 # Code of conduct
 
-> Be respectful. No form of harassment will be tolerated.
+HackUDC adopts the Major League Hacking (MLH) Code of Conduct, which applies to everyone participating in the event.
 
-The HackUDC organization (GPUL) believes every participant has the right to take part in a safe and welcoming environment.
+[Read the official MLH Code of Conduct](https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md).
 
-Harassment includes, but is not limited to, offensive verbal or written comments about gender, age, sexual orientation, disability, physical appearance, body size, race, religion, social class, or economic status. It includes sexual images, deliberate intimidation, stalking, predatory photography or recording, sustained disruption of talks or events, inappropriate physical contact, and unwelcome sexual attention. If your actions make someone feel uncomfortable, they constitute harassment and must stop.
+You can report an incident directly to MLH at [incidents@mlh.io](mailto:incidents@mlh.io) or through the Europe reporting line: [+44 333 038 5995](tel:+443330385995).
 
-Participants asked to stop harassing behaviour are expected to comply immediately.
+## MLH Code of Conduct
 
-Sponsors, judges, mentors, volunteers, organizers, and anyone else present are subject to this policy. Sexualized images, activities, or materials may not be used in projects or during the event. Booth staff, including volunteers, may not wear sexualized clothing, uniforms, or costumes, nor create a sexualized environment.
+> TL;DR. Be respectful. Harassment and abuse are never tolerated. If you are in a situation that makes you uncomfortable at an MLH Member Event, if the event itself creates an unsafe or inappropriate environment, or if interacting with an MLH representative or event organizer makes you uncomfortable, please report it using the procedures included in this document.
 
-If a participant engages in harassing behaviour, the Organizer may take any appropriate action, including a warning or expulsion from the event or online platforms used during the hackathon, without a right to a refund, return, or gifts.
+Major League Hacking (MLH) stands for inclusivity. We believe that every single person has the right to hack in a safe and welcoming environment.
 
-If you experience harassment, notice someone else being harassed, or have another concern, contact the organizers using the reporting procedures below. Organizers will help participants contact campus security or local law enforcement, provide escorts, or otherwise help affected people feel safe.
+Harassment includes but is not limited to offensive verbal or written comments related to gender, age, sexual orientation, disability, physical appearance, body size, race, religion, social class, economic status, and veteran status. Additional cases of harassment include but are not limited to sharing sexual images, violent depictions, vulgar language, deliberate intimidation, stalking, following, brigading, doxxing, harassing photography or recording, sustained disruption of talks or other events, inappropriate physical contact, and unwelcome sexual attention.
 
-These rules apply at every hackathon venue, in online interactions related to the event, at associated social gatherings, and on hackathon-provided transport.
+In particular, attendees should not use sexualized images, activities, or other material both in their hacks and during the event. Booth staff (including volunteers) should not use sexualized clothing/uniforms/costumes or otherwise create a sexualized environment.
 
-## Reporting procedures
+If what you’re doing is making someone feel uncomfortable, that counts as harassment and is enough reason to stop doing it. Participants asked to stop any harassing behavior are expected to comply immediately.
 
-If you feel uncomfortable or believe there may have been a breach of this code, report it immediately. All reporters have the right to remain anonymous.
+Sponsors, judges, mentors, volunteers, organizers, MLH staff, and anyone else participating in the event are also subject to the anti-harassment policy.
 
-Email [hackudc@gpul.org](mailto:hackudc@gpul.org), and your report will reach the organizers. To remain anonymous, use an anonymous email service or create a temporary email account.
+If a participant engages in harassing behavior, MLH may take any action it deems appropriate, including warning the offender or expulsion from the event with no eligibility for reimbursement or refund of any type.
 
-You may also contact one of the following conduct offense contact points directly:
+If you are being harassed, notice that someone else is being harassed, or have any other concerns, please contact MLH using the reporting procedures defined below.
 
--
--
--
+MLH representatives can help participants contact campus security or local law enforcement, provide escorts, or otherwise assist those experiencing harassment to feel safe for the duration of the event. We value your attendance.
 
-## Changes and contact
+We expect participants to follow these rules at all hackathon venues, hackathon-related social events, hackathon-supplied transportation, and online interactions related to the event.
 
-This code may change. We will inform attendees on this page and, for significant changes, through additional methods including email. For questions, email [hackudc@gpul.org](mailto:hackudc@gpul.org).
+## Reporting Procedures
+
+If you feel uncomfortable or think there may be a potential violation of the code of conduct, please report it immediately using one of the following methods. All reporters have the right to remain anonymous.
+
+By sending information to the general reporting line, your report will go to our incident response team members.
+
+- North America General Reporting - +1 409 202 6060, incidents@mlh.io
+- Canada General Reporting - +1 343 453 4532, incidents@mlh.io
+- UK General Reporting - +44 800 808 5675, incidents@mlh.io
+- Europe General Reporting - +44 333 038 5995, incidents@mlh.io
+- Asia-Pacific General Reporting - +91 000 80004 02492, incidents@mlh.io
+- India General Reporting - 000 80004 02492, incidents@mlh.io
+
+## Special Incidents
+
+If you are uncomfortable reporting your situation to one or more of these people or need to contact any of them directly in case of emergency, direct contact details are listed below.
+
+- Mary Siebert - +1 (516) 362-1835, mary@mlh.io
+- Swift - +1 (347) 220-8667, swift@mlh.io
+
+MLH reserves the right to revise, make exceptions to, or otherwise amend these policies in whole or in part. If you have any questions regarding these policies, please contact MLH by e-mail at incidents@mlh.io.
+
+This document was last updated on:
+April 16th 2026
+
+Source: [Major League Hacking Code of Conduct](https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md), reproduced under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). This text corresponds to the April 16, 2026 revision, accessed on October 17, 2026. The document may have changed since then; consult the [official MLH Code of Conduct](https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md) for the latest version.
