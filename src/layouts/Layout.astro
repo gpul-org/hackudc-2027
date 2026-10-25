@@ -13,9 +13,15 @@ interface Props {
   title?: string;
   description: string;
   lang?: string;
+  noindex?: boolean;
 }
 
-const { title = "HackUDC 2027", description, lang = "es" } = Astro.props;
+const {
+  title = "HackUDC 2027",
+  description,
+  lang = "es",
+  noindex = false,
+} = Astro.props;
 
 const ogLocales = { es: "es_ES", en: "en_US", gl: "gl_ES" } as const;
 type Locale = keyof typeof ogLocales;
@@ -144,7 +150,10 @@ const structuredData = {
     <link rel="manifest" href="/site.webmanifest?v=20261001" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <meta name="robots" content="max-image-preview:large" />
+    <meta
+      name="robots"
+      content={noindex ? "noindex" : "max-image-preview:large"}
+    />
     <script
       type="application/ld+json"
       set:html={JSON.stringify(structuredData).replace(/</g, "\\u003c")}
@@ -152,19 +161,24 @@ const structuredData = {
     <Font cssVariable="--font-inter" />
     <Font cssVariable="--font-rockwell" />
 
-    <link rel="canonical" href={canonicalUrl} />
-    {locales.map((locale) => (
-      <link
-        rel="alternate"
-        hreflang={locale}
-        href={getAbsoluteLocaleUrl(locale, path)}
-      />
-    ))}
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={getAbsoluteLocaleUrl(defaultLocale, path)}
-    />
+    {/* Error pages have no stable URL or localized twins to point at. */}
+    {!noindex && (
+      <>
+        <link rel="canonical" href={canonicalUrl} />
+        {locales.map((locale) => (
+          <link
+            rel="alternate"
+            hreflang={locale}
+            href={getAbsoluteLocaleUrl(locale, path)}
+          />
+        ))}
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href={getAbsoluteLocaleUrl(defaultLocale, path)}
+        />
+      </>
+    )}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="HackUDC" />
