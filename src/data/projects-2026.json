@@ -1,0 +1,2022 @@
+{
+  "source": "https://hackudc-2026.devpost.com/project-gallery",
+  "syncedAt": "2026-10-25",
+  "projects": [
+    {
+      "url": "https://devpost.com/software/stepcode",
+      "name": "stepcode",
+      "tagline": "Tool for generating static books that feature interactive, step-by-step pseudocode execution.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/383/646/datas/medium.png",
+      "members": 3,
+      "prizes": [
+        "GPUL – Mejor proyecto Open Source"
+      ],
+      "stack": [
+        "css",
+        "html",
+        "javascript",
+        "python"
+      ],
+      "repo": "https://github.com/daniqss/stepcode"
+    },
+    {
+      "url": "https://devpost.com/software/mxnj-inditex-hackudc2026",
+      "name": "MXNJ-inditex-HackUDC2026",
+      "tagline": "Open-source fashion AI that looks at a photo and finds every garment in a 27k-product catalogue — 69.66% Recall@15, zero closed APIs.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/385/538/datas/medium.png",
+      "members": 4,
+      "prizes": [
+        "GPUL – Mejor uso IA Open Source"
+      ],
+      "stack": [
+        "python"
+      ],
+      "repo": "https://github.com/miguelplanas/HackUDC2026?tab=readme-ov-file"
+    },
+    {
+      "url": "https://devpost.com/software/hackhub-fyv4mt",
+      "name": "HackHUB",
+      "tagline": "An hub made for the UDC hackaton where the hackers and the organization have multiple tools to work better and make it easier with QOL features.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/282/datas/medium.jpg",
+      "members": 2,
+      "prizes": [
+        "GPUL – Mejor proyecto de equipo rookie"
+      ],
+      "stack": [
+        "astro",
+        "supabase",
+        "typescript"
+      ],
+      "repo": "https://github.com/abelsrzz/hackudc-2026"
+    },
+    {
+      "url": "https://devpost.com/software/zara-inditex-challenge-street-to-shop",
+      "name": "Zara / Inditex challenge: street-to-shop",
+      "tagline": "Dada una foto de \"bundle\" (outfit, modelo en la calle, campaña de ropa), localizamos cada prenda y buscamos los 15 productos más parecidos del catálogo de Inditex.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/400/037/datas/medium.png",
+      "members": 1,
+      "prizes": [
+        "INDITEX TECH"
+      ],
+      "stack": [
+        "dino",
+        "python",
+        "pytorch",
+        "yolo"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/housekey",
+      "name": "HouseKey",
+      "tagline": "Your vault. Your key. No one else's.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/385/170/datas/medium.png",
+      "members": 2,
+      "prizes": [
+        "GRADIANT"
+      ],
+      "stack": [
+        "aes-256-gcm",
+        "api",
+        "crypto",
+        "ecdh",
+        "ecdsa",
+        "hkdf-sha256",
+        "next.js",
+        "p-256",
+        "pbkdf2",
+        "sql",
+        "supabase",
+        "typescript",
+        "vercel",
+        "web"
+      ],
+      "repo": "https://github.com/BreaGG/HackUDC2026---HouseKey-Vault"
+    },
+    {
+      "url": "https://devpost.com/software/zenith-nrwusl",
+      "name": "Zenith",
+      "tagline": "Capture, organize, activate your digital brain.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/438/datas/medium.png",
+      "members": 3,
+      "prizes": [
+        "KELEA"
+      ],
+      "stack": [
+        "alembic",
+        "css3",
+        "docker",
+        "fastapi",
+        "git",
+        "github",
+        "html5",
+        "javascript",
+        "linux",
+        "postgresql",
+        "pytest",
+        "python",
+        "react",
+        "vite"
+      ],
+      "repo": "https://github.com/Martinhdeez/zenith.git"
+    },
+    {
+      "url": "https://devpost.com/software/caminovivo",
+      "name": "CaminoVivo",
+      "tagline": "CaminoVivo agrega datos meteorológicos, albergues, fuentes de agua, rutas GPS y eventos culturales de fuentes públicas gallegas en una plataforma unificada con visualización interactiva.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/384/066/datas/medium.png",
+      "members": 4,
+      "prizes": [
+        "GRAFANA"
+      ],
+      "stack": [
+        "css",
+        "grafana",
+        "html5",
+        "java",
+        "mysql",
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/bfg-i",
+      "name": "BFG-I",
+      "tagline": "DOOM to the moon.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/383/871/datas/medium.jpeg",
+      "members": 3,
+      "prizes": [
+        "ALÉN SPACE"
+      ],
+      "stack": [
+        "arm-aarch64",
+        "c",
+        "chocolate-doom",
+        "docker",
+        "ffmpeg",
+        "grafana",
+        "h.264",
+        "influxdb",
+        "libx264",
+        "linux",
+        "python",
+        "rtp/udp",
+        "sdl2"
+      ],
+      "repo": "https://github.com/YagoFalgueras/HackUDC-2026"
+    },
+    {
+      "url": "https://devpost.com/software/k2-platform-hackudc-2026",
+      "name": "K2 Platform",
+      "tagline": "K2 Platform is an advanced data orchestration and intelligence hub developed for HackUDC 2026.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/685/datas/medium.png",
+      "members": 4,
+      "prizes": [
+        "DENODO"
+      ],
+      "stack": [
+        "denodo-ai-sdk-(rag-&-chatbot",
+        "denodo-vdp-(virtual-data-port)",
+        "docker",
+        "fastapi-(python-3.12)",
+        "grafana",
+        "javascript",
+        "nix",
+        "node.js",
+        "react-19-(vite)",
+        "sqlite",
+        "tailwind-css",
+        "vql"
+      ],
+      "repo": "https://github.com/InnovateXYZ/HackUDC2026"
+    },
+    {
+      "url": "https://devpost.com/software/grimorie",
+      "name": "Grimorie",
+      "tagline": "Grimorie: Organiza tus archivos de una forma mágica",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/238/datas/medium.png",
+      "members": 4,
+      "prizes": [
+        "MERLÍN SOFTWARE"
+      ],
+      "stack": [
+        "css",
+        "elastic-search",
+        "html5",
+        "javascript",
+        "python",
+        "react"
+      ],
+      "repo": "https://github.com/Yupikaiyi/Grimoirev2"
+    },
+    {
+      "url": "https://devpost.com/software/bitguard",
+      "name": "BitGuard",
+      "tagline": "Extensión de Chrome para generar contraseñas robustas, guardarlas de forma cifrada y comprobar si han sido comprometidas en brechas de seguridad.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/194/datas/medium.jpeg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "html",
+        "javascript",
+        "python"
+      ],
+      "repo": "https://github.com/bit-japn/Bitguard"
+    },
+    {
+      "url": "https://devpost.com/software/hugo-easy",
+      "name": "hugo-easy",
+      "tagline": "Es una GUI (graphic user interphase) para realizar ciertas operativas de mantenimiento en una pagina hugo (https://gohugo.io/)",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "css",
+        "flask",
+        "html",
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/actividades-costeras-a-coruna",
+      "name": "Actividades Costeras A Coruña",
+      "tagline": "Actividades Costeras A Coruña te recomendará cuándo un día es óptimo para disfrutar de actividades en la costa marítima de A Coruña, basándose en datos meteorológicos.",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "python"
+      ],
+      "repo": "https://github.com/ismasouto/Actividades-Costeras"
+    },
+    {
+      "url": "https://devpost.com/software/meteo-waltqd",
+      "name": "Meteo",
+      "tagline": "Una experiencia estratégica y divertida de predicción del clima, donde cada decisión influye en el tablero y desafía la habilidad del jugador para maximizar su credibilidad y progreso.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/385/241/datas/medium.jpg",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "gdscript",
+        "godot"
+      ],
+      "repo": "https://github.com/luciacastro2/meteo.git"
+    },
+    {
+      "url": "https://devpost.com/software/magic-node",
+      "name": "MAGIC NODE",
+      "tagline": "Proyecto mixto en el que combinamos un sistema de consulta de documentos administrativos basado en Inteligencia Artificial.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/385/634/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "denodo",
+        "python",
+        "typescript"
+      ],
+      "repo": "https://github.com/Alvarolpe/HackUDC_2026"
+    },
+    {
+      "url": "https://devpost.com/software/sekure",
+      "name": "sekure",
+      "tagline": "Gestor de contraseñas web moderno, seguro, innovador y de conocimiento cero (zero-knowledge) que permite organizar contraseñas desde la web y desde una extensión de navegador.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/385/112/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "html",
+        "javascript",
+        "python",
+        "react"
+      ],
+      "repo": "https://github.com/ganadores-de-hackudc/sekure"
+    },
+    {
+      "url": "https://devpost.com/software/meigasearch",
+      "name": "MeigaSearch",
+      "tagline": "MeigaSearch: Plataforma de inteligencia documental privada. Gestiona, busca y consulta tus archivos con seguridad total. Sin nubes ni fugas: soberanía digital y control absoluto de tu información.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/558/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "celery",
+        "css",
+        "docker",
+        "exiftool",
+        "fastapi",
+        "html5",
+        "javascript",
+        "paraphrase-multilingual-minilm-l12-v2",
+        "python",
+        "qdrant",
+        "redis",
+        "sentence-transformers",
+        "smollm",
+        "tesseract"
+      ],
+      "repo": "https://github.com/lgarbayo/meiga-search.git"
+    },
+    {
+      "url": "https://devpost.com/software/gestor-de-olesa",
+      "name": "Gestor de Olesa",
+      "tagline": "Gestor de contraseñas seguro que implementa IA para analizar las contraseñas",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "docker",
+        "groq",
+        "python",
+        "sqlite"
+      ],
+      "repo": "https://github.com/PabloFl07/Open-Password.git"
+    },
+    {
+      "url": "https://devpost.com/software/cortex-gjqm26",
+      "name": "Cortex",
+      "tagline": "un organizador de ideas/tareas o todo en general",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/384/575/datas/medium.gif",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "expo.io",
+        "java",
+        "ollama",
+        "reactnative",
+        "springboot3",
+        "sqlite"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/weatherdatagaliza-dashboard",
+      "name": "WeatherDataGaliza Dashboard",
+      "tagline": "Facilitar la extracción y presentación de los datos meteorológicos para el usuario, para que obtenga un rápido comprendimiento sobre diferentes variables.",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "grafana",
+        "numpy",
+        "pandas",
+        "python"
+      ],
+      "repo": "https://github.com/HugoVarelaSanchez/WeatherDataGaliza"
+    },
+    {
+      "url": "https://devpost.com/software/proyecto-narvaez",
+      "name": "Proyecto Narváez",
+      "tagline": "El Proyecto Narvaez es un sistema de traducción simple de imágenes con notación musical a tablaturas de guitarra, para facilitar el acceso de todos al mundo de la guitarra.",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "c",
+        "mozart",
+        "python"
+      ],
+      "repo": "https://github.com/X03L-git/Proyecto-Narvaez"
+    },
+    {
+      "url": "https://devpost.com/software/wizard404",
+      "name": "Wizard404",
+      "tagline": "Wizard404 centraliza la busqueda y gestion de documentos (PDF, texto, Office, imagenes, audio, video): escanear directorios, buscar por contenido, organizar y hasta limpiar el equipo de archivos",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/384/585/datas/medium.png",
+      "members": 1,
+      "prizes": [],
+      "stack": [
+        "fastapi",
+        "javascript",
+        "python",
+        "react",
+        "tailwindcss",
+        "vite"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/merlin-s-excalidocs",
+      "name": "Merlin's Excalidocs",
+      "tagline": "Hippity hoppity, this project is from our property (unless...)",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "html",
+        "markdown",
+        "postgresql",
+        "python",
+        "swagger"
+      ],
+      "repo": "https://github.com/Oscar200017/Merlin_Excalidocs"
+    },
+    {
+      "url": "https://devpost.com/software/slaysat",
+      "name": "SlaySat",
+      "tagline": "Convertimos una Raspberry Pi en un satélite para jugar a DOOM desde la Tierra. Con radiación espacial y una conexión infernal. Houston, tenemos un juegazo.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/383/854/datas/medium.jpg",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "c",
+        "python"
+      ],
+      "repo": "https://github.com/peprolinbot/chocolate-doom"
+    },
+    {
+      "url": "https://devpost.com/software/pinguinos",
+      "name": "Pingüinos",
+      "tagline": "Identificación visual de productos Zara en fotos de modelo usando CLIP, YOLOv8 y active learning, logrando 45%",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "clip-vit-l-14",
+        "faiss",
+        "kaggle",
+        "python",
+        "pytorch",
+        "yolov8-(deepfashion2)"
+      ],
+      "repo": "https://github.com/hackudc-Inditex/hackudc"
+    },
+    {
+      "url": "https://devpost.com/software/funil",
+      "name": "Funil",
+      "tagline": "Aplicación de gestión de notas con mínima fricción de usuario para proveer al usuario final de respuestas organizadas mediante procesamiento en segundo plano",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/400/datas/medium.jpg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "java",
+        "postgresql",
+        "react",
+        "spring",
+        "springboot",
+        "typescript"
+      ],
+      "repo": "https://github.com/nuuriazf/Funil"
+    },
+    {
+      "url": "https://devpost.com/software/notas-fic",
+      "name": "Notas FIC",
+      "tagline": "Portal estatístico para as materias das titulacións da FIC.",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "chart.js",
+        "css3",
+        "flask",
+        "html5",
+        "javascript",
+        "python",
+        "sqlalchemy",
+        "sqlite"
+      ],
+      "repo": "https://github.com/danielfeitopin/notas-fic"
+    },
+    {
+      "url": "https://devpost.com/software/pwgrad",
+      "name": "PWGrad",
+      "tagline": "A password manager with secure design and homomorphic encryption capabilities",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "go",
+        "php"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/ragnarok-r4f3i8",
+      "name": "ragnarok",
+      "tagline": "A password manager easy to use",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "html",
+        "javascript",
+        "python"
+      ],
+      "repo": "https://github.com/TriggerHappy55/ragnarok"
+    },
+    {
+      "url": "https://devpost.com/software/second-guess-y6ue5k",
+      "name": "Second Guess",
+      "tagline": "Tú capturas. Second Guess conecta.",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "agraph",
+        "groq",
+        "pypdf2",
+        "python",
+        "streamlit"
+      ],
+      "repo": "https://github.com/albagdoel/Second-Guess.git"
+    },
+    {
+      "url": "https://devpost.com/software/blackvault-m92vqk",
+      "name": "BlackVault",
+      "tagline": "Drop it, forget it, find it.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/385/331/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "duckdb",
+        "easyocr",
+        "electron",
+        "fastapi",
+        "ffmpeg",
+        "googlegeminiapi",
+        "ollama",
+        "python",
+        "react",
+        "tailwind",
+        "typescript",
+        "vite"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/lockedin-tl9ykj",
+      "name": "LockedIn",
+      "tagline": "LockedIn is a privacy-first password manager that secures your vault locally using Android Secure Storage. It features end-to-end encrypted group sharing through asymmetric cryptography.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/383/745/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "docker",
+        "fastapi",
+        "jetpack-compose",
+        "jwt",
+        "kotlin",
+        "python"
+      ],
+      "repo": "https://github.com/Casiopobre/HackUDC-2026"
+    },
+    {
+      "url": "https://devpost.com/software/goofytex",
+      "name": "GoofyTex",
+      "tagline": "Recuperacion de Bundle a Producto en Moda",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/382/686/datas/medium.jpeg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "bash",
+        "csv",
+        "faiss",
+        "huggingface",
+        "hydra",
+        "json",
+        "jsonl",
+        "latex",
+        "numpy",
+        "omegaconf",
+        "openclip",
+        "pandas",
+        "pillow",
+        "python",
+        "pytorch",
+        "requests",
+        "torchvision",
+        "tqdm",
+        "yolo"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/princesias",
+      "name": "PrincesIAs",
+      "tagline": "Deconstrucción inteligente de moda para todos.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/085/datas/medium.png",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "numpy",
+        "pandas",
+        "python",
+        "torch"
+      ],
+      "repo": "https://github.com/alvaroviqueiravidal/PrincesIAs---HackUDC-2026.git"
+    },
+    {
+      "url": "https://devpost.com/software/librain",
+      "name": "Librain",
+      "tagline": "Librain convierte información dispersa en conocimiento estructurado, conectado y accionable mediante IA bien integrada, reduciendo fricción cognitiva y manteniendo el control total del usuario.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/385/103/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "better-auth",
+        "docker",
+        "mongodb",
+        "mongoose",
+        "nextjs",
+        "ollama"
+      ],
+      "repo": "https://github.com/cortins-05/Librain"
+    },
+    {
+      "url": "https://devpost.com/software/doomsat",
+      "name": "DOOMSat",
+      "tagline": "DOOM en órbita: jugable desde Tierra hasta un satélite a través de un enlace limitado. Porque DOOM se puede jugar donde uno quiera.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/385/024/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "aarch",
+        "bash",
+        "c",
+        "iptables",
+        "java",
+        "tcp",
+        "udp"
+      ],
+      "repo": "https://github.com/manuramazz/hackudc2026"
+    },
+    {
+      "url": "https://devpost.com/software/chronodash",
+      "name": "ChronoDash",
+      "tagline": "ChronoDash is an Elixir app using Phoenix and Ash to collect, process, and visualize weather data from MeteoSix and WRF, with Prometheus monitoring, Grafana dashboards, and alerting.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/383/912/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "docker",
+        "elixir",
+        "grafana",
+        "meteogalica-meteosix",
+        "phoenix",
+        "prometheus"
+      ],
+      "repo": "https://github.com/yagogarea/chronodash"
+    },
+    {
+      "url": "https://devpost.com/software/excalisearch",
+      "name": "ExcaliSearch",
+      "tagline": "Encuentra lo que necesitas en tus documentos, no solo lo que escribes. Indexación IA y chat interactivo en una sola plataforma.",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "chromadb",
+        "fastapi",
+        "javascript",
+        "node.js",
+        "ollama",
+        "python",
+        "react",
+        "sumy",
+        "tesseract",
+        "vite",
+        "whoosh"
+      ],
+      "repo": "https://github.com/yyishayang/ExcaliSearch"
+    },
+    {
+      "url": "https://devpost.com/software/decentralized-academic-credential-verification-ysmw6p",
+      "name": "Decentralized Academic Credential Verification",
+      "tagline": "Paper degrees are easy to fake and hard to verify. Nova Xi solves this by turning academic credentials into immutable Soulbound Tokens, using AI to provide instant, fraud-proof resume verification.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/968/datas/medium.png",
+      "members": 1,
+      "prizes": [],
+      "stack": [
+        "emailjs",
+        "ether.js",
+        "geminiapi",
+        "hardhat",
+        "ipfs",
+        "metamask",
+        "openzeppelin",
+        "pinata",
+        "react",
+        "solidity"
+      ],
+      "repo": "https://github.com/atharvbhavsar/nova"
+    },
+    {
+      "url": "https://devpost.com/software/resq-ai-pgtu8z",
+      "name": "ResQ-AI",
+      "tagline": "RESQ AI is an AI-powered emergency triage system that uses speech-to-text, NLP, and ML to extract caller details, prioritize cases in seconds, and reduce response time by up to 40%, saving lives.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/774/datas/medium.png",
+      "members": 1,
+      "prizes": [],
+      "stack": [
+        "express.js",
+        "huggingface",
+        "llm",
+        "machine-learning",
+        "natural-language-processing",
+        "neural-chat-7b",
+        "node.js",
+        "ollama",
+        "openstreetmap",
+        "socket.io",
+        "sqlite",
+        "twilio"
+      ],
+      "repo": "https://github.com/atharvbhavsar/ResQ-AI"
+    },
+    {
+      "url": "https://devpost.com/software/seqre",
+      "name": "SeQre",
+      "tagline": "SeQre es una extensión de navegador que permite generar con un simulador cuántico, almacenar y recuperar contraseñas de forma fácil, segura y rápida.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/384/811/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "css3",
+        "html5",
+        "javascript",
+        "node.js",
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/boardmee",
+      "name": "BoardMee",
+      "tagline": "Organiza todos tus archivos con IA en tableros inteligentes y conecta automáticamente con personas cercanas para intercambiar los ítems que elijas de forma rápida, segura y sin esfuerzo.",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "android-studio",
+        "flutter",
+        "groq",
+        "ollama",
+        "supabase"
+      ],
+      "repo": "https://github.com/anabar3/hackathon2026/blob/develop/ManualDeUsuario.md"
+    },
+    {
+      "url": "https://devpost.com/software/achave",
+      "name": "AChave",
+      "tagline": "AChave es un gestor de contraseñas con cifrado cliente-servidor que permite almacenar y gestionar tus contraseñas de forma segura con interfaces web, y extensión de navegador.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/384/746/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "fastapi",
+        "haveibeenpwned",
+        "nextjs"
+      ],
+      "repo": "https://github.com/P4los/AChave/tree/main"
+    },
+    {
+      "url": "https://devpost.com/software/fashion-clip-vision-inditex-matcher-chrininguito-group",
+      "name": "Fashion-CLIP Vision: Inditex Matcher Chrininguito Group",
+      "tagline": "Motor de búsqueda visual con IA (Fashion-CLIP) que analiza outfits completos de Inditex y extrae las prendas exactas usando Contrastive Learning.",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "docker",
+        "fastapi",
+        "github",
+        "huggingface",
+        "javascript",
+        "pandas",
+        "python",
+        "pytorch",
+        "react",
+        "runpod",
+        "transformers",
+        "uvicorn"
+      ],
+      "repo": "https://github.com/aleixbertranandreu/INDITEX_CHALLENGE-HACK_UDC"
+    },
+    {
+      "url": "https://devpost.com/software/gandalfs",
+      "name": "GandalFS",
+      "tagline": "Great Another Non-trivial Dynamic Amazing Layered File Searcher is the Gatekeeper of the data, providing a modern solución to an ancient problem.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/385/600/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "fastapi",
+        "nextjs",
+        "ollama",
+        "openpyxl",
+        "opensearch",
+        "pymupdf",
+        "python"
+      ],
+      "repo": "https://github.com/daviddans/H4CK_UDC26.git"
+    },
+    {
+      "url": "https://devpost.com/software/kryptos-3bl5g2",
+      "name": "Kryptos",
+      "tagline": "It is a tool that allows for a safe storage of passwords along with the generation of safe passwords.",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "dart",
+        "flutter",
+        "html",
+        "javascript",
+        "kotlin"
+      ],
+      "repo": "https://github.com/iagobl/hackudc_gradiant"
+    },
+    {
+      "url": "https://devpost.com/software/dorathefilefinder",
+      "name": "DoraTheFileFinder",
+      "tagline": "AI file finder through prompts on a local data base.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/384/700/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "fastapi",
+        "geminiapi",
+        "html",
+        "javascript",
+        "nextjs",
+        "python",
+        "sqlite"
+      ],
+      "repo": "https://github.com/fragi0/Dora-the-File-Finder"
+    },
+    {
+      "url": "https://devpost.com/software/zero-state-defense",
+      "name": "Zero-State Defense",
+      "tagline": "Zero-State Defense: Bóveda PQC con Kyber y entropía de hardware IBM Quantum. Blindaje Argon2id y Zero-Knowledge total: sin recuperación para una soberanía digital absoluta.",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "aesgcm-256",
+        "argon2id",
+        "dotenv",
+        "markdown",
+        "ml-kem",
+        "python",
+        "qiskit",
+        "sqlite",
+        "streamlit"
+      ],
+      "repo": "https://github.com/jitlifed644/HackUDC-2026"
+    },
+    {
+      "url": "https://devpost.com/software/digital-brain-m4vgir",
+      "name": "Riki Brain",
+      "tagline": "Sistema de documentación personal: captura rápida en un inbox único y procesado posterior a conocimiento en Markdown.",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "ai",
+        "azure",
+        "express.js",
+        "javascript",
+        "node.js",
+        "prisma",
+        "react",
+        "sqlite",
+        "tailwind",
+        "vite"
+      ],
+      "repo": "https://github.com/pablojhdcoder/hack-udc-2026"
+    },
+    {
+      "url": "https://devpost.com/software/things-rtjagh",
+      "name": "Things",
+      "tagline": "We are a team made up of members from Lleida Hack and one friendly Cantabrian who is half Catalan. Our passion for hackathons has taken us all the way to Galicia to participate in this one.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/421/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "api",
+        "html",
+        "javascript",
+        "mobile",
+        "node.js",
+        "ollama",
+        "postgresql",
+        "rabbitmq",
+        "vector"
+      ],
+      "repo": "https://github.com/LLEIDAHACKERS/things"
+    },
+    {
+      "url": "https://devpost.com/software/kelea-notes",
+      "name": "Kelea Notes.",
+      "tagline": "The smart junk drawer for your mind: dump your thoughts, let AI organize them.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/360/datas/medium.jpeg",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "amazon-web-services",
+        "azure-ai-vision",
+        "dart",
+        "docker",
+        "docker-compose",
+        "flutter",
+        "java",
+        "rest-api",
+        "spring-boot",
+        "whisper"
+      ],
+      "repo": "https://github.com/rubengonlab/HackUDC26"
+    },
+    {
+      "url": "https://devpost.com/software/rastreadoc",
+      "name": "RastreaDOC",
+      "tagline": "Herramienta para subir, buscar y filtrar documentos.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/463/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "docker",
+        "elasticsearch",
+        "fastapi",
+        "pandas",
+        "python",
+        "react"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/brainch",
+      "name": "Brainch",
+      "tagline": "An easy path to track your mind",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/452/datas/medium.png",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "codex",
+        "docker",
+        "fastapi",
+        "lovable",
+        "ollama",
+        "python",
+        "react",
+        "tailscale",
+        "tailwindcss"
+      ],
+      "repo": "https://github.com/GoodLvck/HackUDC-project-MVP"
+    },
+    {
+      "url": "https://devpost.com/software/eco-core",
+      "name": "Eco Core",
+      "tagline": "Una eco-aventura 3D de código abierto al 100%, desarrollada para la HackUDC 2026. Creada exclusivamente con herramientas de software libre y distribuida bajo una licencia Copyleft.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/069/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "blender",
+        "gdscript",
+        "godot",
+        "pixelorama"
+      ],
+      "repo": "https://github.com/HackUDCBASP/ECO-CORE"
+    },
+    {
+      "url": "https://devpost.com/software/docai-qfbyiu",
+      "name": "Docai - Intelligent Document Querying",
+      "tagline": "Una potente plataforma web diseñada para interactuar con tus documentos y bases de datos mediante Inteligencia Artificial local.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/384/810/datas/medium.jpg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "css",
+        "fastapi",
+        "html",
+        "javascript",
+        "ollama",
+        "python"
+      ],
+      "repo": "https://github.com/lageese/HackUDC2026"
+    },
+    {
+      "url": "https://devpost.com/software/globalytics",
+      "name": "Globalytics",
+      "tagline": "La aplicación analiza datasets disponibles en el Data Marketplace y genera recomendaciones fundamentadas a partir de los datos.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/380/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "bootstrap",
+        "java",
+        "javascript",
+        "maven",
+        "spring"
+      ],
+      "repo": "https://github.com/Globalytics/HackUDC_26"
+    },
+    {
+      "url": "https://devpost.com/software/magicdocu",
+      "name": "magicdocu",
+      "tagline": "¡La forma más cómoda de gestionar todos tus documentos!",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/383/926/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "celery",
+        "django",
+        "ollama",
+        "pgvector",
+        "postgresql",
+        "python",
+        "redis"
+      ],
+      "repo": "https://github.com/Sprinter05/magicdocu"
+    },
+    {
+      "url": "https://devpost.com/software/inditex-ia-model",
+      "name": "Inditex IA Model",
+      "tagline": "Zara Image Retrieval Pipeline (Score: 59.55%)",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "css",
+        "html",
+        "javascript",
+        "python"
+      ],
+      "repo": "https://github.com/XxSamaxX/Inditex.git"
+    },
+    {
+      "url": "https://devpost.com/software/inditex-tech-challenge",
+      "name": "Inditex-tech-challenge",
+      "tagline": "Chooses the clothes the model is wearing.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/384/008/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "css",
+        "flask",
+        "google-collab",
+        "html",
+        "inditex-data",
+        "jinja",
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/denodo-flick",
+      "name": "Denodo Flick",
+      "tagline": "Proyecto de diseño y desarrollo de una herramienta de toma de decisiones en el ámbito del cine, empleando la IA de Denodo.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/385/278/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "css",
+        "html",
+        "javascript",
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/doominacion-orbital-battle-royale-interplanetarial-satelital",
+      "name": "Doominación Orbital Battle Royale Interplanetarial Satelital",
+      "tagline": "Doom online desde la comodidad de tu salon hasta el espacio.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/171/datas/medium.jpeg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "arm",
+        "c",
+        "electron",
+        "ubuntu",
+        "vitasdk"
+      ],
+      "repo": "https://github.com/WhiteCatMaster/dobris"
+    },
+    {
+      "url": "https://devpost.com/software/synapse-afpz60",
+      "name": "synapse",
+      "tagline": "Conectando las ideas",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/383/362/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "bootstrap",
+        "css",
+        "html",
+        "java",
+        "javascript",
+        "llama",
+        "maven",
+        "postgresql",
+        "react",
+        "spring"
+      ],
+      "repo": "https://github.com/xcotelo/synapse"
+    },
+    {
+      "url": "https://devpost.com/software/digitalbrain",
+      "name": "DigitalBrain",
+      "tagline": "WhatsApp como segundo cerebro, un bot pero más listo.",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "beautifulsoup4",
+        "fastapi",
+        "googlegemini",
+        "pydf",
+        "pydub",
+        "python",
+        "twilio",
+        "uvicorn"
+      ],
+      "repo": "https://github.com/peterrocherr/DigitalBrain"
+    },
+    {
+      "url": "https://devpost.com/software/docseeker",
+      "name": "DocSeeker",
+      "tagline": "Find any document in seconds: we unify files from your cloud drives into one private, AI-powered search workspace.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/384/262/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "docker",
+        "fastaapi",
+        "postgresql",
+        "python",
+        "qdrant",
+        "react"
+      ],
+      "repo": "https://github.com/x-nunez/DocSeeker"
+    },
+    {
+      "url": "https://devpost.com/software/voidvault",
+      "name": "VoidVault",
+      "tagline": "Ni nosotros sabemos tus contraseñas.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/382/956/datas/medium.jpeg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "0-knowledge-architecture",
+        "css",
+        "docker",
+        "email-validator",
+        "fastapi",
+        "hibp",
+        "html",
+        "javascript",
+        "jwt",
+        "manifest",
+        "mit",
+        "posgreslq",
+        "pydantic",
+        "python",
+        "rest",
+        "sqlalchemy",
+        "uvicorn"
+      ],
+      "repo": "https://github.com/H0CK55/VoidVault-HackUDC26.git"
+    },
+    {
+      "url": "https://devpost.com/software/music-decision-maker",
+      "name": "Music Decision Maker",
+      "tagline": "Descubre tu próxima canción favorita usando RAG con Denodo AI SDK.",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "api-denodo",
+        "css",
+        "herramientas-denodo",
+        "html",
+        "javascript",
+        "sql"
+      ],
+      "repo": "https://github.com/Sasa701/Hackudc-Denodo"
+    },
+    {
+      "url": "https://devpost.com/software/breiin",
+      "name": "bREIIn",
+      "tagline": "Your AI knowledge graph. It turns notes, links, audio, and PDFs into a structured \"second brain.\" Stop hoarding data; start exploring your thoughts with GraphRAG technology.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/383/719/datas/medium.jpeg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "docker",
+        "faster-whisper",
+        "google-cloud",
+        "gpt-oss-120b",
+        "mongodb",
+        "neo4j",
+        "ollama",
+        "python",
+        "qdrant",
+        "react",
+        "vite"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/digital-brain-h5v9n3",
+      "name": "Digital Brain",
+      "tagline": "Empowering productivity through intelligent data management and AI-driven insights.",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "fastapi",
+        "python",
+        "react",
+        "whisper"
+      ],
+      "repo": "https://github.com/Alvaro-pg/digital-brain-app.git"
+    },
+    {
+      "url": "https://devpost.com/software/detectition-jellyfish",
+      "name": "Detectition Jellyfish",
+      "tagline": "Raise awareness and provide information about the presence of Portuguese man-of-war jellyfish on the Galician coast.",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "grafana",
+        "influxdb",
+        "python"
+      ],
+      "repo": "https://github.com/aliciabona/hackudc2026.git"
+    },
+    {
+      "url": "https://devpost.com/software/newron",
+      "name": "Newron",
+      "tagline": "Una app de notas que entiende lo que guardas y lo ordena sola en grupos que van evolucionando según lo que escribas.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/477/datas/medium.jpeg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "axios",
+        "docker",
+        "expo.io",
+        "fastapi",
+        "langextract",
+        "ollama",
+        "postgresql",
+        "python",
+        "react-native",
+        "sentence-transformers",
+        "typescript",
+        "whisper"
+      ],
+      "repo": "https://github.com/Hackathon-UDC-2026-AAMA"
+    },
+    {
+      "url": "https://devpost.com/software/fourfocus-inditex",
+      "name": "FourFocus - INDITEX",
+      "tagline": "A Computer Vision AI-model which, from a given bundle, extracts the visible INDITEX-fashion products (dresses, trousers, shoes...).",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "clip",
+        "huggingface",
+        "python",
+        "yolo"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/eclea",
+      "name": "Eclea",
+      "tagline": "Storytelling con Grafana y MeteoGalicia. Dashboards para actividades de tierray mar con datos abiertos.",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "github",
+        "grafana",
+        "influx",
+        "python",
+        "visual-studio"
+      ],
+      "repo": "https://github.com/eliz29ese/hackUDC26.git"
+    },
+    {
+      "url": "https://devpost.com/software/centro-de-control-inteligente-metereologico",
+      "name": "Centro de Control Inteligente Metereológico",
+      "tagline": "Este sistema recolecta y visualiza en tiempo real datos del tiempo gallego. Combina fuentes meteorológicas para crear mapas, paneles de control y alertas automatizadas a través de Telegram.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/383/537/datas/medium.png",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "api",
+        "docker",
+        "grafana",
+        "influx",
+        "linux",
+        "python"
+      ],
+      "repo": "https://github.com/rxdri12/hackUdc-grafana"
+    },
+    {
+      "url": "https://devpost.com/software/smart-brain-fmz21o",
+      "name": "Smart Brain",
+      "tagline": "Smart Brain es tu agente personal que recuerda por ti, analiza tu contenido y te ayuda a alcanzar tus metas diarias. Un compañero imprescindible en esta era de continuo ruido informativo.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/383/687/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "fast-api",
+        "llama3",
+        "ollama",
+        "postgresql",
+        "python",
+        "react"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/santi-go-sistema-inteligente-meteorologica-tiempo-real",
+      "name": "Santi & Go - Sistema Inteligente Meteorológica Tiempo Real",
+      "tagline": "Solución tecnológica que optimiza la práctica deportiva al aire libre en regiones con climatología variable como la ciudad de Santiago de Compostela.",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "grafana",
+        "python"
+      ],
+      "repo": "https://github.com/JuanCasasDR/HackUDC_2026.git"
+    },
+    {
+      "url": "https://devpost.com/software/recursos-ia",
+      "name": "Recursos-IA",
+      "tagline": "Proyecto desarrollado de manera independiente a los retos propuestos de este año. Se trata de un monitor de recursos en tiempo real con integración IA para analizar el comportamiento de procesos.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/383/521/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "git",
+        "openai",
+        "python",
+        "qt6",
+        "vscode"
+      ],
+      "repo": "https://github.com/damianlores/recursos-ia_hack26"
+    },
+    {
+      "url": "https://devpost.com/software/traffic-dashboard-grafana",
+      "name": "Traffic Dashboard Grafana",
+      "tagline": "Our project is based on a heatmap that shows the Galician accidents, showing the accident hottspots and the University Hospitals and principal PACs from Galicia.",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "flask",
+        "grafana",
+        "ngrok",
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/digital-brain-4jp7t2",
+      "name": "Digital Brain",
+      "tagline": "Captura ideas, la IA las organiza.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/383/401/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "api",
+        "java",
+        "python"
+      ],
+      "repo": "https://github.com/hugueteprogrammer/HackUDC.git"
+    },
+    {
+      "url": "https://devpost.com/software/faind",
+      "name": "fAInd",
+      "tagline": "Una aplicación web basada en la búsqueda semántica de documentos locales.",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "css",
+        "javascript",
+        "python",
+        "typescript"
+      ],
+      "repo": "https://github.com/lopezlodeiromartin/scorpions-v1.git"
+    },
+    {
+      "url": "https://devpost.com/software/cerebro-digital",
+      "name": "Cerebro Digital",
+      "tagline": "Hemos desarrollado un 'cerebro digital' capaz de reconvertir un espacio caótico de almacenamiento de anotaciones personales en un espacio ordenado de las mismas para un posterior mejor uso.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/383/365/datas/medium.png",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "api",
+        "datetime",
+        "os",
+        "python",
+        "sqlite",
+        "streamlit"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/indifit-ai",
+      "name": "INDIFIT AI",
+      "tagline": "Proyecto que consiste en un sistema de catálogo automático de productos con IA a partir de una imagen.",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "css3",
+        "faiss",
+        "fastapi",
+        "html5",
+        "javascript",
+        "python",
+        "pytorch"
+      ],
+      "repo": "https://github.com/HugoDConde/INDIFIT_AI"
+    },
+    {
+      "url": "https://devpost.com/software/agroadvisor",
+      "name": "AgroAdvisor",
+      "tagline": "AgroAdvisor turns plain-language questions into instant, data-driven farming decisions with charts. Not a dashboard, a decision engine.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/383/325/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "docker",
+        "fastapi",
+        "html",
+        "python",
+        "skd"
+      ],
+      "repo": "https://github.com/paulaa2/AgroAdvisor"
+    },
+    {
+      "url": "https://devpost.com/software/gatetes",
+      "name": "GateTEXT",
+      "tagline": "En la vida diaria estamos expuestos a miles de estímulos y no sabemos por donde empezar o cómo organizarnos, por ello diseñamos una web donde soltar todos tus enredos y desenmarañar los nudos.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/346/datas/medium.jpg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "css",
+        "flask",
+        "html",
+        "python",
+        "sql",
+        "sqlite",
+        "visual-studio"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/datei",
+      "name": "Datei",
+      "tagline": "Datei es una aplicación web que permite subir archivos, almacenarlos, buscar mediante conceptos clave y obtener resultados relevantes. Queremos facilitar la gestión de documentos de forma intuitiva.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/383/208/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "css",
+        "html",
+        "javascript",
+        "python"
+      ],
+      "repo": "https://github.com/lucspinpa/HackUDC26"
+    },
+    {
+      "url": "https://devpost.com/software/brain-reptrack",
+      "name": "Brain RepTrack",
+      "tagline": "Tu desorden, nuestro orden.",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "chrome-extension-(manifest-v3)",
+        "fastapi",
+        "java",
+        "llama3",
+        "ollama",
+        "postgresql",
+        "pwa",
+        "react",
+        "spring-boot",
+        "typescript",
+        "vite",
+        "whisper"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/remit-o0r34w",
+      "name": "Remit",
+      "tagline": "El único gestor de notas que no morirá ni con tu pereza.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/696/datas/medium.jpeg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "alembic",
+        "chrome",
+        "cloudflare",
+        "docker",
+        "fastapi",
+        "javascript",
+        "jwt",
+        "portainer",
+        "pytest",
+        "python",
+        "react",
+        "sqlite",
+        "sqlmodel",
+        "vite"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/athenapass",
+      "name": "AthenaPass",
+      "tagline": "AthenaPass allows users to store and manage their passwords securely. Employs modern cryptographic practices such as Secure Remote Password for authentication and AES‑GCM for encryption of stored data",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "bash",
+        "css3",
+        "docker",
+        "html5",
+        "python",
+        "typescript"
+      ],
+      "repo": "https://github.com/Rubi960/AthenaPass"
+    },
+    {
+      "url": "https://devpost.com/software/doc-or-who",
+      "name": "Doc or Who",
+      "tagline": "Find the right document with hybrid semantic and keyword search",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/383/207/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "chromadb",
+        "duckdb",
+        "fastapi",
+        "networkx",
+        "next.js",
+        "nltk",
+        "python",
+        "scikit-learn",
+        "sentence-transformers",
+        "spacy",
+        "typescript"
+      ],
+      "repo": "https://github.com/WeihaoLin0830/Doc_or_Who/"
+    },
+    {
+      "url": "https://devpost.com/software/docmind-h5kelc",
+      "name": "Docmind",
+      "tagline": "Toda la documentación de tu empresa, accesible al instante.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/385/627/datas/medium.jpeg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "node.js",
+        "postgresql",
+        "react",
+        "spring"
+      ],
+      "repo": "https://github.com/diegofgomezz/Docmind"
+    },
+    {
+      "url": "https://devpost.com/software/brainer-h6ua4r",
+      "name": "BrAIner",
+      "tagline": "El jarvis de Tony, el Alfred de Bruce. Todo lo que te olvides, estará organizado.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/383/134/datas/medium.jpg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "css",
+        "html",
+        "javascript",
+        "llm",
+        "python"
+      ],
+      "repo": "https://github.com/SergioListe364/HackUDC2026"
+    },
+    {
+      "url": "https://devpost.com/software/doom-espacial",
+      "name": "Doom Espacial",
+      "tagline": "Doom, pero ahora en el espacio.",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "c"
+      ],
+      "repo": "https://github.com/OminosoMago/DoomEspacial"
+    },
+    {
+      "url": "https://devpost.com/software/cryptmypassword",
+      "name": "CryptMyPassword",
+      "tagline": "CryptMyPassword solves the problem of password management and secure generation through several entropies",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "kotlin",
+        "mongodb",
+        "python"
+      ],
+      "repo": "https://github.com/Pablodiz/CryptMyPassword"
+    },
+    {
+      "url": "https://devpost.com/software/sardinas-na-nube",
+      "name": "Sardiñas na nube",
+      "tagline": "Toda tu información corporativa: fresca, accesible y pescada con Inteligencia Artificial.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/931/datas/medium.jpg",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "github",
+        "gorq",
+        "python",
+        "vscode",
+        "vue"
+      ],
+      "repo": "https://github.com/ritapardo/Sardinas_na_nube.git"
+    },
+    {
+      "url": "https://devpost.com/software/peixegalicia-9u7d0s",
+      "name": "ProyectoSubidoPorError",
+      "tagline": "Fue sin querer",
+      "members": 1,
+      "prizes": [],
+      "stack": [
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/reto-denodo-dl9n6s",
+      "name": "Reto Denodo",
+      "tagline": "Agente capaz de toma de decisiones mediante comparaciones.",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "denodo",
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/galiciavixia-5pxi4v",
+      "name": "GaliciaVixía",
+      "tagline": "Alertas de incendios forestais en tempo real, directas ao teu Telegram. Subscríbete á túa zona e recibe avisos cando máis importa.",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "grafana",
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/vault-keys",
+      "name": "Vault Keys",
+      "tagline": "Extension de google que trata de facilitarte la vida con tus contrasenas",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/383/010/datas/medium.png",
+      "members": 1,
+      "prizes": [],
+      "stack": [
+        "html",
+        "javascript",
+        "json"
+      ],
+      "repo": "https://github.com/oscarvazfalagan/ProjectHackUDC"
+    },
+    {
+      "url": "https://devpost.com/software/galaeciametrics",
+      "name": "GalaeciaMetrics",
+      "tagline": "¿Es seguro entrenar hoy? Nuestro IAD traduce en tiempo real el clima de MeteoGalicia en una nota 0-10, mostrándote el mejor deporte, hora y lugar en Grafana con alertas instantáneas.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/382/898/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "aemet",
+        "docker",
+        "grafana",
+        "meteogalica-meteosix",
+        "nginx",
+        "open-meteo",
+        "open-meteo-forecast",
+        "postgresql",
+        "python",
+        "timescaledb"
+      ],
+      "repo": "https://github.com/samuelvazfez/grafana-hackUDC-2026.git"
+    },
+    {
+      "url": "https://devpost.com/software/studystock",
+      "name": "StudyStock",
+      "tagline": "StudyStock is an advanced stock analysis platform designed for the modern trading ecosystem.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/382/874/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "data",
+        "dotenv",
+        "fastapi",
+        "github",
+        "gunicorn",
+        "html",
+        "ia",
+        "json",
+        "logging",
+        "numpy",
+        "os",
+        "pandas",
+        "prophet",
+        "pydanic",
+        "python",
+        "render",
+        "requests",
+        "scikit-learn",
+        "streamlit",
+        "twelve",
+        "typing",
+        "uvicorn"
+      ],
+      "repo": "https://github.com/brunogf3/hack-udc-api"
+    },
+    {
+      "url": "https://devpost.com/software/passeeker",
+      "name": "Passeeker",
+      "tagline": "Un gestor de contraseñas de escritorio centrado en la privacidad que genera claves seguras, detecta filtraciones públicas y almacena credenciales en una bóveda cifrada local.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/382/886/datas/medium.jpeg",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "aes",
+        "css",
+        "html",
+        "javascript",
+        "scrypt",
+        "sqlite"
+      ],
+      "repo": "https://github.com/sergiorodriguezg/HackUDC-Passeeker/tree/master"
+    },
+    {
+      "url": "https://devpost.com/software/muninn",
+      "name": "Muninn",
+      "tagline": "Catch every thought",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "android",
+        "bs4",
+        "chroma",
+        "css",
+        "fastapi",
+        "groq",
+        "html",
+        "http",
+        "javascript",
+        "json",
+        "markdown",
+        "node.js",
+        "pydantic",
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/peixegalicia",
+      "name": "PeixeGalicia",
+      "tagline": "Programa que permite al usuario obtener cierta información sobre el clima en distintos puertos de galicia",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/jugando-doom-en-el-espacio",
+      "name": "Jugando Doom en el Espacio",
+      "tagline": "Hemos seguido el reto de Alén Space de conseguir jugar al Doom a través de una conexión satélite(LEO)-tierra usando diferentes implementaciones.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/385/517/datas/medium.png",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "c",
+        "python"
+      ],
+      "repo": "https://github.com/nmanteiga/Doom-gameplay-on-a-satellite"
+    },
+    {
+      "url": "https://devpost.com/software/g8keeper",
+      "name": "G8KEEPER",
+      "tagline": "A browser extension that safe-keeps, manages and monitors breaches for your passwords in a simple-to-use interface",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/772/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "haveibeenpwnd",
+        "typescript"
+      ],
+      "repo": "https://github.com/HugoVilr/HACKUD_2026/releases/tag/v3.0.0"
+    },
+    {
+      "url": "https://devpost.com/software/grupopixel_hackudc_retoinditex",
+      "name": "grupoPixel_hackUDC_retoInditex",
+      "tagline": "Solve the problem posed by Inditex by creating an AI model that detects the clothes people are wearing.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/385/626/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "html",
+        "python"
+      ],
+      "repo": "https://github.com/mtaibo/grupoPixel_hackUDC_retoInditex/"
+    },
+    {
+      "url": "https://devpost.com/software/filemind-x4b2ia",
+      "name": "FileMind",
+      "tagline": "FileMind is a file manager that ships top search possibilities. Metadata analysis, exhaustive filtering and searching, AI-generated file summaries... Welcome to the next generation of file managers.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/385/155/datas/medium.png",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "fastapi",
+        "postgresql",
+        "python",
+        "react"
+      ],
+      "repo": "https://github.com/RoiCorporation/file-mind"
+    },
+    {
+      "url": "https://devpost.com/software/logicgrant",
+      "name": "LogicGrant",
+      "tagline": "Motor analítico que filtra y clasifica candidatos a becas como MEC mediante modelos GPT-4o y o1. Transforma datos complejos en rankings justificados con visualización en tarjetas.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/712/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "dart",
+        "flutter",
+        "python",
+        "sql",
+        "vql"
+      ],
+      "repo": "https://github.com/minervalago/hack_udc_2026/tree/main"
+    },
+    {
+      "url": "https://devpost.com/software/notify-ifobtz",
+      "name": "Notify.",
+      "tagline": "Ayuda en la organización del día a día",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/557/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "css",
+        "html",
+        "javascript",
+        "python"
+      ],
+      "repo": "https://github.com/moiipaz/hackudc_2026"
+    },
+    {
+      "url": "https://devpost.com/software/flowfy",
+      "name": "FlowFy",
+      "tagline": "¿Pierdes ideas al trabajar? Somos FlowFy. Captura texto, audio o enlaces al instante sin romper tu flujo. Tú vuelcas la información y nuestro sistema la clasifica y estructura visualmente.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/382/675/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "docker",
+        "gemini",
+        "python",
+        "react"
+      ],
+      "repo": "https://github.com/santiago-rey2/H4ck-2026"
+    },
+    {
+      "url": "https://devpost.com/software/cine-taka-toe",
+      "name": "Cine Taka Toe",
+      "tagline": "Cine Taka Toe es un juego inspirado en el Tiki Taka Toe de fútbol, pero llevado al cine: un tablero donde cada casilla representa la intersección entre una condición de fila y una condición de columna",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "completar-tablero",
+        "css3",
+        "html5",
+        "inputs).-css3-?-estilos",
+        "javascript",
+        "marcador-con-localstorage)",
+        "modales",
+        "render-del-tablero-y-llamadas-a-la-api.-the-movie-database-(tmdb)-api-?-busqueda-de-peliculas",
+        "tablero",
+        "tablero-con-cabeceras-tipo-tiki?taka?toe-y-fondo-dinamico-por-turno.-javascript-(vanilla)-?-logica-del-juego-(turnos",
+        "tema-oscuro",
+        "timer-por-turno",
+        "victoria-3-en-raya"
+      ],
+      "repo": "https://github.com/pmudc/Cine-Taka-Toe/"
+    },
+    {
+      "url": "https://devpost.com/software/docknows",
+      "name": "DocKnows",
+      "tagline": "Sube. Busca. Encuentra.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/383/671/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "fastapi",
+        "node.js",
+        "python",
+        "react",
+        "vite"
+      ],
+      "repo": "https://github.com/VictorJoelViejoAlvarez/Hack-UDC-2026-DocKnows.git"
+    },
+    {
+      "url": "https://devpost.com/software/hollywood-studio",
+      "name": "Hollywood Studio",
+      "tagline": "Herramienta que ayuda a las empresas de asesoramiento con la toma de decisión para clientes inversores.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/382/626/datas/medium.png",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "css",
+        "denodoaisdk",
+        "docker",
+        "gemini",
+        "html",
+        "javascript",
+        "kaggle",
+        "python"
+      ],
+      "repo": "https://github.com/HazhelAlvarengaNavas/Hollywood-Studio.git"
+    },
+    {
+      "url": "https://devpost.com/software/swapudc",
+      "name": "SwapUDC",
+      "tagline": "Marketplace bidireccional seguro y exclusivo para la comunidad UDC. Cero estafas. 100% estudiantes.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/446/datas/medium.jpeg",
+      "members": 2,
+      "prizes": [],
+      "stack": [
+        "expo.io",
+        "supabase",
+        "typescript"
+      ],
+      "repo": "https://github.com/mkceta/SwapUDC"
+    },
+    {
+      "url": "https://devpost.com/software/leiranalyzer",
+      "name": "LeirAnalyzer",
+      "tagline": "Un panel avanzado de recomendación de cultivos que fusiona meteorología en tiempo real con IA Generativa, diseñado para ayudar a los agricultores a tomar la mejor decisión de siembra.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/382/600/datas/medium.png",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "groq",
+        "html",
+        "openweathermap-api",
+        "python"
+      ],
+      "repo": "https://github.com/cbauldegaranger-jpg/HackUDC"
+    },
+    {
+      "url": "https://devpost.com/software/devuelto",
+      "name": "Devuelto",
+      "tagline": "Todos hemos perdido algo de valor o sentimental en algún momento: llaves, carteras, teléfonos, documentos. Cuando esto ocurre, la sensación de impotencia es abrumadora. De esta sensación nace Devuelto",
+      "members": 3,
+      "prizes": [],
+      "stack": [
+        "antigravity",
+        "javascript",
+        "react",
+        "vite"
+      ],
+      "repo": "https://github.com/infyago/web-objetos-perdidos"
+    },
+    {
+      "url": "https://devpost.com/software/silledavault",
+      "name": "SilledaVault",
+      "tagline": "Un baúl para almacenar todas tus contraseñas de manera segura, ser notificado en caso de brechas de seguridad y obtener recomendaciones de contraseñas seguras.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/368/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "css3",
+        "html5",
+        "javascript",
+        "python"
+      ],
+      "repo": "https://github.com/manuelcondec/SilledaVault.git"
+    },
+    {
+      "url": "https://devpost.com/software/mousepass",
+      "name": "MousePass",
+      "tagline": "Programa de generación, verificación, almacenamiento y gestión de contraseñas basado en entropía.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/028/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "canvas-api",
+        "css3",
+        "have-i-been-pwned",
+        "html5",
+        "javascript",
+        "web-authentication-api-(webauthn)",
+        "web-crypto-api"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/mindtogether",
+      "name": "MindTogether",
+      "tagline": "MindTogether is a mental health microservices app for journaling, habit tracking, goal setting, and anonymous community support with real-time anonymity controls.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/085/datas/medium.png",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "bootstrap",
+        "consul",
+        "docker",
+        "gnew",
+        "hibernate",
+        "java17",
+        "lombok",
+        "maven",
+        "ollama",
+        "postgresql",
+        "springboot",
+        "springcloudgateway",
+        "vite",
+        "vue"
+      ],
+      "repo": "https://github.com/andrealinarees/mindtogether.git"
+    },
+    {
+      "url": "https://devpost.com/software/safepass-ai",
+      "name": "SafePass AI",
+      "tagline": "Contamos con un gestor de contraseñas que, junto con una clave, nos permitirá acceder a las contraseñas guardadas en cada una de las diferentes aplicaciones y con los diferentes usuarios que tengamos.",
+      "members": 4,
+      "prizes": [],
+      "stack": [
+        "firebase",
+        "html"
+      ]
+    }
+  ]
+}
