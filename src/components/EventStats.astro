@@ -6,6 +6,7 @@ import assetStatsSea from "@/assets/scene/stats-sea.webp";
 import Clock from "@lucide/astro/icons/clock";
 import CodeXml from "@lucide/astro/icons/code-xml";
 import Users from "@lucide/astro/icons/users";
+import RollingNumber from "@/components/RollingNumber.astro";
 import { copy, type Locale } from "@/i18n/copy";
 
 interface Props {
@@ -20,16 +21,11 @@ const sceneSizes =
 
 // One icon per stat, in the same order as `t.stats`.
 const icons = [Users, Clock, CodeXml];
-const reel = Array.from({ length: 30 }, (_, index) => index % 10);
 const stats = t.stats.map(([value, label], index) => {
   return {
     value,
     label,
     Icon: icons[index] ?? Users,
-    characters: [...value].map((character) => ({
-      character,
-      digit: /^\d$/.test(character) ? Number(character) : undefined,
-    })),
   };
 });
 ---
@@ -61,7 +57,7 @@ const stats = t.stats.map(([value, label], index) => {
         style={`--stats-cols: repeat(${stats.length}, minmax(0, 1fr))`}
         data-stats-trigger
       >
-        {stats.map(({ value, label, Icon, characters }) => (
+        {stats.map(({ value, label, Icon }) => (
           <div
             class="flex items-center gap-3 rounded-2xl border border-cream bg-cream/90 px-4 py-2.5 motion-reduce:animate-none sm:flex-col sm:gap-2 sm:px-4 sm:py-5"
             data-stat-card
@@ -82,32 +78,7 @@ const stats = t.stats.map(([value, label], index) => {
                 aria-hidden="true"
                 data-stat-value
               >
-                {characters.map(({ character, digit }) =>
-                  digit === undefined ? (
-                    character
-                  ) : (
-                    <span class="stat-digit">
-                      <span class="stat-digit-static" data-stat-static>
-                        {character}
-                      </span>
-                      <span
-                        class="stat-reel-window"
-                        aria-hidden="true"
-                        data-stat-window
-                      >
-                        <span
-                          class="stat-reel"
-                          data-stat-reel
-                          data-stat-digit={digit}
-                        >
-                          {reel.map((reelDigit) => (
-                            <span class="stat-reel-row">{reelDigit}</span>
-                          ))}
-                        </span>
-                      </span>
-                    </span>
-                  ),
-                )}
+                <RollingNumber value={value} />
               </span>
             </dd>
           </div>
@@ -159,43 +130,6 @@ const stats = t.stats.map(([value, label], index) => {
 </section>
 
 <style>
-  /* Give Safari an explicit, isolated clipping box around every rolling digit. */
-  .stat-digit {
-    position: relative;
-    display: inline-block;
-    height: 1.1em;
-    line-height: 1.1em;
-    vertical-align: baseline;
-  }
-
-  .stat-digit-static {
-    display: block;
-    height: 1.1em;
-    line-height: 1.1em;
-  }
-
-  .stat-reel-window {
-    position: absolute;
-    inset: 0;
-    display: block;
-    overflow: hidden;
-    clip-path: inset(0);
-    visibility: hidden;
-  }
-
-  .stat-reel {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .stat-reel-row {
-    display: block;
-    height: 1.1em;
-    flex: none;
-    line-height: 1.1em;
-    white-space: nowrap;
-  }
-
   /* On desktop the copy starts clear of the tower, measured from page-wrap's */
   /* content edge (80rem max width, clamp(1.25rem, 6vw, 7rem) padding). */
   @media (min-width: 64rem) {
