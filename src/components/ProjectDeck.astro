@@ -188,6 +188,11 @@ const repoLink =
       animation: ticker 80s linear infinite;
     }
 
+    /* Keeps a sideways swipe on the belt from triggering back/forward. */
+    .marquee {
+      overscroll-behavior-x: contain;
+    }
+
     /* Holding a card, or tabbing into one, stops the belt. */
     /* Only keyboard focus counts: a clicked link keeps focus after its new */
     /* tab opens, which would leave the belt stopped on return. */
@@ -209,18 +214,21 @@ const repoLink =
     }
   }
 
-  .deck-card {
+  /* The tilt sits on the card inside the item: the item stays upright, so */
+  /* straightening the card can't move it out from under the pointer, which */
+  /* would drop the hover and tilt it back in a loop. */
+  .deck-card > article {
     rotate: var(--tilt);
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .deck-card {
+    .deck-card > article {
       transition: rotate 600ms var(--ease-out);
     }
 
     /* Picking a card up straightens it. */
-    .deck-card:hover,
-    .deck-card:has(:focus-visible) {
+    .deck-card:hover > article,
+    .deck-card:has(:focus-visible) > article {
       rotate: 0deg;
     }
   }
@@ -250,6 +258,32 @@ const repoLink =
     );
     const staticDigits = Array.from(
       title?.querySelectorAll<HTMLElement>("[data-stat-static]") ?? [],
+    );
+
+    // A sideways trackpad swipe scrubs the belt. The belt is one CSS animation
+    // that loops, so moving its clock moves the cards and still wraps cleanly.
+    // Without motion the strip scrolls natively, so this does nothing.
+    const marquee = document.querySelector<HTMLElement>(".marquee");
+    const track = marquee?.querySelector<HTMLElement>(".marquee-track");
+    marquee?.addEventListener(
+      "wheel",
+      (event) => {
+        if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+        const animation = track?.getAnimations()[0];
+        const duration = Number(
+          animation?.effect?.getComputedTiming().duration,
+        );
+        const half = track ? track.scrollWidth / 2 : 0;
+        if (!animation || !duration || !half) return;
+
+        event.preventDefault();
+        const pixels = event.deltaX * (event.deltaMode === 1 ? 16 : 1);
+        const time = Number(animation.currentTime ?? 0);
+        animation.currentTime =
+          (((time + (pixels * duration) / half) % duration) + duration) %
+          duration;
+      },
+      { passive: false, signal: controller.signal },
     );
 
     if (!title || !reels.length) return;
