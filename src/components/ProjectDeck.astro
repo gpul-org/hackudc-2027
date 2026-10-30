@@ -12,7 +12,7 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
-const count = String(devpost.projects.length);
+const count = String(devpost.total);
 const withCount = (text: string) => text.replaceAll("{count}", count);
 // The title rolls its count in like the stats; the text either side stays put.
 const [titleBefore, titleAfter] = t.projectsTitle.split("{count}");
@@ -22,20 +22,19 @@ const [titleBefore, titleAfter] = t.projectsTitle.split("{count}");
 const shortStack = (stack: string[]) =>
   stack.filter((tag) => tag.length <= 14 && !/[()]/.test(tag)).slice(0, 3);
 
-// Prizes read "Sponsor – Award"; the sponsor is the stamp, the award the subtitle.
-const winners = devpost.projects
-  .filter((project) => project.prizes.length)
-  .map((project, index) => {
-    const [sponsor, award] = project.prizes[0].split(/\s+–\s+/);
-    return {
-      ...project,
-      sponsor,
-      award,
-      stack: shortStack(project.stack),
-      // Alternating tilts, like cards dealt by hand.
-      tilt: [-1.25, 0.75, -0.5, 1, -0.75][index % 5],
-    };
-  });
+// Only winners are synced. Prizes read "Sponsor – Award"; the sponsor is the
+// stamp, the award the subtitle.
+const winners = devpost.projects.map((project, index) => {
+  const [sponsor, award] = project.prizes[0].split(/\s+–\s+/);
+  return {
+    ...project,
+    sponsor,
+    award,
+    stack: shortStack(project.stack),
+    // Alternating tilts, like cards dealt by hand.
+    tilt: [-1.25, 0.75, -0.5, 1, -0.75][index % 5],
+  };
+});
 
 const card =
   "relative flex h-full flex-col overflow-hidden rounded-2xl bg-linear-to-b from-gold-deep to-gold-dark text-cream ring-1 ring-gold/40 ring-inset";
@@ -189,9 +188,9 @@ const repoLink =
       animation: ticker 80s linear infinite;
     }
 
-    /* Holding a card, or tabbing into one, stops the belt. Only keyboard focus
-         counts: a clicked link keeps focus after its new tab opens, which would
-         leave the belt stopped on return. */
+    /* Holding a card, or tabbing into one, stops the belt. */
+    /* Only keyboard focus counts: a clicked link keeps focus after its new */
+    /* tab opens, which would leave the belt stopped on return. */
     .marquee:hover .marquee-track,
     .marquee:has(:focus-visible) .marquee-track {
       animation-play-state: paused;

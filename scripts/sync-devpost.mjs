@@ -1,5 +1,5 @@
-// Pulls last edition's projects from Devpost into src/data/projects-2026.json.
-// Devpost has no public API, so this reads the gallery and project pages. The
+// Pulls last edition's winning projects, and how many were submitted in all,
+// from Devpost into src/data/projects-2026.json. Devpost has no public API, so this reads the gallery and project pages. The
 // output is committed: builds never depend on Devpost being up or unchanged.
 // Run with `pnpm sync:devpost`.
 import { writeFile } from "node:fs/promises";
@@ -102,8 +102,14 @@ for (const [index, project] of projects.entries()) {
   await sleep(delayMs);
 }
 
+// Prizes only show on each project's own page, so every page is read, but
+// only the winners (the ones the site shows) are kept.
+const winners = projects.filter((project) => project.prizes.length);
+
 await writeFile(
   output,
-  `${JSON.stringify({ source: `${hackathon}/project-gallery`, syncedAt: new Date().toISOString().slice(0, 10), projects }, null, 2)}\n`,
+  `${JSON.stringify({ source: `${hackathon}/project-gallery`, syncedAt: new Date().toISOString().slice(0, 10), total: projects.length, projects: winners }, null, 2)}\n`,
 );
-console.log(`Saved ${projects.length} projects to ${output.pathname}`);
+console.log(
+  `Saved ${winners.length} of ${projects.length} projects to ${output.pathname}`,
+);
