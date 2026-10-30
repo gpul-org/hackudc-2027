@@ -193,12 +193,19 @@ const repoLink =
       overscroll-behavior-x: contain;
     }
 
-    /* Holding a card, or tabbing into one, stops the belt. */
-    /* Only keyboard focus counts: a clicked link keeps focus after its new */
-    /* tab opens, which would leave the belt stopped on return. */
-    .marquee:hover .marquee-track,
+    /* Tabbing into a card stops the belt. Only keyboard focus counts: a */
+    /* clicked link keeps focus after its new tab opens, which would leave */
+    /* the belt stopped on return. */
     .marquee:has(:focus-visible) .marquee-track {
       animation-play-state: paused;
+    }
+
+    /* Holding the pointer over a card stops it too. Touch screens keep */
+    /* :hover on whatever was last tapped, so there it never applies. */
+    @media (hover: hover) {
+      .marquee:hover .marquee-track {
+        animation-play-state: paused;
+      }
     }
   }
 
@@ -227,9 +234,14 @@ const repoLink =
     }
 
     /* Picking a card up straightens it. */
-    .deck-card:hover > article,
     .deck-card:has(:focus-visible) > article {
       rotate: 0deg;
+    }
+
+    @media (hover: hover) {
+      .deck-card:hover > article {
+        rotate: 0deg;
+      }
     }
   }
 </style>
