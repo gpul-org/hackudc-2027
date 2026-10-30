@@ -10,16 +10,29 @@ const delayMs = 250;
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const decode = (text) =>
-  text
-    .replace(/<[^>]*>/g, "")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
+const entities = {
+  "&amp;": "&",
+  "&quot;": '"',
+  "&#39;": "'",
+  "&lt;": "<",
+  "&gt;": ">",
+};
+
+// Tags are stripped until none are left, since removing one can join the
+// pieces of another. Entities are then decoded in a single pass, so "&amp;lt;"
+// stays the text "&lt;" instead of turning into "<".
+const decode = (text) => {
+  let plain = text;
+  let previous;
+  do {
+    previous = plain;
+    plain = plain.replace(/<[^>]*>/g, "");
+  } while (plain !== previous);
+  return plain
+    .replace(/&(?:amp|quot|#39|lt|gt);/g, (entity) => entities[entity])
     .replace(/\s+/g, " ")
     .trim();
+};
 
 async function fetchHtml(url) {
   const response = await fetch(url, {
