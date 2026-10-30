@@ -25,6 +25,12 @@ export default defineConfig({
         hostname: "i.ytimg.com",
         pathname: "/vi/sBOCOznVlHM/maxresdefault.jpg",
       },
+      // Project covers synced from Devpost (src/data/projects-2026.json).
+      {
+        protocol: "https",
+        hostname: "d112y698adiu2z.cloudfront.net",
+        pathname: "/photos/production/software_thumbnail_photos/**",
+      },
     ],
   },
 

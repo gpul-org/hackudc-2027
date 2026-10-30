@@ -1,0 +1,379 @@
+---
+import { Image } from "astro:assets";
+import Github from "@/assets/icons/github.svg";
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import Users from "@lucide/astro/icons/users";
+import devpost from "@/data/projects-2026.json";
+import RollingNumber from "@/components/RollingNumber.astro";
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const t = copy[Astro.props.locale];
+const count = String(devpost.total);
+const withCount = (text: string) => text.replaceAll("{count}", count);
+// The title rolls its count in like the stats; the text either side stays put.
+const [titleBefore, titleAfter] = t.projectsTitle.split("{count}");
+
+// Devpost tags are free text; long or compound ones ("denodo-ai-sdk-(rag-&-chatbot")
+// would break the chip row, so only short, plain ones make it onto a card.
+const shortStack = (stack: string[]) =>
+  stack.filter((tag) => tag.length <= 14 && !/[()]/.test(tag)).slice(0, 3);
+
+// Only winners are synced. Prizes read "Sponsor – Award"; the sponsor is the
+// stamp, the award the subtitle.
+const winners = devpost.projects.map((project, index) => {
+  const [sponsor, award] = project.prizes[0].split(/\s+–\s+/);
+  return {
+    ...project,
+    sponsor,
+    award,
+    stack: shortStack(project.stack),
+    // Alternating tilts, like cards dealt by hand.
+    tilt: [-1.25, 0.75, -0.5, 1, -0.75][index % 5],
+  };
+});
+
+const card =
+  "relative flex h-full flex-col overflow-hidden rounded-2xl bg-linear-to-b from-gold-deep to-gold-dark text-cream ring-1 ring-gold/40 ring-inset";
+const stamp =
+  "absolute top-3 left-3 rounded-full bg-gold px-3 py-1.5 text-[0.65rem] leading-none font-black tracking-[0.16em] text-ink uppercase";
+const chip =
+  "shrink-0 rounded-full border border-cream/30 px-2 py-0.5 text-[0.7rem] font-bold text-cream/85";
+const repoLink =
+  "relative z-1 flex size-9 items-center justify-center rounded-full text-cream/85 transition-colors hover:bg-gold hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold";
+---
+
+<!-- Up to 100rem the stickers hanging from the video block reach into the
+     content column, so the heading starts below them. -->
+<div class="page-wrap pb-16 lg:pb-24 lg:max-[100rem]:pt-44" data-project-deck>
+  <div class="flex flex-col gap-6 text-cream lg:flex-row lg:items-end lg:justify-between">
+    <div class="max-w-2xl">
+      <p class="eyebrow text-blue">{t.projectsEyebrow}</p>
+      <h3
+        class="mt-3 font-serif text-3xl leading-none sm:text-4xl lg:text-5xl"
+        data-deck-title
+      >
+        <span class="sr-only">{withCount(t.projectsTitle)}</span>
+        <span aria-hidden="true">
+          {titleBefore}
+          <span class="tabular-nums" data-stat-value>
+            <RollingNumber value={count} />
+          </span>
+          {titleAfter}
+        </span>
+      </h3>
+      <p class="mt-4 text-base leading-relaxed text-cream/80">
+        {t.projectsIntro}
+      </p>
+    </div>
+    <a
+      class="inline-flex shrink-0 items-center gap-2 self-start border-b border-current pb-1.5 text-xs font-black tracking-widest uppercase transition-colors hover:text-blue lg:self-auto"
+      href={devpost.source}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {withCount(t.projectsAll)}
+      <ArrowUpRight class="size-3.5" aria-hidden="true" />
+    </a>
+  </div>
+
+  <!-- The winners pass by on an endless conveyor within the page column. The
+       hand is dealt twice so the loop wraps seamlessly; the copy is hidden
+       from assistive tech and the tab order. The vertical padding leaves room
+       for the tilted corners. -->
+  <div class="marquee mt-8 overflow-hidden py-4 lg:mt-10">
+    <div class="marquee-track flex w-max">
+      {[false, true].map((clone) => (
+        <ul
+          class="flex shrink-0 gap-5 pr-5"
+          aria-label={clone ? undefined : t.projectsList}
+          aria-hidden={clone ? "true" : undefined}
+          inert={clone}
+          data-clone={clone || undefined}
+        >
+          {winners.map((project) => (
+            <li
+              class="deck-card w-[17.5rem] shrink-0 sm:w-80"
+              style={`--tilt: ${project.tilt}deg`}
+            >
+              <article class={card}>
+                <div class="relative aspect-5/2 overflow-hidden bg-gold-dark">
+                  {project.image && (
+                    <Image
+                      class="size-full object-cover"
+                      src={project.image}
+                      alt=""
+                      width={640}
+                      height={427}
+                      widths={[320, 640]}
+                      sizes="20rem"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  <p class={stamp}>{project.sponsor}</p>
+                </div>
+                <div class="flex flex-1 flex-col p-4">
+                  <h4 class="font-serif text-xl leading-none text-balance">
+                    <a
+                      class="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:-outline-offset-4 focus-visible:after:outline-gold"
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {project.name}
+                    </a>
+                  </h4>
+                  {project.award && (
+                    <p class="mt-1.5 text-xs font-extrabold tracking-wide text-gold">
+                      {project.award}
+                    </p>
+                  )}
+                  <p class="mt-2 line-clamp-3 text-sm leading-snug text-cream/90">
+                    {project.tagline}
+                  </p>
+                  <div class="mt-auto flex items-center justify-between gap-3 pt-3">
+                    <ul class="flex min-w-0 gap-1.5 overflow-hidden">
+                      {project.stack.map((tag) => (
+                        <li class={chip}>{tag}</li>
+                      ))}
+                    </ul>
+                    <div class="flex shrink-0 items-center gap-1">
+                      <p class="flex items-center gap-1 text-xs font-bold text-cream/85">
+                        <Users class="size-4" aria-hidden="true" />
+                        <span class="sr-only">{t.projectsTeam}:</span>
+                        {project.members}
+                      </p>
+                      {project.repo && (
+                        <a
+                          class={repoLink}
+                          href={project.repo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${t.projectsCode}: ${project.name}`}
+                        >
+                          <Github class="size-4" aria-hidden="true" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Cards fade in and out at the edges instead of being cut off. */
+  .marquee {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 3rem,
+      #000 calc(100% - 3rem),
+      transparent
+    );
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* `ticker` (global.css) slides the track by half: exactly one hand. */
+    .marquee-track {
+      animation: ticker 80s linear infinite;
+    }
+
+    /* Keeps a sideways swipe on the belt from triggering back/forward. */
+    .marquee {
+      overscroll-behavior-x: contain;
+    }
+
+    /* Tabbing into a card stops the belt. Only keyboard focus counts: a */
+    /* clicked link keeps focus after its new tab opens, which would leave */
+    /* the belt stopped on return. */
+    .marquee:has(:focus-visible) .marquee-track {
+      animation-play-state: paused;
+    }
+
+    /* Holding the pointer over a card stops it too. Touch screens keep */
+    /* :hover on whatever was last tapped, so there it never applies. */
+    @media (hover: hover) {
+      .marquee:hover .marquee-track {
+        animation-play-state: paused;
+      }
+    }
+  }
+
+  /* Without motion it's a single hand to scroll through by hand. */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee {
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    [data-clone] {
+      display: none;
+    }
+  }
+
+  /* The tilt sits on the card inside the item: the item stays upright, so */
+  /* straightening the card can't move it out from under the pointer, which */
+  /* would drop the hover and tilt it back in a loop. */
+  .deck-card > article {
+    rotate: var(--tilt);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .deck-card > article {
+      transition: rotate 600ms var(--ease-out);
+    }
+
+    /* Picking a card up straightens it. */
+    .deck-card:has(:focus-visible) > article {
+      rotate: 0deg;
+    }
+
+    @media (hover: hover) {
+      .deck-card:hover > article {
+        rotate: 0deg;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  let observer: IntersectionObserver | undefined;
+  let controller: AbortController | undefined;
+  let timeline: gsap.core.Timeline | undefined;
+
+  // The project count rolls in once, the first time the title comes into
+  // view, with the same reels and timing as the event stats.
+  document.addEventListener("astro:page-load", () => {
+    observer?.disconnect();
+    timeline?.kill();
+    controller?.abort();
+    controller = new AbortController();
+
+    const title = document.querySelector<HTMLElement>("[data-deck-title]");
+    const reels = Array.from(
+      title?.querySelectorAll<HTMLElement>("[data-stat-reel]") ?? [],
+    );
+    const windows = Array.from(
+      title?.querySelectorAll<HTMLElement>("[data-stat-window]") ?? [],
+    );
+    const staticDigits = Array.from(
+      title?.querySelectorAll<HTMLElement>("[data-stat-static]") ?? [],
+    );
+
+    // A sideways trackpad swipe scrubs the belt. The belt is one CSS animation
+    // that loops, so moving its clock moves the cards and still wraps cleanly.
+    // Without motion the strip scrolls natively, so this does nothing.
+    const marquee = document.querySelector<HTMLElement>(".marquee");
+    const track = marquee?.querySelector<HTMLElement>(".marquee-track");
+    marquee?.addEventListener(
+      "wheel",
+      (event) => {
+        if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+        const animation = track?.getAnimations()[0];
+        const duration = Number(
+          animation?.effect?.getComputedTiming().duration,
+        );
+        const half = track ? track.scrollWidth / 2 : 0;
+        if (!animation || !duration || !half) return;
+
+        event.preventDefault();
+        const pixels = event.deltaX * (event.deltaMode === 1 ? 16 : 1);
+        const time = Number(animation.currentTime ?? 0);
+        animation.currentTime =
+          (((time + (pixels * duration) / half) % duration) + duration) %
+          duration;
+      },
+      { passive: false, signal: controller.signal },
+    );
+
+    if (!title || !reels.length) return;
+
+    const showStaticValue = () => {
+      gsap.set([...reels, ...windows, ...staticDigits], {
+        clearProps: "transform,visibility",
+      });
+    };
+    const clearAnimation = () => {
+      observer?.disconnect();
+      observer = undefined;
+      timeline?.kill();
+      timeline = undefined;
+      showStaticValue();
+    };
+    const motionPreference = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    document.addEventListener("astro:before-swap", clearAnimation, {
+      signal: controller.signal,
+    });
+    motionPreference.addEventListener(
+      "change",
+      () => {
+        if (motionPreference.matches) clearAnimation();
+      },
+      { signal: controller.signal },
+    );
+    document.addEventListener(
+      "visibilitychange",
+      () => {
+        if (!document.hidden) timeline?.progress(1);
+      },
+      { signal: controller.signal },
+    );
+
+    if (motionPreference.matches || !("IntersectionObserver" in window)) return;
+
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        observer?.disconnect();
+        observer = undefined;
+
+        gsap.set(reels, { y: 0 });
+        gsap.set(windows, { visibility: "visible" });
+        gsap.set(staticDigits, { visibility: "hidden" });
+
+        timeline = gsap.timeline({
+          onComplete: () => {
+            showStaticValue();
+            timeline = undefined;
+          },
+        });
+        reels.forEach((reel, digitIndex) => {
+          const digit = Number(reel.dataset.statDigit);
+          const rowHeight =
+            reel.firstElementChild?.getBoundingClientRect().height ?? 0;
+
+          if (!Number.isInteger(digit) || digit < 0 || digit > 9 || !rowHeight)
+            return;
+
+          timeline?.to(
+            reel,
+            {
+              y: -(20 + digit) * rowHeight,
+              duration: 1.35,
+              ease: "power3.out",
+              force3D: false,
+            },
+            0.15 + digitIndex * 0.045,
+          );
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+    );
+    observer.observe(title);
+  });
+</script>

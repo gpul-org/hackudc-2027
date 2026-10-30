@@ -1,0 +1,212 @@
+{
+  "source": "https://hackudc-2026.devpost.com/project-gallery",
+  "syncedAt": "2026-10-30",
+  "total": 119,
+  "projects": [
+    {
+      "url": "https://devpost.com/software/stepcode",
+      "name": "stepcode",
+      "tagline": "Tool for generating static books that feature interactive, step-by-step pseudocode execution.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/383/646/datas/medium.png",
+      "members": 3,
+      "prizes": [
+        "GPUL – Mejor proyecto Open Source"
+      ],
+      "stack": [
+        "css",
+        "html",
+        "javascript",
+        "python"
+      ],
+      "repo": "https://github.com/daniqss/stepcode"
+    },
+    {
+      "url": "https://devpost.com/software/mxnj-inditex-hackudc2026",
+      "name": "MXNJ-inditex-HackUDC2026",
+      "tagline": "Open-source fashion AI that looks at a photo and finds every garment in a 27k-product catalogue — 69.66% Recall@15, zero closed APIs.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/385/538/datas/medium.png",
+      "members": 4,
+      "prizes": [
+        "GPUL – Mejor uso IA Open Source"
+      ],
+      "stack": [
+        "python"
+      ],
+      "repo": "https://github.com/miguelplanas/HackUDC2026?tab=readme-ov-file"
+    },
+    {
+      "url": "https://devpost.com/software/hackhub-fyv4mt",
+      "name": "HackHUB",
+      "tagline": "An hub made for the UDC hackaton where the hackers and the organization have multiple tools to work better and make it easier with QOL features.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/282/datas/medium.jpg",
+      "members": 2,
+      "prizes": [
+        "GPUL – Mejor proyecto de equipo rookie"
+      ],
+      "stack": [
+        "astro",
+        "supabase",
+        "typescript"
+      ],
+      "repo": "https://github.com/abelsrzz/hackudc-2026"
+    },
+    {
+      "url": "https://devpost.com/software/zara-inditex-challenge-street-to-shop",
+      "name": "Zara / Inditex challenge: street-to-shop",
+      "tagline": "Dada una foto de \"bundle\" (outfit, modelo en la calle, campaña de ropa), localizamos cada prenda y buscamos los 15 productos más parecidos del catálogo de Inditex.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/400/037/datas/medium.png",
+      "members": 1,
+      "prizes": [
+        "INDITEX TECH"
+      ],
+      "stack": [
+        "dino",
+        "python",
+        "pytorch",
+        "yolo"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/housekey",
+      "name": "HouseKey",
+      "tagline": "Your vault. Your key. No one else's.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/385/170/datas/medium.png",
+      "members": 2,
+      "prizes": [
+        "GRADIANT"
+      ],
+      "stack": [
+        "aes-256-gcm",
+        "api",
+        "crypto",
+        "ecdh",
+        "ecdsa",
+        "hkdf-sha256",
+        "next.js",
+        "p-256",
+        "pbkdf2",
+        "sql",
+        "supabase",
+        "typescript",
+        "vercel",
+        "web"
+      ],
+      "repo": "https://github.com/BreaGG/HackUDC2026---HouseKey-Vault"
+    },
+    {
+      "url": "https://devpost.com/software/zenith-nrwusl",
+      "name": "Zenith",
+      "tagline": "Capture, organize, activate your digital brain.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/438/datas/medium.png",
+      "members": 3,
+      "prizes": [
+        "KELEA"
+      ],
+      "stack": [
+        "alembic",
+        "css3",
+        "docker",
+        "fastapi",
+        "git",
+        "github",
+        "html5",
+        "javascript",
+        "linux",
+        "postgresql",
+        "pytest",
+        "python",
+        "react",
+        "vite"
+      ],
+      "repo": "https://github.com/Martinhdeez/zenith.git"
+    },
+    {
+      "url": "https://devpost.com/software/caminovivo",
+      "name": "CaminoVivo",
+      "tagline": "CaminoVivo agrega datos meteorológicos, albergues, fuentes de agua, rutas GPS y eventos culturales de fuentes públicas gallegas en una plataforma unificada con visualización interactiva.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/384/066/datas/medium.png",
+      "members": 4,
+      "prizes": [
+        "GRAFANA"
+      ],
+      "stack": [
+        "css",
+        "grafana",
+        "html5",
+        "java",
+        "mysql",
+        "python"
+      ]
+    },
+    {
+      "url": "https://devpost.com/software/bfg-i",
+      "name": "BFG-I",
+      "tagline": "DOOM to the moon.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/383/871/datas/medium.jpeg",
+      "members": 3,
+      "prizes": [
+        "ALÉN SPACE"
+      ],
+      "stack": [
+        "arm-aarch64",
+        "c",
+        "chocolate-doom",
+        "docker",
+        "ffmpeg",
+        "grafana",
+        "h.264",
+        "influxdb",
+        "libx264",
+        "linux",
+        "python",
+        "rtp/udp",
+        "sdl2"
+      ],
+      "repo": "https://github.com/YagoFalgueras/HackUDC-2026"
+    },
+    {
+      "url": "https://devpost.com/software/k2-platform-hackudc-2026",
+      "name": "K2 Platform",
+      "tagline": "K2 Platform is an advanced data orchestration and intelligence hub developed for HackUDC 2026.",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/384/685/datas/medium.png",
+      "members": 4,
+      "prizes": [
+        "DENODO"
+      ],
+      "stack": [
+        "denodo-ai-sdk-(rag-&-chatbot",
+        "denodo-vdp-(virtual-data-port)",
+        "docker",
+        "fastapi-(python-3.12)",
+        "grafana",
+        "javascript",
+        "nix",
+        "node.js",
+        "react-19-(vite)",
+        "sqlite",
+        "tailwind-css",
+        "vql"
+      ],
+      "repo": "https://github.com/InnovateXYZ/HackUDC2026"
+    },
+    {
+      "url": "https://devpost.com/software/grimorie",
+      "name": "Grimorie",
+      "tagline": "Grimorie: Organiza tus archivos de una forma mágica",
+      "image": "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/382/238/datas/medium.png",
+      "members": 4,
+      "prizes": [
+        "MERLÍN SOFTWARE"
+      ],
+      "stack": [
+        "css",
+        "elastic-search",
+        "html5",
+        "javascript",
+        "python",
+        "react"
+      ],
+      "repo": "https://github.com/Yupikaiyi/Grimoirev2"
+    }
+  ]
+}

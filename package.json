@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "sync:devpost": "node scripts/sync-devpost.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.6",

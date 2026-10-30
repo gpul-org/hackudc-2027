@@ -12,6 +12,10 @@
   --color-black: #000000;
   /* Reserved accent: step numbers and markers on the HowTo ink panel. */
   --color-yellow: #f5dc8f;
+  /* HackUDC 2026 gold (from its stickers), plus deep tones that hold white text. */
+  --color-gold: #fed233;
+  --color-gold-deep: #8a6810;
+  --color-gold-dark: #5c4508;
 
   --font-sans:
     var(--font-inter, Inter), ui-sans-serif, system-ui, -apple-system,

@@ -67,6 +67,14 @@ export type Copy = {
   videoPlay: string;
   videoSound: string;
   videoPause: string;
+  projectsEyebrow: string;
+  // `{count}` is the number of projects submitted to Devpost.
+  projectsTitle: string;
+  projectsIntro: string;
+  projectsList: string;
+  projectsTeam: string;
+  projectsCode: string;
+  projectsAll: string;
   stepsTitle: string;
   steps: [string, string, string][];
   sponsorsTitle: string;
@@ -275,6 +283,13 @@ export const copy: Record<Locale, Copy> = {
     videoPlay: "Reproducir el aftermovie",
     videoSound: "Sonido",
     videoPause: "Pausar",
+    projectsEyebrow: "Proyectos 2026",
+    projectsTitle: "{count} proyectos en 36 horas.",
+    projectsIntro: "Estos son los premiados, detrás hay muchos más.",
+    projectsList: "Proyectos premiados en HackUDC 2026",
+    projectsTeam: "Equipo",
+    projectsCode: "Código",
+    projectsAll: "Ver todos en Devpost",
     stepsTitle: "Tu próximo proyecto empieza aquí.",
     steps: [
       [
@@ -599,6 +614,13 @@ export const copy: Record<Locale, Copy> = {
     videoPlay: "Play the aftermovie",
     videoSound: "Sound",
     videoPause: "Pause",
+    projectsEyebrow: "2026 projects",
+    projectsTitle: "{count} projects in 36 hours.",
+    projectsIntro: "These are the winners, there are many more behind them.",
+    projectsList: "Winning projects at HackUDC 2026",
+    projectsTeam: "Team",
+    projectsCode: "Code",
+    projectsAll: "See all on Devpost",
     stepsTitle: "Your next project starts here.",
     steps: [
       [
@@ -935,6 +957,13 @@ export const copy: Record<Locale, Copy> = {
     videoPlay: "Reproducir o aftermovie",
     videoSound: "Son",
     videoPause: "Pausar",
+    projectsEyebrow: "Proxectos 2026",
+    projectsTitle: "{count} proxectos en 36 horas.",
+    projectsIntro: "Estes son os premiados, detrás hai moitos máis.",
+    projectsList: "Proxectos premiados en HackUDC 2026",
+    projectsTeam: "Equipo",
+    projectsCode: "Código",
+    projectsAll: "Ver todos en Devpost",
     stepsTitle: "O teu próximo proxecto comeza aquí.",
     steps: [
       [

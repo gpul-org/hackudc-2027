@@ -10,6 +10,7 @@ import Pause from "@lucide/astro/icons/pause";
 import Play from "@lucide/astro/icons/play";
 import Volume2 from "@lucide/astro/icons/volume-2";
 import VolumeX from "@lucide/astro/icons/volume-x";
+import ProjectDeck from "@/components/ProjectDeck.astro";
 import { copy, type Locale } from "@/i18n/copy";
 
 interface Props {
@@ -45,23 +46,24 @@ const logo = {
   width: 600,
   height: 520,
 };
-// The code sticker is drawn upright, so it needs ~90deg to read level.
+// The code sticker is drawn upright, so it needs ~90deg to read level. Every
+// sticker stays whole inside the section, scroll drift (±14px) included.
 const stickers = [
   {
     ...event,
     class:
-      "top-2 -right-16 w-60 rotate-6 sm:w-80 lg:top-[3%] lg:-right-24 lg:w-[34rem]",
+      "top-6 right-2 w-60 rotate-6 sm:w-80 lg:top-12 lg:right-4 lg:w-[30rem]",
   },
-  // Big and sunk into the bottom edge, so only its upper ~60% shows.
+  // The bottom ones hang past the video block and carry on into the projects.
   {
     ...gpul,
     class:
-      "-bottom-14 -left-6 w-36 -rotate-6 sm:w-44 lg:-bottom-28 lg:left-[3%] lg:w-72",
+      "bottom-2 left-2 w-32 -rotate-6 sm:w-40 lg:-bottom-20 lg:left-[1%] lg:w-48",
   },
   {
     ...lanyard,
     class:
-      "right-4 -bottom-12 w-24 -rotate-6 sm:w-32 lg:right-[6%] lg:-bottom-14 lg:w-52",
+      "right-4 bottom-2 w-20 -rotate-6 sm:w-28 lg:right-[1.5%] lg:-bottom-36 lg:w-44",
   },
   // Some tuck behind the card's edges so it looks stuck on top of them.
   {
@@ -78,154 +80,205 @@ const stickers = [
   },
   {
     ...code,
-    class: "top-[54%] left-[4%] hidden w-24 rotate-[96deg] lg:block",
+    class: "top-[54%] left-[6%] hidden w-24 rotate-[96deg] lg:block",
   },
   {
     ...code,
     class: "top-[46%] right-[3%] hidden w-16 rotate-[84deg] lg:block",
   },
 ];
+// Behind the projects they only show in the gaps: above the heading and in
+// the strip under the cards. The top one sits high enough to clear the
+// Devpost link on wide screens, where the link moves under it.
+const deckStickers = [
+  {
+    ...logo,
+    class: "-top-10 left-[60%] hidden w-28 rotate-[14deg] lg:block",
+  },
+  {
+    ...logo,
+    class: "bottom-8 left-[6%] hidden w-24 -rotate-12 lg:block",
+  },
+  {
+    ...code,
+    class: "bottom-0 left-[36%] hidden w-12 rotate-[84deg] lg:block",
+  },
+  {
+    ...event,
+    class: "right-4 bottom-8 w-44 -rotate-3 sm:w-56 lg:right-[8%] lg:w-72",
+  },
+];
+const stickerImage =
+  "absolute max-w-none scale-75 opacity-0 transition-[opacity,scale] duration-700 ease-out group-data-visible/stickers:scale-100 group-data-visible/stickers:opacity-100 motion-reduce:transition-none";
 const controlButton =
   "flex size-11 cursor-pointer items-center justify-center rounded-full bg-cream/15 text-cream backdrop-blur-sm transition-colors hover:bg-cream hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream";
 ---
 
 <section
-  class="experience relative min-h-[160px] overflow-clip bg-ink py-16 lg:py-24"
+  class="relative overflow-clip bg-ink"
   id="experience"
   aria-labelledby="experience-title"
 >
-  <!-- The stickers pop in one by one when the section scrolls into view (the
+  <!-- The video block keeps its own scroll timeline, so the card's scroll
+       animation is unaffected by the deck below it. -->
+  <div class="experience relative min-h-[160px] py-16 lg:py-24">
+    <!-- The stickers pop in one by one when the section scrolls into view (the
        shared reveal observer sets `data-visible`). Only opacity and scale
        animate: `translate` belongs to the scroll drift. -->
-  <div
-    class="group/stickers pointer-events-none absolute inset-0"
-    aria-hidden="true"
-    data-reveal
-  >
-    {stickers.map((sticker, index) => (
-      <Image
-        class={`absolute max-w-none scale-75 opacity-0 transition-[opacity,scale] duration-700 ease-out group-data-visible/stickers:scale-100 group-data-visible/stickers:opacity-100 motion-reduce:transition-none ${sticker.class}`}
-        style={`transition-delay: ${index * 180}ms`}
-        src={sticker.src}
-        widths={
-          typeof sticker.src === "string" ? undefined : [128, 256, 416, 539]
-        }
-        sizes="(min-width: 1024px) 208px, (min-width: 640px) 128px, 96px"
-        alt=""
-        width={sticker.width}
-        height={sticker.height}
-        loading="lazy"
-        decoding="async"
-        data-scroll-drift
-      />
-    ))}
-  </div>
+    <div
+      class="group/stickers pointer-events-none absolute inset-0"
+      aria-hidden="true"
+      data-reveal
+    >
+      {stickers.map((sticker, index) => (
+        <Image
+          class={`${stickerImage} ${sticker.class}`}
+          style={`transition-delay: ${index * 180}ms`}
+          src={sticker.src}
+          widths={
+            typeof sticker.src === "string" ? undefined : [128, 256, 416, 539]
+          }
+          sizes="(min-width: 1024px) 208px, (min-width: 640px) 128px, 96px"
+          alt=""
+          width={sticker.width}
+          height={sticker.height}
+          loading="lazy"
+          decoding="async"
+          data-scroll-drift
+        />
+      ))}
+    </div>
 
-  <!-- Same padding as About. On desktop the card is centred in a block that
+    <!-- Same padding as About. On desktop the card is centred in a block that
        fills the rest of the screen, so the section is exactly one screen tall. -->
-  <div class="relative flex flex-col justify-center lg:min-h-[calc(100svh-12rem)]">
-    <div class="page-wrap">
-      <div
-        class="group/card relative"
-        data-aftermovie
-        data-embed={aftermovieEmbed}
-        data-full={aftermovieUrl}
-        data-full-label={`${t.videoCta}: ${t.aftermovie}`}
-        data-title={`${t.aftermovie} (YouTube)`}
-      >
-        <!-- Above the card on phones and tablets; laid over its foot on desktop,
+    <div class="relative flex flex-col justify-center lg:min-h-[calc(100svh-12rem)]">
+      <div class="page-wrap">
+        <div
+          class="group/card relative"
+          data-aftermovie
+          data-embed={aftermovieEmbed}
+          data-full={aftermovieUrl}
+          data-full-label={`${t.videoCta}: ${t.aftermovie}`}
+          data-title={`${t.aftermovie} (YouTube)`}
+        >
+          <!-- Above the card on phones and tablets; laid over its foot on desktop,
              stacked above the card that follows it. -->
-        <div class="experience-overlay mb-10 text-cream lg:pointer-events-none lg:absolute lg:inset-x-0 lg:bottom-0 lg:z-1 lg:mb-0 lg:flex lg:items-end lg:justify-between lg:gap-8 lg:p-10">
-          <div>
-            <p class="eyebrow text-blue">{t.aftermovie}</p>
-            <h2
-              class="mt-3 display-heading lg:max-w-[14ch]"
-              id="experience-title"
-            >
-              {t.experienceTitle}
-            </h2>
-            <a
-              class="pointer-events-auto mt-5 inline-flex items-center gap-2 border-b border-current pb-1.5 text-xs font-black tracking-widest uppercase transition-colors hover:text-blue"
-              href={aftermovieUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t.videoCta}
-              <ArrowUpRight class="size-3.5" aria-hidden="true" />
-            </a>
+          <div class="experience-overlay mb-10 text-cream lg:pointer-events-none lg:absolute lg:inset-x-0 lg:bottom-0 lg:z-1 lg:mb-0 lg:flex lg:items-end lg:justify-between lg:gap-8 lg:p-10">
+            <div>
+              <p class="eyebrow text-blue">{t.aftermovie}</p>
+              <h2
+                class="mt-3 display-heading lg:max-w-[14ch]"
+                id="experience-title"
+              >
+                {t.experienceTitle}
+              </h2>
+              <a
+                class="pointer-events-auto mt-5 inline-flex items-center gap-2 border-b border-current pb-1.5 text-xs font-black tracking-widest uppercase transition-colors hover:text-blue"
+                href={aftermovieUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.videoCta}
+                <ArrowUpRight class="size-3.5" aria-hidden="true" />
+              </a>
+            </div>
+
+            <!-- Desktop only, while playing; phones and tablets get YouTube's controls. -->
+            <div class="pointer-events-auto hidden gap-3 lg:group-data-playing/card:flex">
+              <button
+                class={`group/sound ${controlButton}`}
+                type="button"
+                aria-label={t.videoSound}
+                aria-pressed="false"
+                data-aftermovie-sound
+              >
+                <VolumeX
+                  class="size-5 group-aria-pressed/sound:hidden"
+                  aria-hidden="true"
+                />
+                <Volume2
+                  class="hidden size-5 group-aria-pressed/sound:block"
+                  aria-hidden="true"
+                />
+              </button>
+              <button
+                class={controlButton}
+                type="button"
+                aria-label={t.videoPause}
+                data-aftermovie-pause
+              >
+                <Pause class="size-5 fill-current" aria-hidden="true" />
+              </button>
+            </div>
           </div>
 
-          <!-- Desktop only, while playing; phones and tablets get YouTube's controls. -->
-          <div class="pointer-events-auto hidden gap-3 lg:group-data-playing/card:flex">
-            <button
-              class={`group/sound ${controlButton}`}
-              type="button"
-              aria-label={t.videoSound}
-              aria-pressed="false"
-              data-aftermovie-sound
-            >
-              <VolumeX
-                class="size-5 group-aria-pressed/sound:hidden"
-                aria-hidden="true"
-              />
-              <Volume2
-                class="hidden size-5 group-aria-pressed/sound:block"
-                aria-hidden="true"
-              />
-            </button>
-            <button
-              class={controlButton}
-              type="button"
-              aria-label={t.videoPause}
-              data-aftermovie-pause
-            >
-              <Pause class="size-5 fill-current" aria-hidden="true" />
-            </button>
-          </div>
-        </div>
-
-        <!-- Full content width, like About, at the video's own 16:9. On short
+          <!-- Full content width, like About, at the video's own 16:9. On short
              desktop screens the height is capped instead, so the card turns
              wider and the video crops to fill it. The player is prepended here
              once the card is on screen, so it sits under the thumbnail. The
              border is drawn on top (::after) so no sub-pixel gap between it and
              the video can let the dark background show through. -->
-        <div
-          class="experience-card relative aspect-video w-full overflow-hidden rounded-2xl bg-ink @container-size after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border-2 after:border-blue/60 lg:max-h-[calc(100svh-12rem)] lg:rounded-3xl"
-          data-aftermovie-card
-        >
-          <!-- Covers the player until it plays (and, on desktop, whenever it
-               stops), so YouTube's own UI never shows through. -->
-          <button
-            class="group absolute inset-0 size-full cursor-pointer transition-opacity duration-500 group-data-playing/card:pointer-events-none group-data-playing/card:opacity-0 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-cream motion-reduce:transition-none"
-            type="button"
-            aria-label={t.videoPlay}
-            data-aftermovie-play
+          <div
+            class="experience-card relative aspect-video w-full overflow-hidden rounded-2xl bg-ink @container-size after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border-2 after:border-blue/60 lg:max-h-[calc(100svh-12rem)] lg:rounded-3xl"
+            data-aftermovie-card
           >
-            <Image
-              class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none"
-              src={aftermovieThumb}
-              widths={[480, 800, 1280]}
-              sizes="(min-width: 1280px) 1056px, 88vw"
-              alt=""
-              width="1280"
-              height="720"
-              loading="lazy"
-              decoding="async"
-            />
-            <span
-              class="absolute top-1/2 left-1/2 flex size-16 -translate-1/2 items-center justify-center rounded-full bg-cream text-ink transition-[scale,background-color,color] duration-200 ease-out group-hover:scale-110 group-hover:bg-red group-hover:text-cream motion-reduce:transition-none sm:size-20 lg:size-24"
-              aria-hidden="true"
+            <!-- Covers the player until it plays (and, on desktop, whenever it
+               stops), so YouTube's own UI never shows through. -->
+            <button
+              class="group absolute inset-0 size-full cursor-pointer transition-opacity duration-500 group-data-playing/card:pointer-events-none group-data-playing/card:opacity-0 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-cream motion-reduce:transition-none"
+              type="button"
+              aria-label={t.videoPlay}
+              data-aftermovie-play
             >
-              <Play class="size-6 translate-x-0.5 fill-current lg:size-8" />
-            </span>
-          </button>
+              <Image
+                class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none"
+                src={aftermovieThumb}
+                widths={[480, 800, 1280]}
+                sizes="(min-width: 1280px) 1056px, 88vw"
+                alt=""
+                width="1280"
+                height="720"
+                loading="lazy"
+                decoding="async"
+              />
+              <span
+                class="absolute top-1/2 left-1/2 flex size-16 -translate-1/2 items-center justify-center rounded-full bg-cream text-ink transition-[scale,background-color,color] duration-200 ease-out group-hover:scale-110 group-hover:bg-red group-hover:text-cream motion-reduce:transition-none sm:size-20 lg:size-24"
+                aria-hidden="true"
+              >
+                <Play class="size-6 translate-x-0.5 fill-current lg:size-8" />
+              </span>
+            </button>
 
-          <!-- Desktop keeps the title on the video, so it needs a scrim. -->
-          <div class="experience-overlay pointer-events-none absolute inset-0 hidden bg-linear-to-t from-ink/85 via-ink/15 to-transparent lg:block"></div>
+            <!-- Desktop keeps the title on the video, so it needs a scrim. -->
+            <div class="experience-overlay pointer-events-none absolute inset-0 hidden bg-linear-to-t from-ink/85 via-ink/15 to-transparent lg:block"></div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Last year's projects, straight from Devpost, over more stickers. -->
+  <div class="relative">
+    <div
+      class="group/stickers pointer-events-none absolute inset-0"
+      aria-hidden="true"
+      data-reveal
+    >
+      {deckStickers.map((sticker, index) => (
+        <Image
+          class={`${stickerImage} ${sticker.class}`}
+          style={`transition-delay: ${index * 180}ms`}
+          src={sticker.src}
+          alt=""
+          width={sticker.width}
+          height={sticker.height}
+          loading="lazy"
+          decoding="async"
+          data-scroll-drift
+        />
+      ))}
+    </div>
+    <ProjectDeck locale={Astro.props.locale} />
   </div>
 </section>
 

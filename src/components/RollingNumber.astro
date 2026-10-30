@@ -1,0 +1,71 @@
+---
+interface Props {
+  value: string;
+}
+
+// Each digit is a reel of three 0–9 runs, so a roll can spin past a full
+// turn before landing on it. The owner's script drives the reels.
+const reel = Array.from({ length: 30 }, (_, index) => index % 10);
+const characters = [...Astro.props.value].map((character) => ({
+  character,
+  digit: /^\d$/.test(character) ? Number(character) : undefined,
+}));
+---
+
+{characters.map(({ character, digit }) =>
+  digit === undefined ? (
+    character
+  ) : (
+    <span class="stat-digit">
+      <span class="stat-digit-static" data-stat-static>
+        {character}
+      </span>
+      <span class="stat-reel-window" aria-hidden="true" data-stat-window>
+        <span class="stat-reel" data-stat-reel data-stat-digit={digit}>
+          {reel.map((reelDigit) => (
+            <span class="stat-reel-row">{reelDigit}</span>
+          ))}
+        </span>
+      </span>
+    </span>
+  ),
+)}
+
+<style>
+  /* Give Safari an explicit, isolated clipping box around every rolling digit. */
+  .stat-digit {
+    position: relative;
+    display: inline-block;
+    height: 1.1em;
+    line-height: 1.1em;
+    vertical-align: baseline;
+  }
+
+  .stat-digit-static {
+    display: block;
+    height: 1.1em;
+    line-height: 1.1em;
+  }
+
+  .stat-reel-window {
+    position: absolute;
+    inset: 0;
+    display: block;
+    overflow: hidden;
+    clip-path: inset(0);
+    visibility: hidden;
+  }
+
+  .stat-reel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-reel-row {
+    display: block;
+    height: 1.1em;
+    flex: none;
+    line-height: 1.1em;
+    white-space: nowrap;
+  }
+</style>
