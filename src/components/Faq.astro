@@ -14,20 +14,27 @@ const columns = [questions.slice(0, midpoint), questions.slice(midpoint)];
 // Answers may carry Markdown-style links: [label](href).
 const creditsPolicyUrl =
   "https://sede.udc.gal/services/electronic_board/EXP2026/006159/document?documentCsv=DJ01GM3IEGSLN3U132D9497H&logicalId=0405c945-9fe6-4cc2-a94f-250a0dac40c6";
-const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
+const uscAulaProfesionalUrl =
+  "https://www.usc.gal/gl/centro/escola-tecnica-superior-enxenaria/aula-profesional";
+// Answers support `[label](href)` links and `**bold**`, plain strong like the terms in the Markdown pages.
+const tokenPattern = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*/g;
+type AnswerPart = string | { label: string; href: string } | { bold: string };
 const parseAnswer = (answer: string) => {
   answer = answer.replaceAll(
     "{manifestoUrl}",
     getRelativeLocaleUrl(Astro.props.locale, "manifesto"),
   );
   answer = answer.replaceAll("{creditsPolicyUrl}", creditsPolicyUrl);
-  const parts: (string | { label: string; href: string })[] = [];
+  answer = answer.replaceAll("{uscAulaProfesionalUrl}", uscAulaProfesionalUrl);
+  const parts: AnswerPart[] = [];
   let end = 0;
-  for (const match of answer.matchAll(linkPattern)) {
-    parts.push(answer.slice(end, match.index), {
-      label: match[1],
-      href: match[2],
-    });
+  for (const match of answer.matchAll(tokenPattern)) {
+    parts.push(
+      answer.slice(end, match.index),
+      match[3] === undefined
+        ? { label: match[1], href: match[2] }
+        : { bold: match[3] },
+    );
     end = match.index + match[0].length;
   }
   return [...parts, answer.slice(end)];
@@ -77,6 +84,8 @@ const parseAnswer = (answer: string) => {
                     {parseAnswer(paragraph).map((part) =>
                       typeof part === "string" ? (
                         part
+                      ) : "bold" in part ? (
+                        <strong>{part.bold}</strong>
                       ) : (
                         <a
                           class="whitespace-nowrap underline decoration-1 underline-offset-4 transition-colors hover:text-red"
