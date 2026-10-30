@@ -47,8 +47,12 @@ const repoLink =
 ---
 
 <!-- Up to 100rem the stickers hanging from the video block reach into the
-     content column, so the heading starts below them. -->
-<div class="page-wrap pb-16 lg:pb-24 lg:max-[100rem]:pt-44" data-project-deck>
+     content column, so the heading starts below them. Below desktop they sit
+     just above it, so it gets some room of its own. -->
+<div
+  class="page-wrap pb-16 max-lg:pt-12 lg:pb-24 lg:max-[100rem]:pt-44"
+  data-project-deck
+>
   <div class="flex flex-col gap-6 text-cream lg:flex-row lg:items-end lg:justify-between">
     <div class="max-w-2xl">
       <p class="eyebrow text-blue">{t.projectsEyebrow}</p>

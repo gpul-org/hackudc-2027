@@ -121,7 +121,9 @@ const controlButton =
 >
   <!-- The video block keeps its own scroll timeline, so the card's scroll
        animation is unaffected by the deck below it. -->
-  <div class="experience relative min-h-[160px] py-16 lg:py-24">
+  <!-- Below desktop the bottom stickers hang just below the card, tucked a
+       little under its edge, and the bottom padding makes room for them. -->
+  <div class="experience relative min-h-[160px] pt-16 pb-28 sm:pb-40 lg:py-24">
     <!-- The stickers pop in one by one when the section scrolls into view (the
        shared reveal observer sets `data-visible`). Only opacity and scale
        animate: `translate` belongs to the scroll drift. -->
