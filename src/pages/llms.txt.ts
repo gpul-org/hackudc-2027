@@ -16,11 +16,11 @@ ${t.organizationFaq.map(([question, answer]) => `### ${question}\n\n${answer.rep
 
 ## HackUDC 2027
 
-${t.faq[0][1]} ${t.waitlistShort}: ${getAbsoluteLocaleUrl("en", "")}
+${t.faq[0][1]} ${t.signupShort}: https://os.hackudc.com/signup?next=%2Fmy-applications%2F1
 
 ## Official sources
 
-- [English website](${getAbsoluteLocaleUrl("en", "")}): Event information, waitlist and frequently asked questions.
+- [English website](${getAbsoluteLocaleUrl("en", "")}): Event information, applications and frequently asked questions.
 - [Spanish website](${getAbsoluteLocaleUrl("es", "")}): Información del evento en español.
 - [Galician website](${getAbsoluteLocaleUrl("gl", "")}): Información do evento en galego.
 - [Manifesto](${getAbsoluteLocaleUrl("en", "manifesto")}): Organization and guiding principles.

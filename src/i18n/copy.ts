@@ -49,9 +49,9 @@ export type Copy = {
   edition: string;
   title: string;
   eventDates: string;
-  waitlist: string;
+  signup: string;
   login: string;
-  waitlistShort: string;
+  signupShort: string;
   sponsor: string;
   marquee: string;
   aboutLabel: string;
@@ -236,7 +236,7 @@ export const copy: Record<Locale, Copy> = {
     },
     legalContents: "En esta página",
     homeDescription:
-      "HackUDC: hackathon de software libre de 36 horas en A Coruña, organizado por GPUL y hecho posible gracias a sus patrocinadores. Del 26 al 28 de febrero de 2027. Lista de espera para 2027 abierta.",
+      "HackUDC: hackathon de software libre de 36 horas en A Coruña, organizado por GPUL y hecho posible gracias a sus patrocinadores. Del 26 al 28 de febrero de 2027. Inscripciones abiertas.",
     primaryPhotoAlt:
       "Foto de grupo de participantes y organización de HackUDC 2026 en el auditorio de la FIC.",
     organizationIntro:
@@ -256,11 +256,11 @@ export const copy: Record<Locale, Copy> = {
     edition: "5ª EDICIÓN",
     title: "Hackea el futuro desde Galicia.",
     eventDates: "26–28 de febrero de 2027",
-    waitlist: "Apúntate a la lista de espera",
+    signup: "Inscríbete",
     login: "Entrar en hackOS",
-    waitlistShort: "Lista de espera",
+    signupShort: "Inscríbete",
     sponsor: "Patrocinar",
-    marquee: "LISTA DE ESPERA ABIERTA · ÚNETE AHORA · HACKUDC27 · ",
+    marquee: "INSCRIPCIONES ABIERTAS · ÚNETE AHORA · HACKUDC27 · ",
     aboutLabel: "HACK + MARATÓN",
     aboutTitle: "¿Qué es HackUDC?",
     aboutBody: [
@@ -567,7 +567,7 @@ export const copy: Record<Locale, Copy> = {
     },
     legalContents: "On this page",
     homeDescription:
-      "HackUDC: a free-software hackathon in A Coruña. Organized by GPUL and made possible by its sponsors. 36 hours of building. 26–28 February 2027. Join the 2027 waitlist.",
+      "HackUDC: a free-software hackathon in A Coruña. Organized by GPUL and made possible by its sponsors. 36 hours of building. 26–28 February 2027. Registration is open.",
     primaryPhotoAlt:
       "Group photo of HackUDC 2026 participants and organizers in the FIC auditorium.",
     organizationIntro:
@@ -587,11 +587,11 @@ export const copy: Record<Locale, Copy> = {
     edition: "5TH EDITION",
     title: "Hack the future from Galicia.",
     eventDates: "26–28 February 2027",
-    waitlist: "Join the waitlist",
+    signup: "Register",
     login: "Log in to hackOS",
-    waitlistShort: "Waitlist",
+    signupShort: "Register",
     sponsor: "Sponsor",
-    marquee: "WAITLIST NOW OPEN · JOIN US · HACKUDC27 · ",
+    marquee: "REGISTRATION OPEN · JOIN US · HACKUDC27 · ",
     aboutLabel: "HACK + MARATHON",
     aboutTitle: "What is HackUDC?",
     aboutBody: [
@@ -910,7 +910,7 @@ export const copy: Record<Locale, Copy> = {
     },
     legalContents: "Nesta páxina",
     homeDescription:
-      "HackUDC: hackathon de software libre de 36 horas na Coruña, organizado por GPUL e feito posible grazas aos seus patrocinadores. Do 26 ao 28 de febreiro de 2027. Lista de espera para 2027 aberta.",
+      "HackUDC: hackathon de software libre de 36 horas na Coruña, organizado por GPUL e feito posible grazas aos seus patrocinadores. Do 26 ao 28 de febreiro de 2027. Inscricións abertas.",
     primaryPhotoAlt:
       "Foto de grupo de participantes e organización de HackUDC 2026 no auditorio da FIC.",
     organizationIntro:
@@ -930,11 +930,11 @@ export const copy: Record<Locale, Copy> = {
     edition: "5ª EDICIÓN",
     title: "Hackea o futuro desde Galicia.",
     eventDates: "26–28 de febreiro de 2027",
-    waitlist: "Apúntate á lista de espera",
+    signup: "Inscríbete",
     login: "Entrar en hackOS",
-    waitlistShort: "Lista de espera",
+    signupShort: "Inscríbete",
     sponsor: "Patrocinar",
-    marquee: "LISTA DE ESPERA ABERTA · ÚNETE AGORA · HACKUDC27 · ",
+    marquee: "INSCRICIÓNS ABERTAS · ÚNETE AGORA · HACKUDC27 · ",
     aboutLabel: "HACK + MARATÓN",
     aboutTitle: "Que é HackUDC?",
     aboutBody: [
