@@ -244,7 +244,7 @@ export const copy: Record<Locale, Copy> = {
     organizationFaq: [
       [
         "¿Quién hace posible HackUDC?",
-        "Nuestros patrocinadores y colaboradores son el pilar fundamental de HackUDC: gracias a su apoyo, edición tras edición, la participación sigue siendo gratuita. El evento mantiene su independencia y no se organiza en torno a los intereses concretos de ninguna empresa, como explicamos en nuestro [manifiesto]({manifestoUrl}). Sin nuestros maravillosos patrocinadores y colaboradores, HackUDC no sería posible. Agradecemos también a la Facultad de Informática de la Universidade da Coruña que nos ceda los espacios para celebrarlo.",
+        "HackUDC lo organiza el voluntariado de GPUL, una asociación de estudiantes sin ánimo de lucro. El evento se financia con el apoyo de patrocinadores y colaboradores: sin ellos no sería posible y, gracias a ellos, la participación sigue siendo gratuita edición tras edición. A cambio, HackUDC mantiene su independencia y no se organiza en torno a los intereses de ninguna empresa, como explicamos en nuestro [manifiesto]({manifestoUrl}). Gracias también a la Facultad de Informática da Universidade da Coruña por cedernos los espacios.",
       ],
     ],
     errorTitle: "Página no encontrada",
@@ -575,7 +575,7 @@ export const copy: Record<Locale, Copy> = {
     organizationFaq: [
       [
         "Who makes HackUDC possible?",
-        "Our sponsors and collaborators are the foundation of HackUDC: their support keeps participation free, year after year. The event remains independent and is not organized around any individual company’s interests, as we explain in our [manifesto]({manifestoUrl}). HackUDC would not be possible without our wonderful sponsors and collaborators. We also thank the Faculty of Computer Science of the Universidade da Coruña for providing the spaces for the event.",
+        "HackUDC is organized by volunteers from GPUL, a non-profit student association. The event is funded by sponsors and collaborators: it would not be possible without them, and their support keeps participation free edition after edition. In return, HackUDC remains independent and is not organized around any company’s interests, as we explain in our [manifesto]({manifestoUrl}). We also thank the Faculty of Computer Science of the Universidade da Coruña for providing the spaces.",
       ],
     ],
     errorTitle: "Page not found",
@@ -918,7 +918,7 @@ export const copy: Record<Locale, Copy> = {
     organizationFaq: [
       [
         "Quen fai posible HackUDC?",
-        "Os nosos patrocinadores e colaboradores son o piar fundamental de HackUDC: grazas ao seu apoio, edición tras edición, a participación segue sendo gratuíta. O evento mantén a súa independencia e non se organiza arredor dos intereses concretos de ningunha empresa, como explicamos no noso [manifesto]({manifestoUrl}). Sen os nosos marabillosos patrocinadores e colaboradores, HackUDC non sería posible. Agradecemos tamén á Facultade de Informática da Universidade da Coruña que nos ceda os espazos para celebralo.",
+        "HackUDC organízao o voluntariado de GPUL, unha asociación de estudantes sen ánimo de lucro. O evento finánciase co apoio de patrocinadores e colaboradores: sen eles non sería posible e, grazas a eles, a participación segue sendo gratuíta edición tras edición. A cambio, HackUDC mantén a súa independencia e non se organiza arredor dos intereses de ningunha empresa, como explicamos no noso [manifesto]({manifestoUrl}). Grazas tamén á Facultade de Informática da Universidade da Coruña por cedernos os espazos.",
       ],
     ],
     errorTitle: "Páxina non atopada",
