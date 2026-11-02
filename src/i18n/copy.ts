@@ -44,6 +44,7 @@ export type Copy = {
   organizationFaq: [string, string][];
   errorTitle: string;
   errorDescription: string;
+  mlhBadgeAlt: string;
   ogImageAlt: string;
   nav: string[];
   edition: string;
@@ -242,6 +243,7 @@ export const copy: Record<Locale, Copy> = {
     errorTitle: "Página no encontrada",
     errorDescription:
       "Esta página no existe o ha cambiado de dirección. Puedes volver al inicio para seguir explorando HackUDC.",
+    mlhBadgeAlt: "Major League Hacking: temporada de hackathones 2027",
     ogImageAlt:
       "HackUDC 2027, 5ª edición. Programa. Crea. Conecta. 36 horas para construir algo increíble.",
     nav: ["HackUDC", "Participa", "Patrocinadores", "Dudas"],
@@ -566,6 +568,7 @@ export const copy: Record<Locale, Copy> = {
     errorTitle: "Page not found",
     errorDescription:
       "This page does not exist or has moved. Return home to keep exploring HackUDC.",
+    mlhBadgeAlt: "Major League Hacking 2027 Hackathon Season",
     ogImageAlt:
       "HackUDC 2027, 5th edition. Code. Create. Connect. 36 hours to build something amazing.",
     nav: ["HackUDC", "Take part", "Sponsors", "Questions"],
@@ -902,6 +905,7 @@ export const copy: Record<Locale, Copy> = {
     errorTitle: "Páxina non atopada",
     errorDescription:
       "Esta páxina non existe ou cambiou de enderezo. Podes volver ao inicio para seguir explorando HackUDC.",
+    mlhBadgeAlt: "Major League Hacking: tempada de hackathons 2027",
     ogImageAlt:
       "HackUDC 2027, 5ª edición. Programa. Crea. Conecta. 36 horas para construír algo incrible.",
     nav: ["HackUDC", "Participa", "Patrocinadores", "Dúbidas"],
