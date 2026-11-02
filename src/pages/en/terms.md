@@ -53,7 +53,7 @@ A project can be eligible for the general prize and every sponsor prize whose re
 
 ### Rule violations and event changes
 
-If you think someone has broken the competition rules, tell an organizer during the event or write to [hackudc@gpul.org](mailto:hackudc@gpul.org) with what you know and any evidence. We will look into it and hear the team involved before deciding anything, except where urgent safety measures are needed. Conduct problems are handled under the code of conduct.
+If you think someone has broken the competition rules, tell an organizer during the event or write to [hackudc@gpul.org](mailto:hackudc@gpul.org) with what you know and any evidence. We will look into it and hear the team involved before deciding anything, except where urgent safety measures are needed. Conduct problems are handled under the MLH Code of Conduct.
 
 Examples of violations are using someone else's code, misrepresenting your work, exceeding the team size or submitting code written outside the event. We may also disqualify a team for breaking the code of conduct or the spirit of fair play. A confirmed violation can lead to:
 
@@ -70,7 +70,7 @@ By attending the event in person, you declare that you understand and consent to
 
 ### Code of conduct
 
-Everyone at the event, including organizers, volunteers, mentors, judges and sponsors, must follow the [code of conduct]({conductUrl}).
+Everyone at the event, including organizers, volunteers, mentors, judges and sponsors, must follow the [code of conduct]({conductUrl}), which adopts the Major League Hacking (MLH) Code of Conduct.
 
 ## hackOS: using the platform
 

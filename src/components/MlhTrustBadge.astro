@@ -1,0 +1,23 @@
+---
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const t = copy[Astro.props.locale];
+---
+
+<a
+  id="mlh-trust-badge"
+  class="fixed top-0 right-3 z-40 block w-15 sm:right-6 sm:w-20"
+  href="https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2026-season&utm_content=white"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <img
+    class="block h-auto w-full"
+    src="https://logged-assets.s3.amazonaws.com/trust-badge/2027/mlh-trust-badge-2027-white.svg"
+    alt={t.mlhBadgeAlt}
+  />
+</a>

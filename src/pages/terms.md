@@ -53,7 +53,7 @@ Un proyecto puede optar al premio general y a todos los premios de patrocinador 
 
 ### Incumplimientos y cambios del evento
 
-Si crees que alguien ha incumplido las reglas de la competición, díselo a la organización durante el evento o escribe a [hackudc@gpul.org](mailto:hackudc@gpul.org) con lo que sepas y las pruebas que tengas. Lo revisaremos y escucharemos al equipo afectado antes de decidir nada, salvo que sean necesarias medidas urgentes de seguridad. Los problemas de conducta se tratan según el código de conducta.
+Si crees que alguien ha incumplido las reglas de la competición, díselo a la organización durante el evento o escribe a [hackudc@gpul.org](mailto:hackudc@gpul.org) con lo que sepas y las pruebas que tengas. Lo revisaremos y escucharemos al equipo afectado antes de decidir nada, salvo que sean necesarias medidas urgentes de seguridad. Los problemas de conducta se tratan según el código de conducta de MLH.
 
 Son ejemplos de incumplimiento usar código ajeno, falsear tu trabajo, superar el tamaño máximo de equipo o entregar código escrito fuera del evento. También podemos descalificar a un equipo por incumplir el código de conducta o el espíritu de juego limpio. Un incumplimiento acreditado puede suponer:
 
@@ -70,7 +70,7 @@ Al asistir presencialmente al evento, declaras que entiendes y consientes que la
 
 ### Código de conducta
 
-Todas las personas que estén en el evento, incluida la organización, el voluntariado, los mentores, el jurado y los patrocinadores, deben respetar el [código de conducta]({conductUrl}).
+Todas las personas que estén en el evento, incluida la organización, el voluntariado, los mentores, el jurado y los patrocinadores, deben respetar el [código de conducta]({conductUrl}), que adopta el de Major League Hacking (MLH).
 
 ## hackOS: uso de la plataforma
 
