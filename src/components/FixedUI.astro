@@ -10,6 +10,7 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
+const mentorsPageUrl = getRelativeLocaleUrl(Astro.props.locale, "mentors/");
 const sponsorPageUrl = getRelativeLocaleUrl(Astro.props.locale, "sponsors/");
 // The footer lists every network; the floating bar keeps only the main ones.
 const socials = [
@@ -61,6 +62,12 @@ const pill =
     </ul>
   </nav>
   <div class="ml-auto flex gap-2">
+    <a
+      class={`${pill} hidden bg-cream text-ink ring-1 ring-ink/20 hover:bg-blue lg:inline-flex`}
+      href={mentorsPageUrl}
+    >
+      {t.mentors.label}
+    </a>
     <a
       class={`${pill} bg-ink text-cream ring-1 ring-cream/40 hover:bg-red`}
       href="https://os.hackudc.com/signup?next=%2Fmy-applications%2F1"
