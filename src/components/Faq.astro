@@ -24,6 +24,10 @@ const parseAnswer = (answer: string) => {
     "{manifestoUrl}",
     getRelativeLocaleUrl(Astro.props.locale, "manifesto"),
   );
+  answer = answer.replaceAll(
+    "{mentorsUrl}",
+    getRelativeLocaleUrl(Astro.props.locale, "mentors/"),
+  );
   answer = answer.replaceAll("{creditsPolicyUrl}", creditsPolicyUrl);
   answer = answer.replaceAll("{uscAulaProfesionalUrl}", uscAulaProfesionalUrl);
   const parts: AnswerPart[] = [];

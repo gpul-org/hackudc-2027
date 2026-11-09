@@ -1,4 +1,5 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { Image } from "astro:assets";
 import assetLogoMobileNavy from "@/assets/brand/logo-mobile-navy.svg?url";
 import assetLogoNavy from "@/assets/brand/logo-navy.svg?url";
@@ -15,10 +16,10 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
-const sponsorPageUrl =
-  Astro.props.locale === "es"
-    ? "/sponsors/"
-    : `/${Astro.props.locale}/sponsors/`;
+const sponsorPageUrl = getRelativeLocaleUrl(Astro.props.locale, "sponsors/");
+const mentorsPageUrl = getRelativeLocaleUrl(Astro.props.locale, "mentors/");
+const heroButton =
+  "cta-plaque min-h-11 w-full animate-hero-enter text-xs motion-reduce:animate-none sm:text-sm lg:w-56 lg:flex-none lg:text-base xl:w-64 xl:text-lg";
 ---
 
 <section
@@ -81,12 +82,12 @@ const sponsorPageUrl =
     </div>
 
     <div
-      class="mt-10 flex w-[min(84vw,24rem)] flex-row items-center gap-2.5 sm:mt-14 sm:w-auto sm:gap-6"
+      class="mt-8 grid w-[min(84vw,28rem)] grid-cols-4 items-center gap-x-3 gap-y-2 sm:mt-10 sm:gap-x-4 sm:gap-y-3 lg:mt-14 lg:flex lg:w-auto lg:gap-6"
       id="signup"
     >
       <a
         style={`background-image: url(${assetButtonPrimary})`}
-        class="cta-plaque animate-hero-enter text-xs text-cream [animation-delay:390ms] motion-reduce:animate-none sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
+        class={`${heroButton} col-span-2 col-start-2 lg:order-2 text-cream [animation-delay:390ms]`}
         href="https://os.hackudc.com/signup?next=%2Fmy-applications%2F1"
         target="_blank"
         rel="noopener noreferrer"
@@ -95,7 +96,14 @@ const sponsorPageUrl =
       </a>
       <a
         style={`background-image: url(${assetButtonSecondary})`}
-        class="cta-plaque animate-hero-enter text-xs text-blue [animation-delay:460ms] motion-reduce:animate-none sm:w-56 sm:flex-none sm:text-base lg:w-64 lg:text-lg"
+        class={`${heroButton} col-span-2 lg:order-1 text-blue [animation-delay:460ms]`}
+        href={mentorsPageUrl}
+      >
+        {t.mentors.label}
+      </a>
+      <a
+        style={`background-image: url(${assetButtonSecondary})`}
+        class={`${heroButton} col-span-2 lg:order-3 text-blue [animation-delay:530ms]`}
         href={sponsorPageUrl}
       >
         {t.sponsor}

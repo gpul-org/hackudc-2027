@@ -1,0 +1,10 @@
+---
+import MentorsPage from "@/components/MentorsPage.astro";
+import Layout from "@/layouts/Layout.astro";
+import { copy } from "@/i18n/copy";
+const t = copy.gl.mentors;
+---
+
+<Layout lang="gl" title={`${t.label} | HackUDC 2027`} description={t.meta}>
+  <MentorsPage locale="gl" />
+</Layout>

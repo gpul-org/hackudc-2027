@@ -1,0 +1,207 @@
+---
+import { Image } from "astro:assets";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import crab from "@/assets/scene/crab-laptop.webp";
+import photo from "@/assets/gallery/conversations.webp";
+import PageHeader from "@/components/PageHeader.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+const t = copy[Astro.props.locale];
+const { locale } = Astro.props;
+const m = t.mentors;
+const eventDetails = m.context.split(" · ");
+const homeUrl = getRelativeLocaleUrl(locale, "");
+const localeUrls: Record<Locale, string> = {
+  es: getRelativeLocaleUrl("es", "mentors/"),
+  en: getRelativeLocaleUrl("en", "mentors/"),
+  gl: getRelativeLocaleUrl("gl", "mentors/"),
+};
+// Match the hacker signup flow while selecting the mentor application.
+const applyUrl = "https://os.hackudc.com/signup?next=%2Fmy-applications%2F2";
+const buttonBase =
+  "inline-flex min-h-12 max-w-full items-center justify-center gap-2.5 rounded-full py-3 ps-6 pe-5.5 text-center text-sm leading-snug font-bold tracking-normal transition-[background-color,transform] duration-150 ease-out active:scale-[0.96] motion-reduce:transform-none motion-reduce:transition-none";
+---
+
+<PageHeader
+  locale={locale}
+  localeUrls={localeUrls}
+  homeUrl={homeUrl}
+  backLabel={t.backHome}
+  backShortLabel={t.backHomeShort}
+/>
+<main id="top">
+  <section id="mentors" aria-labelledby="mentors-title" class="overflow-hidden">
+    <div class="page-wrap grid items-center gap-6 pt-5 pb-10 sm:gap-8 sm:pt-8 sm:pb-16 lg:grid-cols-[1.35fr_1fr] lg:gap-16 lg:pt-14 lg:pb-24">
+      <div class="min-w-0">
+        <h1 id="mentors-title" class="sr-only">
+          {m.label} · HackUDC 2027 — {m.title}
+        </h1>
+        <p
+          aria-hidden="true"
+          class="max-w-[18ch] font-serif text-[clamp(2rem,8.5vw,2.5rem)] leading-[1.08] tracking-[-0.02em] text-balance sm:max-w-[16ch] sm:text-[clamp(2.75rem,5.4vw,5.25rem)] sm:leading-[1.05] sm:tracking-[-0.025em]"
+        >
+          {m.title}
+        </p>
+        <p class="mt-4 max-w-lg text-base leading-relaxed text-pretty sm:mt-6 sm:text-lg">
+          {m.intro}
+        </p>
+        <a
+          class={`${buttonBase} mt-5 bg-ink text-cream hover:bg-red`}
+          href={applyUrl}
+        >
+          {m.cta}
+          <ArrowUpRight
+            class="size-4 shrink-0 text-blue"
+            stroke-width="2"
+            aria-hidden="true"
+          />
+        </a>
+        <ul class="mt-4 flex max-w-lg flex-wrap gap-x-3 gap-y-1 text-xs leading-relaxed sm:mt-6 sm:text-sm">
+          {eventDetails.map((detail) => (
+            <li class="whitespace-nowrap">{detail}</li>
+          ))}
+        </ul>
+      </div>
+      <div
+        class="relative isolate mx-auto flex aspect-square w-40 items-center justify-center sm:w-64 lg:w-full"
+        aria-hidden="true"
+      >
+        <div class="absolute inset-x-2 top-5 bottom-3 -z-10 rotate-3 border-2 border-ink bg-blue sm:inset-x-6"></div>
+        <Image
+          src={crab}
+          alt=""
+          widths={[320, 560, 752]}
+          sizes="(min-width: 1024px) 320px, (min-width: 640px) 205px, 128px"
+          class="h-auto w-4/5 -rotate-3"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="role" aria-labelledby="role-title" class="bg-blue">
+    <div class="page-wrap py-10 sm:py-12 lg:py-20">
+      <div class="grid items-center gap-6 sm:gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+        <div>
+          <h2 id="role-title" class="display-heading max-w-[15ch]">
+            {m.roleTitle}
+          </h2>
+          <p class="mt-4 max-w-lg text-base leading-relaxed text-pretty sm:mt-6 sm:text-lg">
+            {m.roleBody}
+          </p>
+          <p class="mt-3 max-w-lg leading-relaxed text-pretty sm:mt-5">
+            {m.roleNote}
+          </p>
+        </div>
+        <Image
+          src={photo}
+          alt={m.photoAlt}
+          widths={[480, 768, 1100]}
+          sizes="(min-width: 1024px) 45vw, 90vw"
+          class="h-auto w-full border border-ink/20"
+        />
+      </div>
+      <ul class="mt-7 grid gap-6 sm:mt-10 sm:gap-7 border-t border-ink/30 pt-7 lg:mt-14 lg:grid-cols-3 lg:gap-10 lg:pt-9">
+        {m.tasks.map(([title, body]) => (
+          <li>
+            <h3 class="font-serif text-2xl leading-tight tracking-[-0.015em] sm:text-3xl">
+              {title}
+            </h3>
+            <p class="mt-3 max-w-md leading-relaxed text-pretty">{body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section
+    id="why-mentor"
+    aria-labelledby="why-title"
+    class="bg-ink text-cream"
+  >
+    <div class="page-wrap py-12 lg:grid lg:grid-cols-[1fr_1.2fr] lg:gap-16 lg:py-20">
+      <h2 id="why-title" class="display-heading max-w-[12ch]">
+        {m.whyTitle}
+      </h2>
+      <div class="mt-8 lg:mt-0">
+        {m.reasons.map(([title, body]) => (
+          <div class="border-t border-cream/25 py-5 first:border-t-0 first:pt-0">
+            <h3 class="font-serif text-2xl leading-tight tracking-[-0.015em] text-blue">
+              {title}
+            </h3>
+            <p class="mt-2 max-w-lg leading-relaxed">{body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section
+    id="mentor-faq"
+    aria-labelledby="mentor-faq-title"
+    class="page-wrap grid gap-6 py-10 sm:gap-8 sm:py-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16 lg:py-20"
+  >
+    <h2 id="mentor-faq-title" class="display-heading">
+      {m.faqTitle}
+    </h2>
+    <div class="border-b border-ink/20">
+      {m.faq.map(([question, answer]) => (
+        <details class="group border-t border-ink/20 py-5">
+          <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-5 font-serif text-xl leading-tight tracking-[-0.01em] sm:text-2xl [&::-webkit-details-marker]:hidden">
+            {question}
+            <span
+              aria-hidden="true"
+              class="w-6 shrink-0 text-center font-sans text-2xl leading-none text-red group-open:hidden"
+            >
+              +
+            </span>
+            <span
+              aria-hidden="true"
+              class="hidden w-6 shrink-0 text-center font-sans text-2xl leading-none text-red group-open:inline"
+            >
+              −
+            </span>
+          </summary>
+          <p class="mt-4 max-w-xl leading-relaxed">{answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section id="apply" aria-labelledby="apply-title" class="bg-cream text-ink">
+    <div class="page-wrap pt-4 pb-20 sm:pt-6 sm:pb-24 lg:flex lg:items-center lg:justify-between lg:gap-10 lg:pt-8 lg:pb-28">
+      <div>
+        <h2 id="apply-title" class="display-heading max-w-xl">
+          {m.contactTitle}
+        </h2>
+        <p class="mt-4 max-w-md leading-relaxed text-pretty">{m.contactBody}</p>
+      </div>
+      <div class="mt-7 flex shrink-0 flex-col items-start gap-3 lg:mt-0 lg:items-center">
+        <a
+          class={`${buttonBase} bg-ink text-cream hover:bg-red`}
+          href={applyUrl}
+        >
+          {m.cta}
+          <ArrowUpRight
+            class="size-4 shrink-0 text-blue"
+            stroke-width="2"
+            aria-hidden="true"
+          />
+        </a>
+        <a
+          href="mailto:hackudc@gpul.org"
+          class="inline-flex min-h-11 items-center text-sm font-semibold underline underline-offset-4 hover:text-red"
+        >
+          {m.contact}
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+<SiteFooter locale={locale} />

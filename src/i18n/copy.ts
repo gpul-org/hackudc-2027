@@ -1,6 +1,26 @@
 export type Locale = "es" | "en" | "gl";
 
 export type Copy = {
+  mentors: {
+    label: string;
+    meta: string;
+    title: string;
+    intro: string;
+    cta: string;
+    context: string;
+    roleTitle: string;
+    roleBody: string;
+    roleNote: string;
+    photoAlt: string;
+    tasks: [string, string][];
+    whyTitle: string;
+    reasons: [string, string][];
+    faqTitle: string;
+    faq: [string, string][];
+    contactTitle: string;
+    contactBody: string;
+    contact: string;
+  };
   brand: {
     whoTitle: string;
     whoIntro: string;
@@ -118,6 +138,68 @@ export type Copy = {
 
 export const copy: Record<Locale, Copy> = {
   es: {
+    mentors: {
+      label: "Mentores",
+      meta: "Comparte tu experiencia como mentor o mentora en HackUDC 2027. Descubre el rol, la disponibilidad y cómo inscribirte.",
+      title: "Tu ayuda puede ser el comienzo de una gran idea.",
+      intro:
+        "Sé mentor o mentora en HackUDC 2027. Ayuda a los equipos a convertir sus ideas en algo tangible.",
+      cta: "Inscribirme como mentor",
+      context: "26–28 de febrero de 2027 · Facultade de Informática · A Coruña",
+      roleTitle: "Una brújula para el equipo.",
+      roleBody:
+        "Un mentor escucha, resuelve dudas y ayuda a decidir el siguiente paso. Acompañas al equipo; el proyecto lo construyen ellos.",
+      roleNote:
+        "No necesitas saberlo todo. Aporta tu experiencia en desarrollo, diseño, datos, hardware o producto.",
+      photoAlt: "Participantes de HackUDC conversando durante el evento",
+      tasks: [
+        [
+          "Desbloquear",
+          "Ayuda con un error, una API o una herramienta. Explica el camino para que el equipo pueda seguir.",
+        ],
+        [
+          "Dar foco",
+          "Ayuda a elegir qué construir primero y qué dejar fuera del prototipo.",
+        ],
+        [
+          "Acompañar",
+          "Escucha, ofrece feedback y ayuda a preparar una presentación clara.",
+        ],
+      ],
+      whyTitle: "Tú también te llevas algo.",
+      reasons: [
+        [
+          "Todas las comidas, incluidas",
+          "Comes con los participantes, los demás mentores y la organización durante todo el evento.",
+        ],
+        [
+          "Camiseta y kit de bienvenida",
+          "También te llevas la camiseta de esta edición y el kit de bienvenida de HackUDC.",
+        ],
+        [
+          "Una comunidad que comparte",
+          "Conoce a otros mentores, aprende de los equipos y comparte tu experiencia dentro y fuera del proyecto.",
+        ],
+      ],
+      faqTitle: "Lo práctico",
+      faq: [
+        [
+          "¿Cuánto tiempo tengo que dedicar?",
+          "La disponibilidad es flexible. Cuéntanos cuándo puedes venir y lo coordinamos contigo.",
+        ],
+        [
+          "¿Qué incluye participar como mentor?",
+          "Incluimos la camiseta, el kit de bienvenida y todas las comidas durante el evento. Comerás con participantes, mentores y organización. La colaboración como mentor es voluntaria.",
+        ],
+        [
+          "¿Cómo me apunto?",
+          "Crea tu cuenta o inicia sesión en hackOS y completa la solicitud de mentores.",
+        ],
+      ],
+      contactTitle: "¿Te vienes como mentor?",
+      contactBody: "Cuéntanos qué sabes y cuándo puedes venir.",
+      contact: "Resolver una duda",
+    },
     brand: {
       logoColor: "Color del logo",
       previewBackground: "Fondo de la vista previa",
@@ -394,7 +476,7 @@ export const copy: Record<Locale, Copy> = {
       ],
       [
         "¿Puedo participar como mentor o mentora?",
-        "Sí. Habrá mentores durante todo el evento para resolver dudas. Si quieres colaborar como mentor o mentora, podrás inscribirte cuando abramos el registro.",
+        "Comparte tu experiencia y ayuda a los equipos a avanzar. Consulta el rol y cómo inscribirte en la [página de mentores]({mentorsUrl}).",
       ],
       [
         "Sobre los créditos ECTS",
@@ -463,6 +545,68 @@ export const copy: Record<Locale, Copy> = {
     backHomeShort: "Volver",
   },
   en: {
+    mentors: {
+      label: "Mentors",
+      meta: "Share your experience as a mentor at HackUDC 2027. Find out about the role, availability and how to apply.",
+      title: "Your support could spark a great idea.",
+      intro:
+        "Mentor at HackUDC 2027. Help teams turn their ideas into something tangible.",
+      cta: "Apply as a mentor",
+      context: "26–28 February 2027 · Faculty of Computer Science · A Coruña",
+      roleTitle: "A compass for the team.",
+      roleBody:
+        "Mentors listen, answer questions and help teams choose their next step. You guide the team; they build the project.",
+      roleNote:
+        "You don’t need to know everything. Bring your experience in development, design, data, hardware or product.",
+      photoAlt: "HackUDC participants talking during the event",
+      tasks: [
+        [
+          "Unblock",
+          "Help with an error, an API or a tool. Explain the approach so the team can keep going.",
+        ],
+        [
+          "Focus",
+          "Help decide what to build first and what to leave out of the prototype.",
+        ],
+        [
+          "Support",
+          "Listen, offer feedback and help prepare a clear presentation.",
+        ],
+      ],
+      whyTitle: "You get something out of it too.",
+      reasons: [
+        [
+          "All meals included",
+          "Eat alongside participants, fellow mentors and the organisers throughout the event.",
+        ],
+        [
+          "T-shirt and welcome kit",
+          "You also receive this edition’s T-shirt and the HackUDC welcome kit.",
+        ],
+        [
+          "A community that shares",
+          "Meet fellow mentors, learn from the teams and share your experience beyond the project.",
+        ],
+      ],
+      faqTitle: "The practical details",
+      faq: [
+        [
+          "How much time do I need?",
+          "Availability is flexible. Tell us when you can come and we’ll coordinate with you.",
+        ],
+        [
+          "What is included for mentors?",
+          "We provide a T-shirt, a welcome kit and all meals during the event. You’ll eat alongside participants, mentors and organisers. Mentoring is voluntary.",
+        ],
+        [
+          "How do I apply?",
+          "Create an account or sign in to hackOS and complete the mentor application.",
+        ],
+      ],
+      contactTitle: "Joining us as a mentor?",
+      contactBody: "Tell us what you know and when you can come.",
+      contact: "Ask a question",
+    },
     brand: {
       logoColor: "Logo colour",
       previewBackground: "Preview background",
@@ -725,7 +869,7 @@ export const copy: Record<Locale, Copy> = {
       ],
       [
         "Can I take part as a mentor?",
-        "Yes. Mentors will be available throughout the event to answer questions. If you would like to help as a mentor, you will be able to sign up when registration opens.",
+        "Share your experience and help teams move forward. Find out about the role and how to apply on the [mentors page]({mentorsUrl}).",
       ],
       [
         "About ECTS credits",
@@ -794,6 +938,69 @@ export const copy: Record<Locale, Copy> = {
     backHomeShort: "Back",
   },
   gl: {
+    mentors: {
+      label: "Mentores",
+      meta: "Comparte a túa experiencia como mentor ou mentora en HackUDC 2027. Descubre o rol, a dispoñibilidade e como inscribirte.",
+      title: "A túa axuda pode ser o comezo dunha gran idea.",
+      intro:
+        "Sé mentor ou mentora en HackUDC 2027. Axuda os equipos a converter as súas ideas en algo tanxible.",
+      cta: "Inscribirme como mentor",
+      context:
+        "26–28 de febreiro de 2027 · Facultade de Informática · A Coruña",
+      roleTitle: "Un compás para o equipo.",
+      roleBody:
+        "Un mentor escoita, resolve dúbidas e axuda a decidir o seguinte paso. Acompañas o equipo; o proxecto constrúeno eles.",
+      roleNote:
+        "Non precisas sabelo todo. Achega a túa experiencia en desenvolvemento, deseño, datos, hardware ou produto.",
+      photoAlt: "Participantes de HackUDC conversando durante o evento",
+      tasks: [
+        [
+          "Desbloquear",
+          "Axuda cun erro, unha API ou unha ferramenta. Explica o camiño para que o equipo poida seguir.",
+        ],
+        [
+          "Dar foco",
+          "Axuda a escoller que construír primeiro e que deixar fóra do prototipo.",
+        ],
+        [
+          "Acompañar",
+          "Escoita, ofrece feedback e axuda a preparar unha presentación clara.",
+        ],
+      ],
+      whyTitle: "Ti tamén levas algo.",
+      reasons: [
+        [
+          "Todas as comidas, incluídas",
+          "Comes cos participantes, os demais mentores e a organización durante todo o evento.",
+        ],
+        [
+          "Camiseta e kit de benvida",
+          "Tamén levas a camiseta desta edición e o kit de benvida de HackUDC.",
+        ],
+        [
+          "Unha comunidade que comparte",
+          "Coñece outros mentores, aprende dos equipos e comparte a túa experiencia dentro e fóra do proxecto.",
+        ],
+      ],
+      faqTitle: "O práctico",
+      faq: [
+        [
+          "Canto tempo teño que dedicar?",
+          "A dispoñibilidade é flexible. Cóntanos cando podes vir e coordinámolo contigo.",
+        ],
+        [
+          "Que inclúe participar como mentor?",
+          "Incluímos a camiseta, o kit de benvida e todas as comidas durante o evento. Comerás con participantes, mentores e organización. A colaboración como mentor é voluntaria.",
+        ],
+        [
+          "Como me apunto?",
+          "Crea a túa conta ou inicia sesión en hackOS e completa a solicitude de mentores.",
+        ],
+      ],
+      contactTitle: "Vés como mentor?",
+      contactBody: "Cóntanos que sabes e cando podes vir.",
+      contact: "Resolver unha dúbida",
+    },
     brand: {
       logoColor: "Cor do logo",
       previewBackground: "Fondo da vista previa",
@@ -1070,7 +1277,7 @@ export const copy: Record<Locale, Copy> = {
       ],
       [
         "Podo participar como mentor ou mentora?",
-        "Si. Haberá mentores durante todo o evento para resolver dúbidas. Se queres colaborar como mentor ou mentora, poderás inscribirte cando abramos o rexistro.",
+        "Comparte a túa experiencia e axuda os equipos a avanzar. Consulta o rol e como inscribirte na [páxina de mentores]({mentorsUrl}).",
       ],
       [
         "Sobre os créditos ECTS",

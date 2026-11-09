@@ -1,4 +1,5 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import Github from "@/assets/icons/github.svg";
 import Instagram from "@/assets/icons/instagram.svg";
 import Linkedin from "@/assets/icons/linkedin.svg";
@@ -9,10 +10,7 @@ interface Props {
 }
 
 const t = copy[Astro.props.locale];
-const sponsorPageUrl =
-  Astro.props.locale === "es"
-    ? "/sponsors/"
-    : `/${Astro.props.locale}/sponsors/`;
+const sponsorPageUrl = getRelativeLocaleUrl(Astro.props.locale, "sponsors/");
 // The footer lists every network; the floating bar keeps only the main ones.
 const socials = [
   {
@@ -28,7 +26,7 @@ const socials = [
   },
 ];
 const pill =
-  "rounded-full px-4 py-3 text-xs font-extrabold tracking-wide shadow-sm transition duration-200 ease-out hover:-translate-y-0.5";
+  "inline-flex min-h-11 items-center justify-center rounded-full px-3 py-3 text-xs font-extrabold shadow-sm transition-[color,background-color,transform] duration-200 ease-out hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none sm:px-4 sm:tracking-wide";
 ---
 
 <!-- Shown while neither the site header nor the footer is in view. -->

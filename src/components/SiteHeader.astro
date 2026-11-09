@@ -1,4 +1,5 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import LogIn from "@lucide/astro/icons/log-in";
 import { Image } from "astro:assets";
 import assetLogoNavy from "@/assets/brand/logo-navy.svg?url";
@@ -42,6 +43,12 @@ const languageOption =
     class="hidden items-center gap-4 lg:flex xl:gap-7"
     aria-label="Primary navigation"
   >
+    <a
+      class="inline-flex min-h-11 items-center text-sm font-extrabold transition-colors hover:text-red xl:text-base"
+      href={getRelativeLocaleUrl(locale, "mentors/")}
+    >
+      {t.mentors.label}
+    </a>
     {t.nav.map((label, index) => (
       <a
         class="inline-flex min-h-11 items-center text-sm font-extrabold whitespace-nowrap transition-colors hover:text-red xl:text-base"
