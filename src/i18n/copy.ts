@@ -181,7 +181,7 @@ export const copy: Record<Locale, Copy> = {
           "Conoce a otros mentores, aprende de los equipos y comparte tu experiencia dentro y fuera del proyecto.",
         ],
       ],
-      faqTitle: "Lo práctico",
+      faqTitle: "Antes de apuntarte",
       faq: [
         [
           "¿Cuánto tiempo tengo que dedicar?",
@@ -588,7 +588,7 @@ export const copy: Record<Locale, Copy> = {
           "Meet fellow mentors, learn from the teams and share your experience beyond the project.",
         ],
       ],
-      faqTitle: "The practical details",
+      faqTitle: "Before you apply",
       faq: [
         [
           "How much time do I need?",
@@ -982,7 +982,7 @@ export const copy: Record<Locale, Copy> = {
           "Coñece outros mentores, aprende dos equipos e comparte a túa experiencia dentro e fóra do proxecto.",
         ],
       ],
-      faqTitle: "O práctico",
+      faqTitle: "Antes de apuntarte",
       faq: [
         [
           "Canto tempo teño que dedicar?",

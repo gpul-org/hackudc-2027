@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import shrimp from "@/assets/scene/shrimp-sunglasses.webp";
 import crab from "@/assets/scene/crab-laptop.webp";
 import photo from "@/assets/gallery/conversations.webp";
 import PageHeader from "@/components/PageHeader.astro";
@@ -77,7 +78,7 @@ const buttonBase =
           alt=""
           widths={[320, 560, 752]}
           sizes="(min-width: 1024px) 320px, (min-width: 640px) 205px, 128px"
-          class="h-auto w-4/5 -rotate-3"
+          class="mentor-crab h-auto w-4/5 -rotate-3 motion-reduce:animate-none"
           loading="eager"
           fetchpriority="high"
         />
@@ -123,9 +124,9 @@ const buttonBase =
   <section
     id="why-mentor"
     aria-labelledby="why-title"
-    class="bg-ink text-cream"
+    class="mentor-benefits relative bg-ink text-cream"
   >
-    <div class="page-wrap py-12 lg:grid lg:grid-cols-[1fr_1.2fr] lg:gap-16 lg:py-20">
+    <div class="page-wrap pt-12 pb-28 lg:grid lg:grid-cols-[1fr_1.2fr] lg:gap-16 lg:pt-20 lg:pb-24">
       <h2 id="why-title" class="display-heading max-w-[12ch]">
         {m.whyTitle}
       </h2>
@@ -139,6 +140,14 @@ const buttonBase =
           </div>
         ))}
       </div>
+      <Image
+        src={shrimp}
+        alt=""
+        aria-hidden="true"
+        widths={[240, 480, 680]}
+        sizes="(min-width: 1024px) 256px, 176px"
+        class="mentor-shrimp pointer-events-none absolute right-6 bottom-0 z-10 h-auto w-44 translate-y-[10%] select-none lg:right-auto lg:left-[clamp(1.25rem,6vw,7rem)] lg:w-64"
+      />
     </div>
   </section>
 
@@ -205,3 +214,45 @@ const buttonBase =
   </section>
 </main>
 <SiteFooter locale={locale} />
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .mentor-crab {
+      animation: crab-tilt 1s steps(1, end) infinite;
+    }
+  }
+
+  @keyframes crab-tilt {
+    0%,
+    100% {
+      rotate: -3deg;
+    }
+    50% {
+      rotate: 3deg;
+    }
+  }
+
+  @media (min-width: 64rem) and (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .mentor-benefits {
+        view-timeline-name: --mentor-walk;
+        view-timeline-axis: block;
+      }
+
+      .mentor-shrimp {
+        animation: mentor-walk linear both;
+        animation-timeline: --mentor-walk;
+        animation-range: entry 0% exit 100%;
+      }
+    }
+  }
+
+  @keyframes mentor-walk {
+    from {
+      transform: translateX(-40px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+</style>
