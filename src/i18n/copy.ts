@@ -1,6 +1,9 @@
 export type Locale = "es" | "en" | "gl";
 
 export type Copy = {
+  socialImage: {
+    location: string;
+  };
   mentors: {
     label: string;
     meta: string;
@@ -138,6 +141,7 @@ export type Copy = {
 
 export const copy: Record<Locale, Copy> = {
   es: {
+    socialImage: { location: "A Coruña · Galicia" },
     mentors: {
       label: "Mentores",
       meta: "Comparte tu experiencia como mentor o mentora en HackUDC 2027. Descubre el rol, la disponibilidad y cómo inscribirte.",
@@ -335,7 +339,7 @@ export const copy: Record<Locale, Copy> = {
       "Esta página no existe o ha cambiado de dirección. Puedes volver al inicio para seguir explorando HackUDC.",
     mlhBadgeAlt: "Major League Hacking: temporada de hackathones 2027",
     ogImageAlt:
-      "HackUDC 2027, 5ª edición. Programa. Crea. Conecta. 36 horas para construir algo increíble.",
+      "HackUDC 2027 en A Coruña, Galicia. Fachada acristalada con Emilia, un langostino y un cangrejo con GPUL en su portátil; distintivo oficial de MLH 2027.",
     nav: ["HackUDC", "Participa", "Patrocinadores", "Dudas"],
     edition: "5ª EDICIÓN",
     title: "Hackea el futuro desde Galicia.",
@@ -545,6 +549,7 @@ export const copy: Record<Locale, Copy> = {
     backHomeShort: "Volver",
   },
   en: {
+    socialImage: { location: "A Coruña · Galicia" },
     mentors: {
       label: "Mentors",
       meta: "Share your experience as a mentor at HackUDC 2027. Find out about the role, availability and how to apply.",
@@ -729,7 +734,7 @@ export const copy: Record<Locale, Copy> = {
       "This page does not exist or has moved. Return home to keep exploring HackUDC.",
     mlhBadgeAlt: "Major League Hacking 2027 Hackathon Season",
     ogImageAlt:
-      "HackUDC 2027, 5th edition. Code. Create. Connect. 36 hours to build something amazing.",
+      "HackUDC 2027 in A Coruña, Galicia. Glass-fronted gallery with Emilia, a shrimp and a crab with GPUL on its laptop; official MLH 2027 badge.",
     nav: ["HackUDC", "Take part", "Sponsors", "Questions"],
     edition: "5TH EDITION",
     title: "Hack the future from Galicia.",
@@ -938,6 +943,7 @@ export const copy: Record<Locale, Copy> = {
     backHomeShort: "Back",
   },
   gl: {
+    socialImage: { location: "A Coruña · Galicia" },
     mentors: {
       label: "Mentores",
       meta: "Comparte a túa experiencia como mentor ou mentora en HackUDC 2027. Descubre o rol, a dispoñibilidade e como inscribirte.",
@@ -1136,7 +1142,7 @@ export const copy: Record<Locale, Copy> = {
       "Esta páxina non existe ou cambiou de enderezo. Podes volver ao inicio para seguir explorando HackUDC.",
     mlhBadgeAlt: "Major League Hacking: tempada de hackathons 2027",
     ogImageAlt:
-      "HackUDC 2027, 5ª edición. Programa. Crea. Conecta. 36 horas para construír algo incrible.",
+      "HackUDC 2027 na Coruña, Galicia. Fachada acristalada con Emilia, un lagostino e un cangrexo con GPUL no portátil; distintivo oficial de MLH 2027.",
     nav: ["HackUDC", "Participa", "Patrocinadores", "Dúbidas"],
     edition: "5ª EDICIÓN",
     title: "Hackea o futuro desde Galicia.",
