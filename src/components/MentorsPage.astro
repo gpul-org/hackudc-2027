@@ -6,6 +6,7 @@ import shrimp from "@/assets/scene/shrimp-sunglasses.webp";
 import crab from "@/assets/scene/crab-laptop.webp";
 import photo from "@/assets/gallery/conversations.webp";
 import PageHeader from "@/components/PageHeader.astro";
+import FaqItem from "@/components/FaqItem.astro";
 import SiteFooter from "@/components/SiteFooter.astro";
 import { copy, type Locale } from "@/i18n/copy";
 
@@ -159,26 +160,13 @@ const buttonBase =
     <h2 id="mentor-faq-title" class="display-heading">
       {m.faqTitle}
     </h2>
-    <div class="border-b border-ink/20">
+    <div class="border-b border-ink/15" data-faq-accordion>
       {m.faq.map(([question, answer]) => (
-        <details class="group border-t border-ink/20 py-5">
-          <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-5 font-serif text-xl leading-tight tracking-[-0.01em] sm:text-2xl [&::-webkit-details-marker]:hidden">
-            {question}
-            <span
-              aria-hidden="true"
-              class="w-6 shrink-0 text-center font-sans text-2xl leading-none text-red group-open:hidden"
-            >
-              +
-            </span>
-            <span
-              aria-hidden="true"
-              class="hidden w-6 shrink-0 text-center font-sans text-2xl leading-none text-red group-open:inline"
-            >
-              −
-            </span>
-          </summary>
-          <p class="mt-4 max-w-xl leading-relaxed">{answer}</p>
-        </details>
+        <FaqItem question={question}>
+          <p class="mt-4 mr-11 max-w-xl text-[0.95rem] leading-[1.6]">
+            {answer}
+          </p>
+        </FaqItem>
       ))}
     </div>
   </section>

@@ -1,0 +1,148 @@
+---
+import Plus from "@lucide/astro/icons/plus";
+
+interface Props {
+  question: string;
+  reveal?: boolean;
+}
+
+const { question, reveal = false } = Astro.props;
+---
+
+<details
+  class:list={[
+    "group border-t border-ink/15 motion-reduce:animate-none",
+    { reveal },
+  ]}
+  data-reveal={reveal || undefined}
+  data-faq-item
+>
+  <summary class="flex min-h-21 cursor-pointer list-none items-center justify-between gap-4 py-5 select-none font-serif text-xl leading-[1.15] font-normal tracking-[-0.01em] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red sm:text-2xl [&::-webkit-details-marker]:hidden">
+    <span>{question}</span>
+    <span
+      class="faq-icon inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-current font-sans text-xl leading-none"
+      aria-hidden="true"
+    >
+      <Plus class="size-4" aria-hidden="true" />
+    </span>
+  </summary>
+  <div class="pb-5 [&>p:first-child]:mt-0" data-faq-answer>
+    <slot />
+  </div>
+</details>
+
+<style>
+  .faq-icon {
+    transition:
+      transform 200ms var(--ease-out),
+      background-color 200ms var(--ease-out),
+      color 200ms var(--ease-out);
+  }
+
+  details[open]:not([data-expanded="false"]) .faq-icon {
+    transform: rotate(45deg);
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-icon {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    const animations = new Map<HTMLDetailsElement, Animation>();
+    const easing = getComputedStyle(document.documentElement)
+      .getPropertyValue("--ease-out")
+      .trim();
+
+    const setOpen = (
+      item: HTMLDetailsElement,
+      open: boolean,
+      animate: boolean,
+    ) => {
+      const startHeight = item.getBoundingClientRect().height;
+      animations.get(item)?.cancel();
+      animations.delete(item);
+      item.dataset.expanded = String(open);
+      const answer = item.querySelector<HTMLElement>("[data-faq-answer]")!;
+      answer.inert = !open;
+
+      if (!animate || reducedMotion.matches) {
+        item.open = open;
+        item.style.overflow = "";
+        return;
+      }
+
+      // Measure both native states so the final height stays responsive.
+      item.open = open;
+      const endHeight = item.getBoundingClientRect().height;
+      item.open = true;
+      item.style.overflow = "hidden";
+      const animation = item.animate(
+        { height: [`${startHeight}px`, `${endHeight}px`] },
+        { duration: 200, easing },
+      );
+      animations.set(item, animation);
+      animation.onfinish = () => {
+        item.open = open;
+        item.style.overflow = "";
+        animations.delete(item);
+      };
+    };
+
+    document
+      .querySelectorAll<HTMLElement>("[data-faq-accordion]")
+      .forEach((accordion) => {
+        accordion
+          .querySelectorAll<HTMLDetailsElement>("[data-faq-item]")
+          .forEach((item) => {
+            const summary = item.querySelector("summary")!;
+            summary.addEventListener(
+              "click",
+              (event) => {
+                event.preventDefault();
+                const open = item.dataset.expanded
+                  ? item.dataset.expanded !== "true"
+                  : !item.open;
+                const animate = event.detail > 0;
+                if (open) {
+                  accordion
+                    .querySelectorAll<HTMLDetailsElement>("details[open]")
+                    .forEach((other) => {
+                      if (other !== item) setOpen(other, false, animate);
+                    });
+                }
+                setOpen(item, open, animate);
+              },
+              { signal },
+            );
+          });
+      });
+
+    reducedMotion.addEventListener(
+      "change",
+      () => {
+        if (reducedMotion.matches)
+          animations.forEach((animation) => animation.finish());
+      },
+      { signal },
+    );
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        controller.abort();
+        animations.forEach((animation) => animation.cancel());
+        animations.clear();
+      },
+      { once: true, signal },
+    );
+  });
+</script>
