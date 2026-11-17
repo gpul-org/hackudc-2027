@@ -1,10 +1,6 @@
 ---
-import eventPhoto from "@/assets/gallery/group-photo.webp";
-import socialImageEs from "@/assets/brand/og-es.jpg";
-import socialImageEn from "@/assets/brand/og-en.jpg";
-import socialImageGl from "@/assets/brand/og-gl.jpg";
 import { copy } from "@/i18n/copy";
-import { getAbsoluteLocaleUrl } from "astro:i18n";
+import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
 import { Font } from "astro:assets";
 import { ClientRouter, fade } from "astro:transitions";
 import "@/styles/global.css";
@@ -34,18 +30,14 @@ const path = Astro.url.pathname.replace(localePrefix, "").replace(/^\//, "");
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const locale = lang in ogLocales ? (lang as Locale) : defaultLocale;
-const socialImages = {
-  es: socialImageEs,
-  en: socialImageEn,
-  gl: socialImageGl,
-};
-const socialImage = socialImages[locale];
 const isHomePage = path === "";
-const previewImage = isHomePage ? eventPhoto : socialImage;
-const ogImage = new URL(previewImage.src, Astro.site);
-const ogImageAlt = isHomePage
-  ? copy[locale].primaryPhotoAlt
-  : copy[locale].ogImageAlt;
+// Locale URLs follow the page trailing-slash policy; PNG paths must not.
+const ogImage = new URL(
+  getRelativeLocaleUrl(locale, "og.png").replace(/\/$/, ""),
+  Astro.site,
+);
+ogImage.searchParams.set("v", "20261117");
+const ogImageAlt = copy[locale].ogImageAlt;
 const ogLocale = ogLocales[locale];
 const siteUrl = new URL("/", Astro.site);
 const websiteId = new URL("#website", siteUrl).href;
@@ -79,8 +71,8 @@ const structuredData = {
       "@type": "ImageObject",
       "@id": primaryImageId,
       contentUrl: ogImage.href,
-      width: previewImage.width,
-      height: previewImage.height,
+      width: 1200,
+      height: 630,
       caption: ogImageAlt,
     },
     {
@@ -186,12 +178,9 @@ const structuredData = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
-    <meta
-      property="og:image:type"
-      content={isHomePage ? "image/webp" : "image/jpeg"}
-    />
-    <meta property="og:image:width" content={previewImage.width} />
-    <meta property="og:image:height" content={previewImage.height} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content={1200} />
+    <meta property="og:image:height" content={630} />
     <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:locale" content={ogLocale} />
     {Object.values(ogLocales)
