@@ -36,6 +36,7 @@ const ogImage = new URL(
   getRelativeLocaleUrl(locale, "og.png").replace(/\/$/, ""),
   Astro.site,
 );
+ogImage.searchParams.set("v", "20261117");
 const ogImageAlt = copy[locale].ogImageAlt;
 const ogLocale = ogLocales[locale];
 const siteUrl = new URL("/", Astro.site);
