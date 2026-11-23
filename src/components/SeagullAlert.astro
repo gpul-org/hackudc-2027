@@ -1,0 +1,214 @@
+---
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+import assetLogoCream from "@/assets/brand/logo-cream.svg?url";
+// Imported as URLs so the animated WebP keeps every frame (no re-encoding).
+import assetSeagull from "@/assets/scene/gaviota-baliza.webp?url";
+import assetSeagullStill from "@/assets/scene/gaviota-baliza-still.webp?url";
+import MlhTrustBadge from "@/components/MlhTrustBadge.astro";
+import { copy, type Locale } from "@/i18n/copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const t = copy[Astro.props.locale].seagullAlert;
+---
+
+<!-- Full-screen registration alert, opened by the script below once per session. -->
+<dialog
+  class="group m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto bg-black lg:overflow-hidden p-0 text-cream outline-none backdrop:bg-transparent"
+  aria-labelledby="seagull-alert-title"
+  tabindex="-1"
+  data-seagull-alert
+>
+  <!-- Mirrors SiteHeader's row (78px, same padding and logo width) so the logo
+       stays in place and only turns cream; the MLH badge stays on screen.
+       Closing is "Arriesgarse" or Esc. -->
+  <div class="absolute inset-x-0 top-0 z-10 flex h-[78px] items-center pl-5 sm:pl-[4vw]">
+    <img
+      class="h-auto w-40 sm:w-52"
+      src={assetLogoCream}
+      alt="HackUDC"
+      width="2005"
+      height="307"
+      data-seagull-logo
+    />
+  </div>
+  <MlhTrustBadge locale={Astro.props.locale} duplicate />
+
+  <div class="relative mx-auto grid min-h-full max-w-6xl content-center items-center gap-4 px-6 pt-24 pb-8 lg:grid-cols-2 lg:gap-12 lg:px-12 lg:py-0">
+    <picture
+      class="mx-auto block w-[min(60vw,17rem,22svh)] lg:w-auto max-lg:[@media(max-height:36rem)]:hidden"
+      data-seagull-art
+    >
+      <source
+        media="(prefers-reduced-motion: reduce)"
+        srcset={assetSeagullStill}
+      />
+      <img
+        class="h-auto w-full object-contain lg:h-[min(calc(100vh-10rem),47.5rem)] lg:w-auto"
+        src={assetSeagull}
+        alt={t.imageAlt}
+        width="560"
+        height="760"
+        decoding="async"
+      />
+    </picture>
+
+    <div class="flex max-w-lg flex-col gap-5 max-lg:mx-auto lg:gap-7 max-lg:[@media(max-height:44rem)]:gap-3.5">
+      <p class="eyebrow inline-flex group-open:animate-hero-enter items-center gap-2.5 self-start rounded-full bg-red px-3.5 py-2 text-cream group-open:[animation-delay:160ms] motion-reduce:group-open:animate-none">
+        <span class="size-2 rounded-full bg-cream" aria-hidden="true"></span>
+        {t.eyebrow}
+      </p>
+      <h2
+        id="seagull-alert-title"
+        class="group-open:animate-hero-logo font-serif text-5xl group-open:[animation-delay:220ms] motion-reduce:group-open:animate-none leading-[0.98] font-extrabold tracking-[-0.01em] text-balance lg:text-7xl max-lg:[@media(max-height:44rem)]:text-4xl"
+      >
+        {t.title}
+      </h2>
+      <p class="group-open:animate-hero-enter text-base leading-relaxed text-cream/80 group-open:[animation-delay:340ms] motion-reduce:group-open:animate-none lg:text-lg">
+        {t.body}
+      </p>
+      <div class="flex group-open:animate-hero-enter flex-wrap items-center gap-x-4 gap-y-2 pt-1 group-open:[animation-delay:420ms] motion-reduce:group-open:animate-none">
+        <a
+          class="inline-flex min-h-14 items-center gap-2.5 rounded-full bg-red px-7 text-base font-extrabold text-cream transition-[background-color,color,translate] duration-200 ease-out hover:-translate-y-0.5 hover:bg-cream hover:text-red motion-reduce:transition-none motion-reduce:hover:translate-y-0 lg:text-lg"
+          href="https://os.hackudc.com/signup?next=%2Fmy-applications%2F1"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-seagull-cta
+        >
+          {t.cta}
+          <ArrowRight class="size-5" aria-hidden="true" />
+        </a>
+        <form method="dialog">
+          <button class="min-h-14 cursor-pointer px-4 text-base font-semibold text-cream/75 underline underline-offset-4 transition-colors hover:text-cream motion-reduce:transition-none">
+            {t.dismiss}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  /* Lock page scroll behind the alert; the dialog scrolls on its own. */
+  :global(html:has(dialog[data-seagull-alert][open])) {
+    overflow: hidden;
+  }
+
+  /* The artwork sits on a near-black brown, so fade its edges into black. */
+  [data-seagull-art] {
+    mask-image: radial-gradient(
+      ellipse 50% 50% at 50% 50%,
+      #000 60%,
+      transparent 100%
+    );
+  }
+
+  /* Only the black surface fades in, so the MLH badge never blinks and the
+     logo reads as the header logo turning cream. */
+  dialog[open] {
+    animation: seagull-alert-fade 200ms var(--ease-out) both;
+  }
+
+  dialog[open] [data-seagull-logo] {
+    animation: seagull-alert-logo 200ms var(--ease-out) both;
+  }
+
+  /* The seagull bursts in from below with a springy overshoot: a surprise. */
+  dialog[open] [data-seagull-art] {
+    transform-origin: 50% 100%;
+    animation: seagull-alert-pop 700ms ease-out 60ms both;
+  }
+
+  @keyframes seagull-alert-fade {
+    from {
+      background-color: transparent;
+    }
+  }
+
+  @keyframes seagull-alert-logo {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes seagull-alert-pop {
+    0% {
+      opacity: 0;
+      transform: translateY(40%) scale(0.6) rotate(-6deg);
+    }
+    45% {
+      opacity: 1;
+      transform: translateY(-6%) scale(1.08) rotate(3deg);
+    }
+    65% {
+      transform: translateY(2%) scale(0.97) rotate(-1.5deg);
+    }
+    82% {
+      transform: translateY(-1%) scale(1.01) rotate(0.5deg);
+    }
+    100% {
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog[open],
+    dialog[open] [data-seagull-logo],
+    dialog[open] [data-seagull-art] {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = "hackudc:seagull-alert-seen";
+  // Let the hero intro play before the alert takes over the screen.
+  const OPEN_DELAY = 700;
+
+  function alreadySeen() {
+    try {
+      return sessionStorage.getItem(STORAGE_KEY) !== null;
+    } catch {
+      return false;
+    }
+  }
+
+  function markSeen() {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, "1");
+    } catch {
+      // Storage blocked: the alert may show again, which is acceptable.
+    }
+  }
+
+  let pageController: AbortController | undefined;
+
+  document.addEventListener("astro:page-load", () => {
+    pageController?.abort();
+    pageController = new AbortController();
+    const { signal } = pageController;
+
+    const dialog = document.querySelector<HTMLDialogElement>(
+      "dialog[data-seagull-alert]",
+    );
+    if (!dialog || alreadySeen()) return;
+
+    dialog
+      .querySelector("[data-seagull-cta]")
+      ?.addEventListener("click", () => dialog.close(), { signal });
+
+    const timer = window.setTimeout(() => {
+      if (dialog.open) return;
+      // Marked on open, not on close, so a reload while it is showing
+      // does not bring it back.
+      markSeen();
+      dialog.showModal();
+      // Focus the dialog itself so screen readers announce its title and the
+      // close button does not open with a focus ring.
+      dialog.focus();
+    }, OPEN_DELAY);
+    signal.addEventListener("abort", () => window.clearTimeout(timer));
+  });
+</script>

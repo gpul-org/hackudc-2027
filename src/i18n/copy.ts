@@ -78,6 +78,15 @@ export type Copy = {
   signupShort: string;
   sponsor: string;
   marquee: string;
+  // Seagull alert dialog shown once per session on the home page.
+  seagullAlert: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    cta: string;
+    dismiss: string;
+    imageAlt: string;
+  };
   aboutLabel: string;
   aboutTitle: string;
   // Split around the GPUL link, which the component renders.
@@ -349,6 +358,14 @@ export const copy: Record<Locale, Copy> = {
     signupShort: "Inscríbete",
     sponsor: "Patrocinar",
     marquee: "INSCRIPCIONES ABIERTAS · ÚNETE AHORA · HACKUDC27 · ",
+    seagullAlert: {
+      eyebrow: "Emilia V16",
+      title: "Quedan pocas plazas.",
+      body: "La baliza está encendida. Si quieres estar del 26 al 28 de febrero, asegura tu plaza ya. Recuerda ponerle mimo a la inscripción ;)",
+      cta: "Inscríbete ya",
+      dismiss: "Arriesgarse",
+      imageAlt: "Gaviota con una baliza naranja encendida en la cabeza",
+    },
     aboutLabel: "HACK + MARATÓN",
     aboutTitle: "¿Qué es HackUDC?",
     aboutBody: [
@@ -744,6 +761,14 @@ export const copy: Record<Locale, Copy> = {
     signupShort: "Register",
     sponsor: "Sponsor",
     marquee: "REGISTRATION OPEN · JOIN US · HACKUDC27 · ",
+    seagullAlert: {
+      eyebrow: "Emilia V16",
+      title: "Spots are running out.",
+      body: "The beacon is on. If you want to be there from 26 to 28 February, secure your spot now. Remember to put some love into your application ;)",
+      cta: "Register now",
+      dismiss: "Risk it",
+      imageAlt: "Seagull with a flashing orange beacon on its head",
+    },
     aboutLabel: "HACK + MARATHON",
     aboutTitle: "What is HackUDC?",
     aboutBody: [
@@ -1152,6 +1177,14 @@ export const copy: Record<Locale, Copy> = {
     signupShort: "Inscríbete",
     sponsor: "Patrocinar",
     marquee: "INSCRICIÓNS ABERTAS · ÚNETE AGORA · HACKUDC27 · ",
+    seagullAlert: {
+      eyebrow: "Emilia V16",
+      title: "Quedan poucas prazas.",
+      body: "A baliza está acesa. Se queres estar do 26 ao 28 de febreiro, asegura a túa praza xa. Lembra poñerlle mimo á inscrición ;)",
+      cta: "Inscríbete xa",
+      dismiss: "Arriscarse",
+      imageAlt: "Gaivota cunha baliza laranxa acesa na cabeza",
+    },
     aboutLabel: "HACK + MARATÓN",
     aboutTitle: "Que é HackUDC?",
     aboutBody: [
