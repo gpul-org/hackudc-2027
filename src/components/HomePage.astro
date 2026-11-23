@@ -8,6 +8,8 @@ import FixedUI from "@/components/FixedUI.astro";
 import FloatingNav from "@/components/FloatingNav.astro";
 import SiteFooter from "@/components/SiteFooter.astro";
 import SiteHeader from "@/components/SiteHeader.astro";
+import SeagullAlert from "@/components/SeagullAlert.astro";
+import { flags } from "@/lib/flags";
 
 // Page sections, in display order
 import Hero from "@/components/Hero.astro";
@@ -53,6 +55,8 @@ const localeUrls: Record<Locale, string> = {
 <MlhTrustBadge locale={locale} />
 <FloatingNav locale={locale} localeUrls={localeUrls} />
 <FixedUI locale={locale} />
+<!-- Registration alert, shown once per session while its flag is on. -->
+{flags.seagullAlert && <SeagullAlert locale={locale} />}
 
 <script>
   const show = (element: Element) => element.setAttribute("data-visible", "");
