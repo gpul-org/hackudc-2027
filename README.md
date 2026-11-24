@@ -32,9 +32,6 @@ The MIT license applies to the code only. It does not cover:
   including Emilia), and the identity described in
   [BRAND_GUIDELINES.md](./BRAND_GUIDELINES.md). They are not covered by the MIT
   license and all rights are reserved by GPUL.
-- **Rockwell font files** (`src/assets/fonts`): Rockwell is a commercial
-  typeface and cannot be relicensed under MIT. These files are excluded from
-  the license.
 - **`src/data/projects-2026.json`**: content synced from Devpost and written by
   the participants.
 - **Third-party dependencies**, which keep their own licenses.
