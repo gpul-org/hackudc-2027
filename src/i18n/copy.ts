@@ -286,10 +286,7 @@ export const copy: Record<Locale, Copy> = {
       ],
       type: "Tipografía",
       fonts: [
-        [
-          "Rockwell",
-          "Para títulos. No la uses en párrafos ni textos pequeños.",
-        ],
+        ["Arvo", "Para títulos. No la uses en párrafos ni textos pequeños."],
         ["Inter", "Para párrafos, botones y etiquetas."],
       ],
       voice: "Cómo escribir sobre HackUDC",
@@ -692,7 +689,7 @@ export const copy: Record<Locale, Copy> = {
       colorNames: ["Navy", "Cream", "Sky blue", "Red", "Yellow", "Black"],
       type: "Typography",
       fonts: [
-        ["Rockwell", "For headings. Avoid it in paragraphs and small text."],
+        ["Arvo", "For headings. Avoid it in paragraphs and small text."],
         ["Inter", "For paragraphs, buttons and labels."],
       ],
       voice: "Writing about HackUDC",
@@ -1105,10 +1102,7 @@ export const copy: Record<Locale, Copy> = {
       ],
       type: "Tipografía",
       fonts: [
-        [
-          "Rockwell",
-          "Para títulos. Non a uses en parágrafos nin textos pequenos.",
-        ],
+        ["Arvo", "Para títulos. Non a uses en parágrafos nin textos pequenos."],
         ["Inter", "Para parágrafos, botóns e etiquetas."],
       ],
       voice: "Como escribir sobre HackUDC",

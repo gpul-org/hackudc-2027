@@ -104,7 +104,7 @@ combination and prefer ink for body text on light blue.
 
 | Role               | Typeface                                           | Direction                                               |
 | ------------------ | -------------------------------------------------- | ------------------------------------------------------- |
-| Display            | Rockwell, with the supplied serif fallback stack   | Major headlines, section titles, and prominent numbers. |
+| Display            | Arvo, with the supplied serif fallback stack       | Major headlines, section titles, and prominent numbers. |
 | Interface and body | Inter, with the supplied sans-serif fallback stack | Navigation, labels, CTAs, metadata, and paragraphs.     |
 
 - Use serif display type for hierarchy, not dense interface text.
