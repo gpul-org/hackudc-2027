@@ -52,23 +52,22 @@ const total = String(steps.length).padStart(2, "0");
          into whatever height the heading leaves (`cqh`) instead of guessing it
          from the viewport. -->
       <div
-        class="relative mt-6 flex flex-col items-center max-lg:bg-ink [--photo:min(34cqh,14rem)] [--rose:min(80%,16.25rem)] pinned:min-h-0 pinned:flex-1 pinned:[container-type:size] pinned:[--rose:min(80cqw,16.25rem,50cqh)] lg:mt-10 lg:flex-row lg:[--rose:min(26rem,28vw)] lg:pinned:[--rose:min(88cqh,36rem)]"
+        class="relative mt-6 flex flex-col items-center max-sm:bg-ink pinned:min-h-0 pinned:flex-1 pinned:[container-type:size] sm:flex-row sm:[--rose:min(20rem,25vw)] sm:pinned:[--rose:min(88cqh,25vw)] lg:mt-10 lg:[--rose:min(26rem,28vw)] lg:pinned:[--rose:min(88cqh,36rem)]"
         data-steps-row
       >
-        <div class="h-(--photo) flex-none lg:hidden" aria-hidden="true" />
+        <div class="h-(--photo) flex-none sm:hidden" aria-hidden="true" />
         <div
-          data-steps-photo-layer
-          class="pointer-events-none absolute inset-x-0 top-0 h-[calc(var(--photo)+3rem)] overflow-hidden lg:hidden"
+          class="pointer-events-none absolute inset-x-0 top-0 h-(--photo) overflow-hidden sm:hidden"
           aria-hidden="true"
         >
           {steps.map(({ image }, index) => (
             <Image
-              class="absolute inset-0 h-full w-full object-cover mask-[linear-gradient(to_bottom,black_30%,transparent)]"
+              class="absolute inset-0 h-full w-full object-cover mask-[linear-gradient(to_bottom,var(--color-ink)_45%,transparent)]"
               data-step-photo
               style={`opacity: ${index === 0 ? 1 : 0}`}
               src={image}
               widths={[400, 800, 1200]}
-              sizes="(min-width: 1024px) 500px, 100vw"
+              sizes="100vw"
               alt=""
               width="1200"
               height="900"
@@ -77,18 +76,17 @@ const total = String(steps.length).padStart(2, "0");
             />
           ))}
         </div>
-        <!-- On desktop, only the right half of the rose overlaps the panel. -->
+        <!-- In the side-by-side layout, the rose overlaps the panel by half. -->
         <div
-          data-steps-rose-clip
-          class="pointer-events-none relative z-1 w-(--rose) flex-none max-lg:-mt-[calc(var(--rose)/2)] max-lg:h-[calc(var(--rose)/2)] max-lg:overflow-hidden lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:w-[calc(var(--rose)/2)] lg:items-center lg:justify-end lg:overflow-hidden"
+          class="pointer-events-none relative z-1 w-(--rose) flex-none overflow-hidden max-sm:-mt-[calc(var(--rose)/2)] max-sm:h-[calc(var(--rose)/2)] sm:absolute sm:inset-y-0 sm:left-0 sm:flex sm:w-[calc(var(--rose)/2)] sm:items-center sm:justify-end"
           aria-hidden="true"
         >
           <Image
-            class="block h-auto w-full lg:h-full lg:max-h-(--rose) lg:w-auto lg:max-w-none lg:flex-none"
+            class="block h-auto w-full sm:h-full sm:max-h-(--rose) sm:w-auto sm:max-w-none sm:flex-none"
             data-steps-rose
             src={assetRosaVentos}
             widths={[480, 960, 1440]}
-            sizes="(min-width: 1024px) 576px, 352px"
+            sizes="(min-width: 1024px) 576px, (min-width: 640px) 25vw, 260px"
             alt=""
             width="1440"
             height="1440"
@@ -99,32 +97,32 @@ const total = String(steps.length).padStart(2, "0");
 
         <div
           data-steps-panel
-          class="relative flex flex-col justify-center self-stretch overflow-hidden bg-ink px-6 max-lg:bg-transparent pt-7 pb-7 text-cream lg:pinned:flex-1 lg:m-0 lg:flex-1 lg:self-center lg:p-10 lg:pl-[calc(var(--rose)/2+2.5rem)] lg:pinned:min-h-[calc(var(--rose)*0.8)]"
+          class="relative flex flex-col justify-center self-stretch overflow-clip bg-ink px-6 pt-7 pb-7 text-cream max-sm:bg-transparent sm:flex-1 sm:self-center sm:py-6 sm:pl-[calc(var(--rose)/2+1.5rem)] sm:pinned:min-h-[calc(var(--rose)*0.8)] lg:p-10 lg:pl-[calc(var(--rose)/2+2.5rem)]"
         >
           <div class="grid gap-8">
             {steps.map(({ number, title, body, image }) => (
               <article
-                class="max-lg:text-center pinned:[grid-area:1/1]"
+                class="max-sm:text-center pinned:[grid-area:1/1]"
                 data-step
               >
-                <div class="relative z-1 lg:w-1/2">
+                <div class="relative z-1 sm:w-[55%] lg:w-1/2">
                   <p class="eyebrow text-yellow">
                     {number} <span class="text-cream/40">/ {total}</span>
                   </p>
-                  <h3 class="mt-4 font-serif text-3xl leading-tight max-[30rem]:text-[clamp(1.5rem,7vw,2rem)] max-[30rem]:wrap-anywhere sm:text-4xl">
+                  <h3 class="mt-4 font-serif text-3xl leading-tight max-[30rem]:text-[clamp(1.5rem,7vw,2rem)] max-[30rem]:wrap-anywhere lg:text-4xl">
                     {title}
                   </h3>
-                  <p class="mt-5 max-w-sm text-base leading-relaxed max-lg:mx-auto max-[30rem]:mt-4 sm:text-lg">
+                  <p class="mt-5 max-w-sm text-base leading-relaxed max-sm:mx-auto max-[30rem]:mt-4 lg:text-lg">
                     {body}
                   </p>
                 </div>
-                <!-- Pinned desktop only: the photo fades in from the panel's
+                <!-- In the pinned side-by-side layout, the photo fades in from the panel's
                      ink and swaps with its step. -->
                 <Image
-                  class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[45%] object-cover mask-[linear-gradient(to_right,transparent,black_70%)] lg:pinned:block"
+                  class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-2/5 object-cover mask-[linear-gradient(to_right,transparent,var(--color-ink)_70%)] sm:pinned:block lg:w-[45%]"
                   src={image}
                   widths={[400, 800, 1200]}
-                  sizes="(min-width: 1024px) 500px, 100vw"
+                  sizes="(min-width: 1024px) 500px, 40vw"
                   alt=""
                   width="1200"
                   height="900"
@@ -136,7 +134,8 @@ const total = String(steps.length).padStart(2, "0");
           </div>
 
           <div
-            class="relative z-1 mt-8 flex gap-2 max-lg:justify-center"
+            class="relative z-1 mt-8 flex gap-2 max-sm:justify-center"
+            data-step-markers
             aria-hidden="true"
           >
             {steps.map(() => (
@@ -153,7 +152,11 @@ const total = String(steps.length).padStart(2, "0");
 </section>
 
 <style>
-  @media (width < 64rem) {
+  [data-steps][data-pinned] [data-steps-row] {
+    touch-action: pan-y pinch-zoom;
+  }
+
+  @media (width < 40rem) {
     /* The mobile card keeps its content height, even on tall viewports. */
     [data-steps-row] {
       --photo: clamp(12rem, calc(38svh - 5rem), 18rem);
@@ -167,15 +170,31 @@ const total = String(steps.length).padStart(2, "0");
       padding-top: 0.75rem;
       padding-bottom: 2.5rem;
     }
-    [data-steps-photo-layer] {
-      height: var(--photo);
+  }
+
+  @media (width < 64rem) and (height <= 36rem) {
+    [data-steps][data-pinned] [data-steps-stage] {
+      padding-block: 1.5rem 4.5rem;
     }
-    [data-step-photo] {
-      mask-image: linear-gradient(to bottom, var(--color-ink) 45%, transparent);
+    [data-steps][data-pinned] #steps-title {
+      font-size: 1.875rem;
     }
-    [data-steps-rose-clip] {
-      margin-top: calc(var(--rose) / -2);
-      margin-bottom: 0;
+    [data-steps][data-pinned] [data-steps-row] {
+      margin-top: 1rem;
+    }
+    [data-steps][data-pinned] [data-steps-panel] {
+      padding-block: 1rem;
+    }
+    [data-pinned] [data-step] h3,
+    [data-pinned] [data-step] h3 + p,
+    [data-pinned] [data-step-markers] {
+      margin-top: 0.75rem;
+    }
+  }
+
+  @media (width < 40rem) and (height <= 36rem) {
+    [data-steps][data-pinned] [data-steps-row] {
+      --photo: 9rem;
     }
   }
 </style>
@@ -216,19 +235,46 @@ const total = String(steps.length).padStart(2, "0");
     const markers = [
       ...section.querySelectorAll<HTMLElement>("[data-step-marker]"),
     ];
-    const desktop = matchMedia("(min-width: 1024px)");
+    const wideLayout = matchMedia("(min-width: 640px)");
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     const controller = new AbortController();
     const { signal } = controller;
     let frame = 0;
+    let settleTimer = 0;
     let pinned = false;
+    let touch: {
+      id: number;
+      x: number;
+      y: number;
+      dragging: boolean;
+      scroll: number;
+      minScroll: number;
+      maxScroll: number;
+      scrollPerPixel: number;
+    } | null = null;
+
+    const scrollDistance = () =>
+      Math.max(1, section.offsetHeight - stage.offsetHeight);
 
     // 0 when the stage sticks, 1 when it lets go.
     const scrollProgress = () =>
-      clamp01(
-        -section.getBoundingClientRect().top /
-          Math.max(1, section.offsetHeight - stage.offsetHeight),
-      );
+      clamp01(-section.getBoundingClientRect().top / scrollDistance());
+
+    const settleStep = () => {
+      if (!pinned || touch?.dragging) return;
+
+      const offset = -section.getBoundingClientRect().top;
+      const distance = scrollDistance();
+      // Leave the rest of the page free to scroll past the first and last steps.
+      if (offset <= 0 || offset >= distance) return;
+
+      const stepDistance = distance / (steps.length - 1);
+      const correction =
+        Math.round(offset / stepDistance) * stepDistance - offset;
+      if (Math.abs(correction) > 1) {
+        window.scrollBy({ top: correction, behavior: "smooth" });
+      }
+    };
 
     // Pins on trial and measures: if the tallest step (they all keep their
     // box while stacked) pushes the panel past the row, the screen is too
@@ -239,7 +285,7 @@ const total = String(steps.length).padStart(2, "0");
       pinned =
         !reducedMotion.matches &&
         row.scrollHeight <= row.clientHeight &&
-        (desktop.matches || stage.scrollHeight <= stage.clientHeight);
+        (wideLayout.matches || stage.scrollHeight <= stage.clientHeight);
       section.toggleAttribute("data-pinned", pinned);
     };
 
@@ -248,7 +294,7 @@ const total = String(steps.length).padStart(2, "0");
 
       const position = pinned ? scrollProgress() * (steps.length - 1) : 0;
       const current = Math.round(position);
-      rose.style.transform = `scale(${desktop.matches ? ROSE_SCALE : 1}) rotate(${reducedMotion.matches ? 0 : roseAngle(position)}deg)`;
+      rose.style.transform = `scale(${wideLayout.matches ? ROSE_SCALE : 1}) rotate(${reducedMotion.matches ? 0 : roseAngle(position)}deg)`;
 
       steps.forEach((step, index) => {
         const active = !pinned || index === current;
@@ -269,11 +315,105 @@ const total = String(steps.length).padStart(2, "0");
       if (!frame) frame = requestAnimationFrame(update);
     };
     const remeasure = () => {
+      touch = null;
       measure();
       requestUpdate();
     };
 
+    row.addEventListener(
+      "pointerdown",
+      (event) => {
+        if (!pinned || event.pointerType !== "touch") return;
+        if (!event.isPrimary) {
+          touch = null;
+          return;
+        }
+
+        const scroll = window.scrollY;
+        const start = scroll + section.getBoundingClientRect().top;
+        const distance = scrollDistance();
+        const pixelsPerStep = row.clientWidth / 2;
+        touch = {
+          id: event.pointerId,
+          x: event.clientX,
+          y: event.clientY,
+          dragging: false,
+          scroll,
+          minScroll: Math.min(scroll, start),
+          maxScroll: Math.max(scroll, start + distance),
+          // A swipe across half the card advances one step, like vertical scroll.
+          scrollPerPixel: distance / (steps.length - 1) / pixelsPerStep,
+        };
+      },
+      { signal },
+    );
+    row.addEventListener(
+      "pointermove",
+      (event) => {
+        if (!touch || event.pointerId !== touch.id) return;
+        const dx = touch.x - event.clientX;
+        if (!touch.dragging) {
+          if (
+            Math.abs(dx) < 12 ||
+            Math.abs(dx) < Math.abs(event.clientY - touch.y) * 1.5
+          )
+            return;
+          touch.dragging = true;
+          row.setPointerCapture(event.pointerId);
+        }
+
+        // Both gestures update the same page position so they can be alternated.
+        touch.scroll = Math.min(
+          touch.maxScroll,
+          Math.max(touch.minScroll, touch.scroll + dx * touch.scrollPerPixel),
+        );
+        touch.x = event.clientX;
+        window.scrollTo({ top: touch.scroll, behavior: "instant" });
+      },
+      { signal },
+    );
+    const endTouch = (event: PointerEvent) => {
+      if (event.pointerId !== touch?.id) return;
+      const wasDragging = touch.dragging;
+      touch = null;
+      if (wasDragging) settleStep();
+    };
+    row.addEventListener("pointerup", endTouch, { signal });
+    row.addEventListener("pointercancel", endTouch, { signal });
+
     window.addEventListener("scroll", requestUpdate, { passive: true, signal });
+    if ("onscrollend" in document) {
+      document.addEventListener("scrollend", settleStep, { signal });
+    } else {
+      // Older browsers need a quiet period after both touch input and momentum.
+      let fingerDown = false;
+      const scheduleSettle = () => {
+        clearTimeout(settleTimer);
+        if (pinned && !fingerDown) {
+          settleTimer = window.setTimeout(settleStep, 150);
+        }
+      };
+      const trackFingers = (event: TouchEvent) => {
+        fingerDown = event.touches.length > 0;
+        scheduleSettle();
+      };
+      window.addEventListener("scroll", scheduleSettle, {
+        passive: true,
+        signal,
+      });
+      window.addEventListener("touchstart", trackFingers, {
+        passive: true,
+        signal,
+      });
+      window.addEventListener("touchend", trackFingers, {
+        passive: true,
+        signal,
+      });
+      window.addEventListener("touchcancel", trackFingers, {
+        passive: true,
+        signal,
+      });
+    }
     window.addEventListener("resize", remeasure, { signal });
     reducedMotion.addEventListener("change", remeasure, { signal });
     // Web fonts change the text's height once they load.
@@ -283,6 +423,7 @@ const total = String(steps.length).padStart(2, "0");
       () => {
         controller.abort();
         cancelAnimationFrame(frame);
+        clearTimeout(settleTimer);
       },
       { once: true, signal },
     );
